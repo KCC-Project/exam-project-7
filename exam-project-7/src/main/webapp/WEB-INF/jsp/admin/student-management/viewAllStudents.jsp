@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-    
+    <jsp:include page="../shared/header.jsp" />
+
+<body>
+
+	<!-- Content Area -->
+	<div id="page-content-wrapper">
     
     <table id="viewStudents" class="table table-striped table-bordered">
 				<thead>
@@ -16,6 +21,7 @@
 						<th>city</th>
 						<th>district</th>
 						<th>zipcode</th>
+						<th>Option</th>
 					</tr>
 				</thead>
 				<tfoot>
@@ -30,23 +36,9 @@
 						<th>city</th>
 						<th>district</th>
 						<th>zipcode</th>
+						<th>Option</th>
 					</tr>
 				</tfoot>
-				
-				<tbody>
-				<tr>
-					<th>s-Id</th>
-						<td>first_name</td>
-						<td>middle_name</td>
-						<td>last_name</td>
-						<td>Date_of_birth</td>
-						<td>phone</td>
-						<td>address</td>
-						<td>city</td>
-						<td>district</td>
-						<td>zipcode</td>
-				</tr>
-				</tbody>
 				 
 			</table>
 			
@@ -55,20 +47,43 @@
 		        "processing": true,
 		        "serverSide": true,
 		        "ajax": {
-		            "url": window.context+ '/ApiStudent/GetAllStudent',
-		            "type": "GET"
+		        	"contentType": "application/json",
+		        	"type": "GET",
+		            "url": window.context + "/ApiStudent/GetAllStudent",
+		            "dataType": "json",
+		            "dataSrc": "",
 		        },
 		        "columns": [
 		        	{ "data": "s_id" },
-		            { "data": "first_name" },
-		            { "data": "middle_name" },
-		            { "data": "last_name" },
-		            { "data": "date_of_birth" },
-		            { "data": "phone" },
-		            { "data": "address" },
-		            { "data": "city" },
-		            { "data": "zipcode" },
+		            { "data": "first_name" , "defaultContent": "" },
+		            { "data": "middle_name" , "defaultContent": "" },
+		            { "data": "last_name" , "defaultContent": "" },
+		            { "data": "date_of_birth" , "defaultContent": "" },
+		            { "data": "phone" , "defaultContent": "" },
+		            { "data": "address" , "defaultContent": "" },
+		            { "data": "city" , "defaultContent": ""},
+		            { "data": "district" , "defaultContent": "" },
+		            { "data": "zipcode" , "defaultContent": "" },
+		            
+		            {
+		                "data": null,
+		                "defaultContent": "<button class='btn btn-success editBtns'>Edit!</button>",
+		                "targets": -1
+		              }
 		        ]
 		    } );
 			
+			 $('#viewStudents tbody').on( 'click', '.editBtns', function () {
+				 var table = $('#viewStudents').DataTable();
+			        var data = table.row( $(this).parents('tr') ).data();
+			        alert( data[0] +"'s salary is: "+ data[ 1 ] );
+			    } );
+			
+			
 			</script>
+			
+			
+			
+			</div>
+
+	<jsp:include page="../shared/footer.jsp" />
