@@ -19,11 +19,11 @@ public class MainController {
 	}
 
 	@GET
-	@Path("/student-management/view")
+	@Path("/student/view")
 	public Viewable view() {
 		Map<String, Boolean> model = new HashMap<>();
 		model.put("student_view_clicked", true);
-		return new Viewable("/student-management", model);
+		return new Viewable("admin/student-management/viewAllStudents", model);
 	}
 
 }

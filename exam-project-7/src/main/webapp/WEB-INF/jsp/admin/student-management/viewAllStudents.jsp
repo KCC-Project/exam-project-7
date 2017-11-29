@@ -55,7 +55,7 @@
 		        "processing": true,
 		        "serverSide": true,
 		        "ajax": {
-		            "url": "http://localhost:8080/exam-system/json/students/all",
+		            "url": window.context+ '/ApiStudent/GetAllStudent',
 		            "type": "GET"
 		        },
 		        "columns": [

@@ -17,9 +17,9 @@
             <span class="caret pull-right"></span>
           </a>
           <ul class="collapse collapseable" id="collapse-post">
-          	<li><a href="${cp }/student-management/view" id="view-student">View</a></li>
-            <li><a href="${cp }/student-management/addNew" id="add-student">Add New</a></li>
-            <li><a href="${cp }/student-management/studentSemester" id="Student-Semester">Student-Semester</a></li>
+          	<li><a href="${cp }/student/view" id="view-student">View</a></li>
+            <li><a href="${cp }/studen/addNew" id="add-student">Add New</a></li>
+            <li><a href="${cp }/student/studentSemester" id="Student-Semester">Student-Semester</a></li>
           </ul>
         </li>
         <li class="link">
@@ -29,9 +29,9 @@
             <span class="caret pull-right"></span>
           </a>
           <ul class="collapse collapseable" id="collapse-comments">
-            <li><a href="${cp }/subject-management/view" id="view-subject">View</a></li>
-            <li><a href="${cp }/subject-management/addNew" id="add-subject">Add New</a></li>
-            <li><a href="${cp }/subject-management/subjectSemester" id="Subject-Semester">Subject-Semester</a></li>
+            <li><a href="${cp }/subject/view" id="view-subject">View</a></li>
+            <li><a href="${cp }/subject/addNew" id="add-subject">Add New</a></li>
+            <li><a href="${cp }/subject/subjectSemester" id="Subject-Semester">Subject-Semester</a></li>
           </ul>
         </li>
 
@@ -57,7 +57,7 @@
           </a>
           <ul class="collapse collapseable" id="collapse-exam">
             <li><a href="${cp }/addexam" id="addexam">Add Exam</a></li>
-            <li><a href="${cp }/manageexam" id="manageexam">Manage Exam</a></li>
+            <li><a href="${cp }/manage-exam" id="manageexam">Manage Exam</a></li>
              <li><a href="${cp }/exam-type" id="exam-type">Exam-type</a></li>
              <li><a href="${cp }/student-exam" id="student-exam">Student-exam</a></li>
           </ul>
