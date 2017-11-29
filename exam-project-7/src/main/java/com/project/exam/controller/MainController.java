@@ -21,9 +21,10 @@ public class MainController {
 	@GET
 	@Path("/student/view")
 	public Viewable view() {
+		System.out.println("Insdie view");
 		Map<String, Boolean> model = new HashMap<>();
 		model.put("student_view_clicked", true);
-		return new Viewable("admin/student-management/viewAllStudents", model);
+		return new Viewable("/admin/student-management/viewAllStudents", model);
 	}
 
 }
