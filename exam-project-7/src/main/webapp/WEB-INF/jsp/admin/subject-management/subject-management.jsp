@@ -4,7 +4,7 @@
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="./shared/header.jsp" />
+<jsp:include page="../shared/header.jsp" />
 
 <body>
 
@@ -12,7 +12,7 @@
 
 		<div class="row display-table-row col-lg-12  ">
 
-			<jsp:include page="./shared/admin-sidemenu.jsp" />
+			<jsp:include page="../shared/admin-sidemenu.jsp" />
 
 
 			<!-- Content Area -->
@@ -37,4 +37,4 @@
 	</div>
 
 
-	<jsp:include page="./shared/footer.jsp" />>
+	<jsp:include page="../shared/footer.jsp" />>

@@ -4,7 +4,7 @@
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
 
-<jsp:include page="./shared/header.jsp" />
+<jsp:include page="../jsp/admin/shared/header.jsp" />
 
 <body>
         
@@ -12,10 +12,10 @@
         <div id="page-content-wrapper">
           
 			<c:if test="${homeClicked==true}">
-				<%@ include file="admin-dashboard.jsp"%>
+				<%@ include file="../jsp/admin/shared/admin-dashboard.jsp"%>
 			</c:if>
          
     </div>
     
 
-	<jsp:include page="./shared/footer.jsp" />
+	<jsp:include page="../jsp/admin/shared/footer.jsp" />
