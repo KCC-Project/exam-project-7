@@ -41,7 +41,9 @@ public class StudentDAOImpl implements StudentDAO {
 	@Transactional
 	public StudentsModel getStudent(int s_Id) {
 		Session session= sessionFactory.getCurrentSession();
-		return  session.load(StudentsModel.class, s_Id);
+		StudentsModel model= (StudentsModel)session.load(StudentsModel.class, s_Id);
+		
+		return  model;
 	}
 
 }

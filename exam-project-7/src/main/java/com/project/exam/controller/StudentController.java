@@ -2,7 +2,6 @@ package com.project.exam.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -43,7 +42,7 @@ public class StudentController {
 	@Path("/GetStudent/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public StudentsModel getStudent(@javax.ws.rs.PathParam("id") int id) {
-		return studentService.getStudent(id);
+		return studentService.getStudent(1);
 	}
 	
 	
