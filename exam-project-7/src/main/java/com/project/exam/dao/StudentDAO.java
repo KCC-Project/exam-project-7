@@ -13,5 +13,8 @@ public interface StudentDAO {
 	public List<StudentsModel> getStudentList();
 	public StudentsModel addStudent(StudentsModel student);
 	public StudentsModel getStudent(int s_Id);
+	public StudentsModel updateStudent(StudentsModel student);
+	public int deleteStudent(int s_Id);
 
+	
 }

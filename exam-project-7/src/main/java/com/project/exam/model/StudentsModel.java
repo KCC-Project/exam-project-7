@@ -1,7 +1,5 @@
 package com.project.exam.model;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -103,6 +101,12 @@ public class StudentsModel {
 		this.city = city;
 		this.district = district;
 		this.zipcode = zipcode;
+	}
+	@Override
+	public String toString() {
+		return "StudentsModel [s_id=" + s_id + ", first_name=" + first_name + ", middle_name=" + middle_name
+				+ ", last_name=" + last_name + ", date_of_birth=" + date_of_birth + ", phone=" + phone + ", address="
+				+ address + ", city=" + city + ", district=" + district + ", zipcode=" + zipcode + "]";
 	}
 
 	
