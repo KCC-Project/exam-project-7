@@ -13,11 +13,17 @@ import org.glassfish.jersey.server.mvc.Viewable;
 @Path("/")
 public class MainController {
 
-	    @GET
-	    public Viewable index() {
-	    	System.out.println("heloow");
-	       
-	    	 return new Viewable("/home");
-	 
-	}	
+	@GET
+	public Viewable index() {
+		return new Viewable("/home");
+	}
+
+	@GET
+	@Path("/student-management/view")
+	public Viewable view() {
+		Map<String, Boolean> model = new HashMap<>();
+		model.put("student_view_clicked", true);
+		return new Viewable("/student-management", model);
+	}
+
 }
