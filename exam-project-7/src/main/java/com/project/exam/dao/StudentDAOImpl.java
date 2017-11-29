@@ -15,14 +15,13 @@ import com.project.exam.model.StudentsModel;
 
 public class StudentDAOImpl implements StudentDAO {
 
-	private static List<StudentsModel> students = new ArrayList();
+
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Transactional
 	public List<StudentsModel> getStudentList() {
-		StudentsModel m = new StudentsModel();
 		Session session = sessionFactory.getCurrentSession();
 		return session.createCriteria(StudentsModel.class).list();
 

@@ -1,8 +1,16 @@
 package com.project.exam.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@Entity
+@Table(name="subject")
 public class SubjectModel {
 
-	
+	@Id
 	private int subject_id;
 	private String subject_name;
 	private String subject_code;
@@ -82,6 +90,33 @@ public class SubjectModel {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	@Override
+	public String toString() {
+		return "SubjectModel [subject_id=" + subject_id + ", subject_name=" + subject_name + ", subject_code="
+				+ subject_code + ", theory_cr=" + theory_cr + ", tutorial_cr=" + tutorial_cr + ", practical_cr="
+				+ practical_cr + ", internal_theory=" + internal_theory + ", internal_practical=" + internal_practical
+				+ ", final_theory=" + final_theory + ", syllabus_file=" + syllabus_file + ", status=" + status + "]";
+	}
+	public SubjectModel(int subject_id, String subject_name, String subject_code, int theory_cr, int tutorial_cr,
+			int practical_cr, int internal_theory, int internal_practical, int final_theory, String syllabus_file,
+			int status) {
+		super();
+		this.subject_id = subject_id;
+		this.subject_name = subject_name;
+		this.subject_code = subject_code;
+		this.theory_cr = theory_cr;
+		this.tutorial_cr = tutorial_cr;
+		this.practical_cr = practical_cr;
+		this.internal_theory = internal_theory;
+		this.internal_practical = internal_practical;
+		this.final_theory = final_theory;
+		this.syllabus_file = syllabus_file;
+		this.status = status;
+	}
+	public SubjectModel() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

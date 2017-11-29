@@ -28,6 +28,7 @@ public class StudentController {
 	@Path("/GetAllStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public List<StudentsModel> getAllStudent() {
+		System.out.println("indiseee");
 		return studentService.getStudentList();
 	}
 	
@@ -36,7 +37,7 @@ public class StudentController {
 	@Path("/SaveStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public StudentsModel getAllStudent(StudentsModel studentModel) {
+	public StudentsModel saveStudent(StudentsModel studentModel) {
 		return studentService.addStudent(studentModel);
 	}
 	
@@ -61,6 +62,7 @@ public class StudentController {
 	@Path("/DeleteStudent/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public int deleteStudentsModel(@PathParam("id") int id) {
+		
 		return studentService.deleteStudent(id);
 	}
 }
