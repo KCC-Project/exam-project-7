@@ -16,22 +16,22 @@ import com.project.exam.model.StudentsModel;
 public class StudentDAOImpl implements StudentDAO {
 
 	private static List<StudentsModel> students = new ArrayList();
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Transactional
 	public List<StudentsModel> getStudentList() {
-		StudentsModel m= new StudentsModel();
-		Session session= sessionFactory.getCurrentSession();
-		return  session.createCriteria(StudentsModel.class).list();
-		
+		StudentsModel m = new StudentsModel();
+		Session session = sessionFactory.getCurrentSession();
+		return session.createCriteria(StudentsModel.class).list();
+
 	}
 
 	@Override
 	@Transactional
 	public StudentsModel addStudent(StudentsModel student) {
-		Session session= sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		System.out.println(student.toString());
 		session.save(student);
 		return student;
@@ -40,8 +40,25 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	@Transactional
 	public StudentsModel getStudent(int s_Id) {
-		Session session= sessionFactory.getCurrentSession();
-		return  session.load(StudentsModel.class, s_Id);
+		Session session = sessionFactory.getCurrentSession();
+		return (StudentsModel) session.get(StudentsModel.class, s_Id);
+	}
+
+	@Override
+	@Transactional
+	public StudentsModel updateStudent(StudentsModel student) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(student);
+		return student;
+	}
+
+	@Override
+	@Transactional
+	public int deleteStudent(int s_Id) {
+		Session session = sessionFactory.getCurrentSession();
+		StudentsModel ent = session.load(StudentsModel.class, s_Id);
+		session.delete(ent);
+		return 1;
 	}
 
 }
