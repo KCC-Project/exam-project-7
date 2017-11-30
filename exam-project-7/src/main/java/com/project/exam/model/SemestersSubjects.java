@@ -10,15 +10,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name="semesters_subject")
 public class SemestersSubjects {
-	@Id
+	
+	
 	private int semester_subject_id;
 	
-	private Semesters semester;
-	private Subjects subject;
+	
+	private Semesters semesters;
+	
+	
+	private Subjects subjects;
 	
 	//additional fields
 	private int status;
 
+	@Id
 	public int getSemester_subject_id() {
 		return semester_subject_id;
 	}
@@ -27,24 +32,24 @@ public class SemestersSubjects {
 		this.semester_subject_id = semester_subject_id;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="semester_id")
-	public Semesters getSemester() {
-		return semester;
+	@ManyToOne
+	@JoinColumn(name = "semester_id")
+	public Semesters getSemesters() {
+		return semesters;
 	}
 
-	public void setSemester(Semesters semester) {
-		this.semester = semester;
+	public void setSemesters(Semesters semesters) {
+		this.semesters = semesters;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="subject_id")
-	public Subjects getSubject() {
-		return subject;
+	@ManyToOne
+	@JoinColumn(name = "subject_id")
+	public Subjects getSubjects() {
+		return subjects;
 	}
 
-	public void setSubject(Subjects subject) {
-		this.subject = subject;
+	public void setSubjects(Subjects subjects) {
+		this.subjects = subjects;
 	}
 
 	public int getStatus() {
@@ -54,6 +59,7 @@ public class SemestersSubjects {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
 	
 	
 

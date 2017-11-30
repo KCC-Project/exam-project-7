@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "students")
 public class Students {
 
-	@Id
+	
 	private int s_id;
 	private String first_name;
 	private String middle_name;
@@ -27,9 +27,13 @@ public class Students {
 	private String district;
 	private String zipcode;
 
-	private Set<StudentsSemesters> studentSemester = new HashSet<StudentsSemesters>();
+	
+	private Set<StudentsSemesters> studentSemesters = new HashSet<StudentsSemesters>();
+	
+	
 	private Set<StudentsExams> studentsExams = new HashSet<StudentsExams>();
 
+	@Id
 	public int getS_id() {
 		return s_id;
 	}
@@ -110,16 +114,16 @@ public class Students {
 		this.zipcode = zipcode;
 	}
 
-	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
-	public Set<StudentsSemesters> getStudentSemester() {
-		return studentSemester;
+	@OneToMany(mappedBy = "students")
+	public Set<StudentsSemesters> getStudentSemesters() {
+		return studentSemesters;
 	}
 
-	public void setStudentSemester(Set<StudentsSemesters> studentSemester) {
-		this.studentSemester = studentSemester;
+	public void setStudentSemesters(Set<StudentsSemesters> studentSemesters) {
+		this.studentSemesters = studentSemesters;
 	}
 
-	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "students")
 	public Set<StudentsExams> getStudentsExams() {
 		return studentsExams;
 	}
@@ -127,6 +131,7 @@ public class Students {
 	public void setStudentsExams(Set<StudentsExams> studentsExams) {
 		this.studentsExams = studentsExams;
 	}
+
 	
 	
 

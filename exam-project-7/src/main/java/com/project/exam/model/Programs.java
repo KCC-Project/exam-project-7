@@ -1,14 +1,13 @@
 package com.project.exam.model;
 
-import java.util.List;
+import java.util.Set;
 
-import javax.annotation.Generated;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -18,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class Programs {
 
-	@Id
+	
 	private int program_id;
 	
 	private String program_name;
@@ -26,32 +25,14 @@ public class Programs {
 	private int program_semesters;
 	private int total_credit;
 	private String program_update_date;
-	int status;
+	private int status;
 	
-	@ManyToOne
-	private Departments department;
 	
-	@OneToMany(mappedBy="programs")
-	private List<Semesters> semester;
+	private Departments departments;
+	
+	private Set<Semesters> semesters;
 
-	public Programs() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Programs(int program_id, String program_name, int program_years, int program_semesters, int total_credit,
-			String program_update_date, int status, Departments department) {
-		super();
-		this.program_id = program_id;
-		this.program_name = program_name;
-		this.program_years = program_years;
-		this.program_semesters = program_semesters;
-		this.total_credit = total_credit;
-		this.program_update_date = program_update_date;
-		this.status = status;
-		this.department = department;
-	}
-
+	@Id
 	public int getProgram_id() {
 		return program_id;
 	}
@@ -108,21 +89,26 @@ public class Programs {
 		this.status = status;
 	}
 
-	public Departments getDepartment() {
-		return department;
+	@ManyToOne
+    @JoinColumn(name = "depart_id")
+	public Departments getDepartments() {
+		return departments;
 	}
 
-	public void setDepartment(Departments department) {
-		this.department = department;
+	public void setDepartments(Departments departments) {
+		this.departments = departments;
 	}
 
-	@Override
-	public String toString() {
-		return "Programs [program_id=" + program_id + ", program_name=" + program_name + ", program_years="
-				+ program_years + ", program_semesters=" + program_semesters + ", total_credit=" + total_credit
-				+ ", program_update_date=" + program_update_date + ", status=" + status + ", department=" + department
-				+ "]";
+	@OneToMany(mappedBy="programs", cascade = CascadeType.ALL)
+	public Set<Semesters> getSemester() {
+		return semesters;
 	}
+
+	public void setSemester(Set<Semesters> semesters) {
+		this.semesters = semesters;
+	}
+
+	
 	
 /*
 	 @ManyToOne

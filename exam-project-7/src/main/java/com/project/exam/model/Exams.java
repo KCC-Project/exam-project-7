@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name="exams")
 public class Exams {
 
-	@Id
+	
 	private int exam_id;
 	
 	private String exam_date;
@@ -30,10 +30,9 @@ public class Exams {
 	private Set<StudentsExams> studentsExams = new HashSet<StudentsExams>();
 	
 	
-	@ManyToOne
-	private Exam_types exam_type;
+	private Exam_types exam_types;
 
-
+	@Id
 	public int getExam_id() {
 		return exam_id;
 	}
@@ -104,6 +103,7 @@ public class Exams {
 	}
 
 
+	@OneToMany(mappedBy = "exams")
 	public Set<StudentsExams> getStudentsExams() {
 		return studentsExams;
 	}
@@ -113,14 +113,15 @@ public class Exams {
 		this.studentsExams = studentsExams;
 	}
 
-
-	public Exam_types getExam_type() {
-		return exam_type;
+	@ManyToOne
+    @JoinColumn(name = "exam_type_id")
+	public Exam_types getExam_types() {
+		return exam_types;
 	}
 
 
-	public void setExam_type(Exam_types exam_type) {
-		this.exam_type = exam_type;
+	public void setExam_types(Exam_types exam_types) {
+		this.exam_types = exam_types;
 	}
 
 

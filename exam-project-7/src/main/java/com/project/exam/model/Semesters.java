@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,17 +18,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name="semesters")
 public class Semesters {
 
-	@Id
+	
 	private int semester_id;
 	
-	private int semseter_no;
+	private int semester_no;
 	private int status;
 	
-	private Set<StudentsSemesters> studentSemester = new HashSet<StudentsSemesters>();
 	
-	@OneToMany(mappedBy="semesters")
-	private List<SemestersInfos> semestersInfos;
+	private Set<StudentsSemesters> studentsSemester = new HashSet<StudentsSemesters>();
+	
+	
+	//private Set<SemestersInfos> semestersInfos;
+	
+	
+	private Programs programs;
 
+	@Id
 	public int getSemester_id() {
 		return semester_id;
 	}
@@ -35,12 +42,12 @@ public class Semesters {
 		this.semester_id = semester_id;
 	}
 
-	public int getSemseter_no() {
-		return semseter_no;
+	public int getSemester_no() {
+		return semester_no;
 	}
 
-	public void setSemseter_no(int semseter_no) {
-		this.semseter_no = semseter_no;
+	public void setSemester_no(int semester_no) {
+		this.semester_no = semester_no;
 	}
 
 	public int getStatus() {
@@ -51,23 +58,35 @@ public class Semesters {
 		this.status = status;
 	}
 
-	@OneToMany(mappedBy="semesters", cascade = CascadeType.ALL)
-	public Set<StudentsSemesters> getStudentSemester() {
-		return studentSemester;
+	@OneToMany(mappedBy = "semesters")
+	public Set<StudentsSemesters> getStudentsSemester() {
+		return studentsSemester;
 	}
 
-	public void setStudentSemester(Set<StudentsSemesters> studentSemester) {
-		this.studentSemester = studentSemester;
+	public void setStudentsSemester(Set<StudentsSemesters> studentsSemester) {
+		this.studentsSemester = studentsSemester;
 	}
 
-	public List<SemestersInfos> getSemestersInfos() {
+	@ManyToOne
+    @JoinColumn(name = "program_id")
+	public Programs getPrograms() {
+		return programs;
+	}
+
+	public void setPrograms(Programs programs) {
+		this.programs = programs;
+	}
+/*
+	@OneToMany(mappedBy = "semesters")
+	public Set<SemestersInfos> getSemestersInfos() {
 		return semestersInfos;
 	}
 
-	public void setSemestersInfos(List<SemestersInfos> semestersInfos) {
+	public void setSemestersInfos(Set<SemestersInfos> semestersInfos) {
 		this.semestersInfos = semestersInfos;
 	}
-	
+
+	*/
 	
 	
 	   

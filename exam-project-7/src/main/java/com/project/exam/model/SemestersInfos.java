@@ -1,10 +1,12 @@
-package com.project.exam.model;
+/*package com.project.exam.model;
 
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,12 +24,12 @@ public class SemestersInfos {
 	private int status;
 	
 	
-	@OneToMany(mappedBy="semesters_infos")
-	private List<StudentsSemesters> studentsSemesters;
+	@OneToMany(mappedBy = "semestersInfos")
+	private Set<StudentsSemesters> studentsSemesters;
 	
 	@ManyToOne
+	@JoinColumn(name = "semester_id")
 	private Semesters semesters;
-	
 
 	public int getSemester_info_id() {
 		return semester_info_id;
@@ -69,11 +71,11 @@ public class SemestersInfos {
 		this.status = status;
 	}
 
-	public List<StudentsSemesters> getStudentsSemesters() {
+	public Set<StudentsSemesters> getStudentsSemesters() {
 		return studentsSemesters;
 	}
 
-	public void setStudentsSemesters(List<StudentsSemesters> studentsSemesters) {
+	public void setStudentsSemesters(Set<StudentsSemesters> studentsSemesters) {
 		this.studentsSemesters = studentsSemesters;
 	}
 
@@ -84,10 +86,13 @@ public class SemestersInfos {
 	public void setSemesters(Semesters semesters) {
 		this.semesters = semesters;
 	}
+
 	
+
 	
 	
 	
 	
 	
 }
+*/

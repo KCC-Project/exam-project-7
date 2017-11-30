@@ -3,6 +3,7 @@ package com.project.exam.model;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -14,15 +15,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "departments")
 public class Departments {
 
-	@Id
+	
 	private int depart_id;
 	private String depart_name;
 	private int status;
 	
-	@OneToMany(mappedBy="department")
-	private List<Programs> program;
 	
-
+	private Set<Programs> program;
+	
+	@Id
 	public int getDepart_id() {
 		return depart_id;
 	}
@@ -36,15 +37,17 @@ public class Departments {
 		this.depart_name = depart_name;
 	}
 	public int getStatus() {
-		return status;
+		return status; 
 	}
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public List<Programs> getProgram() {
+	
+	@OneToMany(mappedBy="departments", cascade = CascadeType.ALL)
+	public Set<Programs> getProgram() {
 		return program;
 	}
-	public void setProgram(List<Programs> program) {
+	public void setProgram(Set<Programs> program) {
 		this.program = program;
 	}
 

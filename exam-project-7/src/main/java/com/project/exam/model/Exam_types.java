@@ -3,6 +3,7 @@ package com.project.exam.model;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -14,14 +15,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name="exam_types")
 public class Exam_types {
 
-	@Id
+	
 	private int exam_type_id;
 	private String type_name;
 	private int status;
 	
-	@OneToMany(mappedBy="exam_type")
-	private List<Exams> exams;
+	
+	private Set<Exams> exams;
 
+	@Id
 	public int getExam_type_id() {
 		return exam_type_id;
 	}
@@ -46,11 +48,12 @@ public class Exam_types {
 		this.status = status;
 	}
 
-	public List<Exams> getExams() {
+	@OneToMany(mappedBy="exam_types")
+	public Set<Exams> getExams() {
 		return exams;
 	}
 
-	public void setExams(List<Exams> exams) {
+	public void setExams(Set<Exams> exams) {
 		this.exams = exams;
 	}
 

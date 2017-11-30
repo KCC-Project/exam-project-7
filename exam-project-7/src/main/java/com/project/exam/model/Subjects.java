@@ -10,11 +10,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="subjects")
+@Table(name = "subjects")
 public class Subjects {
 
-	@Id
+	
 	private int subject_id;
+	
 	private String subject_name;
 	private String subject_code;
 	private int theory_cr;
@@ -24,9 +25,11 @@ public class Subjects {
 	private int final_theory;
 	private int syllabus_file;
 	private int status;
+
 	
 	private Set<SemestersSubjects> semesterSubjects = new HashSet<SemestersSubjects>();
 
+	@Id
 	public int getSubject_id() {
 		return subject_id;
 	}
@@ -107,7 +110,7 @@ public class Subjects {
 		this.status = status;
 	}
 
-	@OneToMany(mappedBy="subjects", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "subjects")
 	public Set<SemestersSubjects> getSemesterSubjects() {
 		return semesterSubjects;
 	}
@@ -115,7 +118,5 @@ public class Subjects {
 	public void setSemesterSubjects(Set<SemestersSubjects> semesterSubjects) {
 		this.semesterSubjects = semesterSubjects;
 	}
-	
-	
-	
+
 }
