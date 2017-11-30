@@ -1,9 +1,12 @@
 package com.project.exam.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,6 +31,8 @@ public class Programs {
 	    @JoinColumn(name="depart_id", nullable=false)
 	    private Department department;
 
+	 @OneToMany(mappedBy="semester")
+	    private Set<Semester> semester;
 
 	public int getProgram_id() {
 		return program_id;
@@ -107,6 +112,18 @@ public class Programs {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+	
+	
+
+
+	public Set<Semester> getSemester() {
+		return semester;
+	}
+
+
+	public void setSemester(Set<Semester> semester) {
+		this.semester = semester;
+	}
 
 
 	public Programs() {
@@ -120,8 +137,11 @@ public class Programs {
 		return "Programs [program_id=" + program_id + ", program_name=" + program_name + ", program_years="
 				+ program_years + ", program_semesters=" + program_semesters + ", total_credit=" + total_credit
 				+ ", program_update_date=" + program_update_date + ", status=" + status + ", department=" + department
-				+ "]";
+				+ ", semester=" + semester + "]";
 	}
+
+
+	
 	 
 	 
 	 
