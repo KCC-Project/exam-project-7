@@ -107,6 +107,21 @@ public class Programs {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+
+
+	public Programs() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	@Override
+	public String toString() {
+		return "Programs [program_id=" + program_id + ", program_name=" + program_name + ", program_years="
+				+ program_years + ", program_semesters=" + program_semesters + ", total_credit=" + total_credit
+				+ ", program_update_date=" + program_update_date + ", status=" + status + ", department=" + department
+				+ "]";
+	}
 	 
 	 
 	 

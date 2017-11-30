@@ -52,6 +52,17 @@ public class Department {
 	public void setPrograms(Set<Programs> programs) {
 		this.programs = programs;
 	}
+
+	@Override
+	public String toString() {
+		return "Department [depart_id=" + depart_id + ", depart_name=" + depart_name + ", status=" + status
+				+ ", programs=" + programs + "]";
+	}
+
+	public Department() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	 
 	
 	
