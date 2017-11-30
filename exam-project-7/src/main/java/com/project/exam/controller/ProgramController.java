@@ -11,53 +11,55 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import com.project.exam.model.Subject;
-import com.project.exam.services.SubjectService;
+import com.project.exam.model.Programs;
+import com.project.exam.services.ProgramService;
 
-@Path("/ApiSubject")
-public class SubjectController {
+@Path("/ApiProgram")
+public class ProgramController {
 	
 	@Autowired
-	private SubjectService subjectService;
+	private ProgramService programService;
 	
 	@GET
-	@Path("/GetAllSubject")
+	@Path("/GetAllProgram")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public List<Subject> getAllSubject() {
-		return subjectService.getallSubjectList();
+	public List<Programs> getAllProgram() {
+		return programService.getProgramList();
 	}
 	
 	
 	@POST
-	@Path("/SaveSubject")
+	@Path("/SaveProgram")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Subject saveSubject(Subject subjectModel) {
-		return subjectService.addSubject(subjectModel);
+	public Programs saveProgram(Programs program) {
+		return programService.addProgram(program);
 	}
 	
 
 	@GET
-	@Path("/GetSubject/{id}")
+	@Path("/GetProgram/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Subject getSubject(@PathParam("id") int id) {
-		return subjectService.getSubject(id);
+	public Programs getProgram(@PathParam("id") int id) {
+		return programService.getProgram(id);
 	}
 	
 	@PUT
-	@Path("/UpdateSubject")
+	@Path("/UpdateProgram")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Subject updateSubject(Subject subjectModel) {
-		return subjectService.updateSubject(subjectModel);
+	public Programs updateProgram(Programs program) {
+		return programService.updateProgram(program);
 	}
 	
 	@DELETE
-	@Path("/DeleteSubject/{id}")
+	@Path("/DeleteProgram/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public int deleteSubject(@PathParam("id") int id) {
-		return subjectService.deleteSubject(id);
+	public int deleteProgram(@PathParam("id") int id) {
+		return programService.deleteProgram(id);
 	}
+	
+	
+	
 }
