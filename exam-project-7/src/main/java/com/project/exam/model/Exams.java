@@ -31,7 +31,6 @@ public class Exams {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="exam_type_id", nullable=false)
 	private Exam_types exam_type;
 
 
@@ -104,7 +103,17 @@ public class Exams {
 		this.status = status;
 	}
 
-	@OneToMany(mappedBy="exams", cascade = CascadeType.ALL)
+
+	public Set<StudentsExams> getStudentsExams() {
+		return studentsExams;
+	}
+
+
+	public void setStudentsExams(Set<StudentsExams> studentsExams) {
+		this.studentsExams = studentsExams;
+	}
+
+
 	public Exam_types getExam_type() {
 		return exam_type;
 	}
@@ -114,17 +123,7 @@ public class Exams {
 		this.exam_type = exam_type;
 	}
 
-	@OneToMany(mappedBy="exams", cascade = CascadeType.ALL)
-	public Set<StudentsExams> getStudentsExams() {
-		return studentsExams;
-	}
 
-
-	public void setStudentsExams(Set<StudentsExams> studentsExams) {
-		this.studentsExams = studentsExams;
-	}
-	
-	
 	
 	
 	

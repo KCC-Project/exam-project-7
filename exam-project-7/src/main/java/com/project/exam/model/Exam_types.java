@@ -1,5 +1,6 @@
 package com.project.exam.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -18,8 +19,8 @@ public class Exam_types {
 	private String type_name;
 	private int status;
 	
-	@OneToMany(mappedBy="exams")
-	private Set<Exams> exams;
+	@OneToMany(mappedBy="exam_type")
+	private List<Exams> exams;
 
 	public int getExam_type_id() {
 		return exam_type_id;
@@ -45,15 +46,13 @@ public class Exam_types {
 		this.status = status;
 	}
 
-	public Set<Exams> getExams() {
+	public List<Exams> getExams() {
 		return exams;
 	}
 
-	public void setExams(Set<Exams> exams) {
+	public void setExams(List<Exams> exams) {
 		this.exams = exams;
 	}
-	
-	
-	
+
 	
 }
