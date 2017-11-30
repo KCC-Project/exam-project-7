@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-@Table(name = "department")
+@Table(name = "departments")
 public class Departments {
 
 	@Id

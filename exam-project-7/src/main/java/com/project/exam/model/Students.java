@@ -27,7 +27,7 @@ public class Students {
 	private String district;
 	private String zipcode;
 
-	private Set<StudentsSemester> studentSemester = new HashSet<StudentsSemester>();
+	private Set<StudentsSemesters> studentSemester = new HashSet<StudentsSemesters>();
 	private Set<StudentsExams> studentsExams = new HashSet<StudentsExams>();
 
 	public int getS_id() {
@@ -111,11 +111,11 @@ public class Students {
 	}
 
 	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
-	public Set<StudentsSemester> getStudentSemester() {
+	public Set<StudentsSemesters> getStudentSemester() {
 		return studentSemester;
 	}
 
-	public void setStudentSemester(Set<StudentsSemester> studentSemester) {
+	public void setStudentSemester(Set<StudentsSemesters> studentSemester) {
 		this.studentSemester = studentSemester;
 	}
 

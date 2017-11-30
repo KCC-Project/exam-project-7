@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-@Table(name="exam_type")
+@Table(name="exam_types")
 public class Exam_types {
 
 	@Id
