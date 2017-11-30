@@ -22,17 +22,7 @@ public class Department {
 	@OneToMany(mappedBy="department")
 	private List<Programs> program;
 	
-	public Department() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Department(int depart_id, String depart_name, int status, List<Programs> program) {
-		super();
-		this.depart_id = depart_id;
-		this.depart_name = depart_name;
-		this.status = status;
-		this.program = program;
-	}
+
 	public int getDepart_id() {
 		return depart_id;
 	}

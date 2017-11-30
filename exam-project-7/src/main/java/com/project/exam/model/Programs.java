@@ -2,6 +2,7 @@ package com.project.exam.model;
 
 import java.util.List;
 
+import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
