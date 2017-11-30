@@ -62,8 +62,16 @@ public class StudentController {
 	@Path("/DeleteStudent/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public int deleteStudentsModel(@PathParam("id") int id) {
-		
 		return studentService.deleteStudent(id);
+	}
+	
+	
+	@GET
+	@Path("/SearchStudent/{searchingValue}")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public Students searchStudent(@PathParam("searchingValue") String name) {
+		System.out.println("it is here and name is ="+name);
+		return null;
 	}
 	
 }

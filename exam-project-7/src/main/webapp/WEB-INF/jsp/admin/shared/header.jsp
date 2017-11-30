@@ -10,9 +10,11 @@
 <html lang="en">
 <head>
 
-<spring:url value="/assets/css/extraCss/bootstrap.min.css" var="bootstrap" />
+<spring:url value="/assets/css/bootstrap.min.css" var="bootstrap" />
 <spring:url value="/assets/css/style.css" var="style" />
 <spring:url value="/assets/css/sidebar.css" var="sidebar" />
+<spring:url value="/assets/css/select2.min.css" var="select2" />
+<spring:url value="/assets/css/select2-bootstrap.min.css" var="select23" />
 <spring:url value="/assets/css/style-responsive.css"
 	var="styleresponsive" />
 <spring:url value="/assets/css/profile.css" var="profile" />
@@ -26,7 +28,8 @@
 	
 <spring:url value="/assets/js/extraJs/datatables.min.js"
 	var="datatablesJs" />
-
+<spring:url value="/assets/js/select2.min.js"
+	var="select2Js" />
 
 
 <meta charset="utf-8">
@@ -41,12 +44,16 @@
 <link href="${styleresponsive }" rel="stylesheet">
 <link href="${profile}" rel="stylesheet">
 <link href="${datatablescss}" rel="stylesheet">
+<link href="${select2}" rel="stylesheet">
+<link href="${select23}" rel="stylesheet">
+
 
 
 <script src="${jqueryJs}"></script>
 <script src="${bootstrapJs}"></script>
 <script src="${datatablesJs}"></script>
 <script src="${defaultJs}"></script>
+<script src="${select2Js}"></script>
 
 
 <script>
