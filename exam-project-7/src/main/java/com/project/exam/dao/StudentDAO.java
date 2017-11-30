@@ -10,7 +10,6 @@ import com.project.exam.model.StudentsModel;
 
 
 public interface StudentDAO {
-	
 	public List<StudentsModel> getStudentList();
 	public StudentsModel addStudent(StudentsModel student);
 	public StudentsModel getStudent(int s_Id);

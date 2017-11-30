@@ -13,9 +13,7 @@ import com.project.exam.model.StudentsModel;
 
 @Repository("studentDao")
 public class StudentDAOImpl implements StudentDAO {
-
-
-
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 

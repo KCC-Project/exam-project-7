@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.exam.model.Department;
 import com.project.exam.model.Programs;
 
-@Repository(value="programDAOImpl")
+@Repository("programDao")
 public class ProgramDAOImpl implements ProgramDAO {
 
 	@Autowired

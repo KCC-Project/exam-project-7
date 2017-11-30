@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.exam.model.Department;
-import com.project.exam.model.StudentsModel;
 
 @Repository("departmentDao")
 public class DepartmentDAOImpl implements DepartmentDAO {

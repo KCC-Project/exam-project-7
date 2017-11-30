@@ -12,30 +12,30 @@ import com.project.exam.model.Programs;
 public class ProgramServiceImpl implements ProgramService {
 
 	@Autowired
-	private ProgramDAO programDAO;
+	private ProgramDAO programDao;
 	
 	public List<Programs> getProgramList() {
-		return programDAO.getProgramList();
+		return programDao.getProgramList();
 	}
 
 	@Override
 	public Programs addProgram(Programs program) {
-		return programDAO.addProgram(program);
+		return programDao.addProgram(program);
 	}
 
 	@Override
 	public Programs getProgram(int s_Id) {
-		return programDAO.getProgram(s_Id);
+		return programDao.getProgram(s_Id);
 	}
 
 	@Override
 	public Programs updateProgram(Programs program) {
-		return programDAO.updateProgram(program);
+		return programDao.updateProgram(program);
 	}
 
 	@Override
 	public int deleteProgram(int s_Id) {
-		return programDAO.deleteProgram(s_Id);
+		return programDao.deleteProgram(s_Id);
 	}
 
 }

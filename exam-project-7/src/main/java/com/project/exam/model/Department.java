@@ -1,5 +1,6 @@
 package com.project.exam.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-@Table(name="department")
+@Table(name = "department")
 public class Department {
 
 	@Id
@@ -18,52 +19,43 @@ public class Department {
 	private String depart_name;
 	private int status;
 	
-	 @OneToMany(mappedBy="programs")
-	    private Set<Programs> programs;
-
-	public int getDepart_id() {
-		return depart_id;
-	}
-
-	public void setDepart_id(int depart_id) {
-		this.depart_id = depart_id;
-	}
-
-	public String getDepart_name() {
-		return depart_name;
-	}
-
-	public void setDepart_name(String depart_name) {
-		this.depart_name = depart_name;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public Set<Programs> getPrograms() {
-		return programs;
-	}
-
-	public void setPrograms(Set<Programs> programs) {
-		this.programs = programs;
-	}
-
-	@Override
-	public String toString() {
-		return "Department [depart_id=" + depart_id + ", depart_name=" + depart_name + ", status=" + status
-				+ ", programs=" + programs + "]";
-	}
-
+	@OneToMany(mappedBy="department")
+	private List<Programs> program;
+	
 	public Department() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	 
-	
-	
+	public Department(int depart_id, String depart_name, int status, List<Programs> program) {
+		super();
+		this.depart_id = depart_id;
+		this.depart_name = depart_name;
+		this.status = status;
+		this.program = program;
+	}
+	public int getDepart_id() {
+		return depart_id;
+	}
+	public void setDepart_id(int depart_id) {
+		this.depart_id = depart_id;
+	}
+	public String getDepart_name() {
+		return depart_name;
+	}
+	public void setDepart_name(String depart_name) {
+		this.depart_name = depart_name;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public List<Programs> getProgram() {
+		return program;
+	}
+	public void setProgram(List<Programs> program) {
+		this.program = program;
+	}
+
 }

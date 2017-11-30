@@ -2,6 +2,8 @@ package com.project.exam.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.project.exam.model.Department;
 
 public interface DepartmentDAO 

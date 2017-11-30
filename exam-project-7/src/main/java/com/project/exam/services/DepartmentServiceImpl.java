@@ -12,31 +12,31 @@ import com.project.exam.model.Department;
 public class DepartmentServiceImpl implements DepartmentService{
 
 	@Autowired
-	private DepartmentDAO departmentDAO;
+	private DepartmentDAO departmentDao;
 	
 	@Override
 	public List<Department> getDepartmentList() {
-	return departmentDAO.getDepartmentList();
+	return departmentDao.getDepartmentList();
 	}
 
 	@Override
 	public Department addDepartment(Department department) {
-		return departmentDAO.addDepartment(department);
+		return departmentDao.addDepartment(department);
 	}
 
 	@Override
 	public Department getDepartment(int s_Id) {
-		return departmentDAO.getDepartment(s_Id);
+		return departmentDao.getDepartment(s_Id);
 	}
 
 	@Override
 	public Department updateDepartment(Department department) {
-		return departmentDAO.updateDepartment(department);
+		return departmentDao.updateDepartment(department);
 	}
 
 	@Override
 	public int deleteDepartment(int s_Id) {
-		return departmentDAO.deleteDepartment(s_Id);
+		return departmentDao.deleteDepartment(s_Id);
 	}
 
 }
