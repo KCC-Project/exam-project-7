@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.exam.model.Department;
+import com.project.exam.model.Departments;
 import com.project.exam.model.Programs;
 
 @Repository("programDao")

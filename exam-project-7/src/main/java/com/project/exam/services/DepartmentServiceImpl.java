@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.exam.dao.DepartmentDAO;
-import com.project.exam.model.Department;
+import com.project.exam.model.Departments;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
@@ -15,22 +15,22 @@ public class DepartmentServiceImpl implements DepartmentService{
 	private DepartmentDAO departmentDao;
 	
 	@Override
-	public List<Department> getDepartmentList() {
+	public List<Departments> getDepartmentList() {
 	return departmentDao.getDepartmentList();
 	}
 
 	@Override
-	public Department addDepartment(Department department) {
+	public Departments addDepartment(Departments department) {
 		return departmentDao.addDepartment(department);
 	}
 
 	@Override
-	public Department getDepartment(int s_Id) {
+	public Departments getDepartment(int s_Id) {
 		return departmentDao.getDepartment(s_Id);
 	}
 
 	@Override
-	public Department updateDepartment(Department department) {
+	public Departments updateDepartment(Departments department) {
 		return departmentDao.updateDepartment(department);
 	}
 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.exam.dao.StudentDAO;
-import com.project.exam.model.StudentsModel;
+import com.project.exam.model.Students;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -15,22 +15,22 @@ public class StudentServiceImpl implements StudentService {
 	private StudentDAO studentDao;
 
 	@Override
-	public List<StudentsModel> getStudentList() {
+	public List<Students> getStudentList() {
 		return studentDao.getStudentList();
 	}
 
 	@Override
-	public StudentsModel addStudent(StudentsModel student) {
+	public Students addStudent(Students student) {
 		return studentDao.addStudent(student);
 	}
 
 	@Override
-	public StudentsModel getStudent(int s_Id) {
+	public Students getStudent(int s_Id) {
 		return studentDao.getStudent(s_Id);
 	}
 
 	@Override
-	public StudentsModel updateStudent(StudentsModel student) {
+	public Students updateStudent(Students student) {
 		return studentDao.updateStudent(student);
 	}
 

@@ -25,7 +25,7 @@ public class Exams {
 	
 	@ManyToOne
 	@JoinColumn(name="exam_type_id", nullable=false)
-	private Exam_type exam_type;
+	private Exam_types exam_type;
 
 
 	public int getExam_id() {
@@ -98,12 +98,12 @@ public class Exams {
 	}
 
 
-	public Exam_type getExam_type() {
+	public Exam_types getExam_type() {
 		return exam_type;
 	}
 
 
-	public void setExam_type(Exam_type exam_type) {
+	public void setExam_type(Exam_types exam_type) {
 		this.exam_type = exam_type;
 	}
 	

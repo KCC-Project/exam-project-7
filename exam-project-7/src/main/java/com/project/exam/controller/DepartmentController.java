@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.project.exam.model.Department;
+import com.project.exam.model.Departments;
 import com.project.exam.services.DepartmentService;
 
 @Path("/ApiDepartment")
@@ -26,7 +26,7 @@ public class DepartmentController {
 	@GET
 	@Path("/GetAllDepartment")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public List<Department> getAllDepartment() {
+	public List<Departments> getAllDepartment() {
 		return departmentService.getDepartmentList();
 	}
 	
@@ -35,7 +35,7 @@ public class DepartmentController {
 	@Path("/SaveDepartment")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Department saveDepartment(Department department) {
+	public Departments saveDepartment(Departments department) {
 		return departmentService.addDepartment(department);
 	}
 	
@@ -43,7 +43,7 @@ public class DepartmentController {
 	@GET
 	@Path("/GetDepartment/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Department getDepartment(@PathParam("id") int id) {
+	public Departments getDepartment(@PathParam("id") int id) {
 		return departmentService.getDepartment(id);
 	}
 	
@@ -51,7 +51,7 @@ public class DepartmentController {
 	@Path("/UpdateDepartment")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Department updateDepartment(Department department) {
+	public Departments updateDepartment(Departments department) {
 		return departmentService.updateDepartment(department);
 	}
 	

@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name="exam_type")
-public class Exam_type {
+public class Exam_types {
 
 	@Id
 	private int exam_type_id;

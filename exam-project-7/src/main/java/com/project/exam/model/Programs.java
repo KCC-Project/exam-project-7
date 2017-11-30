@@ -29,7 +29,10 @@ public class Programs {
 	int status;
 	
 	@ManyToOne
-	private Department department;
+	private Departments department;
+	
+	@OneToMany(mappedBy="programs")
+	private List<Semesters> semester;
 
 	public Programs() {
 		super();
@@ -37,7 +40,7 @@ public class Programs {
 	}
 
 	public Programs(int program_id, String program_name, int program_years, int program_semesters, int total_credit,
-			String program_update_date, int status, Department department) {
+			String program_update_date, int status, Departments department) {
 		super();
 		this.program_id = program_id;
 		this.program_name = program_name;
@@ -105,11 +108,11 @@ public class Programs {
 		this.status = status;
 	}
 
-	public Department getDepartment() {
+	public Departments getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(Department department) {
+	public void setDepartment(Departments department) {
 		this.department = department;
 	}
 
