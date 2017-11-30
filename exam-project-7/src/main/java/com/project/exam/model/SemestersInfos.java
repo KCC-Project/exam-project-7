@@ -1,13 +1,10 @@
 package com.project.exam.model;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,8 +20,6 @@ public class SemestersInfos {
 	private String end_date;
 	private int start_year;
 	private int status;
-	
-	private Set<SemSemestersInfos> semestersSemestersInfos = new HashSet<SemSemestersInfos>();
 	
 	
 	@OneToMany(mappedBy="semesters_infos")
@@ -72,14 +67,6 @@ public class SemestersInfos {
 
 	public void setStatus(int status) {
 		this.status = status;
-	}
-
-	public Set<SemSemestersInfos> getSemestersSemestersInfos() {
-		return semestersSemestersInfos;
-	}
-
-	public void setSemestersSemestersInfos(Set<SemSemestersInfos> semestersSemestersInfos) {
-		this.semestersSemestersInfos = semestersSemestersInfos;
 	}
 
 	public List<StudentsSemesters> getStudentsSemesters() {
