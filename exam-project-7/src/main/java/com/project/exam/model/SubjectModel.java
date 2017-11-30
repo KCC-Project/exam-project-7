@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name="subject")
-public class Subject {
+public class SubjectModel {
 
 	@Id
 	private int subject_id;
@@ -98,7 +98,7 @@ public class Subject {
 				+ practical_cr + ", internal_theory=" + internal_theory + ", internal_practical=" + internal_practical
 				+ ", final_theory=" + final_theory + ", syllabus_file=" + syllabus_file + ", status=" + status + "]";
 	}
-	public Subject(int subject_id, String subject_name, String subject_code, int theory_cr, int tutorial_cr,
+	public SubjectModel(int subject_id, String subject_name, String subject_code, int theory_cr, int tutorial_cr,
 			int practical_cr, int internal_theory, int internal_practical, int final_theory, String syllabus_file,
 			int status) {
 		super();
@@ -114,7 +114,7 @@ public class Subject {
 		this.syllabus_file = syllabus_file;
 		this.status = status;
 	}
-	public Subject() {
+	public SubjectModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

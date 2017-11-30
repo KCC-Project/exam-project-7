@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.exam.model.Students;
+import com.project.exam.model.StudentsModel;
 
 @Repository("studentDao")
 public class StudentDAOImpl implements StudentDAO {
@@ -20,15 +20,15 @@ public class StudentDAOImpl implements StudentDAO {
 	private SessionFactory sessionFactory;
 
 	@Transactional
-	public List<Students> getStudentList() {
+	public List<StudentsModel> getStudentList() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(Students.class).list();
+		return session.createCriteria(StudentsModel.class).list();
 
 	}
 
 	@Override
 	@Transactional
-	public Students addStudent(Students student) {
+	public StudentsModel addStudent(StudentsModel student) {
 		Session session = sessionFactory.getCurrentSession();
 		System.out.println(student.toString());
 		session.save(student);
@@ -37,14 +37,14 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Override
 	@Transactional
-	public Students getStudent(int s_Id) {
+	public StudentsModel getStudent(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Students) session.get(Students.class, s_Id);
+		return (StudentsModel) session.get(StudentsModel.class, s_Id);
 	}
 
 	@Override
 	@Transactional
-	public Students updateStudent(Students student) {
+	public StudentsModel updateStudent(StudentsModel student) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(student);
 		return student;
@@ -54,7 +54,7 @@ public class StudentDAOImpl implements StudentDAO {
 	@Transactional
 	public int deleteStudent(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		Students ent = session.load(Students.class, s_Id);
+		StudentsModel ent = session.load(StudentsModel.class, s_Id);
 		session.delete(ent);
 		return 1;
 	}

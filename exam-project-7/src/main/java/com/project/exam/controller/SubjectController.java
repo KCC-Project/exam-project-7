@@ -13,7 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import com.project.exam.model.Subject;
+import com.project.exam.model.SubjectModel;
 import com.project.exam.services.SubjectService;
 
 @Path("/ApiSubject")
@@ -25,7 +25,7 @@ public class SubjectController {
 	@GET
 	@Path("/GetAllSubject")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public List<Subject> getAllSubject() {
+	public List<SubjectModel> getAllSubject() {
 		return subjectService.getallSubjectList();
 	}
 	
@@ -34,7 +34,7 @@ public class SubjectController {
 	@Path("/SaveSubject")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Subject saveSubject(Subject subjectModel) {
+	public SubjectModel saveSubject(SubjectModel subjectModel) {
 		return subjectService.addSubject(subjectModel);
 	}
 	
@@ -42,7 +42,7 @@ public class SubjectController {
 	@GET
 	@Path("/GetSubject/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Subject getSubject(@PathParam("id") int id) {
+	public SubjectModel getSubject(@PathParam("id") int id) {
 		return subjectService.getSubject(id);
 	}
 	
@@ -50,7 +50,7 @@ public class SubjectController {
 	@Path("/UpdateSubject")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Subject updateSubject(Subject subjectModel) {
+	public SubjectModel updateSubject(SubjectModel subjectModel) {
 		return subjectService.updateSubject(subjectModel);
 	}
 	

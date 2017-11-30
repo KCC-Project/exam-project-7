@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name="students")
-public class Students {
+public class StudentsModel {
 
 	
 	@Id
@@ -84,11 +84,11 @@ public class Students {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public Students() {
+	public StudentsModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Students(int s_id, String first_name, String middle_name, String last_name, String date_of_birth,
+	public StudentsModel(int s_id, String first_name, String middle_name, String last_name, String date_of_birth,
 			int phone, String address, String city, String district, String zipcode) {
 		super();
 		this.s_id = s_id;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.project.exam.dao.SubjectDAO;
-import com.project.exam.model.Subject;
+import com.project.exam.model.SubjectModel;
 @Service
 public class SubjectServiceImpl implements SubjectService{
 
@@ -15,22 +15,22 @@ public class SubjectServiceImpl implements SubjectService{
 	private SubjectDAO subjectDao;
 	
 	@Override
-	public List<Subject> getallSubjectList() {
+	public List<SubjectModel> getallSubjectList() {
 		return subjectDao.getallSubjectList();
 	}
 
 	@Override
-	public Subject addSubject(Subject subject) {
+	public SubjectModel addSubject(SubjectModel subject) {
 		return subjectDao.addStudent(subject);
 	}
 
 	@Override
-	public Subject getSubject(int s_Id) {
+	public SubjectModel getSubject(int s_Id) {
 		return subjectDao.getSubject(s_Id);
 	}
 
 	@Override
-	public Subject updateSubject(Subject subject) {
+	public SubjectModel updateSubject(SubjectModel subject) {
 		return subjectDao.updateSubject(subject);
 	}
 

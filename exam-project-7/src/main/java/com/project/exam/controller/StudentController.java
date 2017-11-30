@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-import com.project.exam.model.Student;
+import com.project.exam.model.StudentsModel;
 import com.project.exam.services.StudentService;
 
 @Path("/ApiStudent")
@@ -27,7 +27,7 @@ public class StudentController {
 	@GET
 	@Path("/GetAllStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public List<Student> getAllStudent() {
+	public List<StudentsModel> getAllStudent() {
 		System.out.println("indiseee");
 		return studentService.getStudentList();
 	}
@@ -37,7 +37,7 @@ public class StudentController {
 	@Path("/SaveStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Students saveStudent(Students studentModel) {
+	public StudentsModel saveStudent(StudentsModel studentModel) {
 		return studentService.addStudent(studentModel);
 	}
 	
@@ -45,7 +45,7 @@ public class StudentController {
 	@GET
 	@Path("/GetStudent/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Students getStudent(@PathParam("id") int id) {
+	public StudentsModel getStudent(@PathParam("id") int id) {
 		System.out.println(studentService.getStudent(id));
 		return studentService.getStudent(id);
 	}
@@ -54,7 +54,7 @@ public class StudentController {
 	@Path("/UpdateStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Students updateStudent(Students studentModel) {
+	public StudentsModel updateStudent(StudentsModel studentModel) {
 		return studentService.updateStudent(studentModel);
 	}
 	
