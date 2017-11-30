@@ -119,4 +119,15 @@ public class Students {
 		this.studentSemester = studentSemester;
 	}
 
+	@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
+	public Set<StudentsExams> getStudentsExams() {
+		return studentsExams;
+	}
+
+	public void setStudentsExams(Set<StudentsExams> studentsExams) {
+		this.studentsExams = studentsExams;
+	}
+	
+	
+
 }

@@ -1,9 +1,14 @@
 package com.project.exam.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,6 +26,8 @@ public class Exams {
 	private String full_marks;
 	private String pass_marks;
 	private int status;
+	
+	private Set<StudentsExams> studentsExams = new HashSet<StudentsExams>();
 	
 	
 	@ManyToOne
@@ -97,7 +104,7 @@ public class Exams {
 		this.status = status;
 	}
 
-
+	@OneToMany(mappedBy="exams", cascade = CascadeType.ALL)
 	public Exam_types getExam_type() {
 		return exam_type;
 	}
@@ -105,6 +112,16 @@ public class Exams {
 
 	public void setExam_type(Exam_types exam_type) {
 		this.exam_type = exam_type;
+	}
+
+	@OneToMany(mappedBy="exams", cascade = CascadeType.ALL)
+	public Set<StudentsExams> getStudentsExams() {
+		return studentsExams;
+	}
+
+
+	public void setStudentsExams(Set<StudentsExams> studentsExams) {
+		this.studentsExams = studentsExams;
 	}
 	
 	
