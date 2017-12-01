@@ -24,13 +24,12 @@ public class Exam {
 	
 	private Subjects subjects;
 	
-	@Column(nullable = false)
 	private String exam_date;
 	
 	private String time_from;
 	private String time_to;
-	private String full_marks;
-	private String pass_marks;
+	private int full_marks;
+	private int pass_marks;
 	private int status;
 	
 	private Set<StudentsExam> studentsExams = new HashSet<StudentsExam>();
@@ -46,7 +45,7 @@ public class Exam {
 		this.exam_id = exam_id;
 	}
 
-
+	@Column(nullable = false)
 	public String getExam_date() {
 		return exam_date;
 	}
@@ -77,22 +76,22 @@ public class Exam {
 	}
 
 
-	public String getFull_marks() {
+	public int getFull_marks() {
 		return full_marks;
 	}
 
 
-	public void setFull_marks(String full_marks) {
+	public void setFull_marks(int full_marks) {
 		this.full_marks = full_marks;
 	}
 
 
-	public String getPass_marks() {
+	public int getPass_marks() {
 		return pass_marks;
 	}
 
 
-	public void setPass_marks(String pass_marks) {
+	public void setPass_marks(int pass_marks) {
 		this.pass_marks = pass_marks;
 	}
 

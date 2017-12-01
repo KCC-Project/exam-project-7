@@ -25,7 +25,7 @@ public class Subjects {
 	private int internal_theory;
 	private int internal_practical;
 	private int final_theory;
-	private int syllabus_file;
+	private String syllabus_file;
 	private int status;
 
 	private Set<Exam> exams;
@@ -99,11 +99,11 @@ public class Subjects {
 		this.final_theory = final_theory;
 	}
 
-	public int getSyllabus_file() {
+	public String getSyllabus_file() {
 		return syllabus_file;
 	}
 
-	public void setSyllabus_file(int syllabus_file) {
+	public void setSyllabus_file(String syllabus_file) {
 		this.syllabus_file = syllabus_file;
 	}
 
