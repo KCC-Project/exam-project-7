@@ -39,5 +39,10 @@ public class StudentServiceImpl implements StudentService {
 		return studentDao.deleteStudent(s_Id);
 	}
 
+	@Override
+	public Student searchStudent(String searchPara) {
+		return studentDao.searchStudent(searchPara);
+	}
+
 	
 }

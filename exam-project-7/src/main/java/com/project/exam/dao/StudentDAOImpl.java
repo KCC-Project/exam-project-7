@@ -3,6 +3,7 @@ package com.project.exam.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,16 @@ public class StudentDAOImpl implements StudentDAO {
 		Student ent = session.load(Student.class, s_Id);
 		session.delete(ent);
 		return 1;
+	}
+
+	@Override
+	@Transactional
+	public Student searchStudent(String searchPara) {
+		Session session = sessionFactory.getCurrentSession();
+		SQLQuery query=session.createSQLQuery("SELECT * FROM students WHERE MATCH(first_name, middle_name, last_name) AGAINST('"+searchPara+"' IN NATURAL LANGUAGE MODE)").addEntity(Student.class);
+		Student user = (Student) query.uniqueResult();
+		System.out.println("student = "+user.toString());
+		return user;
 	}
 
 }

@@ -100,11 +100,10 @@
 			    ajax : {
 				url : window.context +"/ApiStudent/SearchStudent",
 				dataType : 'json',
-				type : "GET",
-				delay : 250,
+				type : "POST",
+				delay : 300,
 				data : function(params) {
 				    console.log("params="   + params.term);
-				    //console.log("params="+params.page);
 				    return {
 					val : params.term,
 					page : params.page
@@ -130,6 +129,7 @@
 			    templateSelection : formatRepoSelection
 			}).on("change", function(e) {
 		    var selected_element = $(e.currentTarget);
+		    console.log(selected_element);
 		    var select_val = selected_element.val();
 		    alert("name="+ selectedValues[select_val]);
 		    console.log("Student Id=" + select_val);
@@ -138,9 +138,10 @@
 	function formatRepo(repo) {
 	    if (repo.loading)
 		return repo.text;
-	    var markup = '<option value='+repo.id+'>'
-		    + repo.name + '</option>';
+	    var markup = '<option value='+repo.s_id+'>'
+		    + repo.first_name + '</option>';
 	    console.log("repo.text=" + repo.text);
+	    
 	    return markup;
 	}
 	function formatRepoSelection(repo) {

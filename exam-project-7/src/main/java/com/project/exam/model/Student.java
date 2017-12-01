@@ -1,17 +1,13 @@
 package com.project.exam.model;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -38,7 +34,7 @@ public class Student {
 	private String district;
 	private String zipcode;
 	
-	private Date registeredDate;
+	private String registeredDate;
 	
 	private int status;
 
@@ -147,13 +143,12 @@ public class Student {
 		this.studentsExams = studentsExams;
 	}
 
-	 @Column(name = "registered_date")
-	 @Temporal(TemporalType.DATE)
-	public Date getRegisteredDate() {
+	 
+	public String getRegisteredDate() {
 		return registeredDate;
 	}
 
-	public void setRegisteredDate(Date registeredDate) {
+	public void setRegisteredDate(String registeredDate) {
 		this.registeredDate = registeredDate;
 	}
 
@@ -164,6 +159,17 @@ public class Student {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "Student [s_id=" + s_id + ", first_name=" + first_name + ", middle_name=" + middle_name + ", last_name="
+				+ last_name + ", date_of_birth=" + date_of_birth + ", phone=" + phone + ", address=" + address
+				+ ", city=" + city + ", district=" + district + ", zipcode=" + zipcode + ", registeredDate="
+				+ registeredDate + ", status=" + status + ", studentSemesters=" + studentSemesters + ", studentsExams="
+				+ studentsExams + "]";
+	}
+
+	
 
 	
 	
