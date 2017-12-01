@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.exam.dao.ProgramDAO;
-import com.project.exam.model.Programs;
+import com.project.exam.model.Program;
 
 @Service
 public class ProgramServiceImpl implements ProgramService {
@@ -14,22 +14,22 @@ public class ProgramServiceImpl implements ProgramService {
 	@Autowired
 	private ProgramDAO programDao;
 	
-	public List<Programs> getProgramList() {
+	public List<Program> getProgramList() {
 		return programDao.getProgramList();
 	}
 
 	@Override
-	public Programs addProgram(Programs program) {
+	public Program addProgram(Program program) {
 		return programDao.addProgram(program);
 	}
 
 	@Override
-	public Programs getProgram(int s_Id) {
+	public Program getProgram(int s_Id) {
 		return programDao.getProgram(s_Id);
 	}
 
 	@Override
-	public Programs updateProgram(Programs program) {
+	public Program updateProgram(Program program) {
 		return programDao.updateProgram(program);
 	}
 

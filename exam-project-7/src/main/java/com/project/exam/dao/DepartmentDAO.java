@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.project.exam.model.Departments;
+import com.project.exam.model.Department;
 
 public interface DepartmentDAO 
 {
-	public List<Departments> getDepartmentList();
-	public Departments addDepartment(Departments department);
-	public Departments getDepartment(int s_Id);
-	public Departments updateDepartment(Departments department);
+	public List<Department> getDepartmentList();
+	public Department addDepartment(Department department);
+	public Department getDepartment(int s_Id);
+	public Department updateDepartment(Department department);
 	public int deleteDepartment(int s_Id);
 
 }

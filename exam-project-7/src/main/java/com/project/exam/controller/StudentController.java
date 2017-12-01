@@ -16,7 +16,7 @@ import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.project.exam.model.Students;
+import com.project.exam.model.Student;
 import com.project.exam.services.StudentService;
 
 @Path("/ApiStudent")
@@ -28,7 +28,7 @@ public class StudentController {
 	@GET
 	@Path("/GetAllStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public List<Students> getAllStudent() {
+	public List<Student> getAllStudent() {
 		System.out.println("indiseee");
 		return studentService.getStudentList();
 	}
@@ -38,7 +38,7 @@ public class StudentController {
 	@Path("/SaveStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Students saveStudent(Students studentModel) {
+	public Student saveStudent(Student studentModel) {
 		return studentService.addStudent(studentModel);
 	}
 	
@@ -46,7 +46,7 @@ public class StudentController {
 	@GET
 	@Path("/GetStudent/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Students getStudent(@PathParam("id") int id) {
+	public Student getStudent(@PathParam("id") int id) {
 		System.out.println(studentService.getStudent(id));
 		return studentService.getStudent(id);
 	}
@@ -55,7 +55,7 @@ public class StudentController {
 	@Path("/UpdateStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Students updateStudent(Students studentModel) {
+	public Student updateStudent(Student studentModel) {
 		return studentService.updateStudent(studentModel);
 	}
 	
@@ -70,7 +70,7 @@ public class StudentController {
 	@GET
 	@Path("/SearchStudent/{val}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Students searchStudent(@PathParam("val") String query) {
+	public Student searchStudent(@PathParam("val") String query) {
 		System.out.println("it is here and name is ="+query);
 		return null;
 	}

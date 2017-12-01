@@ -1,6 +1,5 @@
 package com.project.exam.model;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name = "departments")
-public class Departments {
+public class Department {
 
 	
 	private int depart_id;
@@ -21,7 +20,7 @@ public class Departments {
 	private int status;
 	
 	
-	private Set<Programs> program;
+	private Set<Program> program;
 	
 	@Id
 	public int getDepart_id() {
@@ -44,10 +43,10 @@ public class Departments {
 	}
 	
 	@OneToMany(mappedBy="departments", cascade = CascadeType.ALL)
-	public Set<Programs> getProgram() {
+	public Set<Program> getProgram() {
 		return program;
 	}
-	public void setProgram(Set<Programs> program) {
+	public void setProgram(Set<Program> program) {
 		this.program = program;
 	}
 

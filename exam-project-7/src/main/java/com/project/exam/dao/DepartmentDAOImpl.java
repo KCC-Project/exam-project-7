@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.exam.model.Departments;
+import com.project.exam.model.Department;
 
 @Repository("departmentDao")
 public class DepartmentDAOImpl implements DepartmentDAO {
@@ -18,14 +18,14 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	
 	@Override
 	@Transactional
-	public List<Departments> getDepartmentList() {
+	public List<Department> getDepartmentList() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(Departments.class).list();
+		return session.createCriteria(Department.class).list();
 	}
 
 	@Override
 	@Transactional
-	public Departments addDepartment(Departments department) {
+	public Department addDepartment(Department department) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(department);
 		return department;
@@ -33,14 +33,14 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
 	@Override
 	@Transactional
-	public Departments getDepartment(int s_Id) {
+	public Department getDepartment(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Departments) session.get(Departments.class, s_Id);
+		return (Department) session.get(Department.class, s_Id);
 	}
 
 	@Override
 	@Transactional
-	public Departments updateDepartment(Departments department) {
+	public Department updateDepartment(Department department) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(department);
 		return department;
@@ -50,7 +50,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	@Transactional
 	public int deleteDepartment(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		Departments ent = session.load(Departments.class, s_Id);
+		Department ent = session.load(Department.class, s_Id);
 		session.delete(ent);
 		return 1;
 	}

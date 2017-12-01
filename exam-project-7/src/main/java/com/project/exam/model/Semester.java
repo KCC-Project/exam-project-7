@@ -1,10 +1,8 @@
 package com.project.exam.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name="semesters")
-public class Semesters {
+public class Semester {
 
 	
 	private int semester_id;
@@ -25,13 +23,13 @@ public class Semesters {
 	private int status;
 	
 	
-	private Set<StudentsSemesters> studentsSemester = new HashSet<StudentsSemesters>();
+	private Set<StudentsSemester> studentsSemester = new HashSet<StudentsSemester>();
 	
 	
 	//private Set<SemestersInfos> semestersInfos;
 	
 	
-	private Programs programs;
+	private Program programs;
 
 	@Id
 	public int getSemester_id() {
@@ -59,21 +57,21 @@ public class Semesters {
 	}
 
 	@OneToMany(mappedBy = "semesters")
-	public Set<StudentsSemesters> getStudentsSemester() {
+	public Set<StudentsSemester> getStudentsSemester() {
 		return studentsSemester;
 	}
 
-	public void setStudentsSemester(Set<StudentsSemesters> studentsSemester) {
+	public void setStudentsSemester(Set<StudentsSemester> studentsSemester) {
 		this.studentsSemester = studentsSemester;
 	}
 
 	@ManyToOne
     @JoinColumn(name = "program_id")
-	public Programs getPrograms() {
+	public Program getPrograms() {
 		return programs;
 	}
 
-	public void setPrograms(Programs programs) {
+	public void setPrograms(Program programs) {
 		this.programs = programs;
 	}
 /*

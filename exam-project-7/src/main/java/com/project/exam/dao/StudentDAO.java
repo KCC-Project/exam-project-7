@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.project.exam.model.Students;
+import com.project.exam.model.Student;
 
 
 public interface StudentDAO {
-	public List<Students> getStudentList();
-	public Students addStudent(Students student);
-	public Students getStudent(int s_Id);
-	public Students updateStudent(Students student);
+	public List<Student> getStudentList();
+	public Student addStudent(Student student);
+	public Student getStudent(int s_Id);
+	public Student updateStudent(Student student);
 	public int deleteStudent(int s_Id);
 
 	

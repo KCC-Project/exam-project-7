@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name = "students")
-public class Students {
+public class Student {
 
 	
 	private int s_id;
@@ -28,10 +28,10 @@ public class Students {
 	private String zipcode;
 
 	
-	private Set<StudentsSemesters> studentSemesters = new HashSet<StudentsSemesters>();
+	private Set<StudentsSemester> studentSemesters = new HashSet<StudentsSemester>();
 	
 	
-	private Set<StudentsExams> studentsExams = new HashSet<StudentsExams>();
+	private Set<StudentsExam> studentsExams = new HashSet<StudentsExam>();
 
 	@Id
 	public int getS_id() {
@@ -115,20 +115,20 @@ public class Students {
 	}
 
 	@OneToMany(mappedBy = "students")
-	public Set<StudentsSemesters> getStudentSemesters() {
+	public Set<StudentsSemester> getStudentSemesters() {
 		return studentSemesters;
 	}
 
-	public void setStudentSemesters(Set<StudentsSemesters> studentSemesters) {
+	public void setStudentSemesters(Set<StudentsSemester> studentSemesters) {
 		this.studentSemesters = studentSemesters;
 	}
 
 	@OneToMany(mappedBy = "students")
-	public Set<StudentsExams> getStudentsExams() {
+	public Set<StudentsExam> getStudentsExams() {
 		return studentsExams;
 	}
 
-	public void setStudentsExams(Set<StudentsExams> studentsExams) {
+	public void setStudentsExams(Set<StudentsExam> studentsExams) {
 		this.studentsExams = studentsExams;
 	}
 

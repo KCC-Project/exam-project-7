@@ -3,7 +3,6 @@ package com.project.exam.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -15,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name="exams")
-public class Exams {
+public class Exam {
 
 	
 	private int exam_id;
@@ -26,11 +25,12 @@ public class Exams {
 	private String full_marks;
 	private String pass_marks;
 	private int status;
+	private Subject subjects;
 	
-	private Set<StudentsExams> studentsExams = new HashSet<StudentsExams>();
+	private Set<StudentsExam> studentsExams = new HashSet<StudentsExam>();
 	
 	
-	private Exam_types exam_types;
+	private Exam_type exam_types;
 
 	@Id
 	public int getExam_id() {
@@ -104,24 +104,36 @@ public class Exams {
 
 
 	@OneToMany(mappedBy = "exams")
-	public Set<StudentsExams> getStudentsExams() {
+	public Set<StudentsExam> getStudentsExams() {
 		return studentsExams;
 	}
 
 
-	public void setStudentsExams(Set<StudentsExams> studentsExams) {
+	public void setStudentsExams(Set<StudentsExam> studentsExams) {
 		this.studentsExams = studentsExams;
 	}
 
 	@ManyToOne
     @JoinColumn(name = "exam_type_id")
-	public Exam_types getExam_types() {
+	public Exam_type getExam_types() {
 		return exam_types;
 	}
 
 
-	public void setExam_types(Exam_types exam_types) {
+	public void setExam_types(Exam_type exam_types) {
 		this.exam_types = exam_types;
+	}
+
+
+	@ManyToOne
+    @JoinColumn(name = "subject_id")
+	public Subject getSubjects() {
+		return subjects;
+	}
+
+
+	public void setSubjects(Subject subjects) {
+		this.subjects = subjects;
 	}
 
 

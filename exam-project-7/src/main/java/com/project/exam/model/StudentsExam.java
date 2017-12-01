@@ -9,16 +9,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "students_exams")
-public class StudentsExams {
+public class StudentsExam {
 
 	
 	private int students_exams_id;
 
 	
-	private Students students;
+	private Student students;
 
 	
-	private Exams exams;
+	private Exam exams;
 
 	// additional field
 	private int attendance_status;
@@ -37,21 +37,21 @@ public class StudentsExams {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "s_id")
-	public Students getStudents() {
+	public Student getStudents() {
 		return students;
 	}
 
-	public void setStudents(Students students) {
+	public void setStudents(Student students) {
 		this.students = students;
 	}
 
 	@ManyToOne
 	@JoinColumn(name = "exam_id")
-	public Exams getExams() {
+	public Exam getExams() {
 		return exams;
 	}
 
-	public void setExams(Exams exams) {
+	public void setExams(Exam exams) {
 		this.exams = exams;
 	}
 

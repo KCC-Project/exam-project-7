@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.project.exam.model.Subjects;
+import com.project.exam.model.Subject;
 
 @Component
 public interface SubjectService {
 	
-	public List<Subjects> getallSubjectList();
-	public Subjects addSubject(Subjects subject);
-	public Subjects getSubject(int s_Id);
-	public Subjects updateSubject(Subjects subject);
+	public List<Subject> getallSubjectList();
+	public Subject addSubject(Subject subject);
+	public Subject getSubject(int s_Id);
+	public Subject updateSubject(Subject subject);
 	public int deleteSubject(int s_Id);
 
 }

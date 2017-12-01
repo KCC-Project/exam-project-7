@@ -3,7 +3,6 @@ package com.project.exam.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -11,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "subjects")
-public class Subjects {
+public class Subject {
 
 	
 	private int subject_id;
@@ -26,8 +25,9 @@ public class Subjects {
 	private int syllabus_file;
 	private int status;
 
+	private Set<Exam> exams;
 	
-	private Set<SemestersSubjects> semesterSubjects = new HashSet<SemestersSubjects>();
+	private Set<SemestersSubject> semesterSubjects = new HashSet<SemestersSubject>();
 
 	@Id
 	public int getSubject_id() {
@@ -111,12 +111,21 @@ public class Subjects {
 	}
 
 	@OneToMany(mappedBy = "subjects")
-	public Set<SemestersSubjects> getSemesterSubjects() {
+	public Set<SemestersSubject> getSemesterSubjects() {
 		return semesterSubjects;
 	}
 
-	public void setSemesterSubjects(Set<SemestersSubjects> semesterSubjects) {
+	public void setSemesterSubjects(Set<SemestersSubject> semesterSubjects) {
 		this.semesterSubjects = semesterSubjects;
 	}
 
+	
+	@OneToMany(mappedBy="subjects")
+	public Set<Exam> getExams() {
+		return exams;
+	}
+
+	public void setExams(Set<Exam> exams) {
+		this.exams = exams;
+	}
 }

@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.exam.model.Departments;
-import com.project.exam.model.Programs;
+import com.project.exam.model.Department;
+import com.project.exam.model.Program;
 
 @Repository("programDao")
 public class ProgramDAOImpl implements ProgramDAO {
@@ -19,14 +19,14 @@ public class ProgramDAOImpl implements ProgramDAO {
 	
 	@Override
 	@Transactional
-	public List<Programs> getProgramList() {
+	public List<Program> getProgramList() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(Programs.class).list();
+		return session.createCriteria(Program.class).list();
 	}
 
 	@Override
 	@Transactional
-	public Programs addProgram(Programs program) {
+	public Program addProgram(Program program) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(program);
 		return program;
@@ -34,14 +34,14 @@ public class ProgramDAOImpl implements ProgramDAO {
 
 	@Override
 	@Transactional
-	public Programs getProgram(int s_Id) {
+	public Program getProgram(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Programs) session.get(Programs.class, s_Id);
+		return (Program) session.get(Program.class, s_Id);
 		}
 
 	@Override
 	@Transactional
-	public Programs updateProgram(Programs program) {
+	public Program updateProgram(Program program) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(program);
 		return program;
@@ -51,7 +51,7 @@ public class ProgramDAOImpl implements ProgramDAO {
 	@Transactional
 	public int deleteProgram(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		Programs ent = session.load(Programs.class, s_Id);
+		Program ent = session.load(Program.class, s_Id);
 		session.delete(ent);
 		return 1;
 	}

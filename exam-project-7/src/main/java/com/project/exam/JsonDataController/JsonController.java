@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.exam.model.Students;
+import com.project.exam.model.Student;
 import com.project.exam.services.StudentService;
 
 @RestController
@@ -22,7 +22,7 @@ public class JsonController {
 	
 	@RequestMapping(value = "/students/all", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Students> getStudentList() {
+	public List<Student> getStudentList() {
 		return studentService.getStudentList();
 
 	}

@@ -1,3 +1,4 @@
+package com.project.exam.model;
 /*package com.project.exam.model;
 
 import java.util.List;

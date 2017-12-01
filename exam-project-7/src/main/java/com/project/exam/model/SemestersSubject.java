@@ -9,16 +9,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="semesters_subject")
-public class SemestersSubjects {
+public class SemestersSubject {
 	
 	
 	private int semester_subject_id;
 	
 	
-	private Semesters semesters;
+	private Semester semesters;
 	
 	
-	private Subjects subjects;
+	private Subject subjects;
 	
 	//additional fields
 	private int status;
@@ -34,21 +34,21 @@ public class SemestersSubjects {
 
 	@ManyToOne
 	@JoinColumn(name = "semester_id")
-	public Semesters getSemesters() {
+	public Semester getSemesters() {
 		return semesters;
 	}
 
-	public void setSemesters(Semesters semesters) {
+	public void setSemesters(Semester semesters) {
 		this.semesters = semesters;
 	}
 
 	@ManyToOne
 	@JoinColumn(name = "subject_id")
-	public Subjects getSubjects() {
+	public Subject getSubjects() {
 		return subjects;
 	}
 
-	public void setSubjects(Subjects subjects) {
+	public void setSubjects(Subject subjects) {
 		this.subjects = subjects;
 	}
 

@@ -1,8 +1,5 @@
 package com.project.exam.model;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,17 +10,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name = "students_semester")
-public class StudentsSemesters {
+public class StudentsSemester {
 	@Id
 	private int student_semester_id;
 
 	@ManyToOne
 	@JoinColumn(name = "s_id")
-	private Students students;
+	private Student students;
 
 	@ManyToOne
 	@JoinColumn(name = "semester_id")
-	private Semesters semesters;
+	private Semester semesters;
 
 	// additional fields
 	private int status;
@@ -43,19 +40,19 @@ public class StudentsSemesters {
 		this.student_semester_id = student_semester_id;
 	}
 
-	public Students getStudents() {
+	public Student getStudents() {
 		return students;
 	}
 
-	public void setStudents(Students students) {
+	public void setStudents(Student students) {
 		this.students = students;
 	}
 
-	public Semesters getSemesters() {
+	public Semester getSemesters() {
 		return semesters;
 	}
 
-	public void setSemesters(Semesters semesters) {
+	public void setSemesters(Semester semesters) {
 		this.semesters = semesters;
 	}
 

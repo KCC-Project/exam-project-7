@@ -12,7 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.project.exam.model.Programs;
+import com.project.exam.model.Program;
 import com.project.exam.services.ProgramService;
 
 @Path("/ApiProgram")
@@ -24,7 +24,7 @@ public class ProgramController {
 	@GET
 	@Path("/GetAllProgram")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public List<Programs> getAllProgram() {
+	public List<Program> getAllProgram() {
 		return programService.getProgramList();
 	}
 	
@@ -33,7 +33,7 @@ public class ProgramController {
 	@Path("/SaveProgram")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Programs saveProgram(Programs program) {
+	public Program saveProgram(Program program) {
 		return programService.addProgram(program);
 	}
 	
@@ -41,7 +41,7 @@ public class ProgramController {
 	@GET
 	@Path("/GetProgram/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Programs getProgram(@PathParam("id") int id) {
+	public Program getProgram(@PathParam("id") int id) {
 		return programService.getProgram(id);
 	}
 	
@@ -49,7 +49,7 @@ public class ProgramController {
 	@Path("/UpdateProgram")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Programs updateProgram(Programs program) {
+	public Program updateProgram(Program program) {
 		return programService.updateProgram(program);
 	}
 	

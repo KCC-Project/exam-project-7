@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="programs")
 
-public class Programs {
+public class Program {
 
 	
 	private int program_id;
@@ -28,9 +28,9 @@ public class Programs {
 	private int status;
 	
 	
-	private Departments departments;
+	private Department departments;
 	
-	private Set<Semesters> semesters;
+	private Set<Semester> semesters;
 
 	@Id
 	public int getProgram_id() {
@@ -91,20 +91,20 @@ public class Programs {
 
 	@ManyToOne
     @JoinColumn(name = "depart_id")
-	public Departments getDepartments() {
+	public Department getDepartments() {
 		return departments;
 	}
 
-	public void setDepartments(Departments departments) {
+	public void setDepartments(Department departments) {
 		this.departments = departments;
 	}
 
 	@OneToMany(mappedBy="programs", cascade = CascadeType.ALL)
-	public Set<Semesters> getSemester() {
+	public Set<Semester> getSemester() {
 		return semesters;
 	}
 
-	public void setSemester(Set<Semesters> semesters) {
+	public void setSemester(Set<Semester> semesters) {
 		this.semesters = semesters;
 	}
 

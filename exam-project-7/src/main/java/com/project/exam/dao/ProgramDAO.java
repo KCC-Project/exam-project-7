@@ -3,12 +3,12 @@ package com.project.exam.dao;
 import java.util.List;
 
 
-import com.project.exam.model.Programs;
+import com.project.exam.model.Program;
 
 public interface ProgramDAO {
-	public List<Programs> getProgramList();
-	public Programs addProgram(Programs program);
-	public Programs getProgram(int s_Id);
-	public Programs updateProgram(Programs program);
+	public List<Program> getProgramList();
+	public Program addProgram(Program program);
+	public Program getProgram(int s_Id);
+	public Program updateProgram(Program program);
 	public int deleteProgram(int s_Id);
 }
