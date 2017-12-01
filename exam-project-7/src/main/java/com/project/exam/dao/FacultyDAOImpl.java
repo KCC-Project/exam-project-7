@@ -10,45 +10,45 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.exam.model.Faculty;
 
-@Repository("departmentDao")
-public class DepartmentDAOImpl implements DepartmentDAO {
+@Repository("FacultyDao")
+public class FacultyDAOImpl implements FacultyDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Override
 	@Transactional
-	public List<Faculty> getDepartmentList() {
+	public List<Faculty> getFacultyList() {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createCriteria(Faculty.class).list();
 	}
 
 	@Override
 	@Transactional
-	public Faculty addDepartment(Faculty department) {
+	public Faculty addFaculty(Faculty faculty) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(department);
-		return department;
+		session.save(faculty);
+		return faculty;
 	}
 
 	@Override
 	@Transactional
-	public Faculty getDepartment(int s_Id) {
+	public Faculty getFaculty(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Faculty) session.get(Faculty.class, s_Id);
 	}
 
 	@Override
 	@Transactional
-	public Faculty updateDepartment(Faculty department) {
+	public Faculty updateFaculty(Faculty faculty) {
 		Session session = sessionFactory.getCurrentSession();
-		session.update(department);
-		return department;
+		session.update(faculty);
+		return faculty;
 	}
 
 	@Override
 	@Transactional
-	public int deleteDepartment(int s_Id) {
+	public int deleteFaculty(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
 		Faculty ent = session.load(Faculty.class, s_Id);
 		session.delete(ent);

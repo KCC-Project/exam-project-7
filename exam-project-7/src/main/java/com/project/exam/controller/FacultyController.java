@@ -15,51 +15,51 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.project.exam.model.Faculty;
-import com.project.exam.services.DepartmentService;
+import com.project.exam.services.FacultyService;
 
-@Path("/ApiDepartment")
-public class DepartmentController {
+@Path("/ApiFaculty")
+public class FacultyController {
 
 	@Autowired
-	private DepartmentService departmentService;
+	private FacultyService FacultyService;
 	
 	@GET
-	@Path("/GetAllDepartment")
+	@Path("/GetAllFaculty")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public List<Faculty> getAllDepartment() {
-		return departmentService.getDepartmentList();
+	public List<Faculty> getAllFaculty() {
+		return FacultyService.getFacultyList();
 	}
 	
 	
 	@POST
-	@Path("/SaveDepartment")
+	@Path("/SaveFaculty")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Faculty saveDepartment(Faculty department) {
-		return departmentService.addDepartment(department);
+	public Faculty saveFaculty(Faculty faculty) {
+		return FacultyService.addFaculty(faculty);
 	}
 	
 
 	@GET
-	@Path("/GetDepartment/{id}")
+	@Path("/GetFaculty/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Faculty getDepartment(@PathParam("id") int id) {
-		return departmentService.getDepartment(id);
+	public Faculty getFaculty(@PathParam("id") int id) {
+		return FacultyService.getFaculty(id);
 	}
 	
 	@PUT
-	@Path("/UpdateDepartment")
+	@Path("/UpdateFaculty")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Faculty updateDepartment(Faculty department) {
-		return departmentService.updateDepartment(department);
+	public Faculty updateFaculty(Faculty faculty) {
+		return FacultyService.updateFaculty(faculty);
 	}
 	
 	@DELETE
-	@Path("/DeleteDepartment/{id}")
+	@Path("/DeleteFaculty/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public int deleteDepartment(@PathParam("id") int id) {
-		return departmentService.deleteDepartment(id);
+	public int deleteFaculty(@PathParam("id") int id) {
+		return FacultyService.deleteFaculty(id);
 	}
 	
 	
