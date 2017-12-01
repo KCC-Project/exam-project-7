@@ -18,7 +18,7 @@
           </a>
           <ul class="collapse collapseable" id="collapse-post">
           	<li><a href="${cp }/student/view" id="view-student">View</a></li>
-            <li><a href="${cp }/studen/addNew" id="add-student">Add New</a></li>
+            <li><a href="${cp }/student/addNew" id="add-student">Add New</a></li>
             <li><a href="${cp }/student/studentSemester" id="Student-Semester">Student-Semester</a></li>
           </ul>
         </li>

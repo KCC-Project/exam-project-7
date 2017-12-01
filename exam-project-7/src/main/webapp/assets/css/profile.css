@@ -3,7 +3,7 @@
 	color: rgba(64,45,45,0.96);
 }
 .profile-info {
-	text-align: justify;
+	//text-align: justify;
 	//border:1px solid white;
 	border-radius: 5px;
 }
@@ -11,7 +11,7 @@
 	padding: 5px 2px;
 }
 #profile-image img{ 
-	height: 150px;
+	height: 150rem;
 	width: auto;
 	border-radius: 50%;
 }

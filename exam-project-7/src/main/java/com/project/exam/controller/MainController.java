@@ -17,6 +17,11 @@ public class MainController {
 	public Viewable index() {
 		return new Viewable("/home");
 	}
+	@GET
+	@Path("/home")
+	public Viewable home() {
+		return new Viewable("/home");
+	}
 
 	@GET
 	@Path("/student/view")
@@ -25,6 +30,16 @@ public class MainController {
 		Map<String, Boolean> model = new HashMap<>();
 		model.put("student_view_clicked", true);
 		return new Viewable("/admin/student-management/viewAllStudents", model);
+	}
+	
+	
+	@GET
+	@Path("/student/addNew")
+	public Viewable addNew() {
+		System.out.println("Add New Student view");
+		Map<String, Boolean> model = new HashMap<>();
+		model.put("student_addNew_clicked", true);
+		return new Viewable("/admin/student-management/addNew", model);
 	}
 
 }
