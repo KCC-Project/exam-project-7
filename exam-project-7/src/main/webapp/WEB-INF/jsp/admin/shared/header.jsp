@@ -15,6 +15,8 @@
 <spring:url value="/assets/css/sidebar.css" var="sidebar" />
 <spring:url value="/assets/css/select2.min.css" var="select2" />
 <spring:url value="/assets/css/select2-bootstrap.min.css" var="select23" />
+<spring:url value="/assets/css/bootstrap-editable.css" var="tableEditable" />
+<spring:url value="/assets/font-awesome/css/font-awesome.min.css" var="fontAwasome" />
 <spring:url value="/assets/css/style-responsive.css"
 	var="styleresponsive" />
 <spring:url value="/assets/css/profile.css" var="profile" />
@@ -30,6 +32,11 @@
 	var="datatablesJs" />
 <spring:url value="/assets/js/select2.min.js"
 	var="select2Js" />
+	
+	<spring:url value="/assets/js/bootstrap-editable.min.js"
+	var="editableJs" />
+	
+	
 
 
 <meta charset="utf-8">
@@ -46,6 +53,8 @@
 <link href="${datatablescss}" rel="stylesheet">
 <link href="${select2}" rel="stylesheet">
 <link href="${select23}" rel="stylesheet">
+<link href="${tableEditable}" rel="stylesheet">
+<link href="${fontAwasome}" rel="stylesheet">
 
 
 
@@ -54,6 +63,7 @@
 <script src="${datatablesJs}"></script>
 <script src="${defaultJs}"></script>
 <script src="${select2Js}"></script>
+<script src="${editableJs}"></script>
 
 
 <script>

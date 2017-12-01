@@ -100,7 +100,7 @@
 			    ajax : {
 				url : window.context +"/ApiStudent/SearchStudent",
 				dataType : 'json',
-				type : "POST",
+				type : "GET",
 				delay : 250,
 				data : function(params) {
 				    console.log("params="   + params.term);

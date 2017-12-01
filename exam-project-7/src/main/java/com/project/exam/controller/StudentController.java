@@ -10,10 +10,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 import com.project.exam.model.Students;
 import com.project.exam.services.StudentService;
@@ -67,10 +68,10 @@ public class StudentController {
 	
 	
 	@GET
-	@Path("/SearchStudent/{searchingValue}")
+	@Path("/SearchStudent/{val}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Students searchStudent(@PathParam("searchingValue") String name) {
-		System.out.println("it is here and name is ="+name);
+	public Students searchStudent(@PathParam("val") String query) {
+		System.out.println("it is here and name is ="+query);
 		return null;
 	}
 	
