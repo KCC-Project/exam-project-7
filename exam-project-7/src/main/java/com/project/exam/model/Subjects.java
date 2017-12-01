@@ -16,10 +16,8 @@ public class Subjects {
 	
 	private int subject_id;
 	
-	@Column(nullable = false)
 	private String subject_name;
 	
-	@Column(nullable = false)
 	private String subject_code;
 	
 	private int theory_cr;
@@ -43,6 +41,7 @@ public class Subjects {
 		this.subject_id = subject_id;
 	}
 
+	@Column(nullable = false)
 	public String getSubject_name() {
 		return subject_name;
 	}
@@ -51,6 +50,7 @@ public class Subjects {
 		this.subject_name = subject_name;
 	}
 
+	@Column(nullable = false)
 	public String getSubject_code() {
 		return subject_code;
 	}

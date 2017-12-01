@@ -18,7 +18,6 @@ public class Department {
 	
 	private int depart_id;
 	
-	@Column(nullable = false)
 	private String depart_name;
 	
 	private int status;
@@ -33,6 +32,7 @@ public class Department {
 	public void setDepart_id(int depart_id) {
 		this.depart_id = depart_id;
 	}
+	@Column(nullable = false)
 	public String getDepart_name() {
 		return depart_name;
 	}

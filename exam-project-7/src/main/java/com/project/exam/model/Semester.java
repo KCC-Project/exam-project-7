@@ -19,7 +19,6 @@ public class Semester {
 
 	private int semester_id;
 	
-	@Column(nullable = false)
 	private int semester_no;
 	
 	private int status;
@@ -30,7 +29,6 @@ public class Semester {
 	
 	//private Set<SemestersInfos> semestersInfos;
 	
-	@Column(nullable = false)
 	private Program programs;
 
 	@Id
@@ -42,6 +40,7 @@ public class Semester {
 		this.semester_id = semester_id;
 	}
 
+	@Column(nullable = false)
 	public int getSemester_no() {
 		return semester_no;
 	}
@@ -68,7 +67,7 @@ public class Semester {
 	}
 
 	@ManyToOne
-    @JoinColumn(name = "program_id")
+    @JoinColumn(name = "program_id", nullable = false)
 	public Program getPrograms() {
 		return programs;
 	}

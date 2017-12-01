@@ -18,12 +18,10 @@ public class Student {
 	
 	private int s_id;
 	
-	@Column(nullable = false)
 	private String first_name;
 	
 	private String middle_name;
 	
-	@Column(nullable = false)
 	private String last_name;
 	
 	
@@ -53,6 +51,7 @@ public class Student {
 		this.s_id = s_id;
 	}
 
+	@Column(nullable = false)
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -69,6 +68,7 @@ public class Student {
 		this.middle_name = middle_name;
 	}
 
+	@Column(nullable = false)
 	public String getLast_name() {
 		return last_name;
 	}

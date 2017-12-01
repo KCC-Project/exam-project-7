@@ -1,7 +1,5 @@
 package com.project.exam.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -15,10 +13,8 @@ public class SemestersSubject {
 	
 	private int semester_subject_id;
 	
-	@Column(nullable = false)
 	private Semester semesters;
 	
-	@Column(nullable = false)
 	private Subjects subjects;
 	
 	//additional fields
@@ -34,7 +30,7 @@ public class SemestersSubject {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "semester_id")
+	@JoinColumn(name = "semester_id", nullable = false)
 	public Semester getSemesters() {
 		return semesters;
 	}
@@ -44,7 +40,7 @@ public class SemestersSubject {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "subject_id")
+	@JoinColumn(name = "subject_id", nullable = false)
 	public Subjects getSubjects() {
 		return subjects;
 	}

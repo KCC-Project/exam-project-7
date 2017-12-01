@@ -17,7 +17,6 @@ public class Exam_type {
 	
 	private int exam_type_id;
 	
-	@Column(nullable = false)
 	private String type_name;
 	
 	private int status;
@@ -34,6 +33,7 @@ public class Exam_type {
 		this.exam_type_id = exam_type_id;
 	}
 
+	@Column(nullable = false)
 	public String getType_name() {
 		return type_name;
 	}

@@ -21,7 +21,6 @@ public class Program {
 	
 	private int program_id;
 	
-	@Column(nullable = false)
 	private String program_name;
 	
 	private int program_years;
@@ -34,7 +33,6 @@ public class Program {
 	
 	private int status;
 	
-	@Column(nullable = false)
 	private Department departments;
 	
 	private Set<Semester> semesters;
@@ -48,6 +46,7 @@ public class Program {
 		this.program_id = program_id;
 	}
 
+	@Column(nullable = false)
 	public String getProgram_name() {
 		return program_name;
 	}
@@ -97,7 +96,7 @@ public class Program {
 	}
 
 	@ManyToOne
-    @JoinColumn(name = "depart_id")
+    @JoinColumn(name = "depart_id", nullable = false)
 	public Department getDepartments() {
 		return departments;
 	}

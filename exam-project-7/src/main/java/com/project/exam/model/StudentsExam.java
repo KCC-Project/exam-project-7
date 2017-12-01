@@ -15,10 +15,8 @@ public class StudentsExam {
 	
 	private int students_exams_id;
 
-	@Column(nullable = false)
 	private Student students;
 
-	@Column(nullable = false)
 	private Exam exams;
 
 	// additional field
@@ -37,7 +35,7 @@ public class StudentsExam {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "s_id")
+	@JoinColumn(name = "s_id", nullable = false)
 	public Student getStudents() {
 		return students;
 	}
@@ -47,7 +45,7 @@ public class StudentsExam {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "exam_id")
+	@JoinColumn(name = "exam_id", nullable = false)
 	public Exam getExams() {
 		return exams;
 	}
