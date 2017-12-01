@@ -50,6 +50,7 @@ public class StudentController {
 	@Path("/GetStudent/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public Student getStudent(@PathParam("id") int id) {
+		System.out.println("in get student field = "+id);
 		System.out.println(studentService.getStudent(id));
 		return studentService.getStudent(id);
 	}

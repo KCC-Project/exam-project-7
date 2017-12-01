@@ -1,7 +1,9 @@
 package com.project.exam.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,7 +41,7 @@ public class StudentsSemester {
 		this.student_semester_id = student_semester_id;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "s_id", nullable = false)
 	public Student getStudents() {
 		return students;
@@ -49,7 +51,7 @@ public class StudentsSemester {
 		this.students = students;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "semester_id", nullable = false)
 	public Semester getSemesters() {
 		return semesters;

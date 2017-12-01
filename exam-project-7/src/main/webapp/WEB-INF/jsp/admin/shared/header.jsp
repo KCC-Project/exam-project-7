@@ -24,6 +24,7 @@
 <spring:url value="/assets/js/extraJs/jquery-3.2.1.min.js" var="jqueryJs" />
 <spring:url value="/assets/js/extraJs/bootstrap.min.js" var="bootstrapJs" />
 <spring:url value="/assets/js/default.js" var="defaultJs" />
+<spring:url value="/assets/js/custome/custome_editableJs.js" var="custome_editableJs" />
 
 <spring:url value="/assets/css/extraCss/datatables.min.css"
 	var="datatablescss" />
@@ -64,7 +65,7 @@
 <script src="${defaultJs}"></script>
 <script src="${select2Js}"></script>
 <script src="${editableJs}"></script>
-
+<script src="${custome_editableJs}"></script>
 
 <script>
 	window.context = '${cp}';

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,8 +24,14 @@ public class StudentDAOImpl implements StudentDAO {
 	@Transactional
 	public List<Student> getStudentList() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(Student.class).list();
+	List<Student> student=session.createCriteria(Student.class).list();
 
+	//forcing hibernate to pull --- before transaction closes
+	for (Student student2 : student) {
+		Hibernate.initialize((student2.getStudentSemesters()));
+		Hibernate.initialize((student2.getStudentsExams()));
+	}
+		return student;
 	}
 
 	@Override
@@ -40,7 +47,10 @@ public class StudentDAOImpl implements StudentDAO {
 	@Transactional
 	public Student getStudent(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Student) session.get(Student.class, s_Id);
+		Student student=(Student)session.get(Student.class, s_Id);
+		Hibernate.initialize(student.getStudentSemesters());
+		Hibernate.initialize(student.getStudentsExams());
+		return student;
 	}
 
 	@Override
