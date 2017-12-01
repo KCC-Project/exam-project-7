@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.exam.model.Subject;
+import com.project.exam.model.Subjects;
 
 
 
@@ -21,17 +21,17 @@ public class SubjectDAOImpl implements SubjectDAO {
 	
 	@Override
 	@Transactional
-	public List<Subject> getallSubjectList() {
+	public List<Subjects> getallSubjectList() {
 		Session session = sessionFactory.getCurrentSession();
 		//SubjectModel model= new SubjectModel(10,"asdf","as",1,2,1,2,1,2,"asdf",12);
 		//session.save(model);
-		return session.createCriteria(Subject.class).list();
+		return session.createCriteria(Subjects.class).list();
 	
 	}
 
 	@Override
 	@Transactional
-	public Subject addStudent(Subject subjectModel) {
+	public Subjects addStudent(Subjects subjectModel) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(subjectModel);
 		return subjectModel;
@@ -39,14 +39,14 @@ public class SubjectDAOImpl implements SubjectDAO {
 
 	@Override
 	@Transactional
-	public Subject getSubject(int s_Id) {
+	public Subjects getSubject(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Subject) session.get(Subject.class, s_Id);
+		return (Subjects) session.get(Subjects.class, s_Id);
 	}
 
 	@Override
 	@Transactional
-	public Subject updateSubject(Subject subject) {
+	public Subjects updateSubject(Subjects subject) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(subject);
 		return subject;
@@ -56,7 +56,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 	@Transactional
 	public int deleteSubject(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		Subject ent = session.load(Subject.class, s_Id);
+		Subjects ent = session.load(Subjects.class, s_Id);
 		session.delete(ent);
 		return 1;
 	}

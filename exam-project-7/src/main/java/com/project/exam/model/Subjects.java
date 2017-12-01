@@ -3,6 +3,7 @@ package com.project.exam.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -10,13 +11,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "subjects")
-public class Subject {
+public class Subjects {
 
 	
 	private int subject_id;
 	
+	@Column(nullable = false)
 	private String subject_name;
+	
+	@Column(nullable = false)
 	private String subject_code;
+	
 	private int theory_cr;
 	private int tutorial_cr;
 	private int internal_theory;

@@ -1,13 +1,17 @@
 package com.project.exam.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -17,15 +21,26 @@ public class Student {
 
 	
 	private int s_id;
+	
+	@Column(nullable = false)
 	private String first_name;
+	
 	private String middle_name;
+	
+	@Column(nullable = false)
 	private String last_name;
+	
+	
 	private String date_of_birth;
 	private int phone;
 	private String address;
 	private String city;
 	private String district;
 	private String zipcode;
+	
+	private Date registeredDate;
+	
+	private int status;
 
 	
 	private Set<StudentsSemester> studentSemesters = new HashSet<StudentsSemester>();
@@ -130,6 +145,24 @@ public class Student {
 
 	public void setStudentsExams(Set<StudentsExam> studentsExams) {
 		this.studentsExams = studentsExams;
+	}
+
+	 @Column(name = "registered_date")
+	 @Temporal(TemporalType.DATE)
+	public Date getRegisteredDate() {
+		return registeredDate;
+	}
+
+	public void setRegisteredDate(Date registeredDate) {
+		this.registeredDate = registeredDate;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	

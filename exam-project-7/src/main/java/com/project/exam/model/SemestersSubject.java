@@ -1,6 +1,7 @@
 package com.project.exam.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,11 +15,11 @@ public class SemestersSubject {
 	
 	private int semester_subject_id;
 	
-	
+	@Column(nullable = false)
 	private Semester semesters;
 	
-	
-	private Subject subjects;
+	@Column(nullable = false)
+	private Subjects subjects;
 	
 	//additional fields
 	private int status;
@@ -44,11 +45,11 @@ public class SemestersSubject {
 
 	@ManyToOne
 	@JoinColumn(name = "subject_id")
-	public Subject getSubjects() {
+	public Subjects getSubjects() {
 		return subjects;
 	}
 
-	public void setSubjects(Subject subjects) {
+	public void setSubjects(Subjects subjects) {
 		this.subjects = subjects;
 	}
 

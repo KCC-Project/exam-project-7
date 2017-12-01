@@ -3,6 +3,7 @@ package com.project.exam.model;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,14 +21,20 @@ public class Program {
 	
 	private int program_id;
 	
+	@Column(nullable = false)
 	private String program_name;
+	
 	private int program_years;
+	
 	private int program_semesters;
+	
 	private int total_credit;
+	
 	private String program_update_date;
+	
 	private int status;
 	
-	
+	@Column(nullable = false)
 	private Department departments;
 	
 	private Set<Semester> semesters;

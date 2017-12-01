@@ -3,6 +3,7 @@ package com.project.exam.model;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,7 +17,10 @@ public class Department {
 
 	
 	private int depart_id;
+	
+	@Column(nullable = false)
 	private String depart_name;
+	
 	private int status;
 	
 	

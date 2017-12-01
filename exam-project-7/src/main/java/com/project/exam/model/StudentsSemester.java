@@ -1,5 +1,6 @@
 package com.project.exam.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,27 +12,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "students_semester")
 public class StudentsSemester {
-	@Id
+	
 	private int student_semester_id;
 
-	@ManyToOne
-	@JoinColumn(name = "s_id")
 	private Student students;
 
-	@ManyToOne
-	@JoinColumn(name = "semester_id")
 	private Semester semesters;
 
 	// additional fields
-	private int status;
+	@Column(nullable = false)
 	private int batch_year;
+	
+	private int status;
 
 /*	
 	@ManyToOne
 	@JoinColumn(name = "semester_info_id")
 	private SemestersInfos semesters_infos;
 */
-	
+	@Id
 	public int getStudent_semester_id() {
 		return student_semester_id;
 	}
@@ -40,6 +39,8 @@ public class StudentsSemester {
 		this.student_semester_id = student_semester_id;
 	}
 
+	@ManyToOne
+	@JoinColumn(name = "s_id", nullable = false)
 	public Student getStudents() {
 		return students;
 	}
@@ -48,6 +49,8 @@ public class StudentsSemester {
 		this.students = students;
 	}
 
+	@ManyToOne
+	@JoinColumn(name = "semester_id", nullable = false)
 	public Semester getSemesters() {
 		return semesters;
 	}

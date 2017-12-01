@@ -3,6 +3,7 @@ package com.project.exam.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,10 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name="semesters")
 public class Semester {
 
-	
 	private int semester_id;
 	
+	@Column(nullable = false)
 	private int semester_no;
+	
 	private int status;
 	
 	
@@ -28,7 +30,7 @@ public class Semester {
 	
 	//private Set<SemestersInfos> semestersInfos;
 	
-	
+	@Column(nullable = false)
 	private Program programs;
 
 	@Id

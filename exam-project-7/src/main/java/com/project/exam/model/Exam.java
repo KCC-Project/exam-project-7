@@ -3,6 +3,7 @@ package com.project.exam.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,18 +20,21 @@ public class Exam {
 	
 	private int exam_id;
 	
+	private Exam_type exam_types;
+	
+	private Subjects subjects;
+	
+	@Column(nullable = false)
 	private String exam_date;
+	
 	private String time_from;
 	private String time_to;
 	private String full_marks;
 	private String pass_marks;
 	private int status;
-	private Subject subjects;
 	
 	private Set<StudentsExam> studentsExams = new HashSet<StudentsExam>();
 	
-	
-	private Exam_type exam_types;
 
 	@Id
 	public int getExam_id() {
@@ -127,12 +131,12 @@ public class Exam {
 
 	@ManyToOne
     @JoinColumn(name = "subject_id")
-	public Subject getSubjects() {
+	public Subjects getSubjects() {
 		return subjects;
 	}
 
 
-	public void setSubjects(Subject subjects) {
+	public void setSubjects(Subjects subjects) {
 		this.subjects = subjects;
 	}
 

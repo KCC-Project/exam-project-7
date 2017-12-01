@@ -2,14 +2,14 @@ package com.project.exam.dao;
 
 import java.util.List;
 
-import com.project.exam.model.Subject;
+import com.project.exam.model.Subjects;
 
 
 public interface SubjectDAO {
-	public List<Subject> getallSubjectList();
-	public Subject addStudent(Subject subject);
-	public Subject getSubject(int s_Id);
-	public Subject updateSubject(Subject subject);
+	public List<Subjects> getallSubjectList();
+	public Subjects addStudent(Subjects subject);
+	public Subjects getSubject(int s_Id);
+	public Subjects updateSubject(Subjects subject);
 	public int deleteSubject(int s_Id);
 
 }

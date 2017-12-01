@@ -2,6 +2,7 @@ package com.project.exam.model;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -15,7 +16,10 @@ public class Exam_type {
 
 	
 	private int exam_type_id;
+	
+	@Column(nullable = false)
 	private String type_name;
+	
 	private int status;
 	
 	

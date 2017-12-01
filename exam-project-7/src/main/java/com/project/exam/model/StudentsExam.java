@@ -1,6 +1,7 @@
 package com.project.exam.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,10 +15,10 @@ public class StudentsExam {
 	
 	private int students_exams_id;
 
-	
+	@Column(nullable = false)
 	private Student students;
 
-	
+	@Column(nullable = false)
 	private Exam exams;
 
 	// additional field
