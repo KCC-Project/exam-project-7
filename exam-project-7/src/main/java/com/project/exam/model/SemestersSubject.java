@@ -1,6 +1,8 @@
 package com.project.exam.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,7 @@ public class SemestersSubject {
 	private int status;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getSemester_subject_id() {
 		return semester_subject_id;
 	}

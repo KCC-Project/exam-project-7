@@ -5,7 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,13 +26,17 @@ public class Student {
 	
 	private String last_name;
 	
+	private String username;
+	
+	private String password;
+	
+	private String email;
+	
+	
 	
 	private String date_of_birth;
 	private int phone;
 	private String address;
-	private String city;
-	private String district;
-	private String zipcode;
 	
 	private String registeredDate;
 	
@@ -44,6 +49,7 @@ public class Student {
 	private Set<StudentsExam> studentsExams = new HashSet<StudentsExam>();
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getS_id() {
 		return s_id;
 	}
@@ -102,29 +108,6 @@ public class Student {
 		this.address = address;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public String getZipcode() {
-		return zipcode;
-	}
-
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
 
 	@OneToMany(mappedBy = "students")
 	public Set<StudentsSemester> getStudentSemesters() {
@@ -161,14 +144,42 @@ public class Student {
 		this.status = status;
 	}
 
+	@Column(unique = true, nullable = false)
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Column(nullable = false)
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "Student [s_id=" + s_id + ", first_name=" + first_name + ", middle_name=" + middle_name + ", last_name="
-				+ last_name + ", date_of_birth=" + date_of_birth + ", phone=" + phone + ", address=" + address
-				+ ", city=" + city + ", district=" + district + ", zipcode=" + zipcode + ", registeredDate="
+				+ last_name + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", date_of_birth=" + date_of_birth + ", phone=" + phone + ", address=" + address + ", registeredDate="
 				+ registeredDate + ", status=" + status + ", studentSemesters=" + studentSemesters + ", studentsExams="
 				+ studentsExams + "]";
 	}
+
+	
 
 	
 

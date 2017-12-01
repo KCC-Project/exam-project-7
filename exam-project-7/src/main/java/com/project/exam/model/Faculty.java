@@ -5,6 +5,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -12,13 +14,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-@Table(name = "departments")
-public class Department {
+@Table(name = "faculty")
+public class Faculty {
 
 	
-	private int depart_id;
+	private int faculty_id;
 	
-	private String depart_name;
+	private String faculty_name;
 	
 	private int status;
 	
@@ -26,18 +28,19 @@ public class Department {
 	private Set<Program> program;
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getDepart_id() {
-		return depart_id;
+		return faculty_id;
 	}
 	public void setDepart_id(int depart_id) {
-		this.depart_id = depart_id;
+		this.faculty_id = depart_id;
 	}
 	@Column(nullable = false)
 	public String getDepart_name() {
-		return depart_name;
+		return faculty_name;
 	}
 	public void setDepart_name(String depart_name) {
-		this.depart_name = depart_name;
+		this.faculty_name = depart_name;
 	}
 	public int getStatus() {
 		return status; 

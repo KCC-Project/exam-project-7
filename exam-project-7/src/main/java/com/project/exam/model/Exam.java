@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,6 +38,7 @@ public class Exam {
 	
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getExam_id() {
 		return exam_id;
 	}
@@ -117,7 +120,7 @@ public class Exam {
 	}
 
 	@ManyToOne
-    @JoinColumn(name = "exam_type_id")
+    @JoinColumn(name = "exam_type_id", nullable = false)
 	public Exam_type getExam_types() {
 		return exam_types;
 	}
@@ -129,7 +132,7 @@ public class Exam {
 
 
 	@ManyToOne
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "subject_id", nullable = false)
 	public Subjects getSubjects() {
 		return subjects;
 	}

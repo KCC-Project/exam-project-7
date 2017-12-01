@@ -5,6 +5,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,11 +35,12 @@ public class Program {
 	
 	private int status;
 	
-	private Department departments;
+	private Faculty faculty;
 	
 	private Set<Semester> semesters;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getProgram_id() {
 		return program_id;
 	}
@@ -96,13 +99,13 @@ public class Program {
 	}
 
 	@ManyToOne
-    @JoinColumn(name = "depart_id", nullable = false)
-	public Department getDepartments() {
-		return departments;
+    @JoinColumn(name = "faculty_id", nullable = false)
+	public Faculty getDepartments() {
+		return faculty;
 	}
 
-	public void setDepartments(Department departments) {
-		this.departments = departments;
+	public void setDepartments(Faculty departments) {
+		this.faculty = departments;
 	}
 
 	@OneToMany(mappedBy="programs", cascade = CascadeType.ALL)

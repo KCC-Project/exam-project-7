@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,6 +35,7 @@ public class Subjects {
 	private Set<SemestersSubject> semesterSubjects = new HashSet<SemestersSubject>();
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getSubject_id() {
 		return subject_id;
 	}

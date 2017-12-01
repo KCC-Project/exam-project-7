@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,6 +27,7 @@ public class Exam_type {
 	private Set<Exam> exams;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getExam_type_id() {
 		return exam_type_id;
 	}
