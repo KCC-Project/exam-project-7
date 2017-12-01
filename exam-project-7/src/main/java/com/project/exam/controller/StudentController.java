@@ -1,6 +1,9 @@
 package com.project.exam.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -12,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -69,9 +73,11 @@ public class StudentController {
 	@POST
 	@Path("/SearchStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Student searchStudent(@FormParam("val") String params) {
+	public List searchStudent(@FormParam("val") String params) {
 		//System.out.println("from controller= "+studentService.searchStudent(params).toString());
-		return studentService.searchStudent(params);
+		
+	return studentService.searchStudent(params);
+		
 	}
 	
 }

@@ -14,5 +14,5 @@ public interface StudentService {
 	public Student getStudent(int s_Id);
 	public Student updateStudent(Student student);
 	public int deleteStudent(int s_Id);
-	public Student searchStudent(String searchPara);
+	public List searchStudent(String searchPara);
 }

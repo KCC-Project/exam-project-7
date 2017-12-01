@@ -40,7 +40,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student searchStudent(String searchPara) {
+	public List searchStudent(String searchPara) {
 		return studentDao.searchStudent(searchPara);
 	}
 

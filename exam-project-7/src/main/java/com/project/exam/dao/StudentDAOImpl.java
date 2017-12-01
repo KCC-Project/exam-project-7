@@ -1,7 +1,9 @@
 package com.project.exam.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -14,7 +16,7 @@ import com.project.exam.model.Student;
 
 @Repository("studentDao")
 public class StudentDAOImpl implements StudentDAO {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -60,12 +62,36 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Override
 	@Transactional
-	public Student searchStudent(String searchPara) {
+	public List<Object> searchStudent(String searchPara) {
 		Session session = sessionFactory.getCurrentSession();
-		SQLQuery query=session.createSQLQuery("SELECT * FROM students WHERE MATCH(first_name, middle_name, last_name) AGAINST('"+searchPara+"' IN NATURAL LANGUAGE MODE)").addEntity(Student.class);
-		Student user = (Student) query.uniqueResult();
-		System.out.println("student = "+user.toString());
-		return user;
+		SQLQuery query = session
+				.createSQLQuery("SELECT * FROM students WHERE MATCH(first_name, middle_name, last_name) AGAINST('"
+						+ searchPara + "' IN NATURAL LANGUAGE MODE)")
+				.addEntity(Student.class);
+		
+		List listOfReslut = new ArrayList<>();
+		List<Student> list = query.list();
+		
+		for (Student student : list) {
+			Map<String, Object> map = new HashMap<>();
+			Student s = new Student();
+			String name = null;
+			try {
+				if (student.getMiddle_name()== null) {
+					name = student.getFirst_name() + " " + student.getLast_name();
+				} else {
+					name = student.getFirst_name() + " " + student.getMiddle_name() + " " + student.getLast_name();
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			map.put("id", student.getS_id());
+			map.put("name", name);
+			listOfReslut.add(map);
+		}
+
+		return listOfReslut;
 	}
 
 }

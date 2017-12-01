@@ -101,9 +101,9 @@
 				url : window.context +"/ApiStudent/SearchStudent",
 				dataType : 'json',
 				type : "POST",
-				delay : 300,
+				delay : 400,
 				data : function(params) {
-				    console.log("params="   + params.term);
+				    //console.log("params="   + params.term);
 				    return {
 					val : params.term,
 					page : params.page
@@ -111,7 +111,9 @@
 				},
 				processResults : function(data,
 					params) {
-				    //console.log("data=" + data);
+				   // console.log("returned data from server =" + JSON.stringify(data));
+				 //   console.log("full name = " + data.first_name + " "+data.last_name);
+				    //.log("id= " + data.s_id);
 				    params.page = params.page || 1;
 				    return {
 					results : data,
@@ -131,20 +133,19 @@
 		    var selected_element = $(e.currentTarget);
 		    console.log(selected_element);
 		    var select_val = selected_element.val();
-		    alert("name="+ selectedValues[select_val]);
 		    console.log("Student Id=" + select_val);
-		    gettingPreviousAccount(select_val);
+		    //gettingPreviousAccount(select_val);
 		});
+	
 	function formatRepo(repo) {
+		// console.log("formated repo=" + JSON.stringify(repo));
 	    if (repo.loading)
 		return repo.text;
-	    var markup = '<option value='+repo.s_id+'>'
-		    + repo.first_name + '</option>';
-	    console.log("repo.text=" + repo.text);
-	    
+	    var markup = '<option value='+repo.id+'>'
+		    + repo.name + '</option>';
 	    return markup;
 	}
 	function formatRepoSelection(repo) {
-	    return repo.name || repo.text;
+		 return repo.name || repo.text;
 	}
 	</script>
