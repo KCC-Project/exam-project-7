@@ -58,8 +58,9 @@ public class Faculty {
 	}
 	@Override
 	public String toString() {
-		return "Faculty [faculty_id=" + faculty_id + ", faculty_name=" + faculty_name + ", status=" + status + "]";
+		return "Faculty [faculty_id=" + faculty_id + ", faculty_name=" + faculty_name + ", status=" + status+"]";
 	}
+	
 	
 
 	
