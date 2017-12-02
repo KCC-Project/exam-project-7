@@ -1,6 +1,5 @@
 package com.project.exam.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -147,6 +146,16 @@ public class Subjects {
 	public void setExams(Set<Exam> exams) {
 		this.exams = exams;
 	}
+
+	@Override
+	public String toString() {
+		return "Subjects [subject_id=" + subject_id + ", semester_no=" + semester_no + ", subject_name=" + subject_name
+				+ ", subject_code=" + subject_code + ", theory_cr=" + theory_cr + ", tutorial_cr=" + tutorial_cr
+				+ ", internal_theory=" + internal_theory + ", internal_practical=" + internal_practical
+				+ ", final_theory=" + final_theory + ", syllabus_file=" + syllabus_file + ", status=" + status
+				+ ", program=" + program + ", exams=" + exams + "]";
+	}
+	
 	
 	
 }

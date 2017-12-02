@@ -1,5 +1,7 @@
 package com.project.exam.model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -26,7 +30,7 @@ public class StudentsProgram {
 	@Column(nullable = false)
 	private int batch_year;
 	
-	private String enroll_date;
+	private Date enroll_date;
 	
 	private int status;
 	
@@ -58,7 +62,7 @@ public class StudentsProgram {
 		return program;
 	}
 
-	public void setProgram(Program semesters) {
+	public void setProgram(Program program) {
 		this.program = program;
 	}
 
@@ -78,12 +82,20 @@ public class StudentsProgram {
 		this.batch_year = batch_year;
 	}
 
-	public String getEnroll_date() {
+	@Column
+	@Temporal(TemporalType.DATE)
+	public Date getEnroll_date() {
 		return enroll_date;
 	}
 
-	public void setEnroll_date(String enroll_date) {
+	public void setEnroll_date(Date enroll_date) {
 		this.enroll_date = enroll_date;
+	}
+
+	@Override
+	public String toString() {
+		return "StudentsProgram [student_program_id=" + student_program_id + ", students=" + students + ", program="
+				+ program + ", batch_year=" + batch_year + ", enroll_date=" + enroll_date + ", status=" + status + "]";
 	}
 
 	

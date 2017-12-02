@@ -1,5 +1,6 @@
 package com.project.exam.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -34,13 +37,14 @@ public class Student {
 	
 	private int gender;
 	
-	private String date_of_birth;
-	private int phone;
+	private Date date_of_birth;
+	
+	private String phone;
 	private String address;
 	
 	private String image;
 	
-	private String current_semester;
+	private int current_semester;
 	
 	private int status;
 
@@ -86,19 +90,21 @@ public class Student {
 		this.last_name = last_name;
 	}
 
-	public String getDate_of_birth() {
+	@Column
+	@Temporal(TemporalType.DATE)
+	public Date getDate_of_birth() {
 		return date_of_birth;
 	}
 
-	public void setDate_of_birth(String date_of_birth) {
+	public void setDate_of_birth(Date date_of_birth) {
 		this.date_of_birth = date_of_birth;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -183,11 +189,11 @@ public class Student {
 	}
 	
 
-	public String getCurrent_semester() {
+	public int getCurrent_semester() {
 		return current_semester;
 	}
 
-	public void setCurrent_semester(String current_semester) {
+	public void setCurrent_semester(int current_semester) {
 		this.current_semester = current_semester;
 	}
 
@@ -196,10 +202,11 @@ public class Student {
 		return "Student [s_id=" + s_id + ", first_name=" + first_name + ", middle_name=" + middle_name + ", last_name="
 				+ last_name + ", username=" + username + ", password=" + password + ", email=" + email + ", gender="
 				+ gender + ", date_of_birth=" + date_of_birth + ", phone=" + phone + ", address=" + address + ", image="
-				+ image + ", status=" + status + ", studentProgram=" + studentProgram + ", studentsExams="
-				+ studentsExams + "]";
+				+ image + ", current_semester=" + current_semester + ", status=" + status + ", studentProgram="
+				+ studentProgram + ", studentsExams=" + studentsExams + "]";
 	}
 
+	
 	
 
 	

@@ -57,6 +57,12 @@ public class Admin {
 		public void setStatus(int status) {
 			this.status = status;
 		}
+
+		@Override
+		public String toString() {
+			return "Admin [admin_id=" + admin_id + ", admin_username=" + admin_username + ", admin_password="
+					+ admin_password + ", status=" + status + "]";
+		}
 		
 		
 		

@@ -62,5 +62,11 @@ public class Exam_type {
 		this.exams = exams;
 	}
 
+	@Override
+	public String toString() {
+		return "Exam_type [exam_type_id=" + exam_type_id + ", type_name=" + type_name + ", status=" + status
+				+ ", exams=" + exams + "]";
+	}
+
 	
 }

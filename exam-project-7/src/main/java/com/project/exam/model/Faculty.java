@@ -29,17 +29,17 @@ public class Faculty {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public int getDepart_id() {
+	public int getFaculty_id() {
 		return faculty_id;
 	}
-	public void setDepart_id(int depart_id) {
+	public void setFaculty_id(int depart_id) {
 		this.faculty_id = depart_id;
 	}
 	@Column(nullable = false)
-	public String getDepart_name() {
+	public String getFaculty_name() {
 		return faculty_name;
 	}
-	public void setDepart_name(String depart_name) {
+	public void setFaculty_name(String depart_name) {
 		this.faculty_name = depart_name;
 	}
 	public int getStatus() {
@@ -56,5 +56,11 @@ public class Faculty {
 	public void setProgram(Set<Program> program) {
 		this.program = program;
 	}
+	@Override
+	public String toString() {
+		return "Faculty [faculty_id=" + faculty_id + ", faculty_name=" + faculty_name + ", status=" + status
+				+ ", program=" + program + "]";
+	}
 
+	
 }

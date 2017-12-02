@@ -1,5 +1,6 @@
 package com.project.exam.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -26,10 +29,12 @@ public class Exam {
 	
 	private Subjects subjects;
 	
-	private String exam_date;
+	@Column
+	@Temporal(TemporalType.DATE)
+	private Date exam_date;
 	
-	private String time_from;
-	private String time_to;
+	private Date time_from;
+	private Date time_to;
 	private int full_marks;
 	private int pass_marks;
 	private int status;
@@ -49,32 +54,34 @@ public class Exam {
 	}
 
 	@Column(nullable = false)
-	public String getExam_date() {
+	public Date getExam_date() {
 		return exam_date;
 	}
 
 
-	public void setExam_date(String exam_date) {
+	public void setExam_date(Date exam_date) {
 		this.exam_date = exam_date;
 	}
 
-
-	public String getTime_from() {
+	@Column
+	@Temporal(TemporalType.TIME)
+	public Date getTime_from() {
 		return time_from;
 	}
 
 
-	public void setTime_from(String time_from) {
+	public void setTime_from(Date time_from) {
 		this.time_from = time_from;
 	}
 
-
-	public String getTime_to() {
+	@Column
+	@Temporal(TemporalType.TIME)
+	public Date getTime_to() {
 		return time_to;
 	}
 
 
-	public void setTime_to(String time_to) {
+	public void setTime_to(Date time_to) {
 		this.time_to = time_to;
 	}
 
@@ -140,6 +147,14 @@ public class Exam {
 
 	public void setSubjects(Subjects subjects) {
 		this.subjects = subjects;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Exam [exam_id=" + exam_id + ", exam_types=" + exam_types + ", subjects=" + subjects + ", exam_date="
+				+ exam_date + ", time_from=" + time_from + ", time_to=" + time_to + ", full_marks=" + full_marks
+				+ ", pass_marks=" + pass_marks + ", status=" + status + ", studentsExams=" + studentsExams + "]";
 	}
 
 

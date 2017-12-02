@@ -88,4 +88,13 @@ public class StudentsExam {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "StudentsExam [students_exams_id=" + students_exams_id + ", students=" + students + ", exams=" + exams
+				+ ", attendance_status=" + attendance_status + ", obtained_marks=" + obtained_marks + ", grade=" + grade
+				+ ", status=" + status + "]";
+	}
+	
+	
+
 }
