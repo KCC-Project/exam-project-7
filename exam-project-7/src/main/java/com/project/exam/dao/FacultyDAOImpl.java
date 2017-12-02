@@ -2,6 +2,7 @@ package com.project.exam.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,12 @@ public class FacultyDAOImpl implements FacultyDAO {
 	@Transactional
 	public List<Faculty> getFacultyList() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(Faculty.class).list();
+		
+		List<Faculty> faculty = session.createCriteria(Faculty.class).list();
+		for (Faculty faculty1 : faculty) {
+			Hibernate.initialize((faculty1.getProgram()));
+		}
+		return faculty;
 	}
 
 	@Override
@@ -35,7 +41,9 @@ public class FacultyDAOImpl implements FacultyDAO {
 	@Transactional
 	public Faculty getFaculty(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Faculty) session.get(Faculty.class, s_Id);
+		Faculty faculty =  session.get(Faculty.class, s_Id);
+		Hibernate.initialize((faculty.getProgram()));
+		return faculty;
 	}
 
 	@Override

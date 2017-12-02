@@ -49,6 +49,7 @@ public class Admin {
 			this.admin_password = admin_password;
 		}
 
+		@Column(nullable = true)
 		public int getStatus() {
 			return status;
 		}

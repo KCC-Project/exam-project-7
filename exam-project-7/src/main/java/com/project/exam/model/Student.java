@@ -32,18 +32,20 @@ public class Student {
 	
 	private String email;
 	
-	
+	private int gender;
 	
 	private String date_of_birth;
 	private int phone;
 	private String address;
 	
-	private String registeredDate;
+	private String image;
+	
+	private String current_semester;
 	
 	private int status;
 
 	
-	private Set<StudentsSemester> studentSemesters = new HashSet<StudentsSemester>();
+	private Set<StudentsProgram> studentProgram = new HashSet<StudentsProgram>();
 	
 	
 	private Set<StudentsExam> studentsExams = new HashSet<StudentsExam>();
@@ -110,12 +112,12 @@ public class Student {
 
 
 	@OneToMany(mappedBy = "students")
-	public Set<StudentsSemester> getStudentSemesters() {
-		return studentSemesters;
+	public Set<StudentsProgram> getStudentProgram() {
+		return studentProgram;
 	}
 
-	public void setStudentSemesters(Set<StudentsSemester> studentSemesters) {
-		this.studentSemesters = studentSemesters;
+	public void setStudentProgram(Set<StudentsProgram> studentProgram) {
+		this.studentProgram = studentProgram;
 	}
 
 	@OneToMany(mappedBy = "students")
@@ -128,14 +130,7 @@ public class Student {
 	}
 
 	 
-	public String getRegisteredDate() {
-		return registeredDate;
-	}
-
-	public void setRegisteredDate(String registeredDate) {
-		this.registeredDate = registeredDate;
-	}
-
+	@Column(nullable = true)
 	public int getStatus() {
 		return status;
 	}
@@ -169,21 +164,44 @@ public class Student {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Column(nullable = false)
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+
+	public String getCurrent_semester() {
+		return current_semester;
+	}
+
+	public void setCurrent_semester(String current_semester) {
+		this.current_semester = current_semester;
+	}
 
 	@Override
 	public String toString() {
 		return "Student [s_id=" + s_id + ", first_name=" + first_name + ", middle_name=" + middle_name + ", last_name="
-				+ last_name + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", date_of_birth=" + date_of_birth + ", phone=" + phone + ", address=" + address + ", registeredDate="
-				+ registeredDate + ", status=" + status + ", studentSemesters=" + studentSemesters + ", studentsExams="
+				+ last_name + ", username=" + username + ", password=" + password + ", email=" + email + ", gender="
+				+ gender + ", date_of_birth=" + date_of_birth + ", phone=" + phone + ", address=" + address + ", image="
+				+ image + ", status=" + status + ", studentProgram=" + studentProgram + ", studentsExams="
 				+ studentsExams + "]";
 	}
 
 	
 
-	
-
-	
 	
 
 }

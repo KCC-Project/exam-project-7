@@ -13,34 +13,31 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-@Table(name = "students_semester")
-public class StudentsSemester {
+@Table(name = "students_program")
+public class StudentsProgram {
 	
-	private int student_semester_id;
+	private int student_program_id;
 
 	private Student students;
 
-	private Semester semesters;
+	private Program program;
 
 	// additional fields
 	@Column(nullable = false)
 	private int batch_year;
 	
+	private String enroll_date;
+	
 	private int status;
-
-/*	
-	@ManyToOne
-	@JoinColumn(name = "semester_info_id")
-	private SemestersInfos semesters_infos;
-*/
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public int getStudent_semester_id() {
-		return student_semester_id;
+	public int getStudent_program_id() {
+		return getStudent_program_id();
 	}
 
-	public void setStudent_semester_id(int student_semester_id) {
-		this.student_semester_id = student_semester_id;
+	public void setStudent_program_id(int student_program_id) {
+		this.student_program_id = student_program_id;
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -54,13 +51,13 @@ public class StudentsSemester {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "semester_id", nullable = false)
-	public Semester getSemesters() {
-		return semesters;
+	@JoinColumn(name = "program_id", nullable = false)
+	public Program getProgram() {
+		return program;
 	}
 
-	public void setSemesters(Semester semesters) {
-		this.semesters = semesters;
+	public void setProgram(Program semesters) {
+		this.program = program;
 	}
 
 	public int getStatus() {
@@ -79,6 +76,15 @@ public class StudentsSemester {
 		this.batch_year = batch_year;
 	}
 
+	public String getEnroll_date() {
+		return enroll_date;
+	}
+
+	public void setEnroll_date(String enroll_date) {
+		this.enroll_date = enroll_date;
+	}
+
+	
 
 	
 

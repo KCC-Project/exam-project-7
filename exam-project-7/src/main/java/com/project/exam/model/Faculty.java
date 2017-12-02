@@ -49,7 +49,7 @@ public class Faculty {
 		this.status = status;
 	}
 	
-	@OneToMany(mappedBy="departments", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="faculty", cascade = CascadeType.ALL)
 	public Set<Program> getProgram() {
 		return program;
 	}

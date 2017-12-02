@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,6 +19,7 @@ public class Subjects {
 
 	
 	private int subject_id;
+	private int semester_no;
 	
 	private String subject_name;
 	
@@ -30,9 +33,9 @@ public class Subjects {
 	private String syllabus_file;
 	private int status;
 
-	private Set<Exam> exams;
+	private Program program;
 	
-	private Set<SemestersSubject> semesterSubjects = new HashSet<SemestersSubject>();
+	private Set<Exam> exams;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -117,17 +120,25 @@ public class Subjects {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
-	@OneToMany(mappedBy = "subjects")
-	public Set<SemestersSubject> getSemesterSubjects() {
-		return semesterSubjects;
-	}
-
-	public void setSemesterSubjects(Set<SemestersSubject> semesterSubjects) {
-		this.semesterSubjects = semesterSubjects;
-	}
-
 	
+	public int getSemester_no() {
+		return semester_no;
+	}
+
+	public void setSemester_no(int semester_no) {
+		this.semester_no = semester_no;
+	}
+
+	@ManyToOne
+    @JoinColumn(name = "program_id", nullable = false)
+	public Program getProgram() {
+		return program;
+	}
+
+	public void setProgram(Program program) {
+		this.program = program;
+	}
+
 	@OneToMany(mappedBy="subjects")
 	public Set<Exam> getExams() {
 		return exams;
@@ -136,4 +147,6 @@ public class Subjects {
 	public void setExams(Set<Exam> exams) {
 		this.exams = exams;
 	}
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.project.exam.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -27,17 +28,15 @@ public class Program {
 	
 	private int program_years;
 	
-	private int program_semesters;
-	
 	private int total_credit;
-	
-	private String program_update_date;
 	
 	private int status;
 	
 	private Faculty faculty;
 	
-	private Set<Semester> semesters;
+	private Set<StudentsProgram> studentsProgram = new HashSet<StudentsProgram>();
+	
+	private Set<Subjects> subject;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -53,25 +52,18 @@ public class Program {
 	public String getProgram_name() {
 		return program_name;
 	}
-
+	
 	public void setProgram_name(String program_name) {
 		this.program_name = program_name;
 	}
-
+	
+	
 	public int getProgram_years() {
 		return program_years;
 	}
 
 	public void setProgram_years(int program_years) {
 		this.program_years = program_years;
-	}
-
-	public int getProgram_semesters() {
-		return program_semesters;
-	}
-
-	public void setProgram_semesters(int program_semesters) {
-		this.program_semesters = program_semesters;
 	}
 
 	public int getTotal_credit() {
@@ -82,14 +74,6 @@ public class Program {
 		this.total_credit = total_credit;
 	}
 
-	public String getProgram_update_date() {
-		return program_update_date;
-	}
-
-	public void setProgram_update_date(String program_update_date) {
-		this.program_update_date = program_update_date;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -98,36 +82,38 @@ public class Program {
 		this.status = status;
 	}
 
+	
+	@OneToMany(mappedBy = "program")
+	public Set<StudentsProgram> getStudentsProgram() {
+		return studentsProgram;
+	}
+
+	public void setStudentsProgram(Set<StudentsProgram> studentsProgram) {
+		this.studentsProgram = studentsProgram;
+	}
+
 	@ManyToOne
     @JoinColumn(name = "faculty_id", nullable = false)
-	public Faculty getDepartments() {
+	public Faculty getFaculty() {
 		return faculty;
 	}
 
-	public void setDepartments(Faculty departments) {
-		this.faculty = departments;
+	public void setFaculty(Faculty faculty) {
+		this.faculty = faculty;
 	}
 
-	@OneToMany(mappedBy="programs", cascade = CascadeType.ALL)
-	public Set<Semester> getSemester() {
-		return semesters;
+	@OneToMany(mappedBy="program", cascade = CascadeType.ALL)
+	public Set<Subjects> getSubject() {
+		return subject;
 	}
 
-	public void setSemester(Set<Semester> semesters) {
-		this.semesters = semesters;
+	public void setSubject(Set<Subjects> subject) {
+		this.subject = subject;
 	}
 
 	
 	
-/*
-	 @ManyToOne
-	    @JoinColumn(name="depart_id", nullable=false)
-	    private Department department;
 
-	 @OneToMany(mappedBy="semester")
-	    private Set<Semester> semester;
-*/
-	
 	
 	 
 	 

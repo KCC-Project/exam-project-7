@@ -1,4 +1,4 @@
-package com.project.exam.model;
+/*package com.project.exam.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,3 +64,4 @@ public class SemestersSubject {
 	
 
 }
+*/

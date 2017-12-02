@@ -1,4 +1,4 @@
-package com.project.exam.model;
+/* package com.project.exam.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,10 +26,8 @@ public class Semester {
 	private int status;
 	
 	
-	private Set<StudentsSemester> studentsSemester = new HashSet<StudentsSemester>();
+	private Set<StudentsProgram> studentsSemester = new HashSet<StudentsProgram>();
 	
-	
-	//private Set<SemestersInfos> semestersInfos;
 	
 	private Program programs;
 
@@ -61,11 +59,11 @@ public class Semester {
 	}
 
 	@OneToMany(mappedBy = "semesters")
-	public Set<StudentsSemester> getStudentsSemester() {
+	public Set<StudentsProgram> getStudentsSemester() {
 		return studentsSemester;
 	}
 
-	public void setStudentsSemester(Set<StudentsSemester> studentsSemester) {
+	public void setStudentsSemester(Set<StudentsProgram> studentsSemester) {
 		this.studentsSemester = studentsSemester;
 	}
 
@@ -78,18 +76,7 @@ public class Semester {
 	public void setPrograms(Program programs) {
 		this.programs = programs;
 	}
-/*
-	@OneToMany(mappedBy = "semesters")
-	public Set<SemestersInfos> getSemestersInfos() {
-		return semestersInfos;
-	}
-
-	public void setSemestersInfos(Set<SemestersInfos> semestersInfos) {
-		this.semestersInfos = semestersInfos;
-	}
-
-	*/
-	
 	
 	   
 }
+*/

@@ -2,12 +2,16 @@ package com.project.exam.dao;
 
 import java.util.List;
 
+import javax.security.auth.Subject;
+
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.exam.model.Program;
 import com.project.exam.model.Subjects;
 
 
@@ -23,9 +27,13 @@ public class SubjectDAOImpl implements SubjectDAO {
 	@Transactional
 	public List<Subjects> getallSubjectList() {
 		Session session = sessionFactory.getCurrentSession();
-		//SubjectModel model= new SubjectModel(10,"asdf","as",1,2,1,2,1,2,"asdf",12);
-		//session.save(model);
-		return session.createCriteria(Subjects.class).list();
+		List<Subjects> subject = session.createCriteria(Subjects.class).list();
+		for (Subjects subject1 : subject) {
+			Hibernate.initialize((subject1.getExams()));
+			Hibernate.initialize((subject1.getSemesterSubjects()));
+		}
+		return subject;
+
 	
 	}
 
@@ -41,7 +49,10 @@ public class SubjectDAOImpl implements SubjectDAO {
 	@Transactional
 	public Subjects getSubject(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Subjects) session.get(Subjects.class, s_Id);
+		Subjects subject = session.get(Subjects.class, s_Id);
+		Hibernate.initialize((subject.getExams()));
+		Hibernate.initialize((subject.getSemesterSubjects()));
+		return subject;
 	}
 
 	@Override
