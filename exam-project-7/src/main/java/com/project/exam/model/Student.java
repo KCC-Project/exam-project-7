@@ -136,7 +136,6 @@ public class Student {
 	}
 
 	 
-	@Column(nullable = true)
 	public int getStatus() {
 		return status;
 	}
