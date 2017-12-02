@@ -17,7 +17,9 @@
 			<div class="box box-default with-border">
 				<div>
 					<div style="margin: 0px; padding-left: 20px; height: 35px;">
-						
+						<a><button type="button" class="btn btn-info pull-right"
+								data-toggle="modal" data-target="#searchStudentModal"
+								id="modal-box">Filter</button></a>
 						<div class="col-xs-3"
 							style="margin-left: -34px; /* border: 2px solid black; */ height: 37px;">
 							<div class="form-group">
@@ -130,12 +132,100 @@
 				</div>
 			</div>
 
-			
+			<!--=========================================================================================  -->
+			<div class="modal fade" id="searchStudentModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Students Search</h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-3">
+										<div class="form-group " style="margin-bottom: 0px;">
+											<select required class="form-control" id="p-faculty-box"
+												name="faculty_id">
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-sm-3" style="margin-bottom: 0px;">
+										<select required class="form-control" id="p-program-box"
+											name="program_id">
+											<option value="" disabled selected>Select Programme</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-3" style="margin-bottom: 0px;">
+										<select required class="form-control" name="batch_id"
+											id="p-batch-box">
+											<option value="" disabled selected>Select Batch</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-3" id="semester-batch"
+										style="margin-bottom: 0px;">
+										<select required class="form-control" id="Semester_box"
+											name="Semester_box">
+											<option value="" disabled selected>Select Semester</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<br>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-success"
+									id="searchbtnClicked" data-dismiss="modal">Search</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--=========================================================================================  -->
 	<jsp:include page="../shared/footer.jsp" />
 	<script>
 	
+	$(document).ready(function(){
+		
+		$("#modal-box").click(function(event){ load_faculty(event, "p-faculty-box");});
+		$("#p-faculty-box").change(function(event){ load_program(event, "p-program-box"); });
+		$("#p-program-box").change(function(event){ load_batch_year(event, "p-batch-box"); });
+		
+		
+		
+	});
+	function load_faculty(e, target) {
+		var url=window.context +"/ApiDepartment/GetAllDepartment";
+		var aj=new XMLHttpRequest();
+		aj.open("GET", url, true);
+		aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		aj.onreadystatechange=function(){
+			if (aj.readyState==4&&aj.status==200) {
+				var return_data=aj.responseText;
+				alert(return_data);
+				//$('#' + target).html(return_data);
+			}
+		}
+		aj.send();
+	}
 	
-	$("select").select2(
+	
+	$("select").select2({
+	    theme : "bootstrap",
+	    width : "auto"
+	});
+	
+	$("#sel1").select2(
 			{
 			    theme : "bootstrap",
 			    width : "210px",
@@ -265,4 +355,5 @@
 			}
 		    });
 	}
+	
 	</script>

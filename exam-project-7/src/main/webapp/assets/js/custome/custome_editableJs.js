@@ -2,7 +2,18 @@ $(document).ready(function() {
 
 	//////  Edit table for student information  ///////
 
+	$('#tblStudent').editable({
+		container : 'body',
+		selector : 'td.fname',
+		title : 'First Name',
+		validate : function(value) {
+			if ($.trim(value) == '') {
+				return 'This field is required';
+			}
+		}
+	});
 
+	
 	$('#tblStudent').editable({
 		container : 'body',
 		selector : 'td.mname',
