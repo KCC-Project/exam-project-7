@@ -33,7 +33,7 @@ public class StudentsProgram {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getStudent_program_id() {
-		return getStudent_program_id();
+		return student_program_id;
 	}
 
 	public void setStudent_program_id(int student_program_id) {
@@ -45,6 +45,8 @@ public class StudentsProgram {
 	public Student getStudents() {
 		return students;
 	}
+
+	
 
 	public void setStudents(Student students) {
 		this.students = students;
