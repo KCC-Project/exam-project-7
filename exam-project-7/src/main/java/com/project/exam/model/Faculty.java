@@ -56,6 +56,10 @@ public class Faculty {
 	public void setProgram(Set<Program> program) {
 		this.program = program;
 	}
+	@Override
+	public String toString() {
+		return "Faculty [faculty_id=" + faculty_id + ", faculty_name=" + faculty_name + ", status=" + status + "]";
+	}
 	
 
 	

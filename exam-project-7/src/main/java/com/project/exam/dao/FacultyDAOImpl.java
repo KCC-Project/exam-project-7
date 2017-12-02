@@ -24,6 +24,7 @@ public class FacultyDAOImpl implements FacultyDAO {
 		
 		List<Faculty> faculty = session.createCriteria(Faculty.class).list();
 		for (Faculty faculty1 : faculty) {
+			System.out.println(faculty1);
 			Hibernate.initialize((faculty1.getProgram()));
 		}
 		return faculty;
