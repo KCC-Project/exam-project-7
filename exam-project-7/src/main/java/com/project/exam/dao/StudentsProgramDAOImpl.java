@@ -2,6 +2,7 @@ package com.project.exam.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,10 @@ public class StudentsProgramDAOImpl implements StudentsProgramDAO {
 		Session session = sessionFactory.getCurrentSession();
 		
 		List<StudentsProgram> studentsProgram = session.createCriteria(StudentsProgram.class).list();
-		
+		for (StudentsProgram studentsProgram2 : studentsProgram) {
+			Hibernate.initialize(studentsProgram2.getStudents());
+			Hibernate.initialize(studentsProgram2.getProgram());
+		}
 		return studentsProgram;
 	}
 
