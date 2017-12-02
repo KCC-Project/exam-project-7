@@ -28,7 +28,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 	//forcing hibernate to pull --- before transaction closes
 	for (Student student2 : student) {
-		Hibernate.initialize((student2.getStudentSemesters()));
+		Hibernate.initialize((student2.getStudentProgram()));
 		Hibernate.initialize((student2.getStudentsExams()));
 	}
 		return student;
@@ -48,7 +48,7 @@ public class StudentDAOImpl implements StudentDAO {
 	public Student getStudent(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
 		Student student=(Student)session.get(Student.class, s_Id);
-		Hibernate.initialize(student.getStudentSemesters());
+		Hibernate.initialize(student.getStudentProgram());
 		Hibernate.initialize(student.getStudentsExams());
 		return student;
 	}

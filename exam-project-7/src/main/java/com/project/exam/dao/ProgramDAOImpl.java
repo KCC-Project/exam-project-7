@@ -24,7 +24,7 @@ public class ProgramDAOImpl implements ProgramDAO {
 		Session session = sessionFactory.getCurrentSession();
 		List<Program> program = session.createCriteria(Program.class).list();
 		for (Program program1 : program) {
-			Hibernate.initialize((program1.getSemester()));
+			Hibernate.initialize((program1.getStudentsProgram()));
 		}
 		return program;
 	}
@@ -42,7 +42,7 @@ public class ProgramDAOImpl implements ProgramDAO {
 	public Program getProgram(int s_Id) {
 		Session session = sessionFactory.getCurrentSession();
 		Program program =  session.get(Program.class, s_Id);
-		Hibernate.initialize((program.getSemester()));
+		Hibernate.initialize((program.getStudentsProgram()));
 		return program;
 		}
 

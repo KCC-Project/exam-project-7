@@ -2,8 +2,6 @@ package com.project.exam.dao;
 
 import java.util.List;
 
-import javax.security.auth.Subject;
-
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.exam.model.Program;
 import com.project.exam.model.Subjects;
 
 
@@ -30,7 +27,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 		List<Subjects> subject = session.createCriteria(Subjects.class).list();
 		for (Subjects subject1 : subject) {
 			Hibernate.initialize((subject1.getExams()));
-			Hibernate.initialize((subject1.getSemesterSubjects()));
+			Hibernate.initialize((subject1.getProgram()));
 		}
 		return subject;
 
@@ -51,7 +48,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 		Session session = sessionFactory.getCurrentSession();
 		Subjects subject = session.get(Subjects.class, s_Id);
 		Hibernate.initialize((subject.getExams()));
-		Hibernate.initialize((subject.getSemesterSubjects()));
+		Hibernate.initialize((subject.getProgram()));
 		return subject;
 	}
 
