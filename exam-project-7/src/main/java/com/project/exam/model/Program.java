@@ -111,14 +111,6 @@ public class Program {
 		this.subject = subject;
 	}
 
-	@Override
-	public String toString() {
-		return "Program [program_id=" + program_id + ", program_name=" + program_name + ", program_years="
-				+ program_years + ", total_credit=" + total_credit + ", status=" + status + ", faculty=" + faculty
-				+ ", studentsProgram=" + studentsProgram + ", subject=" + subject + "]";
-	}
-
-	
 	
 
 	
