@@ -1,6 +1,5 @@
 package com.project.exam.model;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,10 +30,10 @@ public class Exam {
 	
 	@Column
 	@Temporal(TemporalType.DATE)
-	private Date exam_date;
+	private String exam_date;
 	
-	private Date time_from;
-	private Date time_to;
+	private String time_from;
+	private String time_to;
 	private int full_marks;
 	private int pass_marks;
 	private int status;
@@ -54,34 +53,32 @@ public class Exam {
 	}
 
 	@Column(nullable = false)
-	public Date getExam_date() {
+	public String getExam_date() {
 		return exam_date;
 	}
 
 
-	public void setExam_date(Date exam_date) {
+	public void setExam_date(String exam_date) {
 		this.exam_date = exam_date;
 	}
 
-	@Column
-	@Temporal(TemporalType.TIME)
-	public Date getTime_from() {
+	
+	public String getTime_from() {
 		return time_from;
 	}
 
 
-	public void setTime_from(Date time_from) {
+	public void setTime_from(String time_from) {
 		this.time_from = time_from;
 	}
 
-	@Column
-	@Temporal(TemporalType.TIME)
-	public Date getTime_to() {
+	
+	public String getTime_to() {
 		return time_to;
 	}
 
 
-	public void setTime_to(Date time_to) {
+	public void setTime_to(String time_to) {
 		this.time_to = time_to;
 	}
 

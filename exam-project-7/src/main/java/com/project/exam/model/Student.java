@@ -1,6 +1,5 @@
 package com.project.exam.model;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -37,7 +34,7 @@ public class Student {
 	
 	private int gender;
 	
-	private Date date_of_birth;
+	private String date_of_birth;
 	
 	private String phone;
 	private String address;
@@ -90,13 +87,11 @@ public class Student {
 		this.last_name = last_name;
 	}
 
-	@Column
-	@Temporal(TemporalType.DATE)
-	public Date getDate_of_birth() {
+	public String getDate_of_birth() {
 		return date_of_birth;
 	}
 
-	public void setDate_of_birth(Date date_of_birth) {
+	public void setDate_of_birth(String date_of_birth) {
 		this.date_of_birth = date_of_birth;
 	}
 
@@ -135,8 +130,7 @@ public class Student {
 		this.studentsExams = studentsExams;
 	}
 
-	 
-	public int getStatus() {
+	 	public int getStatus() {
 		return status;
 	}
 
