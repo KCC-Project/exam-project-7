@@ -8,84 +8,43 @@
 
 <!-- Content Area -->
 <div id="page-content-wrapper">
-
-<table id="example" class="display" width="100%">
-      </table>
-<div id="demo">
-</div>
+	<button id="edit">Edit</button>
+	<table id="faculty_table" class="table table-hover table-striped" width="100%">
+	</table>
+	<div id="demo"></div>
 
 
 	<script>
-function createNode(element) {
-    return document.createElement(element);
-}
 
-function append(parent, el) {
-  return parent.appendChild(el);
-}
+const url = 'http://localhost:8080/exam-project-7/ApiFaculty/GetAllFaculty';
 
-const ul = document.getElementById('authors');
-const url = 'https://randomuser.me/api/?results=10';
-fetch(url)
+// setting header type
+var myHeaders = new Headers();
+myHeaders.append("Accept", "application/json");
+
+// describing request
+var myInit = { method: 'GET',
+               headers: myHeaders,
+               cache: 'default' };
+// setting up the final request variable
+var myRequest = new Request(url, myInit);
+
+
+// fetch api,  
+fetch(myRequest)
 .then((resp) => resp.json())
 .then(function(data) {
-  let authors = data.results;
+  let results = data;
     
-    callbackTester (load, authors);
+  /* create datatable as per json format and load it into given table id */
+    loadJsonData (load, results, "faculty_table");
+  /* --------- */
 })
 .catch(function(error) {
   console.log(error);
 });   
 
 
-
-
-function callbackTester (callback) {
-alert(callback);
-  callback (arguments[1]);
-}
-function load(author){
-var data = author;
-
-$(document).ready( function () {
-var cols = [];
-
-var exampleRecord = data[0];
-
-//get keys in object. This will only work if your statement remains true that all objects have identical keys
-var keys = Object.keys(exampleRecord);
-
-//for each key, add a column definition
-keys.forEach(function(k) {
-  cols.push({
-    title: k,
-    data: k
-    //optionally do some type detection here for render function
-  });
-});
-
-//initialize DataTables
-var table = $('#example').DataTable({
-  columns: cols
-});
-
-//add data and draw
-table.rows.add(data).draw();
- $('#example tbody').on( 'click', 'tr', function () {
-      if ( $(this).hasClass('selected') ) {
-          $(this).removeClass('selected');
-      }
-      else {
-          table.$('tr.selected').removeClass('selected');
-          $(this).addClass('selected');
-      }
-  } );
-
-  $('#button').click( function () {
-      table.row('.selected').remove().draw( false );
-  } );
-});
-}
 </script>
 
 
