@@ -1,10 +1,13 @@
 package com.project.exam.model;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +28,7 @@ public class Faculty {
 	private int status;
 	
 	
-	private Set<Program> program;
+	private Collection<Program> program= new ArrayList<>();
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -49,18 +52,22 @@ public class Faculty {
 		this.status = status;
 	}
 	
-	@OneToMany(mappedBy="faculty", cascade = CascadeType.ALL)
-	public Set<Program> getProgram() {
+	@OneToMany(mappedBy="faculty",cascade = CascadeType.ALL)
+	public Collection<Program> getProgram() {
 		return program;
 	}
-	public void setProgram(Set<Program> program) {
+	public void setProgram(Collection<Program> program) {
 		this.program = program;
 	}
 	@Override
 	public String toString() {
-		return "Faculty [faculty_id=" + faculty_id + ", faculty_name=" + faculty_name + ", status=" + status+"]";
+		return "Faculty [faculty_id=" + faculty_id + ", faculty_name=" + faculty_name + ", status=" + status + "]";
 	}
-	
+	public Faculty() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
 
 	

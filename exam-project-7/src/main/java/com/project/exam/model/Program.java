@@ -1,11 +1,14 @@
 package com.project.exam.model;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +21,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name="programs")
-
 public class Program {
 
 	
@@ -34,7 +36,7 @@ public class Program {
 	
 	private Faculty faculty;
 	
-	private Set<StudentsProgram> studentsProgram = new HashSet<StudentsProgram>();
+	private Collection<StudentsProgram> studentsProgram = new ArrayList<>();
 	
 	private Set<Subjects> subject;
 
@@ -84,11 +86,11 @@ public class Program {
 
 	
 	@OneToMany(mappedBy = "program")
-	public Set<StudentsProgram> getStudentsProgram() {
+	public Collection<StudentsProgram> getStudentsProgram() {
 		return studentsProgram;
 	}
 
-	public void setStudentsProgram(Set<StudentsProgram> studentsProgram) {
+	public void setStudentsProgram(Collection<StudentsProgram> studentsProgram) {
 		this.studentsProgram = studentsProgram;
 	}
 
@@ -96,6 +98,11 @@ public class Program {
     @JoinColumn(name = "faculty_id", nullable = false)
 	public Faculty getFaculty() {
 		return faculty;
+	}
+
+	public Program() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public void setFaculty(Faculty faculty) {
@@ -114,11 +121,12 @@ public class Program {
 	@Override
 	public String toString() {
 		return "Program [program_id=" + program_id + ", program_name=" + program_name + ", program_years="
-				+ program_years + ", total_credit=" + total_credit + ", status=" + status + ", faculty=" + faculty
-				+ ", studentsProgram=" + studentsProgram + ", subject=" + subject + "]";
+				+ program_years + ", total_credit=" + total_credit + ", status=" + status + "]";
 	}
 
 
+	
+	
 
 	
 	

@@ -86,11 +86,7 @@ public class StudentsProgram {
 		this.enroll_date = enroll_date;
 	}
 
-	@Override
-	public String toString() {
-		return "StudentsProgram [student_program_id=" + student_program_id + ", students=" + students + ", program="
-				+ program + ", batch_year=" + batch_year + ", enroll_date=" + enroll_date + ", status=" + status + "]";
-	}
+	
 
 	
 
