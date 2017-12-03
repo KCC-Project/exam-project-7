@@ -16,7 +16,7 @@
 
 	<script>
 
-const url = 'http://localhost:8080/exam-project-7/ApiFaculty/GetAllFaculty';
+const url = window.context +"/ApiFaculty/GetAllFaculty";
 
 // setting header type
 var myHeaders = new Headers();
