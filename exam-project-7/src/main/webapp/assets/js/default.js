@@ -5,7 +5,10 @@ $(".menu-toggle").click(function(e) {
 });
 
 
-/* call this function just after fetching data from server, eg: loadJsonData(load, {json_data}, {html_table_id} */
+/*
+ * call this function just after fetching data from server, eg:
+ * loadJsonData(load, {json_data}, {html_table_id}
+ */
 function loadJsonData(callback) {
 	alert(callback);
 	callback(arguments[1], arguments[2]);
@@ -30,6 +33,11 @@ function load(results, target_table_id) {
 		// optionally do some type detection here for render function
 		});
 	});
+	cols.push({
+		title : "Option",
+		data :null,
+  "defaultContent": "<button class='btn btn-success edit'>Click!</button>"
+  });
 
 	// initialize DataTables
 	var table = $('#'+target_table_id+'').DataTable({
@@ -38,33 +46,19 @@ function load(results, target_table_id) {
 
 	// add data and draw
 	table.rows.add(data).draw();
-	enableEdit(target_table_id);
+	enableEdit("faculty_table");
 }
 
 function enableEdit(target_table_id) {
 	$(document).ready(
 			function() {
 
-				var oTable = $('#'+target_table_id+'').DataTable();
+				var table = $('#'+target_table_id+'').DataTable();
 
-				$('#'+target_table_id+'').on('click', 'tr', function() {
-					$(this).toggleClass('selected');
-					var pos = oTable.row(this).index();
-					var row = oTable.row(pos).data();
-					console.log(row);
-				});
-
-				$('#edit').click(
-						function() {
-							var oData = oTable.rows('.selected').data();
-
-							for (var i = 0; i < oData.length; i++) {
-								alert("Name: " + oData[i][0] + " data2: "
-										+ oData[i][1] + " data3: "
-										+ oData[i][2]);
-							}
-
-						});
+				 $('#'+target_table_id+' tbody').on( 'click', '.edit', function () {
+				        var data = table.row( $(this).parents('tr') ).data();
+				        alert( data['faculty_id'] +"'s name is: "+ data[ 'faculty_name' ] );
+				    } );
 
 			});
 }

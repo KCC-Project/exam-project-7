@@ -38,6 +38,11 @@ fetch(myRequest)
     
   /* create datatable as per json format and load it into given table id */
     loadJsonData (load, results, "faculty_table");
+   
+ // var dataArray =  
+   //if(dataArray){
+	 //  alert( data['faculty_id'] +"'s name is: "+ data[ 'faculty_name' ] );
+   //}
   /* --------- */
 })
 .catch(function(error) {
