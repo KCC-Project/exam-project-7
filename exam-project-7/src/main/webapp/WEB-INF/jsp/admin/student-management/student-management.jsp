@@ -6,8 +6,6 @@
 
 <jsp:include page="../shared/header.jsp" />
 
-<body>
-
 	<!-- Content Area -->
 	<div id="page-content-wrapper">
 

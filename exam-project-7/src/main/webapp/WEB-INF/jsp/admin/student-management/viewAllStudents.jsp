@@ -3,9 +3,7 @@
 
     <jsp:include page="../shared/header.jsp" />
 
-<body>
-
-	<div class="col-md-12 col-sm-12 ">
+	  <div id="page-content-wrapper">
 			<ol class="breadcrumb">
 				<li><a href="admin-dashboard.jsp"><span
 						class="glyphicon glyphicon-home"> Home</span></a></li>
@@ -190,6 +188,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 			<!--=========================================================================================  -->
 	<jsp:include page="../shared/footer.jsp" />

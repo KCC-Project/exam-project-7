@@ -22,6 +22,26 @@ public class MainController {
 	public Viewable home() {
 		return new Viewable("/home");
 	}
+	
+	@GET
+	@Path("/user")
+	public Viewable student() {
+		return new Viewable("/student/student-home");
+	}
+	@GET
+	@Path("/user/profile")
+	public Viewable profile() {
+		return new Viewable("/student/student-profile");
+	}
+	
+	@GET
+	@Path("/faculty")
+	public Viewable faculty() {
+		System.out.println("Insdie view");
+		Map<String, Boolean> model = new HashMap<>();
+		model.put("faculty_clicked", true);
+		return new Viewable("/admin/student-management/faculty", model);
+	}
 
 	@GET
 	@Path("/student/view")

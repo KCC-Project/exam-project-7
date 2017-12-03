@@ -42,7 +42,7 @@
             <span class="caret pull-right"></span>
           </a>
           <ul class="collapse collapseable" id="collapse-manage">
-            <li><a href="${cp }/department" id="Semester">Department</a></li>
+            <li><a href="${cp }/faculty" id="Semester">Faculty</a></li>
             <li><a href="${cp }/program" id="courses">Program</a></li>
              <li><a href="${cp }/semester" id="courses">Semester</a></li>
              <li><a href="${cp }/sem-info" id="courses">Semester Info</a></li>
