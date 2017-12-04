@@ -17,13 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.project.exam.model.StudentsExam;
 import com.project.exam.services.StudentsExamService;
 
-@Path("/ApiStudentsExamsExam")
+@Path("/ApiStudentsExams")
 public class StudentsExamController {
 	@Autowired
 	private StudentsExamService StudentsExamService;
 
 	@GET
-	@Path("/GetAllStudentsExamsExam")
+	@Path("/GetAllStudentsExams")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public List<StudentsExam> getAllStudentsExam() {
 		System.out.println("indiseee");
@@ -32,7 +32,7 @@ public class StudentsExamController {
 	
 	
 	@POST
-	@Path("/SaveStudentsExamsExam")
+	@Path("/SaveStudentsExam")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public StudentsExam saveStudentsExam(StudentsExam studentsExamModel) {
@@ -41,14 +41,14 @@ public class StudentsExamController {
 	
 
 	@GET
-	@Path("/GetStudentsExamsExam/{id}")
+	@Path("/GetStudentsExams/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public StudentsExam getStudentsExam(@PathParam("id") int id) {
 		return StudentsExamService.getstudentsExam(id);
 	}
 	
 	@PUT
-	@Path("/UpdateStudentsExamsExam")
+	@Path("/UpdateStudentsExam")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public StudentsExam updateStudentsExam(StudentsExam studentsExamModel) {

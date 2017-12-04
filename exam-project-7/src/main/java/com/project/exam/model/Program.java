@@ -1,26 +1,8 @@
 package com.project.exam.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-@Entity
-@Table(name="programs")
 public class Program {
 
 	
@@ -34,14 +16,24 @@ public class Program {
 	
 	private int status;
 	
-	private Faculty faculty;
-	
-	private Collection<StudentsProgram> studentsProgram = new ArrayList<>();
-	
-	private Set<Subjects> subject;
+	private int faculty_id;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	public Program() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Program(int program_id, String program_name, int program_years, int total_credit, int status,
+			int faculty_id) {
+		super();
+		this.program_id = program_id;
+		this.program_name = program_name;
+		this.program_years = program_years;
+		this.total_credit = total_credit;
+		this.status = status;
+		this.faculty_id = faculty_id;
+	}
+
 	public int getProgram_id() {
 		return program_id;
 	}
@@ -50,16 +42,14 @@ public class Program {
 		this.program_id = program_id;
 	}
 
-	@Column(nullable = false)
 	public String getProgram_name() {
 		return program_name;
 	}
-	
+
 	public void setProgram_name(String program_name) {
 		this.program_name = program_name;
 	}
-	
-	
+
 	public int getProgram_years() {
 		return program_years;
 	}
@@ -84,54 +74,21 @@ public class Program {
 		this.status = status;
 	}
 
-	
-	@OneToMany(mappedBy = "program")
-	public Collection<StudentsProgram> getStudentsProgram() {
-		return studentsProgram;
+	public int getFaculty_id() {
+		return faculty_id;
 	}
 
-	public void setStudentsProgram(Collection<StudentsProgram> studentsProgram) {
-		this.studentsProgram = studentsProgram;
-	}
-
-	@ManyToOne
-    @JoinColumn(name = "faculty_id", nullable = false)
-	public Faculty getFaculty() {
-		return faculty;
-	}
-
-	public Program() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public void setFaculty(Faculty faculty) {
-		this.faculty = faculty;
-	}
-
-	@OneToMany(mappedBy="program", cascade = CascadeType.ALL)
-	public Set<Subjects> getSubject() {
-		return subject;
-	}
-
-	public void setSubject(Set<Subjects> subject) {
-		this.subject = subject;
+	public void setFaculty_id(int faculty_id) {
+		this.faculty_id = faculty_id;
 	}
 
 	@Override
 	public String toString() {
 		return "Program [program_id=" + program_id + ", program_name=" + program_name + ", program_years="
-				+ program_years + ", total_credit=" + total_credit + ", status=" + status + "]";
+				+ program_years + ", total_credit=" + total_credit + ", status=" + status + ", faculty_id=" + faculty_id
+				+ "]";
 	}
-
-
 	
 	
-
-	
-	
-
-	
-	 
 	 
 }

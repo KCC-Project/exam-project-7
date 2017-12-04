@@ -1,84 +1,144 @@
 package com.project.exam.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.project.exam.model.Faculty;
 
 @Repository("FacultyDao")
 public class FacultyDAOImpl implements FacultyDAO {
+	private Connection conn;
+	private String sql;
+	private PreparedStatement pst;
+	private ResultSet rs;
 
-	@Autowired
-	private SessionFactory sessionFactory;
-	
 	@Override
-	@Transactional
 	public List<Faculty> getFacultyList() {
-		Session session = sessionFactory.openSession();
-		List<Faculty> faculty = session.createCriteria(Faculty.class).list();
-		List<Faculty> faculty2= new ArrayList<>();
-		
-		for (Faculty faculty1 : faculty) {
-			//System.out.println("Extra data = "+faculty1.getProgram());
-			
-			Hibernate.initialize(faculty1.getProgram());
-			
-			Faculty fa= new Faculty();
-			fa.setFaculty_id(faculty1.getFaculty_id());
-			fa.setFaculty_name(faculty1.getFaculty_name());
-			fa.setStatus(faculty1.getStatus());
-			faculty2.add(fa);
+		List<Faculty> listFaculty = new ArrayList<Faculty>();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "Select * from faculty";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Faculty model = new Faculty();
+				model.setFaculty_id(rs.getInt("faculty_id"));
+				model.setFaculty_name(rs.getString("faculty_name"));
+				model.setStatus(rs.getInt("status"));
+				listFaculty.add(model);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		return faculty2;
+		return listFaculty;
 	}
 
 	@Override
-	@Transactional
 	public Faculty addFaculty(Faculty faculty) {
-		Session session = sessionFactory.getCurrentSession();
-		session.save(faculty);
-		return faculty;
-	}
-
-	@Override
-	@Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
-	public Faculty getFaculty(int s_Id) {
-		Session session = sessionFactory.getCurrentSession();
-		Faculty faculty =  session.get(Faculty.class, s_Id);
-	
-		Faculty faculty1=new Faculty();
-		faculty1.setFaculty_id(faculty.getFaculty_id());
-		faculty1.setFaculty_name(faculty.getFaculty_name());
-		faculty1.setStatus(faculty.getStatus());
+		boolean status = false;
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "insert into faculty(faculty_name,status) values(?,?)";
+			pst = conn.prepareStatement(sql);
+			int col = 1;
+			pst.setString(col++, faculty.getFaculty_name());
 		
-	Hibernate.initialize(faculty.getProgram());
-	
-		return faculty1;
+			pst.setInt(col++, faculty.getStatus());
+			int count = pst.executeUpdate();
+			if (count > 0) {
+				status = true;
+			}
+		} catch (Exception e) {
+			System.out.println("Error from saving faculty=" + e);
+		} finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		if (status==true) {
+			return faculty;
+		}
+		return new Faculty();
 	}
 
 	@Override
-	@Transactional
+	public Faculty getFaculty(int s_Id) {
+		Faculty model= new Faculty();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "Select * from faculty where faculty_id=?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, s_Id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				
+				model.setFaculty_id(rs.getInt("faculty_id"));
+				model.setFaculty_name(rs.getString("faculty_name"));
+				model.setStatus(rs.getInt("status"));
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return model;
+	}
+
+	@Override
 	public Faculty updateFaculty(Faculty faculty) {
-		Session session = sessionFactory.getCurrentSession();
-		session.update(faculty);
-		return faculty;
+		
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "update faculty set faculty_name=? , status=? where faculty_id=?";
+			pst = conn.prepareStatement(sql);
+			int col = 1;
+			
+			pst.setString(col++, faculty.getFaculty_name());
+			pst.setInt(col++, faculty.getStatus());
+			pst.setInt(col++, faculty.getFaculty_id());
+			int count = pst.executeUpdate();
+			if (count > 0) {
+				
+				return faculty;
+				
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return new Faculty();
 	}
 
 	@Override
-	@Transactional
 	public int deleteFaculty(int s_Id) {
-		Session session = sessionFactory.getCurrentSession();
-		Faculty ent = session.load(Faculty.class, s_Id);
-		session.delete(ent);
-		return 1;
+		int result = 0;
+		//System.out.println("deleting id form ecaminfoModel="+id);
+		try {
+			Connection connection = DatabaseConnection.connectToDatabase();
+			sql = "delete from faculty where faculty_id =?";
+			pst = connection.prepareStatement(sql);
+			pst.setInt(1,s_Id);
+			result = pst.executeUpdate();
+		} catch (Exception e) {
+			//System.out.println("Error in deleting examInfo model="+e.getMessage());
+		} finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return result;
 	}
 
 }

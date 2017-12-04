@@ -1,94 +1,159 @@
 package com.project.exam.dao;
 
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.project.exam.model.Faculty;
 import com.project.exam.model.Program;
 
 @Repository("programDao")
 public class ProgramDAOImpl implements ProgramDAO {
-
-	@Autowired
-	private SessionFactory sessionFactory;
 	
+	private Connection conn;
+	private String sql;
+	private PreparedStatement pst;
+	private ResultSet rs;
+
 	@Override
-	@Transactional
 	public List<Program> getProgramList() {
-		Session session = sessionFactory.getCurrentSession();
-		List<Program> program = session.createCriteria(Program.class).list();
-		List<Program> program2= new ArrayList<>();
-		for (Program program1 : program) {
-			
-			
-			
-			Program pr= new Program();
-			pr.setProgram_id(program1.getProgram_id());
-			pr.setProgram_name(program1.getProgram_name());
-			pr.setProgram_years(program1.getProgram_years());
-			pr.setTotal_credit(program1.getTotal_credit());
-			pr.setStatus(program1.getStatus());
-			pr.setFaculty(program1.getFaculty());
-			program2.add(pr);
-			
-			Hibernate.initialize((program1.getStudentsProgram()));
-			//Hibernate.initialize((program1.getFaculty()));
-			Hibernate.initialize((program1.getSubject()));
+		List<Program> listProgram = new ArrayList<Program>();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "Select * from programs";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Program model = new Program();
+				model.setProgram_id(rs.getInt("program_id"));
+				model.setProgram_name(rs.getString("program_name"));
+				model.setProgram_years(rs.getInt("program_years"));
+				model.setStatus(rs.getInt("status"));
+				model.setTotal_credit(rs.getInt("total_credit"));
+				model.setFaculty_id(rs.getInt("faculty_id"));
+				listProgram.add(model);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		return program2;
+		return listProgram;
 	}
 
 	@Override
-	@Transactional
 	public Program addProgram(Program program) {
-		Session session = sessionFactory.getCurrentSession();
-		session.save(program);
-		return program;
-	}
-
-	@Override
-	@Transactional
-	public Program getProgram(int s_Id) {
-		Session session = sessionFactory.getCurrentSession();
-		Program program =  session.get(Program.class, s_Id);
-		Hibernate.initialize((program.getStudentsProgram()));
-		//Hibernate.initialize((program.getFaculty()));
-		Hibernate.initialize((program.getSubject()));
-		
-		Program pr= new Program();
-		pr.setProgram_id(program.getProgram_id());
-		pr.setProgram_name(program.getProgram_name());
-		pr.setProgram_years(program.getProgram_years());
-		pr.setTotal_credit(program.getTotal_credit());
-		pr.setStatus(program.getStatus());
-		pr.setFaculty(program.getFaculty());
-		
-		
-		return pr;
+		boolean status = false;
+	
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "insert into programs(program_name,program_years,status,total_credit,faculty_id) values(?,?,?,?,?)";
+			pst = conn.prepareStatement(sql);
+			int col = 1;
+			pst.setString(col++, program.getProgram_name());
+			pst.setInt(col++, program.getProgram_years());
+			pst.setInt(col++, program.getStatus());
+			pst.setInt(col++, program.getTotal_credit());
+			pst.setInt(col++, program.getFaculty_id());
+			
+			int count = pst.executeUpdate();
+			if (count > 0) {
+				status = true;
+			}
+		} catch (Exception e) {
+			System.out.println("Error from saving program=" + e);
+		} finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
+		if (status==true) {
+			return program;
+		}
+		return new Program();
+	}
 
 	@Override
-	@Transactional
+	public Program getProgram(int s_Id) {
+		Program model= new Program();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "Select * from programs where program_id=?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, s_Id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				
+				model.setProgram_id(rs.getInt("program_id"));
+				model.setProgram_name(rs.getString("program_name"));
+				model.setProgram_years(rs.getInt("program_years"));
+				model.setStatus(rs.getInt("status"));
+				model.setTotal_credit(rs.getInt("total_credit"));
+				model.setFaculty_id(rs.getInt("faculty_id"));
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return model;
+	}
+
+	@Override
 	public Program updateProgram(Program program) {
-		Session session = sessionFactory.getCurrentSession();
-		session.update(program);
-		return program;
+		
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "update programs set program_name=? , program_years=?, status=?, total_credit=?,faculty_id=? where program_id=?";
+			pst = conn.prepareStatement(sql);
+			int col = 1;
+			pst.setString(col++, program.getProgram_name());
+			pst.setInt(col++, program.getProgram_years());
+			pst.setInt(col++, program.getStatus());
+			pst.setInt(col++, program.getTotal_credit());
+			pst.setInt(col++, program.getFaculty_id());
+			pst.setInt(col++, program.getProgram_id());
+			int count = pst.executeUpdate();
+			if (count > 0) {
+				
+				return program;
+				
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return new Program();
 	}
 
 	@Override
-	@Transactional
 	public int deleteProgram(int s_Id) {
-		Session session = sessionFactory.getCurrentSession();
-		Program ent = session.load(Program.class, s_Id);
-		session.delete(ent);
-		return 1;
+		int result = 0;
+		//System.out.println("deleting id form ecaminfoModel="+id);
+		try {
+			Connection connection = DatabaseConnection.connectToDatabase();
+			sql = "delete from programs where program_id =?";
+			pst = connection.prepareStatement(sql);
+			pst.setInt(1,s_Id);
+			result = pst.executeUpdate();
+		} catch (Exception e) {
+			//System.out.println("Error in deleting examInfo model="+e.getMessage());
+		} finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return result;
 	}
+	
 
 }

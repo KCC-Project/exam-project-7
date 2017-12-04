@@ -1,72 +1,180 @@
 package com.project.exam.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.project.exam.model.Subjects;
 
-
-
 @Repository("subjectDao")
 public class SubjectDAOImpl implements SubjectDAO {
+	private Connection conn;
+	private String sql;
+	private PreparedStatement pst;
+	private ResultSet rs;
 
-
-	@Autowired
-	private SessionFactory sessionFactory;
-	
 	@Override
-	@Transactional
 	public List<Subjects> getallSubjectList() {
-		Session session = sessionFactory.getCurrentSession();
-		List<Subjects> subject = session.createCriteria(Subjects.class).list();
-		for (Subjects subject1 : subject) {
-			Hibernate.initialize((subject1.getExams()));
-			Hibernate.initialize((subject1.getProgram()));
+		List<Subjects> listSubjects = new ArrayList<Subjects>();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "Select * from subjects";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Subjects model = new Subjects();
+				model.setSubject_id(rs.getInt("subject_id"));
+				model.setFinal_theory(rs.getInt("final_theory"));
+				model.setInternal_practical(rs.getInt("internal_practical"));
+				model.setInternal_theory(rs.getInt("internal_theory"));
+				model.setSemester_no(rs.getInt("semester_no"));
+				model.setStatus(rs.getInt("status"));
+				model.setSubject_code(rs.getString("subject_code"));
+				model.setSubject_name(rs.getString("subject_name"));
+				model.setSyllabus_file(rs.getString("syllabus_file"));
+				model.setTheory_cr(rs.getInt("theory_cr"));
+				model.setTutorial_cr(rs.getInt("tutorial_cr"));
+				model.setProgram_id(rs.getInt("program_id"));
+				listSubjects.add(model);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		return subject;
-
-	
+		return listSubjects;
 	}
 
 	@Override
-	@Transactional
-	public Subjects addStudent(Subjects subjectModel) {
-		Session session = sessionFactory.getCurrentSession();
-		session.save(subjectModel);
-		return subjectModel;
+	public Subjects addStudent(Subjects subject) {
+		boolean status = false;
+
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "insert into subjects(final_theory,internal_practical,internal_theory,semester_no,status,subject_code,subject_name,"
+					+ "syllabus_file,theory_cr,tutorial_cr,program_id) values(?,?,?,?,?,?,?,?,?,?,?)";
+			pst = conn.prepareStatement(sql);
+			int col = 1;
+
+			pst.setInt(col++, subject.getFinal_theory());
+			pst.setInt(col++, subject.getInternal_practical());
+			pst.setInt(col++, subject.getInternal_theory());
+			pst.setInt(col++, subject.getSemester_no());
+			pst.setInt(col++, subject.getStatus());
+			pst.setString(col++, subject.getSubject_code());
+			pst.setString(col++, subject.getSubject_name());
+			pst.setString(col++, subject.getSyllabus_file());
+			pst.setInt(col++, subject.getTheory_cr());
+			pst.setInt(col++, subject.getTutorial_cr());
+			pst.setInt(col++, subject.getProgram_id());
+
+			int count = pst.executeUpdate();
+			if (count > 0) {
+				status = true;
+			}
+		} catch (Exception e) {
+			System.out.println("Error from saving studentsProgram=" + e);
+		} finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		if (status == true) {
+			return subject;
+		}
+		return new Subjects();
 	}
 
 	@Override
-	@Transactional
 	public Subjects getSubject(int s_Id) {
-		Session session = sessionFactory.getCurrentSession();
-		Subjects subject = session.get(Subjects.class, s_Id);
-		Hibernate.initialize((subject.getExams()));
-		Hibernate.initialize((subject.getProgram()));
-		return subject;
+		Subjects model = new Subjects();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "Select * from subjects where subject_id=?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, s_Id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				model.setSubject_id(rs.getInt("subject_id"));
+				model.setFinal_theory(rs.getInt("final_theory"));
+				model.setInternal_practical(rs.getInt("internal_practical"));
+				model.setInternal_theory(rs.getInt("internal_theory"));
+				model.setSemester_no(rs.getInt("semester_no"));
+				model.setStatus(rs.getInt("status"));
+				model.setSubject_code(rs.getString("subject_code"));
+				model.setSubject_name(rs.getString("subject_name"));
+				model.setSyllabus_file(rs.getString("syllabus_file"));
+				model.setTheory_cr(rs.getInt("theory_cr"));
+				model.setTutorial_cr(rs.getInt("tutorial_cr"));
+				model.setProgram_id(rs.getInt("program_id"));
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return model;
 	}
 
 	@Override
-	@Transactional
 	public Subjects updateSubject(Subjects subject) {
-		Session session = sessionFactory.getCurrentSession();
-		session.update(subject);
-		return subject;
+
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "update subjects set final_theory=?,internal_practical=?,internal_theory=?,semester_no=?,status=?,subject_code=?,subject_name=?,syllabus_file=?,theory_cr=?,tutorial_cr=?,program_id=? where subject_id=?";
+			pst = conn.prepareStatement(sql);
+			int col = 1;
+			pst.setInt(col++, subject.getFinal_theory());
+			pst.setInt(col++, subject.getInternal_practical());
+			pst.setInt(col++, subject.getInternal_theory());
+			pst.setInt(col++, subject.getSemester_no());
+			pst.setInt(col++, subject.getStatus());
+			pst.setString(col++, subject.getSubject_code());
+			pst.setString(col++, subject.getSubject_name());
+			pst.setString(col++, subject.getSyllabus_file());
+			pst.setInt(col++, subject.getTheory_cr());
+			pst.setInt(col++, subject.getTutorial_cr());
+			pst.setInt(col++, subject.getProgram_id());
+			pst.setInt(col++, subject.getSubject_id());
+			int count = pst.executeUpdate();
+			if (count > 0) {
+
+				return subject;
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return new Subjects();
 	}
 
 	@Override
-	@Transactional
 	public int deleteSubject(int s_Id) {
-		Session session = sessionFactory.getCurrentSession();
-		Subjects ent = session.load(Subjects.class, s_Id);
-		session.delete(ent);
-		return 1;
+		int result = 0;
+		// System.out.println("deleting id form ecaminfoModel="+id);
+		try {
+			Connection connection = DatabaseConnection.connectToDatabase();
+			sql = "delete from subjects where subject_id =?";
+			pst = connection.prepareStatement(sql);
+			pst.setInt(1, s_Id);
+			result = pst.executeUpdate();
+		} catch (Exception e) {
+			// System.out.println("Error in deleting examInfo model="+e.getMessage());
+		} finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return result;
 	}
 
 }
