@@ -45,6 +45,8 @@
 	<spring:url value="/assets/js/bootstrap-editable.min.js"
 	var="editableJs" />
 	
+	<spring:url value="/assets/js/bootstrapValidator.min.js"
+	var="bootstrapValidator" />
 	
 	
 
@@ -80,7 +82,7 @@
 <script src="${custome_editableJs}"></script>
 <script src="${re-usableJs}"></script>
 <script src="${bootstrapSwitchJs}"></script>
-
+<script src="${bootstrapValidator}"></script>
 
 <script>
 	window.context = '${cp}';

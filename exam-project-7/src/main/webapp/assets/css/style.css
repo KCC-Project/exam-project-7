@@ -124,6 +124,8 @@
 	letter-spacing: 1px;
 	color: white;
 }
+#success_message{ display: none;}
+
 /* Do not remove anything above here */
 
 /* Remove later */

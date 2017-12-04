@@ -35,6 +35,12 @@ public class MainController {
 	}
 	
 	@GET
+	@Path("/subject/addNew")
+	public Viewable addSubject() {
+		return new Viewable("/admin/subject-management/addNewSubject");
+	}
+	
+	@GET
 	@Path("/faculty")
 	public Viewable faculty() {
 		System.out.println("Insdie view");
