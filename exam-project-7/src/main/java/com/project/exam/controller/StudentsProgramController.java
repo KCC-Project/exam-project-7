@@ -62,4 +62,10 @@ public class StudentsProgramController {
 		return studentsProgramService.deleteStudentsProgram(id);
 	}
 	
+	@GET
+	@Path("/GetStudentsProgramByProgramId/{id}")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List<StudentsProgram> getStudentsProgramByProgramId(@PathParam("id") int id) {
+		return studentsProgramService.getStudentsProgramByProgramId(id);
+	}
 }

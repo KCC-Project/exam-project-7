@@ -124,8 +124,8 @@
 							<label class='control-label col-md-2' for='id_gender'>Gender</label>
 							<div class='col-md-3'>
 								<div class='form-group internal'>
-									<div class='make-switch' data-off-label='Male'
-										data-on-label='Female' id='id_slide_switch'>
+									<div class='make-switch' data-on-text="Female"
+										data-off-text='MALE' id='id_slide_switch'>
 										<input id='id_slide' type='checkbox' value='chk_hydro'
 											name="id_slide" class="probeProbe">
 									</div>

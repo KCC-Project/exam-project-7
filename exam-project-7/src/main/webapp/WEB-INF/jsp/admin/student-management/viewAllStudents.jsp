@@ -109,11 +109,9 @@
 										<thead>
 											<tr class="info">
 											
-												<td>District</td>
-												<td>City</td>
+											
 												<td>Email</td>
 												<td>DOB</td>
-												<td>Registration Date</td>
 												<td>Status</td>
 												
 												
@@ -204,21 +202,85 @@
 		
 	});
 	function load_faculty(e, target) {
-		var url=window.context +"/ApiDepartment/GetAllDepartment";
-		var aj=new XMLHttpRequest();
-		aj.open("GET", url, true);
-		aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		aj.onreadystatechange=function(){
-			if (aj.readyState==4&&aj.status==200) {
-				var return_data=aj.responseText;
-				alert(return_data);
-				//$('#' + target).html(return_data);
+		 $.ajax({
+			url : window.context +"/ApiFaculty/GetAllFaculty",
+			method : "GET",
+			dataType : 'json',
+			cache : true,
+			success : function(data) {
+				var json=data;
+			    console.log("json size=" + data.length);
+				var content = '';
+				content +="<option selected='true' > Select Faculty </option>"
+			   for (var i = 0; i < data.length; i++) {
+				   var facultyName=data[i].faculty_name;
+				   var facultyId=data[i].faculty_id;
+				   console.log("faculty name =" + facultyName);
+				   
+					content += '<option value='+facultyId+'>' + facultyName + '</option>';
 			}
-		}
-		aj.send();
+			   $('#' + target).html(content);
+			  },
+			error : function() {
+			    alert("Error...!!!");
+			}
+		    });
+	}
+	function load_program(e, target) {
+		var getid = e.target.id;
+		var id = $('#'+getid).find(":selected").val();
+		 $.ajax({
+				url : window.context +"/ApiProgram/GetProgramByFacultyId/"+id,
+				method : "GET",
+				dataType : 'json',
+				cache : true,
+				success : function(data) {
+					
+				    console.log("program size=" +JSON.stringify(data));
+					var content = '';
+					content +="<option selected='true' > Select Program </option>"
+				   for (var i = 0; i < data.length; i++) {
+					   var programeName=data[i].program_name;
+					   var programeId=data[i].program_id;
+					   console.log("faculty name =" + programeName);
+					   
+						content += '<option value='+programeId+'>' + programeName + '</option>';
+				}
+				   $('#' + target).html(content);
+				  },
+				error : function() {
+				    alert("Error...!!!");
+				}
+			    });
 	}
 	
-	
+	function load_batch_year(e, target){
+		var getid = e.target.id;
+		var id = $('#'+getid).find(":selected").val();
+		 $.ajax({
+				url : window.context +"/ApiStudentsProgram/GetStudentsProgramByProgramId/"+id,
+				method : "GET",
+				dataType : 'json',
+				cache : true,
+				success : function(data) {
+					
+				    console.log("batch size=" +JSON.stringify(data));
+					var content = '';
+					content +="<option selected='true' > Select Batch </option>"
+				   for (var i = 0; i < data.length; i++) {
+					   var batch_yearDate=data[i].batch_year;
+					   var batch_yearId=data[i].student_program_id;
+					   console.log("batch_yearDate name =" + batch_yearDate);
+					   
+						content += '<option value='+batch_yearId+'>' + batch_yearDate + '</option>';
+				}
+				   $('#' + target).html(content);
+				  },
+				error : function() {
+				    alert("Error...!!!");
+				}
+			    });
+	}
 	$("select").select2({
 	    theme : "bootstrap",
 	    width : "auto"
@@ -330,17 +392,13 @@
 					
 					content1 += '<tr>';
 				
-					content1 += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"text\" class=\"district\" id='student_name'>"
-							+ data.district + "</td>";
-							content1 += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"text\" class=\"city\" id='student_name'>"
-							+ data.city + "</td>";	
+				
 							content1 += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"text\" class=\"email\" id='student_name'>"
 							+ data.last_name + "</td>";	
 							content1 += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"date\" class=\"dob\" id='student_name'>"
 							+ data.date_of_birth + "</td>";	
 								
-							content1 += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"date\" class=\"regdate\" id='student_name'>"
-							+ data.registeredDate + "</td>";	
+							
 							content1 += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"number\" class=\"status\" id='student_name'>"
 							+ data.status + "</td>";	
 					content1 += '<tr>';

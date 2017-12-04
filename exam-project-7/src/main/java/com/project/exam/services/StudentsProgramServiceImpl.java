@@ -38,5 +38,10 @@ public class StudentsProgramServiceImpl implements StudentsProgramService {
 		return StudentsProgramDao.deleteStudentsProgram(s_Id);
 	}
 
+	@Override
+	public List<StudentsProgram> getStudentsProgramByProgramId(int s_Id) {
+		return StudentsProgramDao.getStudentsProgramByProgramId(s_Id);
+	}
+
 
 }

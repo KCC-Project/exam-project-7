@@ -154,4 +154,29 @@ public class StudentsProgramDAOImpl implements StudentsProgramDAO {
 		return result;
 	}
 
+	@Override
+	public List<StudentsProgram> getStudentsProgramByProgramId(int s_Id) {
+		List<StudentsProgram> listStudentsProgram = new ArrayList<StudentsProgram>();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "Select * from students_program where program_id=?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, s_Id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				StudentsProgram model = new StudentsProgram();
+				model.setStudent_program_id(rs.getInt("student_program_id"));
+				model.setBatch_year(rs.getInt("batch_year"));
+				model.setEnroll_date(rs.getString("enroll_date"));
+				model.setStatus(rs.getInt("status"));
+				model.setProgram_id(rs.getInt("program_id"));
+				model.setS_id(rs.getInt("s_id"));
+				listStudentsProgram.add(model);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return listStudentsProgram;
+	}
+
 }

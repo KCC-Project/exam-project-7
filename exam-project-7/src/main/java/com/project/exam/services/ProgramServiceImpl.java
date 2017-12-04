@@ -38,4 +38,9 @@ public class ProgramServiceImpl implements ProgramService {
 		return programDao.deleteProgram(s_Id);
 	}
 
+	@Override
+	public List<Program> getProgramListByFacultyId(int s_Id) {
+		return programDao.getProgramListByFacultyId(s_Id);
+	}
+
 }

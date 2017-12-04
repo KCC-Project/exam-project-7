@@ -1,22 +1,5 @@
 //bootstrap switch js
 
-$(document).ready(function() {
-	$('.probeProbe').bootstrapSwitch('state', true);
-
-	$('.probeProbe').on('switchChange.bootstrapSwitch', function(event, state) {
-		// alert("mausam");
-		// alert(this);
-		// alert(event);
-		// alert(state);
-	});
-	$('#input01').filestyle()
-	$('#input001').filestyle({
-		'placeholder' : 'upload image'
-	});
-	
-	
-
-});
 
 /*
  * call this function just after fetching data from server, eg:

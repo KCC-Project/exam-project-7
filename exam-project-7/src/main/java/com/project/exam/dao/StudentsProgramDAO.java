@@ -10,4 +10,5 @@ public interface StudentsProgramDAO {
 	public StudentsProgram getStudentsProgram(int s_Id);
 	public StudentsProgram updateStudentsProgram(StudentsProgram studentsProgram);
 	public int deleteStudentsProgram(int s_Id);
+	public List<StudentsProgram> getStudentsProgramByProgramId(int s_Id);
 }

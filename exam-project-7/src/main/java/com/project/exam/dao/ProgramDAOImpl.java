@@ -154,6 +154,33 @@ public class ProgramDAOImpl implements ProgramDAO {
 		}
 		return result;
 	}
+
+	@Override
+	public List<Program> getProgramListByFacultyId(int s_Id) {
+		System.out.println("here indise== "+s_Id);
+		List<Program> listProgram = new ArrayList<Program>();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "Select * from programs where faculty_id=?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, s_Id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Program model = new Program();
+				System.out.println(rs.getString("program_name"));
+				model.setProgram_id(rs.getInt("program_id"));
+				model.setProgram_name(rs.getString("program_name"));
+				model.setProgram_years(rs.getInt("program_years"));
+				model.setStatus(rs.getInt("status"));
+				model.setTotal_credit(rs.getInt("total_credit"));
+				model.setFaculty_id(rs.getInt("faculty_id"));
+				listProgram.add(model);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return listProgram;
+	}
 	
 
 }

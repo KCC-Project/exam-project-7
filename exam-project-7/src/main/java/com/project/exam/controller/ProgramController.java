@@ -44,6 +44,8 @@ public class ProgramController {
 	@Path("/GetProgram/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public Program getProgram(@PathParam("id") int id) {
+		System.out.println("it is here = "+id);
+		System.out.println(programService.getProgram(id).toString());
 		return programService.getProgram(id);
 	}
 	
@@ -62,6 +64,11 @@ public class ProgramController {
 		return programService.deleteProgram(id);
 	}
 	
-	
+	@GET
+	@Path("/GetProgramByFacultyId/{id}")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List<Program> getProgramByFacultyId(@PathParam("id") int id) {
+		return programService.getProgramListByFacultyId(id);
+	}
 	
 }
