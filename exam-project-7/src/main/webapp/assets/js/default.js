@@ -1,9 +1,22 @@
+//bootstrap switch js
 
-$(".menu-toggle").click(function(e) {
-	e.preventDefault();
-	$("#wrapper").toggleClass("toggled");
+$(document).ready(function() {
+	$('.probeProbe').bootstrapSwitch('state', true);
+
+	$('.probeProbe').on('switchChange.bootstrapSwitch', function(event, state) {
+		// alert("mausam");
+		// alert(this);
+		// alert(event);
+		// alert(state);
+	});
+	$('#input01').filestyle()
+	$('#input001').filestyle({
+		'placeholder' : 'upload image'
+	});
+	
+	
+
 });
-
 
 /*
  * call this function just after fetching data from server, eg:
@@ -33,14 +46,15 @@ function load(results, target_table_id) {
 		// optionally do some type detection here for render function
 		});
 	});
-	cols.push({
-		title : "Option",
-		data :null,
-  "defaultContent": "<button class='btn btn-success edit'>Click!</button>"
-  });
+	cols
+			.push({
+				title : "Option",
+				data : null,
+				"defaultContent" : "<button class='btn btn-success edit'>Click!</button>"
+			});
 
 	// initialize DataTables
-	var table = $('#'+target_table_id+'').DataTable({
+	var table = $('#' + target_table_id + '').DataTable({
 		columns : cols
 	});
 
@@ -50,15 +64,14 @@ function load(results, target_table_id) {
 }
 
 function enableEdit(target_table_id) {
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
 
-				var table = $('#'+target_table_id+'').DataTable();
+		var table = $('#' + target_table_id + '').DataTable();
 
-				 $('#'+target_table_id+' tbody').on( 'click', '.edit', function () {
-				        var data = table.row( $(this).parents('tr') ).data();
-				        alert( data['faculty_id'] +"'s name is: "+ data[ 'faculty_name' ] );
-				    } );
+		$('#' + target_table_id + ' tbody').on('click', '.edit', function() {
+			var data = table.row($(this).parents('tr')).data();
+			alert(data['faculty_id'] + "'s name is: " + data['faculty_name']);
+		});
 
-			});
+	});
 }

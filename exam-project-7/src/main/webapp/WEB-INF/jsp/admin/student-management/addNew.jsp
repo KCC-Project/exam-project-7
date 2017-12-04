@@ -23,154 +23,165 @@
 			<div class="panel-heading main-color-bg">Add Student</div>
 			<div class="panel-body">
 
-				<form class="" action="../addStudent" enctype="multipart/form-data"
-					method="Post">
+				<form class='form-horizontal' role='form'>
+					<div class='form-group'>
+						<label class='control-label col-md-2 col-md-offset-2'
+							for='id_program'>Title</label>
+						<div class='col-md-2'>
+							<select class='form-control' id='id_program'>
+								<option>Mr</option>
+								<option>Ms</option>
+								<option>Mrs</option>
+								<option>Miss</option>
+							</select>
+						</div>
+					</div>
+					<div class='form-group'>
+						<label class='control-label col-md-2 col-md-offset-2'
+							for='id_title'>Name</label>
+						<div class='col-md-8'>
 
-					<div
-						class="col-lg-4 col-sm-8 col-sm-offset-2 col-lg-offset-0 profile-info ">
-						<table class="table tabel-responsive">
-							<tr>
-								<td>
-									<div class="text-center" id="profile-image">
-										<img src="me.jpg" alt="image upload">
+							<div class='col-md-3 indent-small'>
+								<div class='form-group internal'>
+									<input class='form-control' id='id_first_name'
+										placeholder='First Name' type='text'>
+								</div>
+							</div>
+							<div class='col-md-3 indent-small'>
+								<div class='form-group internal'>
+									<input class='form-control' id='id_middle_name'
+										placeholder='Middle Name' type='text'>
+								</div>
+							</div>
+							<div class='col-md-3 indent-small'>
+								<div class='form-group internal'>
+									<input class='form-control' id='id_last_name'
+										placeholder='Last Name' type='text'>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class='form-group'>
+						<label class='control-label col-md-2 col-md-offset-2'
+							for='id_username'>Username</label>
+						<div class='col-md-8'>
+							<div class='col-md-5'>
+								<div class='form-group internal'>
+									<input class='form-control col-md-8' id='id_username'
+										placeholder='Username' type='text'>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class='form-group'>
+						<label class='control-label col-md-2 col-md-offset-2'
+							for='id_password'>Password</label>
+						<div class='col-md-8'>
+							<div class='col-md-5'>
+								<div class='form-group internal'>
+									<input class='form-control col-md-8' id='id_password'
+										placeholder='Password' type='text'>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class='form-group'>
+						<label class='control-label col-md-2 col-md-offset-2'
+							for='id_email'>Contact</label>
+						<div class='col-md-6'>
+							<div class='form-group'>
+								<div class='col-md-11'>
+									<input class='form-control' id='id_email' placeholder='E-mail'
+										type='text'>
+								</div>
+							</div>
+							<div class='form-group internal'>
+								<div class='col-md-11'>
+									<input class='form-control' id='id_phone'
+										placeholder='Phone: (xxx) - xxx xxxx' type='text'>
+								</div>
+							</div>
+							<div class='form-group internal'>
+								<div class='col-md-11'>
+									<input class='form-control' id='id_phone' placeholder='Address'
+										type='text'>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class='form-group'>
+						<label class='control-label col-md-2 col-md-offset-2' for='id_dob'>Date
+							Of Birth</label>
+						<div class='col-md-8'>
+							<div class='col-md-3'>
+								<div class='form-group internal input-group'>
+									<input class='form-control datepicker' id='id_dob'> <span
+										class='input-group-addon'> <i
+										class='glyphicon glyphicon-calendar'></i>
+									</span>
+								</div>
+							</div>
+							<label class='control-label col-md-2' for='id_gender'>Gender</label>
+							<div class='col-md-3'>
+								<div class='form-group internal'>
+									<div class='make-switch' data-off-label='Male'
+										data-on-label='Female' id='id_slide_switch'>
+										<input id='id_slide' type='checkbox' value='chk_hydro'
+											name="id_slide" class="probeProbe">
 									</div>
-								</td>
-							</tr>
-							<tr>
-								<td><input type="file" id="inputfile" name="filepath"
-									class="form-control"></td>
-							</tr>
-							<tr>
-								<td><h3 class="text-center">
-										<i><b>Student</b></i>
-									</h3></td>
-							</tr>
-						</table>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6 profile-info">
-						<table class="tabel tabel-responsive">
-							<tr>
-								<td>Firstname: <span class="astriek">*</span>
-								</td>
-								<td><input type="text" placeholder="Firstname"
-									class="form-control" required name="student_firstname"></td>
-							</tr>
-							<tr>
-								<td>Middle Name:</td>
-								<td><input type="text" placeholder="Middlename"
-									class="form-control" name="student_middlename"></td>
-							</tr>
-							<tr>
-								<td>LastName: <span class="astriek">*</span>
-								</td>
-								<td><input type="text" placeholder="Lastname"
-									class="form-control" required name="student_Lastname"></td>
-							</tr>
-							<tr>
-								<td>Gender: <span class="astriek">*</span>
-								</td>
-								<td><label class="radio-inline"><input type="radio"
-										name="gender" required value="male">Male</label> <label
-									class="radio-inline"><input type="radio" name="gender"
-										value="female">Female</label></td>
-							</tr>
-							<tr>
-								<td>ID:</td>
-								<td><input type="text" placeholder="ID"
-									class="form-control" required name="id" id="studentID"
-									onblur="validate();" onkeyup="autoUserPass();"></td>
-								<td><span id="Error_ID"
-									class="glyphicon glyphicon-remove-circle"
-									style="visibility: hidden;"></span></td>
-							</tr>
-							<tr>
-								<td>Phone:</td>
-								<td><input type="number" placeholder="Phone"
-									class="form-control" name="Mobile"></td>
-							</tr>
-							<tr>
-								<td>Address:</td>
-								<td><input type="text" placeholder="Address"
-									class="form-control" name="Address" id="address_ID"></td>
-							</tr>
-							<tr>
-								<td>Email:</td>
-								<td><input type="email" placeholder="email"
-									class="form-control" name="email"></td>
-							</tr>
-							<tr>
-								<td>Enroll Date:</td>
-								<td><input type="date" id="date" class="form-control"
-									name="date"></td>
-							</tr>
-						</table>
+					<div class='form-group'>
+						<label class='control-label col-md-2 col-md-offset-2'
+							for='id_equipment'>Current Semester</label>
+						<div class='col-md-8'>
+							<div class='col-md-3'>
+								<div class='form-group internal'>
+									<select class='form-control' id='id_equipment'>
+										<option>Select Semester</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+									</select>
+								</div>
+							</div>
+							<div class='col-md-9'>
+								<div class='form-group internal'>
+									<label class='control-label col-md-3' for='id_status'>Status</label>
+									<div class='make-switch' data-off-label='IN'
+										data-on-label='OUT' id='id_slide_switch'>
+										<input id='id_slide' type='checkbox' value='chk_hydro'
+											name="id_slide" class="probeProbe">
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6 profile-info">
-						<table class="tabel tabel-responsive">
-							<tr>
-								<td>Faculty: <span class="astriek">*</span>
-								</td>
-								<td><select required class="form-control" id="faculty-box"
-									onChange="load_program();">
 
-								</select></td>
-							</tr>
+					<div class='form-group'>
+						<label class='control-label col-md-2 col-md-offset-2'
+							for='id_pets'>Image</label>
+						<div class='col-md-8'>
 
-							<tr>
-								<td>Programme: <span class="astriek">*</span>
-								</td>
-								<td><select required class="form-control" id="program-box"
-									onChange="load_batch();">
-										<option value="" disabled selected>Select Programme</option>
-								</select></td>
-							</tr>
-
-							<tr>
-								<td>Batch: <span class="astriek">*</span>
-								</td>
-								<td><select required class="form-control" id="batch-box">
-										<option value="" disabled selected>Select Batch</option>
-								</select></td>
-							</tr>
-							<tr>
-								<td>Section:</td>
-								<td><select class="form-control" id="sel1">
-										<option value="" disabled selected>Select Section</option>
-										<option>B01</option>
-										<option>B02</option>
-								</select></td>
-							</tr>
-							<tr>
-								<td>Username:</td>
-								<td><input type="text" placeholder="username"
-									class="form-control" name="student_username"
-									id="student_username1"></td>
-							</tr>
-							<tr>
-								<td>Password:</td>
-								<td><input type="password" class="form-control"
-									name="password" placeholder="Password" id="Password1"></td>
-							</tr>
-							<tr>
-								<td>Confirm Password:</td>
-								<td><input type="password" class="form-control"
-									name="confirm_password" placeholder="Confirm Password"
-									id="confirm_password"></td>
-							</tr>
-							<tr>
-								<td>Status: <span class="astriek">*</span>
-								</td>
-								<td><label class="radio-inline"><input type="radio"
-										name="status" required checked value="active">Active</label> <label
-									class="radio-inline"><input type="radio" name="status"
-										value="inactive">Inactive</label></td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="submit"
-									class="btn btn-success btn-block" value="Submit"></td>
-							</tr>
-						</table>
+							<input name="myFile" type="file">
+					
+						
+						</div>
+						
 					</div>
+					
+<div class="row">
+<div class="col-md-2 col-md-offset-5">
+<input type="submit" value="Submit" class="btn btn-primary">
+</div>
+</div>
 				</form>
 			</div>
 		</div>
@@ -178,31 +189,4 @@
 </div>
 
 
-	<script type="text/javascript">
-		function autoUserPass() {
-
-			var id = document.getElementById("studentID").value;
-
-			var url = "../ajax_user_password_autofill";
-			var idSend = "id=" + id;
-			var aj = new XMLHttpRequest();
-			aj.open("POST", url, true);
-			aj.setRequestHeader("Content-type",
-					"application/x-www-form-urlencoded");
-			aj.onreadystatechange = function() {
-				if (aj.readyState == 4 && aj.status == 200) {
-					var return_data = aj.responseText;
-					//alert("from ajax:"+return_data);
-					document.getElementById("student_username1").value = return_data;
-					document.getElementById("Password1").value = return_data;
-					document.getElementById("confirm_password").value = return_data;
-					document.getElementById("Error_ID").style.visibility = "hidden";
-				}
-			}
-			aj.send(idSend);
-
-		}
-	</script>
-
-
-	<jsp:include page="../shared/footer.jsp" />
+<jsp:include page="../shared/footer.jsp" />
