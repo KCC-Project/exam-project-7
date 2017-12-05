@@ -75,19 +75,19 @@
                         return '<a href='+window.context +'file/'+data+'>view Syllabus</a>';
                     },
                 }, {
-                    "data" : "semester_no"
+                    "data" : "program_id",
+                    render: function ( data, type, row ) {
+                        return '<a href='+ window.context +'/program/'+data+'>Program_id: '+data+'</a>';
+                    },
                 }, {
-                    "data" : "status"
+                    "data" : "semester_no"
                 }, {
                     data: null,
                     render: function ( data, type, row ) {
-                        // Combine the two data
                         return '<button class="btn btn-success editBtns">Click!</button>';
                     },
                 } ]
             });
-            
-            
             
             $('#view_subject tbody').on( 'click', '.editBtns', function () {
                 var table = $("#view_subject").DataTable();
