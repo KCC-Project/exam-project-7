@@ -1,7 +1,7 @@
 
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"
+	isELIgnored="false"%>
 
 
 <jsp:include page="../shared/header.jsp" />
@@ -10,10 +10,8 @@
 <div id="page-content-wrapper">
 
 	<ol class="breadcrumb">
-		<li><a href="${cp}/home"><span
-				class="glyphicon glyphicon-home"> Home </span></a></li>
-		<li><a><span class="glyphicon glyphicon-user black">
-					View Subject </span></a></li>
+		<li><a href="${cp}/home"><span class="glyphicon glyphicon-home"> Home </span></a></li>
+		<li><a><span class="glyphicon glyphicon-user black"> View Subject </span></a></li>
 	</ol>
 
 	<div class="panel-group">
@@ -21,12 +19,10 @@
 			<div class="panel-heading main-color-bg">
 				View Subject
 				<div class="filter-area pull-right">
-					<button type="button" class="btn btn-info" id="filter-box"
-						data-toggle="modal" data-target=#search_subject_modal>
+					<button type="button" class="btn btn-info" id="filter-box">
 						<span class="glyphicon glyphicon-search"> Filter </span>
 					</button>
-					<button class="btn btn-warning" id=view-all-subject>View
-						All Subject</button>
+					<button class="btn btn-warning" id=view-all-subject>View All Subject</button>
 				</div>
 			</div>
 
@@ -39,23 +35,26 @@
 						<div class="modal-content">
 							<div class="modal-body">
 
-								<form class="well form-horizontal" action=" " method="post"
-									id="subject_search_form">
+								<form class="well form-horizontal" action=" " method="post" id="subject_search_form">
 									<fieldset>
 
 										<!-- Form Name -->
 										<legend>Search Subject!</legend>
 
-										<div class="col-sm-12 form-group">
-											<label>Program Name : </label> <select class="form-control"
-												id="s-program-box" name="s_program_box">
+										<div class="row form-group">
+											<label class="col-sm-4 control-label">Program Name: </label>
+											<div class="col-sm-8">
+												<div class="input-group">
+													<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span> <select
+														class="form-control col-sm-12" id="s-program-box" name="s_program_box">
 
-											</select>
+													</select>
+												</div>
+											</div>
 										</div>
 
 										<div class="col-sm-12 form-group">
-											<div class="alert alert-info">The fields Below are
-												Optional</div>
+											<div class="alert alert-info">The fields Below are Optional</div>
 										</div>
 
 										<div class="row form-group">
@@ -63,10 +62,9 @@
 												<label class="control-label">Subject Name</label>
 												<div class="inputGroupContainer">
 													<div class="input-group">
-														<span class="input-group-addon"><i
-															class="glyphicon glyphicon-book"></i></span> <input
-															name="s_subject_name" placeholder="Enter Subject Name"
-															class="form-control" type="text">
+														<span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span> <input
+															name="s_subject_name" placeholder="Enter Subject Name" class="form-control"
+															type="text">
 													</div>
 												</div>
 											</div>
@@ -75,18 +73,17 @@
 												<label class=" control-label">Subject Code</label>
 												<div class=" inputGroupContainer">
 													<div class="input-group">
-														<span class="input-group-addon"><i
-															class="glyphicon glyphicon-book"></i></span> <input
-															name="s_subject_code" placeholder="Enter Subject code"
-															class="form-control" type="text">
+														<span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span> <input
+															name="s_subject_code" placeholder="Enter Subject code" class="form-control"
+															type="text">
 													</div>
 												</div>
 											</div>
 										</div>
 
 										<div class="col-sm-12 form-group">
-											<label>Semester no.: </label> <select class="form-control"
-												id="s-semester-no" name="s_semester_no">
+											<label>Semester no.: </label> <select class="form-control" id="s-semester-no"
+												name="s_semester_no">
 												<option value="" selected>Select Semester</option>
 												<option value="1">1</option>
 												<option value="2">2</option>
@@ -103,7 +100,7 @@
 										<div class="form-group">
 											<label class="col-md-4 control-label"></label>
 											<div class="col-md-4">
-												<button type="submit" class="btn btn-warning">
+												<button type="submit" class="btn btn-warning" id="search_submit">
 													Submit <span class="glyphicon glyphicon-send"></span>
 												</button>
 											</div>
@@ -116,8 +113,7 @@
 							</div>
 
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 
@@ -126,8 +122,7 @@
 
 
 
-				<table id="view_subject" class="table table-hover table-striped"
-					cellspacing="0" width="100%">
+				<table id="view_subject" class="table table-hover table-striped" cellspacing="0" width="100%">
 					<thead>
 						<tr class="info">
 							<th>Id</th>
@@ -165,38 +160,12 @@
             // hiding table view
             $("#view_subject").hide();
 
-            $('#s-program-box').click(function () {
-            $("#s-program-box").select2({
-                tags : true,
-                multiple : true,
-                ajax : {
-                    url : window.context + "/ApiFaculty/GetAllFaculty",
-                    dataType : "json",
-                    type : "GET",
-                    data : function (params) {
-                        var queryParameters = {
-                            term : params.term
-                        };
-                        return queryParameters;
-                    },
-                    processResults : function (data) {
-                        return {
-                            results : $.map(data, function (item) {
-                                return {
-                                    text : item.faculty_name,
-                                    id : item.faculty_id
-                                };
-                            })
-                        };
-                    }
-                }
-            });
-            });
-
             // Showing modal when filter button is clicked
-            $('#filter-box').click(function (event) {
+            $('#filter-box').click(function () {
+                $('#search_subject_modal').modal('show');
                 // initilizing modal with form validators
                 initialize_modal();
+                load_program('s-program-box');
             });
 
             // when view all subject button is clicked
@@ -208,6 +177,36 @@
                     return false;
                 }
             });
+
+            function load_program(target) {
+                $('#' + target).select2({
+                    width: "100%",
+                    placeholder: "Select Program",
+                    tags : true,
+                    multiple : true,
+                    ajax : {
+                        url : window.context + "/ApiProgram/GetAllProgram",
+                        dataType : "json",
+                        type : "GET",
+                        data : function (params) {
+                            var queryParameters = {
+                                term : params.term
+                            };
+                            return queryParameters;
+                        },
+                        processResults : function (data) {
+                            return {
+                                results : $.map(data, function (item) {
+                                    return {
+                                        id : item.program_id,
+                                        text : item.program_name
+                                    };
+                                })
+                            };
+                        }
+                    }
+                });
+            }
 
             function initialize_modal() {
                 $("#subject_search_form").bootstrapValidator({
@@ -232,38 +231,37 @@
                                 },
                             }
                         },
-                        program_id : {
+                        s_program_box : {
                             validators : {
                                 stringLength : {
                                     max : 1,
                                     message : "You can select only one program"
                                 },
+                                notEmpty : {
+                                    message : "Please Enter Program"
+                                }
                             }
                         }
                     }
                 })
                 // on form submit
-                .on("success.form.bv", function (e) {
-                    $("#success_message").slideDown({
-                        opacity : "show"
-                    }, "slow"); // Do something ...
-                    $("#subject_search_form").data("bootstrapValidator").resetForm();
+                
+                
+             $('#search_submit').click(function () {
+                 $("#subject_search_form").data("bootstrapValidator").resetForm();
+                 
+                 // Prevent form submission
+                 e.preventDefault();
+                 
+                 
+                 // Get the BootstrapValidator instance
+                 var bv = $form.data("bootstrapValidator");
 
-                    // Prevent form submission
-                    e.preventDefault();
-
-                    // Get the form instance
-                    var $form = $(e.target);
-
-                    // Get the BootstrapValidator instance
-                    var bv = $form.data("bootstrapValidator");
-
-                    // Use Ajax to submit form data
-                    $.post($form.attr("action"), $form.serialize(), function (result) {
-                        console.log(result);
-                    }, "json");
-                });
-
+                 // Use Ajax to submit form data
+                 $.post($form.attr("action"), $form.serialize(), function (result) {
+                     alert(result);
+                 }, "json");
+            });
             }
 
             // when load all subject is clicked

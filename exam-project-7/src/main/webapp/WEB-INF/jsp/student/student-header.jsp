@@ -51,7 +51,7 @@
 <script src="${extraJs}/bootstrap-switch.min.js"></script>
 <!-- Written JS -->
 <script src="${custome}/custome_editableJs.js"></script>
-<script src="${custome}/re-usableJs.js"></script>
+<script src="${custome}/reUsableJs.js"></script>
 <script src="${Js}/default.js"></script>
 
 <script>
