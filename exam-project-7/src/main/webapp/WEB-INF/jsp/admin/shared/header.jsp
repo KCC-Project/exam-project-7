@@ -35,6 +35,7 @@
 <link href="${css}/bootstrap-editable.css" rel="stylesheet">
 <link href="${fontAwasome}" rel="stylesheet">
 <link href="${css}/bootstrap-switch.min.css" rel="stylesheet">
+<link href="${css}/datatables.min.css" rel="stylesheet">
 <!-- Written CSS -->
 <link href="${css }style.css" rel="stylesheet">
 <link href="${css }sidebar.css" rel="stylesheet">
