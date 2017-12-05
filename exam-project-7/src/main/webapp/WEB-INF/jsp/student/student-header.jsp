@@ -27,28 +27,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MIS</title>
 
-<!-- Bootstrap core CSS -->
+<!-- Linked CSS -->
 <link href="${css }/bootstrap.min.css" rel="stylesheet">
+<link href="${css}/select2.min.css" rel="stylesheet">
+<link href="${css}/select2-bootstrap.min.css" rel="stylesheet">
+<link href="${css}/bootstrap-editable.css" rel="stylesheet">
+<link href="${fontAwasome}" rel="stylesheet">
+<link href="${css}/bootstrap-switch.min.css" rel="stylesheet">
+<!-- Written CSS -->
 <link href="${css }style.css" rel="stylesheet">
 <link href="${css }sidebar.css" rel="stylesheet">
 <link href="${css }/style-responsive.css" rel="stylesheet">
 <link href="${css}/profile.css" rel="stylesheet">
-<link href="${css}" rel="stylesheet">
-<link href="${css}/select2.min.css" rel="stylesheet">
-<link href="${css}/select2-bootstrap.min.css" rel="stylesheet">
-<link href="${css}/bootstrap-editable.css" rel="stylesheet">
-<link href="${css}" rel="stylesheet">
-<link href="${fontAwasome}" rel="stylesheet">
 
 
+<!-- Linked JS -->
 <script src="${extraJs}/jquery-3.2.1.min.js"></script>
 <script src="${extraJs}/bootstrap.min.js"></script>
 <script src="${extraJs}/datatables.min.js"></script>
-<script src="${Js}/default.js"></script>
-<script src="${Js}/select2.min.js"></script>
-<script src="${Js}/bootstrap-editable.min.js"></script>
+<script src="${extraJs}/select2.min.js"></script>
+<script src="${extraJs}/bootstrap-editable.min.js"></script>
+<script src="${extraJs}/bootstrapValidator.min.js"></script>
+<script src="${extraJs}/bootstrap-switch.min.js"></script>
+<!-- Written JS -->
 <script src="${custome}/custome_editableJs.js"></script>
 <script src="${custome}/re-usableJs.js"></script>
+<script src="${Js}/default.js"></script>
 
 <script>
 	window.context = '${cp}';

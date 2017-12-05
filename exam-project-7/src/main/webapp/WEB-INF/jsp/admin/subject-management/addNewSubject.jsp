@@ -6,6 +6,12 @@
 <jsp:include page="../shared/header.jsp" />
 
 
+<!-- Success message -->
+<div class="alert alert-success" role="alert" id="success_message">
+	Success <i class="glyphicon glyphicon-thumbs-up"></i> Subject add
+	request made, we will get back to you shortly.
+</div>
+
 <!-- Content Area -->
 <div id="page-content-wrapper">
 
@@ -38,8 +44,8 @@
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-book"></i></span> <input name="first_name"
-									placeholder="Subject Name" class="form-control" type="text">
+									class="glyphicon glyphicon-book"></i></span> <input name="subject_name"
+									placeholder="Enter Subject Name" class="form-control" type="text">
 							</div>
 						</div>
 					</div>
@@ -51,8 +57,8 @@
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-user"></i></span> <input name="last_name"
-									placeholder="Subject Code" class="form-control" type="text">
+									class="glyphicon glyphicon-user"></i></span> <input name="subject_code"
+									placeholder="Enter Subject Code" class="form-control" type="text">
 							</div>
 						</div>
 					</div>
@@ -65,13 +71,13 @@
 
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control" placeholder="theory_credit"
+									<input class="form-control" placeholder="Enter Subject theory_credit"
 										type="text" name="theory_cr">
 								</div>
 							</div>
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control" placeholder="tutorial_credit"
+									<input class="form-control" placeholder="Enter Subject tutorial_credit"
 										type="text" name="tutorial_cr">
 								</div>
 							</div>
@@ -86,19 +92,19 @@
 
 							<div class="col-md-3 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control" placeholder="Internal_theory"
+									<input class="form-control" placeholder="Enter Internal_theory marks"
 										type="text" name="internal_theory">
 								</div>
 							</div>
 							<div class="col-md-3 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control" placeholder="Internal_practical"
+									<input class="form-control" placeholder="Enter Internal_practical marks"
 										type="text" name="internal_practical">
 								</div>
 							</div>
 							<div class="col-md-3 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control" placeholder="Final_theory"
+									<input class="form-control" placeholder=" Enter Final_theory marks"
 										type="text" name="final_theory">
 								</div>
 							</div>
@@ -113,8 +119,8 @@
 						<div class="col-md-4">
 							<div class="input-group">
 								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-list"></i></span> <select name="program"
-									class="form-control" id="faculty_select_box">
+									class="glyphicon glyphicon-list"></i></span> 
+									<select name="program" placeholder="Select Subject Program" class="form-control" id="faculty_select_box">
 
 								</select>
 							</div>
@@ -125,13 +131,14 @@
 
 					<!-- radio checks -->
 					<div class="form-group">
-						<label class="col-md-4 control-label">This Subject is avilable ?</label>
+						<label class="col-md-4 control-label">This Subject is
+							avilable ?</label>
 						<div class="col-md-4">
 
 							<div class="form-group">
 								<div class="radio">
-									<label> <input type="radio" name="status" checked required>
-										Yes
+									<label> <input type="radio" name="status" checked
+										required> Yes
 									</label>
 								</div>
 
@@ -145,10 +152,6 @@
 						</div>
 					</div>
 
-					<!-- Success message -->
-					<div class="alert alert-success" role="alert" id="success_message">
-						Success <i class="glyphicon glyphicon-thumbs-up"></i> Subject add request made, we will get back to you shortly.
-					</div>
 
 					<!-- Button -->
 					<div class="form-group">
@@ -169,8 +172,11 @@
 </div>
 
 <script>
-	$(document).ready(function() {
-						$("#faculty_select_box").select2(
+	$(document)
+			.ready(
+					function() {
+						$("#faculty_select_box")
+								.select2(
 										{
 											tags : true,
 											multiple : true,
@@ -203,7 +209,8 @@
 											}
 										});
 
-						$('#contact_form').bootstrapValidator(
+						$('#contact_form')
+								.bootstrapValidator(
 										{
 											// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
 											feedbackIcons : {
@@ -212,7 +219,7 @@
 												validating : 'glyphicon glyphicon-refresh'
 											},
 											fields : {
-												first_name : {
+												subject_name : {
 													validators : {
 														stringLength : {
 															min : 2,
@@ -222,7 +229,7 @@
 														}
 													}
 												},
-												last_name : {
+												subject_code : {
 													validators : {
 														stringLength : {
 															min : 3,

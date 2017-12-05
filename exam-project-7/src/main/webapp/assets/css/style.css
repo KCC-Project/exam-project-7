@@ -124,7 +124,13 @@
 	letter-spacing: 1px;
 	color: white;
 }
-#success_message{ display: none;}
+#success_message{ 
+	display: none;
+	position: fixed;
+	margin: 0 auto;
+	top: 0;
+	z-index:1000;
+}
 
 /* Do not remove anything above here */
 
