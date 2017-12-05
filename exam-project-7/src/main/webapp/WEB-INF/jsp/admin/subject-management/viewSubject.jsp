@@ -180,8 +180,8 @@
 
             function load_program(target) {
                 $('#' + target).select2({
-                    width: "100%",
-                    placeholder: "Select Program",
+                    width : "100%",
+                    placeholder : "Select Program",
                     tags : true,
                     multiple : true,
                     ajax : {
@@ -244,24 +244,15 @@
                         }
                     }
                 })
-                // on form submit
-                
-                
-             $('#search_submit').click(function () {
-                 $("#subject_search_form").data("bootstrapValidator").resetForm();
-                 
-                 // Prevent form submission
-                 e.preventDefault();
-                 
-                 
-                 // Get the BootstrapValidator instance
-                 var bv = $form.data("bootstrapValidator");
+               
+                .on('success.form.fv', function(e) {
+                    // Prevent form submission
+                    e.preventDefault();
 
-                 // Use Ajax to submit form data
-                 $.post($form.attr("action"), $form.serialize(), function (result) {
-                     alert(result);
-                 }, "json");
-            });
+                   alert("wsda");
+
+                });
+                
             }
 
             // when load all subject is clicked
