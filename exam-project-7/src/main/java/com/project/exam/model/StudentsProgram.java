@@ -12,8 +12,6 @@ public class StudentsProgram {
 
 	private int program_id;
 
-	// additional fields
-	@Column(nullable = false)
 	private int batch_year;
 	
 	private String enroll_date;

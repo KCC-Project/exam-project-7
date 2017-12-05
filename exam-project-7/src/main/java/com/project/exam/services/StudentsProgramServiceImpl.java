@@ -11,36 +11,41 @@ import com.project.exam.model.StudentsProgram;
 @Service
 public class StudentsProgramServiceImpl implements StudentsProgramService {
 	@Autowired
-	private StudentsProgramDAO StudentsProgramDao;
+	private StudentsProgramDAO studentsProgramDao;
 	
 	@Override
 	public List<StudentsProgram> getStudentsProgramList() {
-	return StudentsProgramDao.getStudentsProgramList();
+	return studentsProgramDao.getStudentsProgramList();
 	}
 
 	@Override
 	public StudentsProgram addStudentsProgram(StudentsProgram studentsProgram) {
-		return StudentsProgramDao.addStudentsProgram(studentsProgram);
+		return studentsProgramDao.addStudentsProgram(studentsProgram);
 	}
 
 	@Override
 	public StudentsProgram getStudentsProgram(int s_Id) {
-		return StudentsProgramDao.getStudentsProgram(s_Id);
+		return studentsProgramDao.getStudentsProgram(s_Id);
 	}
 
 	@Override
 	public StudentsProgram updateStudentsProgram(StudentsProgram studentsProgram) {
-		return StudentsProgramDao.updateStudentsProgram(studentsProgram);
+		return studentsProgramDao.updateStudentsProgram(studentsProgram);
 	}
 
 	@Override
 	public int deleteStudentsProgram(int s_Id) {
-		return StudentsProgramDao.deleteStudentsProgram(s_Id);
+		return studentsProgramDao.deleteStudentsProgram(s_Id);
 	}
 
 	@Override
 	public List<StudentsProgram> getStudentsProgramByProgramId(int s_Id) {
-		return StudentsProgramDao.getStudentsProgramByProgramId(s_Id);
+		return studentsProgramDao.getStudentsProgramByProgramId(s_Id);
+	}
+
+	@Override
+	public List<StudentsProgram> searchByField(Object[] obj) {
+		return studentsProgramDao.searchByField(obj);
 	}
 
 
