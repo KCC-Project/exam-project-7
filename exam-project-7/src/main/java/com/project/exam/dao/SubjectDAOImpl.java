@@ -95,8 +95,8 @@ public class SubjectDAOImpl implements SubjectDAO {
 	}
 
 	@Override
-	public Subjects getSubject(int s_Id) {
-		Subjects model = new Subjects();
+	public List<Subjects> getSubject(int s_Id) {
+		List<Subjects> listSubject= new ArrayList<>();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "Select * from subjects where subject_id=?";
@@ -104,6 +104,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 			pst.setInt(1, s_Id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
+				Subjects model = new Subjects();
 				model.setSubject_id(rs.getInt("subject_id"));
 				model.setFinal_theory(rs.getInt("final_theory"));
 				model.setInternal_practical(rs.getInt("internal_practical"));
@@ -116,12 +117,12 @@ public class SubjectDAOImpl implements SubjectDAO {
 				model.setTheory_cr(rs.getInt("theory_cr"));
 				model.setTutorial_cr(rs.getInt("tutorial_cr"));
 				model.setProgram_id(rs.getInt("program_id"));
-
+				listSubject.add(model);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return model;
+		return listSubject;
 	}
 
 	@Override

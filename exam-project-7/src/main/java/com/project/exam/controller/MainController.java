@@ -85,4 +85,21 @@ public class MainController {
 		return new Viewable("/admin/student-management/addNew", model);
 	}
 
+	@GET
+	@Path("/manage-exam")
+	public Viewable manageExam() {
+		System.out.println("Insdie manage-exam");
+		Map<String, Boolean> model = new HashMap<>();
+		model.put("manage-exam_clicked", true);
+		return new Viewable("/admin/exam-management/manage-exam", model);
+	}
+	
+	@GET
+	@Path("/exam-type")
+	public Viewable examType() {
+		System.out.println("Insdie exam-type");
+		Map<String, Boolean> model = new HashMap<>();
+		model.put("exam-type_clicked", true);
+		return new Viewable("/admin/exam-management/exam-type", model);
+	}
 }

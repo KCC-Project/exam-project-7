@@ -8,9 +8,9 @@
 		<li><a href="admin-dashboard.jsp"><span
 				class="glyphicon glyphicon-home"> Home</span></a></li>
 		<li><a><span class="glyphicon glyphicon-education black">
-					Education</span></a></li>
+					Exam</span></a></li>
 					<li><a><span class="glyphicon glyphicon-education black">
-					Program</span></a></li>
+					Exam-Type</span></a></li>
 
 	</ol>
 	<!--=============================================Main Containt===============================  -->
@@ -18,7 +18,7 @@
 		<div>
 			<div style="margin: 0px; padding-left: 20px; height: 35px;">
 				<a><button type="button" class="btn btn-info pull-right"
-						data-toggle="modal" id="modal-box-vew-all-program">View
+						data-toggle="modal" id="modal-box-vew-all-exam-type">View
 						All</button></a>
 				<div class="col-xs-3"
 					style="margin-left: -34px; /* border: 2px solid black; */ height: 37px;">
@@ -36,35 +36,33 @@
 	</div>
 
 
-	<table id="view_program"
+	<table id="view_exam_Type"
 		class="table table-hover table-striped table-responsive"
 		cellspacing="0" width="100%">
 		<thead>
 			<tr class="info">
 				<th>Id</th>
-				<th>Program Name</th>
-				<th>Year</th>
-				<th>Total Credit</th>
+				<th>Name</th>
 				<th>Status</th>
-				<th>Faculty Name</th>
 				<th>Option</th>
 			</tr>
 		</thead>
 	</table>
 
 
-
+	<!--=========================================================================================  -->
+	
 </div>
 <!--=========================================================================================  -->
 <jsp:include page="../shared/footer.jsp" />
 <script>
 	$(document).ready(function() {
 
-		$("#modal-box-vew-all-program").click(function(event) {
-			var url = window.context + "/ApiProgram/GetAllProgram";
+		$("#modal-box-vew-all-exam-type").click(function(event) {
+			var url = window.context + "/ApiExam_type/GetAllExam_type";
 			var method = "GET";
 			var data = "";
-			loadProgramInformation(url, method, data);
+			loadExamTypeInformation(url, method, data);
 		});
 	});
 
@@ -79,9 +77,9 @@
 		//width:auto,
 		height : "10px",
 		minimumInputLength : 3,
-		placeholder : "Search For  Program",
+		placeholder : "Search Exam Type",
 		ajax : {
-			url : window.context + "/ApiProgram/SearchProgram",
+			url : window.context + "/ApiExam_type/SearchExam-Type",
 			dataType : 'json',
 			type : "POST",
 			delay : 400,
@@ -117,10 +115,10 @@
 		var select_val = selected_element.val();
 		//console.log("program Id=" + select_val);
 		//alert(select_val);
-		var url = window.context + "/ApiProgram/GetProgram/" + select_val;
+		var url = window.context + "/ApiExam_type/GetExam_type/" + select_val;
 		var method = "GET";
 		var data = "";
-		loadProgramInformation(url, method, data);
+		loadExamTypeInformation(url, method, data);
 	});
 
 	function formatRepo(repo) {
@@ -133,8 +131,8 @@
 	function formatRepoSelection(repo) {
 		return repo.name || repo.text;
 	}
-	function loadProgramInformation(url, method, data) {
-		$('#view_program').DataTable({
+	function loadExamTypeInformation(url, method, data) {
+		$('#view_exam_Type').DataTable({
 			destroy : true,
 			paging : true,
 			searching : true,
@@ -149,13 +147,9 @@
 				"async" : false
 			},
 			"columns" : [ {
-				"data" : "program_id"
+				"data" : "exam_type_id"
 			}, {
-				"data" : "program_name"
-			}, {
-				"data" : "program_years"
-			}, {
-				"data" : "total_credit"
+				"data" : "type_name"
 			}, {
 				data : null,
 				render : function(data, type, row) {
@@ -171,8 +165,6 @@
 					return '' + statusStatus + '';
 				},
 			}, {
-				"data" : "faculty_id"
-			}, {
 				data : null,
 				render : function(data, type, row) {
 					return '<button class="btn btn-success editBtns">Edit</button>';
@@ -181,11 +173,11 @@
 		});
 
 		// edit buttons on subjects row
-		$('#view_program tbody').on('click', '.editBtns', function() {
-			var table = $("#view_program").DataTable();
+		$('#view_exam_Type tbody').on('click', '.editBtns', function() {
+			var table = $("#view_exam_Type").DataTable();
 			var data = table.row($(this).parents('tr')).data();
 			console.log(data);
-			alert(data['program_name'] + "' id is: " + data['program_id']);
+			alert(data['type_name'] + "' id is: " + data['exam_type_id']);
 		});
 	}
 </script>

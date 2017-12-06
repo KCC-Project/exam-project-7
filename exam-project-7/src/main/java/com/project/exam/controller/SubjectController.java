@@ -44,7 +44,7 @@ public class SubjectController {
 	@GET
 	@Path("/GetSubject/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Subjects getSubject(@PathParam("id") int id) {
+	public List<Subjects> getSubject(@PathParam("id") int id) {
 		return subjectService.getSubject(id);
 	}
 	

@@ -24,7 +24,7 @@ public class Exam_typeServiceImpl implements Exam_typeService {
 	}
 
 	@Override
-	public Exam_type getExam_type(int s_Id) {
+	public List<Exam_type> getExam_type(int s_Id) {
 		return exam_typeDao.getExam_type(s_Id);
 	}
 
@@ -36,6 +36,11 @@ public class Exam_typeServiceImpl implements Exam_typeService {
 	@Override
 	public int deleteExam_type(int s_Id) {
 		return exam_typeDao.deleteExam_type(s_Id);
+	}
+
+	@Override
+	public List searchExamType(String searchPara) {
+		return exam_typeDao.searchExamType(searchPara);
 	}
 
 

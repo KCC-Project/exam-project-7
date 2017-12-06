@@ -4,17 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.project.exam.model.Admin;
 import com.project.exam.model.Exam_type;
+import com.project.exam.model.Program;
 
 @Repository("exam_TypeDao")
 public class Exam_typeDAOImpl implements Exam_typeDAO {
@@ -76,8 +73,9 @@ public class Exam_typeDAOImpl implements Exam_typeDAO {
 	}
 
 	@Override
-	public Exam_type getExam_type(int s_Id) {
-		Exam_type model = new Exam_type();
+	public List<Exam_type> getExam_type(int s_Id) {
+		List<Exam_type> listExam_type= new ArrayList<>();
+		
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "Select * from exam_types where exam_type_id=?";
@@ -85,14 +83,16 @@ public class Exam_typeDAOImpl implements Exam_typeDAO {
 			pst.setInt(1, s_Id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
+				Exam_type model = new Exam_type();
 				model.setExam_type_id(rs.getInt("exam_type_id"));
 				model.setStatus(rs.getInt("status"));
 				model.setType_name(rs.getString("type_name"));
+				listExam_type.add(model);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return model;
+		return listExam_type;
 	}
 
 	@Override
@@ -139,6 +139,31 @@ public class Exam_typeDAOImpl implements Exam_typeDAO {
 			}
 		}
 		return result;
+	}
+
+	
+
+	@Override
+	public List searchExamType(String searchPara) {
+		List listOfReslut = new ArrayList<>();
+		//System.out.println("search ="+searchPara);
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "SELECT * FROM exam_types WHERE type_name like '"+searchPara+"%'";
+			pst=conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+		//System.out.println("here");
+			while (rs.next()) {
+				Map<String, Object> map = new HashMap<>();
+				Program s = new Program();
+				map.put("id", rs.getInt("exam_type_id"));
+				map.put("name", rs.getString("type_name"));			
+				listOfReslut.add(map);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return listOfReslut;
 	}
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -42,7 +43,7 @@ public class Exam_typeController {
 	@GET
 	@Path("/GetExam_type/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Exam_type getExam_type(@PathParam("id") int id) {
+	public List<Exam_type> getExam_type(@PathParam("id") int id) {
 		return exam_typeService.getExam_type(id);
 	}
 	
@@ -60,5 +61,13 @@ public class Exam_typeController {
 	public int deleteExam_type(@PathParam("id") int id) {
 		return exam_typeService.deleteExam_type(id);
 	}
-	
+	@POST
+	@Path("/SearchExam-Type")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List searchProgram(@FormParam("val") String params) {
+		System.out.println("inside search exam type");
+		//System.out.println("from controller= "+studentService.searchStudent(params).toString());
+	return exam_typeService.searchExamType(params);
+		
+	}
 }

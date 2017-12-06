@@ -11,7 +11,7 @@ public interface SubjectService {
 	
 	public List<Subjects> getallSubjectList();
 	public Subjects addSubject(Subjects subject);
-	public Subjects getSubject(int s_Id);
+	public List<Subjects> getSubject(int s_Id);
 	public Subjects updateSubject(Subjects subject);
 	public int deleteSubject(int s_Id);
 	public List searchSubject(String searchPara);
