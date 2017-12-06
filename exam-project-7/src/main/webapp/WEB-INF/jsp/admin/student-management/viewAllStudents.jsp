@@ -32,100 +32,28 @@
 			</div>
 		</div>
 	</div>
-	<!--====================================================Table==================================================================  -->
-	<div class="box box-primary with-border" style="margin-top: 10px;">
-		<div class="row with-border" style="overflow: hidden;">
-			<div class="col-lg-12 ">
-				<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
-					<span class="hidden-xs"
-						style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
-						class="fa fa-graduation-cap"></i> Student View</span> <span
-						class="visible-xs"
-						style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
-						class="fa fa-graduation-cap"></i> Student View</span>
-
-					<div class="form-group col-sm-4 pull-right"
-						style="margin-bottom: 0px;">
-						<select required class="form-control" name="student-batch-box"
-							id="student-batch-box">
-							<option value="" disabled selected>Select Student</option>
-						</select>
-					</div>
-				</h3>
-			</div>
-		</div>
-		<!-- Regular exam -->
-		<div class="box-body " style="margin-bottom: 4px;">
-			<div id="accordion" class="box-group">
-				<div class="panel box box-default">
-					<div class="box-header with-border">
-						<br>
-						<div class="table-responsive">
-							<table class="table table-bordered" id="tblStudent">
-								<thead>
-									<tr class="info">
-										<td>S.No</td>
-										<td>F.Name</td>
-										<td>M.name</td>
-										<td>L.Name</td>
-										<td>Phone</td>
-										<td>Address</td>
-									</tr>
-								</thead>
-								<tbody id="load_student_info">
-								</tbody>
-							</table>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<br> <br>
-	<!--====================================================Table==================================================================  -->
-	<div class="box box-primary with-border" style="margin-top: 10px;">
-		<div class="row with-border" style="overflow: hidden;">
-			<div class="col-lg-12 ">
-				<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
-					<span class="hidden-xs"
-						style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
-						class="fa fa-graduation-cap"></i> Additional Information </span> <span
-						class="visible-xs"
-						style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
-						class="fa fa-graduation-cap"></i> Additional Information </span>
-				</h3>
-			</div>
-		</div>
-		<!-- Regular exam -->
-		<div class="box-body " style="margin-bottom: 4px;">
-			<div id="accordion" class="box-group">
-				<div class="panel box box-default">
-					<div class="box-header with-border">
-						<br>
-						<div class="table-responsive">
-							<table class="table table-bordered" id="tblStudent_additional">
-								<thead>
-									<tr class="info">
 
 
-										<td>Email</td>
-										<td>DOB</td>
-										<td>Status</td>
+	<table id="view_student" class="table table-hover table-striped"
+		cellspacing="0" width="100%">
+		<thead>
+			<tr class="info">
+				<th>Id</th>
+				<th>Image</th>
+				<th>Name</th>
+				<th>Username</th>
+				<th>Gender</th>
+				<th>DOB</th>
+				<th>Address</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th>current Semester</th>
+				<th>Status</th>
+				<th>Option</th>
+			</tr>
+		</thead>
+	</table>
 
-
-									</tr>
-								</thead>
-								<tbody id="additional_student_info">
-								</tbody>
-							</table>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!--=========================================================================================  -->
 	<div class="modal fade" id="searchStudentModal" role="dialog">
@@ -180,10 +108,6 @@
 
 	$(document).ready(function() {
 
-		
-		
-	
-		
 		$("#modal-box").click(function(event) {
 			load_faculty(event, "p-faculty-box");
 		});
@@ -224,8 +148,7 @@
 					var facultyId = data[i].faculty_id;
 					console.log("faculty name =" + facultyName);
 
-					content += '<option value='+facultyId+'>' + facultyName
-							+ '</option>';
+					content += '<option value='+facultyId+'>' + facultyName + '</option>';
 				}
 				$('#' + target).html(content);
 			},
@@ -252,8 +175,7 @@
 					var programeId = data[i].program_id;
 					console.log("faculty name =" + programeName);
 
-					content += '<option value='+programeId+'>' + programeName
-							+ '</option>';
+					content += '<option value='+programeId+'>' + programeName + '</option>';
 				}
 				$('#' + target).html(content);
 			},
@@ -267,111 +189,100 @@
 		var getid = e.target.id;
 		var id = $('#' + getid).find(":selected").val();
 		programId = id;
-		$
-				.ajax({
-					url : window.context
-							+ "/ApiStudentsProgram/GetStudentsProgramByProgramId/"
-							+ id,
-					method : "GET",
-					dataType : 'json',
-					cache : true,
-					success : function(data) {
-						console.log("simple data=" + data);
-						console.log("batch size=" + JSON.stringify(data));
-						var lengt = data.length;
-						var duplicateYear = [];
-						var content = '';
-						content += "<option selected='true' > Select Batch </option>"
-						for (var i = 0; i < data.length; i++) {
-							
-							duplicateYear[i] = data[i].batch_year;
-							var batch_yearDate = data[i].batch_year;
-							var batch_yearId = data[i].student_program_id;
-							//console.log("batch_yearDate name ="	+ batch_yearDate);
+		$.ajax({
+			url : window.context + "/ApiStudentsProgram/GetStudentsProgramByProgramId/" + id,
+			method : "GET",
+			dataType : 'json',
+			cache : true,
+			success : function(data) {
+				console.log("simple data=" + data);
+				console.log("batch size=" + JSON.stringify(data));
+				var lengt = data.length;
+				var duplicateYear = [];
+				var content = '';
+				content += "<option selected='true' > Select Batch </option>"
+				for (var i = 0; i < data.length; i++) {
 
-						}
+					duplicateYear[i] = data[i].batch_year;
+					var batch_yearDate = data[i].batch_year;
+					var batch_yearId = data[i].student_program_id;
+					//console.log("batch_yearDate name ="	+ batch_yearDate);
 
-						var uniqueYear = duplicateYear
-								.filter(function(x, i, a) {
-									return a.indexOf(x) == i;
-								});
-						
-						for (var i = 0; i < uniqueYear.length; i++) {
-							//batchyear = uniqueYear[i];
-							content += '<option value='+uniqueYear[i] +'>'
-									+ uniqueYear[i] + '</option>';
-						}
+				}
 
-						$('#' + target).html(content);
-					},
-					error : function() {
-						alert("Error...!!!");
-					}
+				var uniqueYear = duplicateYear.filter(function(x, i, a) {
+					return a.indexOf(x) == i;
 				});
+
+				for (var i = 0; i < uniqueYear.length; i++) {
+					//batchyear = uniqueYear[i];
+					content += '<option value='+uniqueYear[i] +'>' + uniqueYear[i] + '</option>';
+				}
+
+				$('#' + target).html(content);
+			},
+			error : function() {
+				alert("Error...!!!");
+			}
+		});
 	}
 
 	function load_student(e, target) {
 
-		$
-				.ajax({
-					url : window.context
-							+ "/ApiStudentsProgram/SearchStudentsProgram",
-					method : "POST",
-					dataType : 'json',
-					cache : false,
+		$.ajax({
+			url : window.context + "/ApiStudentsProgram/SearchStudentsProgram",
+			method : "POST",
+			dataType : 'json',
+			cache : false,
 
-					data : {
-						programId : programId,
-						batchyear : batchyear
-					},
+			data : {
+				programId : programId,
+				batchyear : batchyear
+			},
 
-					success : function(data) {
+			success : function(data) {
 
-						console.log("batch size=" + JSON.stringify(data));
-						var content1 = '';
-						content1 += "<option selected='true' > Select Student </option>"
-						for (var i = 0; i < data.length; i++) {
-							var s_id = data[i].s_id;
-							// alert("outside");
+				console.log("batch size=" + JSON.stringify(data));
+				var content1 = '';
+				content1 += "<option selected='true' > Select Student </option>"
+				for (var i = 0; i < data.length; i++) {
+					var s_id = data[i].s_id;
+					// alert("outside");
 
-							$.ajax({
-								url : window.context
-										+ "/ApiStudent/GetStudent/" + s_id,
-								method : "GET",
-								dataType : 'json',
-								cache : false,
-								async : false,
-								success : function(data) {
-									//alert("insode");
-									console.log("student name size="
-											+ JSON.stringify(data));
+					$.ajax({
+						url : window.context + "/ApiStudent/GetStudent/" + s_id,
+						method : "GET",
+						dataType : 'json',
+						cache : false,
+						async : false,
+						success : function(data) {
+							//alert("insode");
+							console.log("student name size=" + JSON.stringify(data));
 
-									var firstname = data.first_name;
-									var middlename = data.middle_name;
-									var lastname = data.last_name;
-									var sid = data.s_id;
-									if (middlename == null) {
-										fullname = firstname + " " + lastname;
-									} else {
-										fullname = firstname + " " + middlename
-												+ " " + lastname;
-									}
+							var firstname = data.first_name;
+							var middlename = data.middle_name;
+							var lastname = data.last_name;
+							var sid = data.s_id;
+							if (middlename == null) {
+								fullname = firstname + " " + lastname;
+							} else {
+								fullname = firstname + " " + middlename + " " + lastname;
+							}
 
-									content1 += '<option value='+sid+'>'
-											+ fullname + '</option>';
-								},
-								error : function() {
-									alert("Error...!!!");
-								}
-							});
-
+							content1 += '<option value='+sid+'>' + fullname + '</option>';
+						},
+						error : function() {
+							alert("Error...!!!");
 						}
-						$('#' + target).html(content1);
-					},
-					error : function() {
-						alert("Error...!!!");
-					}
-				});
+					});
+
+				}
+				$('#' + target).html(content1);
+			},
+			error : function() {
+				alert("Error...!!!");
+			}
+		});
 	}
 
 	$("select").select2({
@@ -437,59 +348,66 @@
 	}
 
 	function loadStudentInformation(val) {
-
-		$
-				.ajax({
-					url : window.context + "/ApiStudent/GetStudent/" + val,
-					method : "GET",
-					dataType : 'json',
-					cache : true,
-					data : {
-						student_id : val
-					},
-					success : function(data) {
-						//  var obj = JSON.parse(data);
-						console.log("json size=" + JSON.stringify(data));
-						$("#tblStudent").show();
-
-						var content = '';
-
-						content += '<tr>';
-						content += '<td  class="student_sn">' + 1 + '</td>';
-						content += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"text\" class=\"fname\" id='student_name'>"
-								+ data.first_name + "</td>";
-						content += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"text\" class=\"mname\" id='student_name'>"
-								+ data.middle_name + "</td>";
-						content += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"text\" class=\"lname\" id='student_name'>"
-								+ data.last_name + "</td>";
-						content += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"number\" class=\"phone\" id='student_name'>"
-								+ data.phone + "</td>";
-						content += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"text\" class=\"address\" id='student_name'>"
-								+ data.address + "</td>";
-						content += '<tr>';
-
-						$("#load_student_info").html(content);
-
-						$("#tblStudent_additional").show();
-						var content1 = '';
-
-						content1 += '<tr>';
-
-						content1 += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"text\" class=\"email\" id='student_name'>"
-								+ data.last_name + "</td>";
-						content1 += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"date\" class=\"dob\" id='student_name'>"
-								+ data.date_of_birth + "</td>";
-
-						content1 += "<td data-pk="+data.s_id+" value="+data.s_id+" data-name=\"student_name\"  data-type=\"number\" class=\"status\" id='student_name'>"
-								+ data.status + "</td>";
-						content1 += '<tr>';
-
-						$("#additional_student_info").html(content1);
-
-					},
-					error : function() {
-						alert("Error...!!!");
+		// Initializing Datatable
+		$('#view_student').DataTable({
+			"processing" : true,
+			"serverSide" : true,
+			"ajax" : {
+				"url" : window.context + "/ApiStudent/GetStudent/" + val,
+				"type" : "GET",
+				"dataSrc" : "",
+				"contentType" : "application/json",
+				"dataType" : "json"
+			},
+			"columns" : [ {
+				"data" : "s_id"
+			}, {
+				"data" : "s_id"
+			}, {
+				data : null,
+				render : function(data, type, row) {
+					// Combine the two data
+					return '' + data.first_name + ' ' + data.middle_name + ' ' + data.last_name + '';
+				},
+			}, {
+				"data" : "username"
+			}, {
+				data : null,
+				render : function(data, type, row) {
+					// Combine the two data
+					if (data.gender == 0) {
+						return 'Male';
+					} else {
+						return 'Female';
 					}
-				});
+				},
+			}, {
+				"data" : "date_of_birth"
+			}, {
+				"data" : "address"
+			}, {
+				"data" : "phone"
+			}, {
+				"data" : "email"
+			}, {
+				"data" : "current_semester"
+			}, {
+				"data" : "status"
+			}, {
+				data : null,
+				render : function(data, type, row) {
+					return '<button class="btn btn-success editBtns">Click!</button>';
+				},
+			} ]
+		});
+
+		// edit buttons on subjects row
+		$('#view_student tbody').on('click', '.editBtns', function() {
+			var table = $("#view_subject").DataTable();
+			var data = table.row($(this).parents('tr')).data();
+			console.log(data);
+			alert(data['username'] + "' id is: " + data['s_id']);
+		});
+
 	}
 </script>
