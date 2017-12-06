@@ -39,6 +39,7 @@
 				<th>Start Time</th>
 				<th>End Time</th>
 				<th>Status</th>
+				<th>Option</th>
 			</tr>
 		</thead>
 	</table>
@@ -122,8 +123,10 @@
 <jsp:include page="../shared/footer.jsp" />
 <script>
 var subjectId;
+var subjectname;
 var examTypeId;
 var examTypeName;
+var programeName;
 	$(document).ready(function() {
 		
 	
@@ -136,6 +139,8 @@ var examTypeName;
 			load_program(event, "p-program-box");
 		});
 		$("#p-program-box").change(function(event) {
+			var getid = event.target.id;
+			programeName  = $('#' + getid).find(":selected").text();
 			load_subject(event, "p-subject-box");
 		});
 		
@@ -148,17 +153,16 @@ var examTypeName;
 			var getid = event.target.id;
 			 examTypeId  = $('#' + getid).find(":selected").val();
 			 examTypeName=$('#' + getid).find(":selected").text();
-			//alert("examTypeId = "+examTypeId+" "+examTypeName+ " "+subjectId);
+		
 		});
 		
 		
 		
 		$("#searchbtnClicked").click(function(event) {
-			
-			
-			var url=window.context + "/ApiSubject/GetSubjectByProgram";
-			var method="GET";
-			var data="";
+			alert("examTypeId = "+examTypeId+" "+examTypeName+ " "+subjectId);
+			var url=window.context + "/ApiExam/GetExamByExamTypeAndSubjectId";
+			var method="POST";
+			var data="{'examTypeId':'" + examTypeId + "','subjectId':'" + subjectId + "'}";
 			loadExamInformation(url,method,data);
 		});
 		
@@ -170,6 +174,7 @@ var examTypeName;
 	function load_exam_type(event,target){
 		var getid = event.target.id;
 		subjectId  = $('#' + getid).find(":selected").val();
+		subjectname=$('#' + getid).find(":selected").text();
 		$.ajax({
 			url : window.context + "/ApiExam_type/GetAllExam_type",
 			method : "GET",
@@ -224,7 +229,8 @@ var examTypeName;
 	}
 	
 	function loadExamInformation(url, method, data) {
-		//alert(url+"  "+method+  +data);
+		alert(url+"  "+method+  +data);
+		alert(data);
 		$('#view_exam').DataTable({
 			destroy : true,
 			paging : true,
@@ -242,22 +248,15 @@ var examTypeName;
 			"columns" : [ {
 				"data" : "exam_id"
 			}, {
-				"data" : "subject_name"
+				"data" : subjectname
 			}, {
-				"data" : "type_name"
+				"data" : examTypeName
 			}, {
 				data : null,
 				render : function(data, type, row) {
 					console.log(JSON.stringify(data));
-					var statusStatus = "";
-
-					if (data.status == 1) {
-						statusStatus = "Running";
-					} else if (data.status == 0) {
-						statusStatus = "Not Running";
-					}
-
-					return '' + statusStatus + '';
+					
+					return programeName + ' ' +data.semester_no;
 				},
 			}, {
 				"data" : "full_marks"
