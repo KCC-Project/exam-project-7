@@ -17,72 +17,79 @@
 	<div class="panel-group">
 		<div class="panel panel-default">
 			<div class="panel-heading main-color-bg">
-				View Subject
-				<div class="filter-area pull-right">
-					<button type="button" class="btn btn-info" id="filter-box">
-						<span class="glyphicon glyphicon-search"> Filter </span>
-					</button>
-					<button class="btn btn-warning" id=view-all-subject>View All Subject</button>
+
+
+				<div class="box box-default with-border">
+					<div>
+						<div style="margin: 0px; padding-left: 20px; height: 35px;">
+							<a><button type="button" class="btn btn-info pull-right" data-toggle="modal"
+									data-target="#searchSubjectModal" id="modal-box">Filter</button></a>
+							<div class="col-xs-3"
+								style="margin-left: -34px; /* border: 2px solid black; */ height: 37px;">
+								<div class="form-group">
+									<div class="input-group">
+										<select class="form-control" id="subject-search-sel1"></select> <span
+											class="input-group-addon"> <i class="fa fa-search"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-7 " id="sembtn"></div>
+						</div>
+					</div>
 				</div>
+
+
 			</div>
 
 			<div class="panel-body">
 
-				<div class="modal fade" id="search_subject_modal" role="dialog">
-					<div class="modal-dialog">
 
+				<!--=========================================================================================  -->
+				<div class="modal fade" id="searchSubjectModal" role="dialog">
+					<div class="modal-dialog modal-lg">
 						<!-- Modal content-->
 						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Subject Search</h4>
+							</div>
 							<div class="modal-body">
-
-								<form class="well form-horizontal" action="" method="post" id="subject_search_form">
-									<fieldset>
-
-										<!-- Form Name -->
-										<legend>Search Subject!</legend>
-
-										<div class="row form-group">
-											<label class="col-sm-4 control-label">Program Name: </label>
-											<div class="col-sm-8">
-												<div class="input-group">
-													<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span> <select
-														class="form-control col-sm-12" id="s-program-box" name="s_program_box">
-
-													</select>
-												</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="col-sm-6">
+											<div class="form-group " style="margin-bottom: 0px;">
+												<select required class="form-control" id="p-faculty-box" name="faculty_id">
+												</select>
 											</div>
 										</div>
-
+										<div class="form-group col-sm-6" style="margin-bottom: 0px;">
+											<select required class="form-control" id="p-program-box" name="program_id">
+												<option value="" disabled selected>Select Program</option>
+											</select>
+										</div>
 										<div class="col-sm-12 form-group">
-											<div class="alert alert-info">The fields Below are Optional</div>
+											<h4 class="text-danger">The fields Below are Optional</h4>
 										</div>
 
 										<div class="row form-group">
-											<div class="col-sm-6">
+											<div class="col-sm-4">
 												<label class="control-label">Subject Name</label>
-												<div class="inputGroupContainer">
-													<div class="input-group">
-														<span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span> <input
-															name="s_subject_name" placeholder="Enter Subject Name" class="form-control"
-															type="text">
-													</div>
+												<div class="input-group">
+													<input name="s_subject_name" placeholder="Enter Subject Name" class="form-control"
+														type="text">
 												</div>
 											</div>
 
-											<div class="col-sm-6">
+											<div class="col-sm-4">
 												<label class=" control-label">Subject Code</label>
-												<div class=" inputGroupContainer">
-													<div class="input-group">
-														<span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span> <input
-															name="s_subject_code" placeholder="Enter Subject code" class="form-control"
-															type="text">
-													</div>
+												<div class="input-group">
+													<input name="s_subject_code" placeholder="Enter Subject code" class="form-control"
+														type="text">
 												</div>
 											</div>
-										</div>
-
-										<div class="col-sm-12 form-group">
-											<label>Semester no.: </label> <select class="form-control" id="s-semester-no"
+											<div class="col-sm-4">
+												<label>Semester no.: </label> <select class="form-control" id="s-semester-no"
 												name="s_semester_no">
 												<option value="" selected>Select Semester</option>
 												<option value="1">1</option>
@@ -94,29 +101,19 @@
 												<option value="7">7</option>
 												<option value="8">8</option>
 											</select>
-										</div>
-
-										<!-- Button -->
-										<div class="form-group">
-											<label class="col-md-4 control-label"></label>
-											<div class="col-md-4">
-												<button type="submit" class="btn btn-warning" id="search_submit">
-													Submit <span class="glyphicon glyphicon-send"></span>
-												</button>
 											</div>
+											
 										</div>
 
-									</fieldset>
-								</form>
-
-
-							</div>
-
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+								<br>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-success" id="searchbtnClicked" data-dismiss="modal">Search</button>
+								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 
@@ -136,36 +133,28 @@
 							<th>Option</th>
 						</tr>
 					</thead>
-					<tfoot>
-						<tr class="info">
-							<th>Id</th>
-							<th>Subject_name</th>
-							<th>Subject_code</th>
-							<th>Subject_credit</th>
-							<th>Subject_marks</th>
-							<th>Syllabus_file</th>
-							<th>Program_id</th>
-							<th>Semester_no</th>
-							<th>Option</th>
-						</tr>
-					</tfoot>
 				</table>
 			</div>
 		</div>
 	</div>
 
 	<script>
+        var programId = 0;
+
         $(document).ready(function () {
 
             // hiding table view
-            $("#view_subject").hide();
+            //$("#view_subject").hide();
+            $("#modal-box").click(function (event) {
+                load_faculty(event, "p-faculty-box");
+            });
 
-            // Showing modal when filter button is clicked
-            $('#filter-box').click(function () {
-                $('#search_subject_modal').modal('show');
-                // initilizing modal with form validators
-                initialize_modal();
-                load_program('s-program-box');
+            $("#p-faculty-box").change(function (event) {
+                load_program(event, "p-program-box");
+            });
+
+            $("#searchbtnClicked").click(function (event) {
+                load_subject(event);
             });
 
             // when view all subject button is clicked
@@ -178,93 +167,90 @@
                 }
             });
 
-            function load_program(target) {
-                $('#' + target).select2({
-                    width : "100%",
-                    placeholder : "Select Program",
-                    tags : true,
-                    multiple : true,
-                    ajax : {
-                        url : window.context + "/ApiProgram/GetAllProgram",
-                        dataType : "json",
-                        type : "GET",
-                        data : function (params) {
-                            var queryParameters = {
-                                term : params.term
-                            };
-                            return queryParameters;
-                        },
-                        processResults : function (data) {
-                            return {
-                                results : $.map(data, function (item) {
-                                    return {
-                                        id : item.program_id,
-                                        text : item.program_name
-                                    };
-                                })
-                            };
-                        }
-                    }
-                });
+            function load_subject(e) {
+                //alert(programId);
+                //alert(batchyear);
+                var url = window.context + "/ApiSubject/SearchSubject";
+                var method = "POST";
+                var data = "{'programId':'" + programId + "','semester':'" + 8 + "'}";
+
+                loadSubjectInformation(url, method, data);
             }
 
-            function initialize_modal() {
-                $("#subject_search_form").bootstrapValidator({
-                    // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-                    feedbackIcons : {
-                        valid : "glyphicon glyphicon-ok",
-                        invalid : "glyphicon glyphicon-remove",
-                        validating : "glyphicon glyphicon-refresh"
+            $("#subject-search-sel1").select2({
+                theme : "bootstrap",
+                width : "210px",
+                //width:auto,
+                height : "10px",
+                minimumInputLength : 3,
+                placeholder : "Search for a Subject",
+                ajax : {
+                    url : window.context + "/ApiSubject/SearchSubject",
+                    dataType : 'json',
+                    type : "POST",
+                    delay : 400,
+                    data : function (params) {
+                        //console.log("params="   + params.term);
+                        return {
+                            val : params.term,
+                            page : params.page
+                        };
                     },
-                    fields : {
-                        s_subject_name : {
-                            validators : {
-                                stringLength : {
-                                    min : 2
-                                },
+                    processResults : function (data, params) {
+                        // console.log("returned data from server =" + JSON.stringify(data));
+                        //   console.log("full name = " + data.first_name + " "+data.last_name);
+                        //.log("id= " + data.s_id);
+                        params.page = params.page || 1;
+                        return {
+                            results : data,
+                            pagination : {
+                                more : (params.page * 30) < data.total_count
                             }
-                        },
-                        subject_code : {
-                            validators : {
-                                stringLength : {
-                                    min : 3
-                                },
-                            }
-                        },
-                        s_program_box : {
-                            validators : {
-                                stringLength : {
-                                    max : 1,
-                                    message : "You can select only one program"
-                                },
-                                notEmpty : {
-                                    message : "Please Enter Program"
-                                }
-                            }
-                        }
-                    }
-                })
+                        };
+                    },
+                    cache : true
+                },
+                escapeMarkup : function (markup) {
+                    return markup;
+                },
+                templateResult : formatRepo,
+                templateSelection : formatRepoSelection
+            }).on("change", function (e) {
+                var selected_element = $(e.currentTarget);
+                //console.log(selected_element);
+                var select_val = selected_element.val();
+                //console.log("Student Id=" + select_val);
+                var url = window.context + "/ApiSubject/GetSubject/" + select_val;
+                var method = "GET";
+                var data = "";
+                loadSubjectInformation(url, method, data);
+            });
 
-                .on('success.form.bv', function (e) {
-                    // Prevent submit form
-                    e.preventDefault();
-                    var $form = $(e.target), validator = $form.data('bootstrapValidator');
-                   
-                });
-
+            function formatRepo(repo) {
+                // console.log("formated repo=" + JSON.stringify(repo));
+                if (repo.loading)
+                    return repo.text;
+                var markup = '<option value='+repo.id+'>' + repo.name + '</option>';
+                return markup;
+            }
+            function formatRepoSelection(repo) {
+                return repo.name || repo.text;
             }
 
             // when load all subject is clicked
-            function load_all_subjects() {
+            function loadSubjectInformation(url, method, data) {
                 // Initializing Datatable
                 $('#view_subject').DataTable({
+                    destroy : true,
+                    paging : true,
+                    searching : true,
                     "processing" : true,
-                    "serverSide" : true,
+                    "serverSide" : false,
                     "ajax" : {
                         "url" : window.context + "/ApiSubject/GetAllSubject",
-                        "type" : "GET",
+                        "type" : method,
+                        "data" : data,
                         "dataSrc" : "",
-                        "contentType" : "application/json",
                         "dataType" : "json"
                     },
                     "columns" : [ {

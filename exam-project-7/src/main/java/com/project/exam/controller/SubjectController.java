@@ -70,8 +70,7 @@ public class SubjectController {
 	public List searchSubject(@FormParam("val") String params) {
 		//System.out.println("from controller= "+studentService.searchStudent(params).toString());
 		
-	//return subjectService.searchSubject(params);
-		return null;
+	return subjectService.searchSubject(params);
 		
 	}
 }

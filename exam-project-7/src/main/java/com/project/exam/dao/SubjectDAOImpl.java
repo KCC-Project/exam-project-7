@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.project.exam.model.Student;
 import com.project.exam.model.Subjects;
 
 @Repository("subjectDao")
@@ -175,6 +178,38 @@ public class SubjectDAOImpl implements SubjectDAO {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public List searchSubject(String searchPara) {
+		
+		List listOfResult = new ArrayList<>();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "SELECT * FROM subjects WHERE program_name like '" + searchPara + "%'";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Map<String, Object> map = new HashMap<>();
+				Subjects s = new Subjects();
+				String subjectName = null;
+				subjectName = rs.getString("subject_name") + " " + rs.getString("subject_code");
+
+				map.put("id", rs.getInt("subject_id"));
+				map.put("name", subjectName);
+				
+				listOfResult.add(map);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return listOfResult;
+	}
+
+	@Override
+	public List<Subjects> getSubjectByParameters(Object[] obj) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

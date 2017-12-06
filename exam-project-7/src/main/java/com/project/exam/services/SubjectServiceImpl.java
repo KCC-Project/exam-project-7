@@ -38,4 +38,14 @@ public class SubjectServiceImpl implements SubjectService{
 		return subjectDao.deleteSubject(s_Id);
 	}
 
+	@Override
+	public List searchSubject(String searchPara) {
+		return subjectDao.searchSubject(searchPara);
+	}
+
+	@Override
+	public List<Subjects> getSubjectByParameters(Object[] obj) {
+		return subjectDao.getSubjectByParameters(obj);
+	}
+
 }
