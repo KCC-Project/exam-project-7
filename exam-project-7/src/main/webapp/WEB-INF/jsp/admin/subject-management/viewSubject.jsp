@@ -160,8 +160,10 @@
             // when view all subject button is clicked
             $("#view-all-subject").click(function () {
                 if (confirm('Do you want to load All Subjects ? ')) {
-                    $("#view_subject").show();
-                    load_all_subjects();
+                    var url = window.context + "/ApiSubject/GetAllSubject";
+                    var method = "GET";
+                    var data = "";
+                    loadSubjectInformation(url, method, data);
                 } else {
                     return false;
                 }
