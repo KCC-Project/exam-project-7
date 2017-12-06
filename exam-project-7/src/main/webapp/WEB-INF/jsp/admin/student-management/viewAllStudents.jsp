@@ -362,12 +362,12 @@
 			"columns" : [ {
 				"data" : "s_id"
 			}, {
-				"data" : "s_id"
+				"data" : "first_name"
 			}, {
 				data : null,
 				render : function(data, type, row) {
 					// Combine the two data
-					return '' + data.first_name + ' ' + data.middle_name + ' ' + data.last_name + '';
+					return '' + data.first_name + ' ' + data.last_name + '';
 				},
 			}, {
 				"data" : "username"
