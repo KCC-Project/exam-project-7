@@ -1,16 +1,13 @@
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"
+	isELIgnored="false"%>
 
 
 <jsp:include page="../shared/header.jsp" />
 
 
 <!-- Success message -->
-<div class="alert alert-success" role="alert" id="success_message">
-	Success <i class="glyphicon glyphicon-thumbs-up"></i> Subject add
-	request made, we will get back to you shortly.
-</div>
+<div class="alert alert-success" role="alert" id="success_message"></div>
 
 <!-- Content Area -->
 <div id="page-content-wrapper">
@@ -18,10 +15,8 @@
 
 	<!-- Content Area -->
 	<ol class="breadcrumb">
-		<li><a href="${cp}/home"><span
-				class="glyphicon glyphicon-home"> Home </span></a></li>
-		<li><a><span class="glyphicon glyphicon-user black">
-					Add-Subjects </span></a></li>
+		<li><a href="${cp}/home"><span class="glyphicon glyphicon-home"> Home </span></a></li>
+		<li><a><span class="glyphicon glyphicon-user black"> Add-Subjects </span></a></li>
 	</ol>
 
 	<div class="panel-group">
@@ -30,8 +25,7 @@
 			<div class="panel-body"></div>
 
 
-			<form class="well form-horizontal" action=" " method="post"
-				id="contact_form">
+			<form class="well form-horizontal" action=" " method="post" id="contact_form">
 				<fieldset>
 
 					<!-- Form Name -->
@@ -43,10 +37,8 @@
 						<label class="col-md-4 control-label">Subject Name</label>
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-book"></i></span> <input
-									name="subject_name" placeholder="Enter Subject Name"
-									class="form-control" type="text">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span> <input
+									name="subject_name" placeholder="Enter Subject Name" class="form-control" type="text">
 							</div>
 						</div>
 					</div>
@@ -57,31 +49,26 @@
 						<label class="col-md-4 control-label">Subject Code</label>
 						<div class="col-md-4 inputGroupContainer">
 							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-user"></i></span> <input
-									name="subject_code" placeholder="Enter Subject Code"
-									class="form-control" type="text">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> <input
+									name="subject_code" placeholder="Enter Subject Code" class="form-control" type="text">
 							</div>
 						</div>
 					</div>
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="control-label col-md-2 col-md-offset-2"
-							for="id_title">Subject Credit</label>
+						<label class="control-label col-md-2 col-md-offset-2" for="id_title">Subject Credit</label>
 						<div class="col-md-8">
 
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control"
-										placeholder="Enter Subject theory_credit" type="text"
+									<input class="form-control" placeholder="Enter Subject theory_credit" type="text"
 										name="theory_cr">
 								</div>
 							</div>
 							<div class="col-md-4 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control"
-										placeholder="Enter Subject tutorial_credit" type="text"
+									<input class="form-control" placeholder="Enter Subject tutorial_credit" type="text"
 										name="tutorial_cr">
 								</div>
 							</div>
@@ -90,28 +77,24 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="control-label col-md-2 col-md-offset-2"
-							for="id_title">Subject Marks</label>
+						<label class="control-label col-md-2 col-md-offset-2" for="id_title">Subject Marks</label>
 						<div class="col-md-8">
 
 							<div class="col-md-3 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control"
-										placeholder="Enter Internal_theory marks" type="text"
+									<input class="form-control" placeholder="Enter Internal_theory marks" type="text"
 										name="internal_theory">
 								</div>
 							</div>
 							<div class="col-md-3 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control"
-										placeholder="Enter Internal_practical marks" type="text"
+									<input class="form-control" placeholder="Enter Internal_practical marks" type="text"
 										name="internal_practical">
 								</div>
 							</div>
 							<div class="col-md-3 inputGroupContainer">
 								<div class="input-group">
-									<input class="form-control"
-										placeholder=" Enter Final_theory marks" type="text"
+									<input class="form-control" placeholder=" Enter Final_theory marks" type="text"
 										name="final_theory">
 								</div>
 							</div>
@@ -125,9 +108,8 @@
 						<label class="col-md-4 control-label">Program</label>
 						<div class="col-md-4">
 							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-list"></i></span> <select name="program"
-									placeholder="Select Subject Program" class="form-control"
+								<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span> <select
+									name="program" placeholder="Select Subject Program" class="form-control"
 									id="faculty_select_box">
 
 								</select>
@@ -139,20 +121,17 @@
 
 					<!-- radio checks -->
 					<div class="form-group">
-						<label class="col-md-4 control-label">This Subject is
-							avilable ?</label>
+						<label class="col-md-4 control-label">This Subject is avilable ?</label>
 						<div class="col-md-4">
 
 							<div class="form-group">
 								<div class="radio">
-									<label> <input type="radio" name="status" checked
-										required> Yes
+									<label> <input type="radio" name="status" checked required> Yes
 									</label>
 								</div>
 
 								<div class="radio">
-									<label> <input type="radio" name="status" required>
-										No
+									<label> <input type="radio" name="status" required> No
 									</label>
 								</div>
 							</div>
@@ -300,24 +279,39 @@
         })
 
         .on("success.form.bv", function (e) {
-            $("#success_message").slideDown({
-                opacity : "show"
-            }, "slow"); // Do something ...
+
             $("#contact_form").data("bootstrapValidator").resetForm();
 
             // Prevent form submission
             e.preventDefault();
 
-            // Get the form instance
-            var $form = $(e.target);
+            var data = $('#contact_form').serializeArray();
+            console.log(data);
 
-            // Get the BootstrapValidator instance
-            var bv = $form.data("bootstrapValidator");
+            //Add in additional data to the original form data:
+            /*
+            data.push(
+              {name: 'age',      value: 25},
+              {name: 'sex',      value: 'M'},
+              {name: 'weight',   value: 200}
+            );  */
 
-            // Use Ajax to submit form data
-            $.post($form.attr("action"), $form.serialize(), function (result) {
-                console.log(result);
-            }, "json");
+            $.ajax({
+                type : 'POST',
+                url : window.context + "ApiSubject/SearchSubject",
+                data : data,
+                dataType : 'json',
+                cache : false,
+                success : function () {
+                    var message = "Subject has been added Successfully";
+                    $("#success_message").html(message);
+                    alert("Thanks for the submission!");
+                },
+                error : function () {
+                    alert('error!');
+                }
+            });
+
         });
     });
 </script>

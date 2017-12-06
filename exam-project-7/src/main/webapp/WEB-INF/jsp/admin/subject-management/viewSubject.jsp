@@ -24,13 +24,12 @@
 								style="margin-left: -34px; /* border: 2px solid black; */ height: 37px;">
 								<div class="form-group">
 									<div class="input-group">
-										<select class="form-control" id="subject-search-sel1"></select> <span
+										<select class="form-control" id="sel1"></select> <span
 											class="input-group-addon"> <i class="fa fa-search"></i>
 										</span>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 " id="sembtn"></div>
 						</div>
 					</div>
 				</div>
@@ -156,76 +155,26 @@
                     return false;
                 }
             });
+            
+          //For select 2 initialization
+    		var url1=window.context + "/ApiSubject/SearchSubject";
+    		var method1="POST";
+    		var url2= window.context + "/ApiSubject/GetSubject";
+    		var method2="GET";
+    		var placeholder="Subject Name";
+    		select2Function(url1,url2,method1,method2,placeholder,loadSubjectInformation);
+    		
+        });
 
             function load_subject(e) {
                 //alert(programId);
                 //alert(batchyear);
                 var semester_no =  $('#s-semester-no').val();
-                var url = window.context + "/ApiSubject/GetSubjectByParameters";
+                var url = window.context + "/ApiSubject/SearchSubject";
                 var method = "POST";
                 var data = "{'programId':'" + programId + "','semester_no':'" + semester_no + "'}";
 
                 loadSubjectInformation(url, method, data);
-            }
-
-            $("#subject-search-sel1").select2({
-                theme : "bootstrap",
-                width : "210px",
-                //width:auto,
-                height : "10px",
-                minimumInputLength : 3,
-                placeholder : "Search for a Subject",
-                ajax : {
-                    url : window.context + "/ApiSubject/SearchSubject",
-                    dataType : 'json',
-                    type : "POST",
-                    delay : 400,
-                    data : function (params) {
-                        //console.log("params="   + params.term);
-                        return {
-                            val : params.term,
-                            page : params.page
-                        };
-                    },
-                    processResults : function (data, params) {
-                        // console.log("returned data from server =" + JSON.stringify(data));
-                        //   console.log("full name = " + data.first_name + " "+data.last_name);
-                        //.log("id= " + data.s_id);
-                        params.page = params.page || 1;
-                        return {
-                            results : data,
-                            pagination : {
-                                more : (params.page * 30) < data.total_count
-                            }
-                        };
-                    },
-                    cache : true
-                },
-                escapeMarkup : function (markup) {
-                    return markup;
-                },
-                templateResult : formatRepo,
-                templateSelection : formatRepoSelection
-            }).on("change", function (e) {
-                var selected_element = $(e.currentTarget);
-                //console.log(selected_element);
-                var select_val = selected_element.val();
-                //console.log("Student Id=" + select_val);
-                var url = window.context + "/ApiSubject/GetSubject/" + select_val;
-                var method = "GET";
-                var data = "";
-                loadSubjectInformation(url, method, data);
-            });
-
-            function formatRepo(repo) {
-                // console.log("formated repo=" + JSON.stringify(repo));
-                if (repo.loading)
-                    return repo.text;
-                var markup = '<option value='+repo.id+'>' + repo.name + '</option>';
-                return markup;
-            }
-            function formatRepoSelection(repo) {
-                return repo.name || repo.text;
             }
 
             // when load all subject is clicked
@@ -295,7 +244,7 @@
 
             }
 
-        });
+        
     </script>
 
 
