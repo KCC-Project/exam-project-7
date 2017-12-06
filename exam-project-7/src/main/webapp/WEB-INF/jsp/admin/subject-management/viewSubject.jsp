@@ -247,7 +247,7 @@
                     "processing" : true,
                     "serverSide" : false,
                     "ajax" : {
-                        "url" : window.context + "/ApiSubject/GetAllSubject",
+                        "url" : url,
                         "type" : method,
                         "data" : data,
                         "dataSrc" : "",

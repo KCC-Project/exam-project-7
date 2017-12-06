@@ -68,6 +68,7 @@ public class SubjectController {
 	@Path("/SearchSubject")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public List searchSubject(@FormParam("val") String params) {
+		System.out.println(params);
 		//System.out.println("from controller= "+studentService.searchStudent(params).toString());
 		
 	return subjectService.searchSubject(params);
