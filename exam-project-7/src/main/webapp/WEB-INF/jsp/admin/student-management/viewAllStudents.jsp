@@ -323,7 +323,7 @@
 			}, {
 				data : null,
 				render : function(data, type, row) {
-					console.log("mm="+JSON.stringify(data));
+					console.log(JSON.stringify(data));
 					var full_name = "";
 					full_name +=data.first_name+ " ";
 					if(data.middle_name  == undefined){

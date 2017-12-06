@@ -292,7 +292,28 @@ public class StudentDAOImpl implements StudentDAO {
 			        if (rs != null) {
 			        	
 			        	while(rs.next()){
-			        		
+			        		Map<String, Object> map= new HashMap<>();
+			        		map.put("s_id", rs.getInt("s_id"));
+			        		map.put("address", rs.getString("address"));
+			        		map.put("current_semester", rs.getInt("current_semester"));
+			        		map.put("date_of_birth",rs.getString("date_of_birth") );
+			        		map.put("email", rs.getString("email"));
+			        		map.put("first_name",rs.getString("first_name") );
+			        		map.put("gender", rs.getInt("gender"));
+			        		map.put("image", rs.getString("image"));
+			        		map.put("last_name", rs.getString("last_name"));
+			        		map.put("middle_name", rs.getString("middle_name"));
+			        		map.put("password", rs.getString("password"));
+			        		map.put("phone",rs.getString("phone") );
+			        		map.put("status", rs.getInt("status"));
+			        		map.put("username",rs.getString("username") );
+			        	
+			        		map.put("student_program_id", rs.getInt("student_program_id"));
+			        		map.put("batch_year",rs.getInt("batch_year") );
+			        		map.put("enroll_date", rs.getString("enroll_date"));
+			        		map.put("status",rs.getInt("status") );
+			        		map.put("program_id",rs.getInt("program_id") );
+			        	/*	
 			        		Student model = new Student();
 							model.setS_id(rs.getInt("s_id"));
 							model.setAddress(rs.getString("address"));
@@ -309,6 +330,10 @@ public class StudentDAOImpl implements StudentDAO {
 							model.setStatus(rs.getInt("status"));
 							model.setUsername(rs.getString("username"));
 						
+							
+						
+			        					        		
+			        		
 							StudentsProgram model1 = new StudentsProgram();
 							model1.setStudent_program_id(rs.getInt("student_program_id"));
 							model1.setBatch_year(rs.getInt("batch_year"));
@@ -318,7 +343,11 @@ public class StudentDAOImpl implements StudentDAO {
 							model1.setS_id(rs.getInt("s_id"));
 							
 							studentsModel.add(model);
-						studentsModel.add(model1);
+							studentsModel.add(model1);*/
+			        		
+			        		studentsModel.add(map);
+			        		
+						
 						}
 
 			        }
