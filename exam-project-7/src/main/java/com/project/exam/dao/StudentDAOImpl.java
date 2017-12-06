@@ -4,23 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.inject.Model;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.project.exam.model.Student;
 import com.project.exam.model.StudentsProgram;
-import com.project.exam.model.Subjects;
 
 @Repository("studentDao")
 public class StudentDAOImpl implements StudentDAO {
@@ -53,6 +45,8 @@ public class StudentDAOImpl implements StudentDAO {
 				model.setPhone(rs.getString("phone"));
 				model.setStatus(rs.getInt("status"));
 				model.setUsername(rs.getString("username"));
+				
+				
 				listStudent.add(model);
 			}
 		} catch (Exception e) {
@@ -236,9 +230,9 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public List<Student> getStudentsByStudentsProgram(Object[] obj) {
+	public List getStudentsByStudentsProgram(Object[] obj) {
 		List<Object> parameters = new ArrayList<Object>();
-		List<Student> studentsModel = new ArrayList<>();
+		List studentsModel = new ArrayList<>();
 
 		int student_program_id = 0;
 		int s_id = 0;
@@ -254,6 +248,8 @@ public class StudentDAOImpl implements StudentDAO {
 		if (obj[3] != null) {  batch_year = Integer.parseInt(obj[3].toString()); }
 		if (obj[4] != null) {  enroll_date = obj[4].toString(); }
 		if (obj[5] != null) {  status = Integer.parseInt(obj[5].toString()); }
+		
+		System.out.println("from bd ="+program_id+  " "+batch_year);
 		
 		try {
 			  StringBuilder query = new StringBuilder("SELECT * FROM students as s  INNER JOIN students_program as sp ON s.s_id = sp.s_id  where 1=1");
@@ -312,14 +308,24 @@ public class StudentDAOImpl implements StudentDAO {
 							model.setPhone(rs.getString("phone"));
 							model.setStatus(rs.getInt("status"));
 							model.setUsername(rs.getString("username"));
+						
+							StudentsProgram model1 = new StudentsProgram();
+							model1.setStudent_program_id(rs.getInt("student_program_id"));
+							model1.setBatch_year(rs.getInt("batch_year"));
+							model1.setEnroll_date(rs.getString("enroll_date"));
+							model1.setStatus(rs.getInt("status"));
+							model1.setProgram_id(rs.getInt("program_id"));
+							model1.setS_id(rs.getInt("s_id"));
+							
 							studentsModel.add(model);
+						studentsModel.add(model1);
 						}
 
 			        }
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+		System.out.println(Arrays.deepToString(studentsModel.toArray()));
 		return studentsModel;
 	}
 

@@ -229,34 +229,13 @@
 
 	function load_student(e, target) {
 
-		$.ajax({
-			url : window.context + "/ApiStudentsProgram/SearchStudentsProgram",
-			method : "POST",
-			dataType : 'json',
-			cache : false,
+		alert(programId);
+		alert(batchyear);
+		var url = window.context + "/ApiStudent/SearchStudentsByProgram";
+		var method = "POST";
+		var data = "{'programId':'" + programId + "','batchyear':'" + batchyear + "'}";
 		
-			data : {
-				programId : programId,
-				batchyear : batchyear
-			},
-
-			success : function(data) {
-
-				console.log("batch size=" + JSON.stringify(data));
-				
-				for (var i = 0; i < data.length; i++) {
-					var s_id = data[i].s_id;
-					 alert("s_id = "+s_id);
-
-					loadStudentInformation(s_id);
-
-				}
-				
-			},
-			error : function() {
-				alert("Error...!!!");
-			}
-		});
+		loadStudentInformation(url,method,data);
 	}
 
 	$("select").select2({
@@ -307,7 +286,10 @@
 		console.log(selected_element);
 		var select_val = selected_element.val();
 		console.log("Student Id=" + select_val);
-		loadStudentInformation(select_val);
+		var url = window.context + "/ApiStudent/GetStudent/" + select_val;
+		var method = "GET";
+		var data = "";
+		loadStudentInformation(url, method, data);
 	});
 
 	function formatRepo(repo) {
@@ -321,16 +303,16 @@
 		return repo.name || repo.text;
 	}
 
-	function loadStudentInformation(val) {
+	function loadStudentInformation(url, method, data) {
 		// Initializing Datatable
 		$('#view_student').DataTable({
 			"processing" : true,
 			"serverSide" : true,
 			"ajax" : {
-				"url" : window.context + "/ApiStudent/GetStudent/" + val,
-				"type" : "GET",
+				"url" : url,
+				"type" : method,
+				"data": data,
 				"dataSrc" : "",
-				"contentType" : "application/json",
 				"dataType" : "json",
 				"async" : false
 			},
@@ -341,9 +323,17 @@
 			}, {
 				data : null,
 				render : function(data, type, row) {
-					
+					console.log("mm="+JSON.stringify(data));
+					var full_name = "";
+					full_name +=data.first_name+ " ";
+					if(data.middle_name  == undefined){
+						
+					}else{
+						full_name += data.middle_name+ " ";
+					}
+					full_name += data.last_name;
 					// Combine the two data
-					return '' + data.first_name + ' ' + data.last_name + '';
+					return '' + full_name + '';
 				},
 			}, {
 				"data" : "username"
@@ -351,7 +341,7 @@
 				data : null,
 				render : function(data, type, row) {
 					// Combine the two data
-					if (data.gender == 0) {
+					if (data.gender == 1) {
 						return 'Male';
 					} else {
 						return 'Female';

@@ -86,11 +86,12 @@ public class StudentController {
 	@POST
 	@Path("/SearchStudentsByProgram")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public List<Student> searchStudentsProgram(@FormParam("programId") int programId,@FormParam("batchyear") int batchyear) {
+	public List searchStudentsByProgram(@FormParam("programId") int programId,@FormParam("batchyear") int batchyear) {
+		System.out.println("from controller =" +programId +" "+batchyear);
 		Object[] ob= new Object[7];
-		ob[2]=programId;
-		System.out.println(ob[2]);
-		ob[3]=batchyear;
+		ob[2]=3;
+		ob[3]=2013;
+		System.out.println("form server = "+studentService.getStudentsByStudentsProgram(ob));
 		return studentService.getStudentsByStudentsProgram(ob);
 	}
 	

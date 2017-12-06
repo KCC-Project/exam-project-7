@@ -45,7 +45,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> getStudentsByStudentsProgram(Object[] obj) {
+	public List getStudentsByStudentsProgram(Object[] obj) {
 		return studentDao.getStudentsByStudentsProgram(obj);
 	}
 

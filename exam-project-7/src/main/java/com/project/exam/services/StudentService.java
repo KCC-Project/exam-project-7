@@ -16,5 +16,5 @@ public interface StudentService {
 	public Student updateStudent(Student student);
 	public int deleteStudent(int s_Id);
 	public List searchStudent(String searchPara);
-	public List<Student> getStudentsByStudentsProgram(Object[] obj);
+	public List getStudentsByStudentsProgram(Object[] obj);
 }
