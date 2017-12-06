@@ -353,7 +353,7 @@
 			"processing" : true,
 			"serverSide" : true,
 			"ajax" : {
-				"url" : window.context + "/ApiStudent/GetStudent/" + val,
+				"url" : window.context + "/ApiStudent/GetAllStudent",
 				"type" : "GET",
 				"dataSrc" : "",
 				"contentType" : "application/json",
@@ -366,6 +366,7 @@
 			}, {
 				data : null,
 				render : function(data, type, row) {
+					
 					// Combine the two data
 					return '' + data.first_name + ' ' + data.last_name + '';
 				},
