@@ -77,8 +77,7 @@ public class ProgramController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public List searchProgram(@FormParam("val") String params) {
 		//System.out.println("from controller= "+studentService.searchStudent(params).toString());
-		
-	return programService.searchStudent(params);
+	return programService.searchProgram(params);
 		
 	}
 }

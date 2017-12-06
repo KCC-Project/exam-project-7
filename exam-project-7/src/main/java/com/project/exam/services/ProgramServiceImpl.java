@@ -43,4 +43,9 @@ public class ProgramServiceImpl implements ProgramService {
 		return programDao.getProgramListByFacultyId(s_Id);
 	}
 
+	@Override
+	public List searchProgram(String searchPara) {
+	return programDao.searchProgram(searchPara);
+	}
+
 }

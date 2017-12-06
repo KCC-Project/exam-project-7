@@ -14,4 +14,5 @@ public interface ProgramService {
 	public Program updateProgram(Program program);
 	public int deleteProgram(int s_Id);
 	public List<Program> getProgramListByFacultyId(int s_Id);
+	public List searchProgram(String searchPara);
 }
