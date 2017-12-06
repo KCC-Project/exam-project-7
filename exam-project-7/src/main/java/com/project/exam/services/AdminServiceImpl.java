@@ -25,7 +25,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Admin getAdmin(int s_Id) {
+	public List<Admin> getAdmin(int s_Id) {
 		return adminDao.getAdmin(s_Id);
 	}
 
@@ -37,6 +37,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int deleteAdmin(int s_Id) {
 		return adminDao.deleteAdmin(s_Id);
+	}
+
+	@Override
+	public List searchAdmin(String searchPara) {
+	return adminDao.searchAdmin(searchPara);
 	}
 
 }

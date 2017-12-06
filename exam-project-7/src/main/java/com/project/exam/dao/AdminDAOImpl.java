@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.exam.model.Admin;
+import com.project.exam.model.Program;
 import com.project.exam.model.Student;
 
 @Repository("adminDao")
@@ -77,8 +80,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public Admin getAdmin(int s_Id) {
-		Admin model = new Admin();
+	public List<Admin> getAdmin(int s_Id) {
+		List<Admin>listAdmin= new ArrayList<>();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "Select * from admins where admin_id=?";
@@ -86,15 +89,17 @@ public class AdminDAOImpl implements AdminDAO {
 			pst.setInt(1, s_Id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
+				Admin model = new Admin();
 				model.setAdmin_id(rs.getInt("admin_id"));
 				model.setAdmin_password(rs.getString("admin_password"));
 				model.setAdmin_username(rs.getString("admin_username"));
 				model.setStatus(rs.getInt("status"));
+				listAdmin.add(model);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return model;
+		return listAdmin;
 	}
 
 	@Override
@@ -143,6 +148,29 @@ public class AdminDAOImpl implements AdminDAO {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public List searchAdmin(String searchPara) {
+		List listOfReslut = new ArrayList<>();
+		//System.out.println("search ="+searchPara);
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "SELECT * FROM admins WHERE admin_username like '"+searchPara+"%'";
+			pst=conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+		//System.out.println("here");
+			while (rs.next()) {
+				Map<String, Object> map = new HashMap<>();
+				Program s = new Program();
+				map.put("id", rs.getInt("admin_id"));
+				map.put("name", rs.getString("admin_username"));			
+				listOfReslut.add(map);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return listOfReslut;
 	}
 
 }

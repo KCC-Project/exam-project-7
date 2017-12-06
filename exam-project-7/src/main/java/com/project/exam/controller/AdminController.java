@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -43,7 +44,7 @@ public class AdminController {
 	@GET
 	@Path("/GetAdmin/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Admin getAdmin(@PathParam("id") int id) {
+	public List<Admin> getAdmin(@PathParam("id") int id) {
 		return adminService.getAdmin(id);
 	}
 	
@@ -61,5 +62,13 @@ public class AdminController {
 	public int deleteAdmin(@PathParam("id") int id) {
 		return adminService.deleteAdmin(id);
 	}
-	
+	@POST
+	@Path("/SearchAdmin")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List searchProgram(@FormParam("val") String params) {
+		System.out.println("inside search SearchAdmin ");
+		//System.out.println("from controller= "+studentService.searchStudent(params).toString());
+	return adminService.searchAdmin(params);
+		
+	}
 }

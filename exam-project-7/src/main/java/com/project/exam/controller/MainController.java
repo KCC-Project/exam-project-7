@@ -102,4 +102,13 @@ public class MainController {
 		model.put("exam-type_clicked", true);
 		return new Viewable("/admin/exam-management/exam-type", model);
 	}
+	
+	@GET
+	@Path("/view-admin")
+	public Viewable admin() {
+		System.out.println("Insdie admin");
+		Map<String, Boolean> model = new HashMap<>();
+		model.put("admin-type_clicked", true);
+		return new Viewable("/admin/admin-management/view-admin", model);
+	}
 }

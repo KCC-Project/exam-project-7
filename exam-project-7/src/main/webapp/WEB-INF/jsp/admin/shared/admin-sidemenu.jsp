@@ -62,7 +62,18 @@
              <li><a href="${cp }/student-exam" id="student-exam">Student-exam</a></li>
           </ul>
         </li>
-        
+        <!--====================================================================================  -->
+          <li class="link">
+          <a href="#collapse-admin" data-toggle="collapse"  aria-controls="collapse-admin">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-xs hidden-sm">Setting</span>
+            <span class="caret pull-right"></span>
+          </a>
+          <ul class="collapse collapseable" id="collapse-admin">
+            <li><a href="${cp }/view-admin" id="view-admin">View-Admin</a></li>
+            
+          </ul>
+        </li>
       </ul>
     </div>
     <!-- -------------------------------------------------- -->
