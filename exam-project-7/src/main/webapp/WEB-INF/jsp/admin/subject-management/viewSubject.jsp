@@ -248,10 +248,11 @@
                     "serverSide" : false,
                     "ajax" : {
                         "url" : url,
-                        "type" : method,
-                        "data" : data,
-                        "dataSrc" : "",
-                        "dataType" : "json"
+        				"type" : method,
+        				"data": data,
+        				"dataSrc" : "",
+        				"dataType" : "json",
+        				"async" : false
                     },
                     "columns" : [ {
                         "data" : "subject_id"
@@ -262,6 +263,7 @@
                     }, {
                         data : null,
                         render : function (data, type, row) {
+                            console.log(data);
                             // Combine the two data
                             return 'Theory_credit: ' + data.theory_cr + '</br> Tutorial_credit: ' + data.tutorial_cr;
                         },

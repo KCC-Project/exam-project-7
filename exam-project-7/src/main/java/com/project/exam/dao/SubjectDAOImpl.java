@@ -186,7 +186,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 		List listOfResult = new ArrayList<>();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "SELECT * FROM subjects WHERE program_name like '" + searchPara + "%'";
+			sql = "SELECT * FROM subjects WHERE subject_name like '" + searchPara + "%'";
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -197,7 +197,6 @@ public class SubjectDAOImpl implements SubjectDAO {
 
 				map.put("id", rs.getInt("subject_id"));
 				map.put("name", subjectName);
-				
 				listOfResult.add(map);
 			}
 		} catch (Exception e) {
