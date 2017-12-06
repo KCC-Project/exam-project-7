@@ -108,8 +108,8 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public Student getStudent(int s_Id) {
-		Student model = new Student();
+	public List<Student> getStudent(int s_Id) {
+		List<Student> listStudent= new ArrayList<>();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "Select * from students where s_id=?";
@@ -117,6 +117,7 @@ public class StudentDAOImpl implements StudentDAO {
 			pst.setInt(1, s_Id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
+				Student model = new Student();
 				model.setS_id(rs.getInt("s_id"));
 				model.setAddress(rs.getString("address"));
 				model.setCurrent_semester(rs.getInt("current_semester"));
@@ -131,13 +132,13 @@ public class StudentDAOImpl implements StudentDAO {
 				model.setPhone(rs.getString("phone"));
 				model.setStatus(rs.getInt("status"));
 				model.setUsername(rs.getString("username"));
-				
+				listStudent.add(model);
 
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return model;
+		return listStudent;
 	}
 
 	@Override

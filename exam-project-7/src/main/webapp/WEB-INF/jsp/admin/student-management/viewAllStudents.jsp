@@ -34,7 +34,7 @@
 	</div>
 
 
-	<table id="view_student" class="table table-hover table-striped"
+	<table id="view_student" class="table table-hover table-striped table-responsive"
 		cellspacing="0" width="100%">
 		<thead>
 			<tr class="info">
@@ -234,7 +234,7 @@
 			method : "POST",
 			dataType : 'json',
 			cache : false,
-
+		
 			data : {
 				programId : programId,
 				batchyear : batchyear
@@ -243,41 +243,15 @@
 			success : function(data) {
 
 				console.log("batch size=" + JSON.stringify(data));
-				var content1 = '';
-				content1 += "<option selected='true' > Select Student </option>"
+				
 				for (var i = 0; i < data.length; i++) {
 					var s_id = data[i].s_id;
-					// alert("outside");
+					 alert("s_id = "+s_id);
 
-					$.ajax({
-						url : window.context + "/ApiStudent/GetStudent/" + s_id,
-						method : "GET",
-						dataType : 'json',
-						cache : false,
-						async : false,
-						success : function(data) {
-							//alert("insode");
-							console.log("student name size=" + JSON.stringify(data));
-
-							var firstname = data.first_name;
-							var middlename = data.middle_name;
-							var lastname = data.last_name;
-							var sid = data.s_id;
-							if (middlename == null) {
-								fullname = firstname + " " + lastname;
-							} else {
-								fullname = firstname + " " + middlename + " " + lastname;
-							}
-
-							content1 += '<option value='+sid+'>' + fullname + '</option>';
-						},
-						error : function() {
-							alert("Error...!!!");
-						}
-					});
+					loadStudentInformation(s_id);
 
 				}
-				$('#' + target).html(content1);
+				
 			},
 			error : function() {
 				alert("Error...!!!");
@@ -353,11 +327,12 @@
 			"processing" : true,
 			"serverSide" : true,
 			"ajax" : {
-				"url" : window.context + "/ApiStudent/GetAllStudent",
+				"url" : window.context + "/ApiStudent/GetStudent/" + val,
 				"type" : "GET",
 				"dataSrc" : "",
 				"contentType" : "application/json",
-				"dataType" : "json"
+				"dataType" : "json",
+				"async" : false
 			},
 			"columns" : [ {
 				"data" : "s_id"

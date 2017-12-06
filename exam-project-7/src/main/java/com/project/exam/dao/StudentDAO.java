@@ -12,9 +12,9 @@ import com.project.exam.model.Student;
 public interface StudentDAO {
 	public List<Student> getStudentList();
 	public Student addStudent(Student student);
-	public Student getStudent(int s_Id);
+	public List<Student> getStudent(int s_Id);
 	public Student updateStudent(Student student);
 	public int deleteStudent(int s_Id);
 	public List searchStudent(String searchPara);
-	
+
 }
