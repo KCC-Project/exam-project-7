@@ -55,6 +55,16 @@ public class MainController {
 		model.put("faculty_clicked", true);
 		return new Viewable("/admin/student-management/faculty", model);
 	}
+	
+	@GET
+	@Path("/program")
+	public Viewable program() {
+		System.out.println("Insdie program");
+		Map<String, Boolean> model = new HashMap<>();
+		model.put("program_clicked", true);
+		return new Viewable("/admin/student-management/program", model);
+	}
+	
 
 	@GET
 	@Path("/student/view")

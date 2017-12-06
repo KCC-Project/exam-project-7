@@ -140,13 +140,13 @@
 			cache : true,
 			success : function(data) {
 				var json = data;
-				console.log("json size=" + data.length);
+				//console.log("json size=" + data.length);
 				var content = '';
 				content += "<option selected='true' > Select Faculty </option>"
 				for (var i = 0; i < data.length; i++) {
 					var facultyName = data[i].faculty_name;
 					var facultyId = data[i].faculty_id;
-					console.log("faculty name =" + facultyName);
+					//console.log("faculty name =" + facultyName);
 
 					content += '<option value='+facultyId+'>' + facultyName + '</option>';
 				}
@@ -167,13 +167,13 @@
 			cache : true,
 			success : function(data) {
 
-				console.log("program size=" + JSON.stringify(data));
+				//console.log("program size=" + JSON.stringify(data));
 				var content = '';
 				content += "<option selected='true' > Select Program </option>"
 				for (var i = 0; i < data.length; i++) {
 					var programeName = data[i].program_name;
 					var programeId = data[i].program_id;
-					console.log("faculty name =" + programeName);
+					//console.log("faculty name =" + programeName);
 
 					content += '<option value='+programeId+'>' + programeName + '</option>';
 				}
@@ -195,8 +195,8 @@
 			dataType : 'json',
 			cache : true,
 			success : function(data) {
-				console.log("simple data=" + data);
-				console.log("batch size=" + JSON.stringify(data));
+				//console.log("simple data=" + data);
+				//console.log("batch size=" + JSON.stringify(data));
 				var lengt = data.length;
 				var duplicateYear = [];
 				var content = '';
@@ -229,8 +229,8 @@
 
 	function load_student(e, target) {
 
-		alert(programId);
-		alert(batchyear);
+		//alert(programId);
+		//alert(batchyear);
 		var url = window.context + "/ApiStudent/SearchStudentsByProgram";
 		var method = "POST";
 		var data = "{'programId':'" + programId + "','batchyear':'" + batchyear + "'}";
@@ -283,9 +283,9 @@
 		templateSelection : formatRepoSelection
 	}).on("change", function(e) {
 		var selected_element = $(e.currentTarget);
-		console.log(selected_element);
+		//console.log(selected_element);
 		var select_val = selected_element.val();
-		console.log("Student Id=" + select_val);
+		//console.log("Student Id=" + select_val);
 		var url = window.context + "/ApiStudent/GetStudent/" + select_val;
 		var method = "GET";
 		var data = "";
@@ -306,8 +306,11 @@
 	function loadStudentInformation(url, method, data) {
 		// Initializing Datatable
 		$('#view_student').DataTable({
+			 destroy: true,
+			 paging: true,
+			    searching: true,
 			"processing" : true,
-			"serverSide" : true,
+			"serverSide" : false,
 			"ajax" : {
 				"url" : url,
 				"type" : method,
@@ -362,14 +365,14 @@
 			}, {
 				data : null,
 				render : function(data, type, row) {
-					return '<button class="btn btn-success editBtns">Click!</button>';
+					return '<button class="btn btn-success editBtns">Edit</button>';
 				},
 			} ]
 		});
 
 		// edit buttons on subjects row
 		$('#view_student tbody').on('click', '.editBtns', function() {
-			var table = $("#view_subject").DataTable();
+			var table = $("#view_student").DataTable();
 			var data = table.row($(this).parents('tr')).data();
 			console.log(data);
 			alert(data['username'] + "' id is: " + data['s_id']);
