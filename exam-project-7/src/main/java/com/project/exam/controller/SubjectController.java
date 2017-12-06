@@ -86,6 +86,16 @@ public class SubjectController {
 		return subjectService.getSubjectByParameters(ob);
 	}
 	
+	@GET
+	@Path("/GetSubjectByParameters1/{id}")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List getSubjectByParameters1(@PathParam("id") int programId) {
+		
+		Object[] ob= new Object[11];
+		ob[1]=programId;
+		return subjectService.getSubjectByParameters(ob);
+	}
+	
 	@POST
 	@Path("/GetSubjectByProgram")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})

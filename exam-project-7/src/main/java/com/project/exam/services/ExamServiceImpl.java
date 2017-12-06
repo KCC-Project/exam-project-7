@@ -40,4 +40,9 @@ public class ExamServiceImpl implements ExamService {
 		return examDao.deleteExam(s_Id);
 	}
 
+	@Override
+	public List<Exam> searchByField(Object[] obj) {
+		return examDao.searchByField(obj);
+	}
+
 }

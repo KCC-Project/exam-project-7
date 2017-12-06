@@ -10,4 +10,5 @@ public interface ExamService {
 	public Exam getExam(int s_Id);
 	public Exam updateExam(Exam exam);
 	public int deleteExam(int s_Id);
+	public List<Exam> searchByField(Object[] obj);
 }

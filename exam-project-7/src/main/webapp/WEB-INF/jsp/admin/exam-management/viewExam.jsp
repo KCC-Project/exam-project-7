@@ -72,12 +72,41 @@
 							<div class="form-group col-sm-4" style="margin-bottom: 0px;">
 								<select required class="form-control" name="subject_id"
 									id="p-subject-box">
-									<option value="" disabled selected>Select Batch</option>
+									<option value="" disabled selected>Select Subject</option>
 								</select>
 							</div>
+							
+							
 
 						</div>
 					</div>
+					<br>
+				
+					<div class="row">
+						<div class="col-sm-12">
+						<div class="form-group col-sm-6" style="margin-bottom: 0px;">
+								<select required class="form-control" name="subject_id"
+									id="p-Exam-Type-box">
+									<option value="" disabled selected> Select Exam Type</option>
+								</select>
+							</div>
+							
+							<div class="form-group col-sm-6" style="margin-bottom: 0px;">
+								<select required class="form-control" name="semester"
+									id="p-semester-box">
+									<option value="" disabled selected> select Semester </option>
+									<option value="1" > 1</option>
+									<option value="2" > 2</option>
+									<option value="3" >3 </option>
+									<option value="4" >4 </option>
+									<option value="5" >5 </option>
+									<option value="6" >6 </option>
+									<option value="7" >7 </option>
+									<option value="8" >8 </option>
+								</select>
+							</div>
+					</div>
+					</div>	
 					<br>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -92,12 +121,16 @@
 <!--=========================================================================================  -->
 <jsp:include page="../shared/footer.jsp" />
 <script>
-	
-
+var subjectId;
+var examTypeId;
+var examTypeName;
 	$(document).ready(function() {
-
+		
+	
+		
 		$("#modal-box").click(function(event) {
 			load_faculty(event, "p-faculty-box");
+			
 		});
 		$("#p-faculty-box").change(function(event) {
 			load_program(event, "p-program-box");
@@ -105,6 +138,20 @@
 		$("#p-program-box").change(function(event) {
 			load_subject(event, "p-subject-box");
 		});
+		
+		$("#p-subject-box").change(function(event) {
+			load_exam_type(event, "p-Exam-Type-box");
+		});
+		
+		$("#p-Exam-Type-box").change(function(event) {
+			
+			var getid = event.target.id;
+			 examTypeId  = $('#' + getid).find(":selected").val();
+			 examTypeName=$('#' + getid).find(":selected").text();
+			//alert("examTypeId = "+examTypeId+" "+examTypeName+ " "+subjectId);
+		});
+		
+		
 		
 		$("#searchbtnClicked").click(function(event) {
 			
@@ -116,39 +163,57 @@
 		});
 		
 	});
-
-	function load_subjects(e, target) {
-		var getid = e.target.id;
-		var id = $('#' + getid).find(":selected").val();
+	
+	
+	
+	
+	function load_exam_type(event,target){
+		var getid = event.target.id;
+		subjectId  = $('#' + getid).find(":selected").val();
 		$.ajax({
-			url : window.context + "/ApiStudentsProgram/GetStudentsProgramByProgramId/" + id,
+			url : window.context + "/ApiExam_type/GetAllExam_type",
 			method : "GET",
 			dataType : 'json',
 			cache : true,
 			success : function(data) {
-				//console.log("simple data=" + data);
-				//console.log("batch size=" + JSON.stringify(data));
-				var lengt = data.length;
-				var duplicateYear = [];
+				var json = data;
+				//console.log("json size=" + data.length);
 				var content = '';
-				content += "<option selected='true' > Select Batch </option>"
+				content += "<option selected='true' > Select Exam Type </option>"
 				for (var i = 0; i < data.length; i++) {
+					var examTypeName = data[i].type_name;
+					var examTypeNameId = data[i].exam_type_id;
+					//console.log("faculty name =" + facultyName);
 
-					duplicateYear[i] = data[i].batch_year;
-					var batch_yearDate = data[i].batch_year;
-					var batch_yearId = data[i].student_program_id;
-					//console.log("batch_yearDate name ="	+ batch_yearDate);
+					content += '<option value='+examTypeNameId+'>' + examTypeName + '</option>';
+				}
+				$('#' + target).html(content);
+			},
+			error : function() {
+				alert("Error...!!!");
+			}
+		});
+	}
 
+	function load_subject(e, target) {
+		var getid = e.target.id;
+		var id = $('#' + getid).find(":selected").val();
+		$.ajax({
+			url : window.context + "/ApiSubject/GetSubjectByParameters1/" + id,
+			method : "GET",
+			dataType : 'json',
+			cache : true,
+			success : function(data) {
+				
+				console.log("batch size=" + JSON.stringify(data));
+				
+				var content = '';
+				content += "<option selected='true' > Select Subject </option>"
+				for (var i = 0; i < data.length; i++) {
+					content += '<option value='+data[i].subject_id +'>' + data[i].subject_name + '</option>';
 				}
 
-				var uniqueYear = duplicateYear.filter(function(x, i, a) {
-					return a.indexOf(x) == i;
-				});
-
-				for (var i = 0; i < uniqueYear.length; i++) {
-					//batchyear = uniqueYear[i];
-					content += '<option value='+uniqueYear[i] +'>' + uniqueYear[i] + '</option>';
-				}
+				
 
 				$('#' + target).html(content);
 			},

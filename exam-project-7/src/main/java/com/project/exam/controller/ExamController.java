@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.project.exam.model.Exam;
+import com.project.exam.model.StudentsProgram;
 import com.project.exam.services.ExamService;
 
 @Path("ApiExam")
@@ -60,6 +62,16 @@ public class ExamController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public int deleteExam(@PathParam("id") int id) {
 		return examService.deleteExam(id);
+	}
+	
+	@POST
+	@Path("/GetExamByExamTypeAndSubjectId")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List<Exam> getExamByExamTypeAndSubjectId(@FormParam("examTypeId") int examTypeId,@FormParam("subjectId") int subjectId) {
+		Object[] ob= new Object[10];
+		ob[1]=examTypeId;
+		ob[2]=subjectId;
+		return examService.searchByField(ob);
 	}
 	
 }
