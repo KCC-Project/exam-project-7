@@ -1,6 +1,6 @@
 
 //url1 for search Param ,url2 for get getting data with the help of selected id, fxn calling datatable load 
-function select2Function(url1,url2,method1,method2,fxn){
+function select2Function(url1,url2,method1,method2,placeholder,fxn){
 		$("select").select2({
 			theme : "bootstrap",
 			width : "auto"
@@ -12,7 +12,7 @@ function select2Function(url1,url2,method1,method2,fxn){
 			//width:auto,
 			height : "10px",
 			minimumInputLength : 3,
-			placeholder : "Search Admin",
+			placeholder : "Search "+placeholder,
 			ajax : {
 				url :url1 ,
 				dataType : 'json',

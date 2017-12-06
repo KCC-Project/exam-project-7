@@ -57,7 +57,16 @@
 <jsp:include page="../shared/footer.jsp" />
 <script>
 	$(document).ready(function() {
-
+		
+		
+		var url1=window.context + "/ApiExam_type/SearchExam-Type";
+		var method1="POST";
+		var url2= window.context + "/ApiExam_type/GetExam_type";
+		var method2="GET";
+		var placeholder="Exam Type";
+		select2Function(url1,url2,method1,method2,placeholder,loadExamTypeInformation);
+		
+		
 		$("#modal-box-vew-all-exam-type").click(function(event) {
 			var url = window.context + "/ApiExam_type/GetAllExam_type";
 			var method = "GET";
@@ -66,72 +75,9 @@
 		});
 	});
 
-	$("select").select2({
-		theme : "bootstrap",
-		width : "auto"
-	});
 
-	$("#sel1").select2({
-		theme : "bootstrap",
-		width : "210px",
-		//width:auto,
-		height : "10px",
-		minimumInputLength : 3,
-		placeholder : "Search Exam Type",
-		ajax : {
-			url : window.context + "/ApiExam_type/SearchExam-Type",
-			dataType : 'json',
-			type : "POST",
-			delay : 400,
-			data : function(params) {
-				//console.log("params="   + params.term);
-				return {
-					val : params.term,
-					page : params.page
-				};
-			},
-			processResults : function(data, params) {
-				console.log("returned data from server =" + JSON.stringify(data));
-				//   console.log("full name = " + data.first_name + " "+data.last_name);
-				//.log("id= " + data.s_id);
-				params.page = params.page || 1;
-				return {
-					results : data,
-					pagination : {
-						more : (params.page * 30) < data.total_count
-					}
-				};
-			},
-			cache : true
-		},
-		escapeMarkup : function(markup) {
-			return markup;
-		},
-		templateResult : formatRepo,
-		templateSelection : formatRepoSelection
-	}).on("change", function(e) {
-		var selected_element = $(e.currentTarget);
-		//console.log(selected_element);
-		var select_val = selected_element.val();
-		//console.log("program Id=" + select_val);
-		//alert(select_val);
-		var url = window.context + "/ApiExam_type/GetExam_type/" + select_val;
-		var method = "GET";
-		var data = "";
-		loadExamTypeInformation(url, method, data);
-	});
-
-	function formatRepo(repo) {
-		// console.log("formated repo=" + JSON.stringify(repo));
-		if (repo.loading)
-			return repo.text;
-		var markup = '<option value='+repo.id+'>' + repo.name + '</option>';
-		return markup;
-	}
-	function formatRepoSelection(repo) {
-		return repo.name || repo.text;
-	}
 	function loadExamTypeInformation(url, method, data) {
+		alert(url+"  "+method+  +data);
 		$('#view_exam_Type').DataTable({
 			destroy : true,
 			paging : true,

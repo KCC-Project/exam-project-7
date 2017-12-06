@@ -130,6 +130,15 @@
 			var id = $('#' + getid).find(":selected").val();
 			batchyear = id;
 		});
+		
+		
+		//For select 2 initialization
+		var url1=window.context + "/ApiStudent/SearchStudent";
+		var method1="POST";
+		var url2= window.context + "/ApiStudent/GetStudent";
+		var method2="GET";
+		var placeholder="Student";
+		select2Function(url1,url2,method1,method2,placeholder,loadStudentInformation);
 
 	});
 
@@ -186,70 +195,7 @@
 		loadStudentInformation(url,method,data);
 	}
 
-	$("select").select2({
-		theme : "bootstrap",
-		width : "auto"
-	});
-
-	$("#sel1").select2({
-		theme : "bootstrap",
-		width : "210px",
-		//width:auto,
-		height : "10px",
-		minimumInputLength : 3,
-		placeholder : "Search for a student",
-		ajax : {
-			url : window.context + "/ApiStudent/SearchStudent",
-			dataType : 'json',
-			type : "POST",
-			delay : 400,
-			data : function(params) {
-				//console.log("params="   + params.term);
-				return {
-					val : params.term,
-					page : params.page
-				};
-			},
-			processResults : function(data, params) {
-				// console.log("returned data from server =" + JSON.stringify(data));
-				//   console.log("full name = " + data.first_name + " "+data.last_name);
-				//.log("id= " + data.s_id);
-				params.page = params.page || 1;
-				return {
-					results : data,
-					pagination : {
-						more : (params.page * 30) < data.total_count
-					}
-				};
-			},
-			cache : true
-		},
-		escapeMarkup : function(markup) {
-			return markup;
-		},
-		templateResult : formatRepo,
-		templateSelection : formatRepoSelection
-	}).on("change", function(e) {
-		var selected_element = $(e.currentTarget);
-		//console.log(selected_element);
-		var select_val = selected_element.val();
-		//console.log("Student Id=" + select_val);
-		var url = window.context + "/ApiStudent/GetStudent/" + select_val;
-		var method = "GET";
-		var data = "";
-		loadStudentInformation(url, method, data);
-	});
-
-	function formatRepo(repo) {
-		// console.log("formated repo=" + JSON.stringify(repo));
-		if (repo.loading)
-			return repo.text;
-		var markup = '<option value='+repo.id+'>' + repo.name + '</option>';
-		return markup;
-	}
-	function formatRepoSelection(repo) {
-		return repo.name || repo.text;
-	}
+	
 
 	
 </script>

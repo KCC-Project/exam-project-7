@@ -63,7 +63,8 @@
 		var method1="POST";
 		var url2=window.context + "/ApiAdmin/GetAdmin";
 		var method2="GET";
-		select2Function(url1,url2,method1,method2,loadAdminInformation);
+		var placeholder="Admin";
+		select2Function(url1,url2,method1,method2,placeholder,loadAdminInformation);
 		
 	
 		$("#modal-box-vew-all-admin").click(function(event) {
