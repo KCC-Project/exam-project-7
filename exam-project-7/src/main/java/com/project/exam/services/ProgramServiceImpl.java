@@ -24,7 +24,7 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 
 	@Override
-	public Program getProgram(int s_Id) {
+	public List<Program> getProgram(int s_Id) {
 		return programDao.getProgram(s_Id);
 	}
 

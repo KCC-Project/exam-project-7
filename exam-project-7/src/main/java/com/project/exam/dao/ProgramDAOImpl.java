@@ -83,8 +83,9 @@ public class ProgramDAOImpl implements ProgramDAO {
 	}
 
 	@Override
-	public Program getProgram(int s_Id) {
-		Program model= new Program();
+	public List<Program> getProgram(int s_Id) {
+		List<Program> listProgram= new ArrayList<>();
+	
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "Select * from programs where program_id=?";
@@ -92,19 +93,19 @@ public class ProgramDAOImpl implements ProgramDAO {
 			pst.setInt(1, s_Id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				
+				Program model= new Program();
 				model.setProgram_id(rs.getInt("program_id"));
 				model.setProgram_name(rs.getString("program_name"));
 				model.setProgram_years(rs.getInt("program_years"));
 				model.setStatus(rs.getInt("status"));
 				model.setTotal_credit(rs.getInt("total_credit"));
 				model.setFaculty_id(rs.getInt("faculty_id"));
-				
+				listProgram.add(model);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return model;
+		return listProgram;
 	}
 
 	@Override

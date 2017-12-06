@@ -44,8 +44,8 @@ public class ProgramController {
 	@GET
 	@Path("/GetProgram/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Program getProgram(@PathParam("id") int id) {
-		System.out.println("it is here = "+id);
+	public List<Program> getProgram(@PathParam("id") int id) {
+		System.out.println("it is hercie = "+id);
 		System.out.println(programService.getProgram(id).toString());
 		return programService.getProgram(id);
 	}
