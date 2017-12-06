@@ -103,53 +103,58 @@
 
 
 					<!-- Select Basic -->
-
 					<div class="form-group">
-						<label class="col-md-4 control-label">Program</label>
-						<div class="col-md-4">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span> <select
-									name="program" placeholder="Select Subject Program" class="form-control"
-									id="faculty_select_box">
-
-								</select>
-							</div>
-						</div>
-					</div>
-
-
-
-					<!-- radio checks -->
-					<div class="form-group">
-						<label class="col-md-4 control-label">This Subject is avilable ?</label>
-						<div class="col-md-4">
-
-							<div class="form-group">
-								<div class="radio">
-									<label> <input type="radio" name="status" checked required> Yes
-									</label>
-								</div>
-
-								<div class="radio">
-									<label> <input type="radio" name="status" required> No
-									</label>
+						<label class="control-label col-md-2 col-md-offset-2" for="id_title">Subject Program</label>
+						<div class="col-md-8">
+							<div class="col-md-3 inputGroupContainer">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span> <select
+										required class="form-control" id="p-faculty-box" name="faculty_id">
+									</select>
 								</div>
 							</div>
 
+							<div class="col-md-3 inputGroupContainer">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span> <select
+										required class="form-control" id="p-program-box" name="program_id" required>
+									</select>
+								</div>
+							</div>
 						</div>
-					</div>
-
-
-					<!-- Button -->
-					<div class="form-group">
-						<label class="col-md-4 control-label"></label>
-						<div class="col-md-4">
-							<button type="submit" class="btn btn-warning">
-								Send <span class="glyphicon glyphicon-send"></span>
-							</button>
 						</div>
-					</div>
 
+
+						<!-- radio checks -->
+						<div class="form-group">
+							<label class="col-md-4 control-label">This Subject is avilable ?</label>
+							<div class="col-md-4">
+
+								<div class="form-group">
+									<div class="radio">
+										<label> <input type="radio" value=0 name="status" checked required> Yes
+										</label>
+									</div>
+
+									<div class="radio">
+										<label> <input type="radio" value=1 name="status" required> No
+										</label>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+						<!-- Button -->
+						<div class="form-group">
+							<label class="col-md-4 control-label"></label>
+							<div class="col-md-4">
+								<button type="submit" class="btn btn-warning">
+									Send <span class="glyphicon glyphicon-send"></span>
+								</button>
+							</div>
+						</div>
 				</fieldset>
 			</form>
 		</div>
@@ -160,30 +165,11 @@
 
 <script>
     $(document).ready(function () {
-        $("#faculty_select_box").select2({
-            tags : true,
-            multiple : true,
-            ajax : {
-                url : window.context + "/ApiFaculty/GetAllFaculty",
-                dataType : "json",
-                type : "GET",
-                data : function (params) {
-                    var queryParameters = {
-                        term : params.term
-                    };
-                    return queryParameters;
-                },
-                processResults : function (data) {
-                    return {
-                        results : $.map(data, function (item) {
-                            return {
-                                text : item.faculty_name,
-                                id : item.faculty_id
-                            };
-                        })
-                    };
-                }
-            }
+
+        load_faculty(event, "p-faculty-box");
+
+        $("#p-faculty-box").change(function (event) {
+            load_program(event, "p-program-box");
         });
 
         $("#contact_form").bootstrapValidator({
@@ -263,24 +249,11 @@
                             message : "Please Enter Number"
                         }
                     }
-                },
-                program : {
-                    validators : {
-                        stringLength : {
-                            max : 1,
-                            message : "You can select only one program"
-                        },
-                        notEmpty : {
-                            message : "Please Select Program that Subject Belongs to"
-                        }
-                    }
                 }
             }
         })
 
         .on("success.form.bv", function (e) {
-
-            $("#contact_form").data("bootstrapValidator").resetForm();
 
             // Prevent form submission
             e.preventDefault();
@@ -289,26 +262,29 @@
             console.log(data);
 
             //Add in additional data to the original form data:
-            /*
-            data.push(
-              {name: 'age',      value: 25},
-              {name: 'sex',      value: 'M'},
-              {name: 'weight',   value: 200}
-            );  */
+			/*
+            data.push({
+                name : 'programId',
+                value : 1
+            }, {
+                name : 'batchyear',
+                value : 2013
+            });  */
 
             $.ajax({
-                type : 'POST',
-                url : window.context + "ApiSubject/SearchSubject",
-                data : data,
+                url : window.context + "/ApiStudent/SearchStudentsByProgram",
+                method : "POST",
                 dataType : 'json',
-                cache : false,
-                success : function () {
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                cache : true,
+                success : function (data) {
                     var message = "Subject has been added Successfully";
                     $("#success_message").html(message);
                     alert("Thanks for the submission!");
+                    $("#contact_form")[0].reset();
                 },
                 error : function () {
-                    alert('error!');
+                    alert("Error...!!!");
                 }
             });
 
