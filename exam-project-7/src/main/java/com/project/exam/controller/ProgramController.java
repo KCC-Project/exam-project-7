@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -71,4 +72,13 @@ public class ProgramController {
 		return programService.getProgramListByFacultyId(id);
 	}
 	
+	@POST
+	@Path("/SearchProgram")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List searchProgram(@FormParam("val") String params) {
+		//System.out.println("from controller= "+studentService.searchStudent(params).toString());
+		
+	return programService.searchStudent(params);
+		
+	}
 }

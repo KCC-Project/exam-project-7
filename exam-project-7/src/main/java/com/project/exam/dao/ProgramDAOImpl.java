@@ -5,11 +5,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.project.exam.model.Program;
+import com.project.exam.model.Student;
 
 @Repository("programDao")
 public class ProgramDAOImpl implements ProgramDAO {
@@ -180,6 +183,41 @@ public class ProgramDAOImpl implements ProgramDAO {
 			// TODO: handle exception
 		}
 		return listProgram;
+	}
+
+	@Override
+	public List searchProgram(String searchPara) {
+		List listOfReslut = new ArrayList<>();
+		//System.out.println("search ="+searchPara);
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "SELECT * FROM programs WHERE MATCH(program_name) AGAINST('"+ searchPara + "' IN NATURAL LANGUAGE MODE)";
+			pst=conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+		//System.out.println("here");
+			while (rs.next()) {
+				Map<String, Object> map = new HashMap<>();
+				Program s = new Program();
+				String name = null;
+				System.out.println("m name = " +rs.getString("middle_name"));
+				try {
+					if (rs.getString("middle_name")== null) {
+						name = rs.getString("first_name") + " " +  rs.getString("last_name");
+					} else {
+						name = rs.getString("first_name") + " " + rs.getString("middle_name") + " " +rs.getString("last_name");
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				map.put("id", rs.getInt("s_id"));
+				map.put("name", name);
+				map.put("image",rs.getString("image"));
+				listOfReslut.add(map);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return listOfReslut;
 	}
 	
 
