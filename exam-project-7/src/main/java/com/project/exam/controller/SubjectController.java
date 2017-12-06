@@ -73,4 +73,16 @@ public class SubjectController {
 	return subjectService.searchSubject(params);
 		
 	}
+	
+	
+	@POST
+	@Path("/GetSubjectByParameters")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List getSubjectByParameters(@FormParam("programId") int programId,@FormParam("semester_no") int semester_no) {
+		System.out.println("from controller =" +programId +" "+semester_no);
+		Object[] ob= new Object[11];
+		ob[1]=programId;
+		ob[9]=semester_no;
+		return subjectService.getSubjectByParameters(ob);
+	}
 }

@@ -14,10 +14,6 @@
 		<li><a><span class="glyphicon glyphicon-user black"> View Subject </span></a></li>
 	</ol>
 
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel-heading main-color-bg">
-
 
 				<div class="box box-default with-border">
 					<div>
@@ -38,11 +34,6 @@
 						</div>
 					</div>
 				</div>
-
-
-			</div>
-
-			<div class="panel-body">
 
 
 				<!--=========================================================================================  -->
@@ -134,10 +125,7 @@
 						</tr>
 					</thead>
 				</table>
-			</div>
-		</div>
-	</div>
-
+			
 	<script>
         var programId = 0;
 
@@ -172,9 +160,10 @@
             function load_subject(e) {
                 //alert(programId);
                 //alert(batchyear);
-                var url = window.context + "/ApiSubject/SearchSubject";
+                var semester_no =  $('#s-semester-no').val();
+                var url = window.context + "/ApiSubject/GetSubjectByParameters";
                 var method = "POST";
-                var data = "{'programId':'" + programId + "','semester':'" + 8 + "'}";
+                var data = "{'programId':'" + programId + "','semester_no':'" + semester_no + "'}";
 
                 loadSubjectInformation(url, method, data);
             }
