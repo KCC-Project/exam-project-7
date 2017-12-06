@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -60,5 +61,16 @@ public class SubjectController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public int deleteSubject(@PathParam("id") int id) {
 		return subjectService.deleteSubject(id);
+	}
+	
+	
+	@POST
+	@Path("/SearchSubject")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List searchSubject(@FormParam("val") String params) {
+		//System.out.println("from controller= "+studentService.searchStudent(params).toString());
+		
+	return subjectService.searchSubject(params);
+		
 	}
 }

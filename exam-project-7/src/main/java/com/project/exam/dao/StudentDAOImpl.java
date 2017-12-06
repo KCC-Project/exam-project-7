@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.exam.model.Student;
+import com.project.exam.model.StudentsProgram;
 import com.project.exam.model.Subjects;
 
 @Repository("studentDao")
@@ -232,6 +233,94 @@ public class StudentDAOImpl implements StudentDAO {
 			// TODO: handle exception
 		}
 		return listOfReslut;
+	}
+
+	@Override
+	public List<Student> getStudentsByStudentsProgram(Object[] obj) {
+		List<Object> parameters = new ArrayList<Object>();
+		List<Student> studentsModel = new ArrayList<>();
+
+		int student_program_id = 0;
+		int s_id = 0;
+		int program_id = 0;
+		int batch_year = 0;
+		String enroll_date = null;
+		int status = 0;
+		String username = null;
+
+		if (obj[0] != null) {  student_program_id = Integer.parseInt(obj[0].toString()); }
+		if (obj[1] != null) {  s_id = Integer.parseInt(obj[1].toString()); }
+		if (obj[2] != null) {  program_id = Integer.parseInt(obj[2].toString()); }
+		if (obj[3] != null) {  batch_year = Integer.parseInt(obj[3].toString()); }
+		if (obj[4] != null) {  enroll_date = obj[4].toString(); }
+		if (obj[5] != null) {  status = Integer.parseInt(obj[5].toString()); }
+		
+		try {
+			  StringBuilder query = new StringBuilder("SELECT * FROM students as s  INNER JOIN students_program as sp ON s.s_id = sp.s_id  where 1=1");
+			  
+				if (student_program_id != 0) {
+		            query.append(" AND student_program_id = ?");
+		            parameters.add(student_program_id);
+		        }
+				if (s_id != 0) {
+		            query.append(" AND s_id = ?");
+		            parameters.add(s_id);
+		        }
+				if (program_id != 0) {
+		            query.append(" AND program_id = ?");
+		            parameters.add(program_id);
+		        }
+				if (batch_year != 0) {
+		            query.append(" AND batch_year = ?");
+		            parameters.add(batch_year);
+		        }
+				if (enroll_date != null) {
+		            query.append(" AND enroll_date = ?");
+		            parameters.add(enroll_date);
+		        }
+				if (status != 0) {
+		            query.append(" AND status = ?");
+		            parameters.add(status);
+		        }
+				  String Query = query.toString();
+			        System.out.println(Query);
+			        
+			        conn = DatabaseConnection.connectToDatabase();
+			        pst = conn.prepareStatement(Query);
+			        
+			        int i = 1;
+			        for (Object parameter : parameters) {
+			            pst.setObject(i++, parameter);
+			        }
+			        rs = pst.executeQuery();
+			        if (rs != null) {
+			        	
+			        	while(rs.next()){
+			        		
+			        		Student model = new Student();
+							model.setS_id(rs.getInt("s_id"));
+							model.setAddress(rs.getString("address"));
+							model.setCurrent_semester(rs.getInt("current_semester"));
+							model.setDate_of_birth(rs.getString("date_of_birth"));
+							model.setEmail(rs.getString("email"));
+							model.setFirst_name(rs.getString("first_name"));
+							model.setGender(rs.getInt("gender"));
+							model.setImage(rs.getString("image"));
+							model.setLast_name(rs.getString("last_name"));
+							model.setMiddle_name(rs.getString("middle_name"));
+							model.setPassword(rs.getString("password"));
+							model.setPhone(rs.getString("phone"));
+							model.setStatus(rs.getInt("status"));
+							model.setUsername(rs.getString("username"));
+							studentsModel.add(model);
+						}
+
+			        }
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return studentsModel;
 	}
 
 }

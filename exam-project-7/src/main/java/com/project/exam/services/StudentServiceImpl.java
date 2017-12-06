@@ -44,5 +44,10 @@ public class StudentServiceImpl implements StudentService {
 		return studentDao.searchStudent(searchPara);
 	}
 
+	@Override
+	public List<Student> getStudentsByStudentsProgram(Object[] obj) {
+		return studentDao.getStudentsByStudentsProgram(obj);
+	}
+
 	
 }

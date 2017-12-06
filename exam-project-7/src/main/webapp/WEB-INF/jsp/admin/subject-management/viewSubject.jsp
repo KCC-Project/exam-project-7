@@ -35,7 +35,7 @@
 						<div class="modal-content">
 							<div class="modal-body">
 
-								<form class="well form-horizontal" action=" " method="post" id="subject_search_form">
+								<form class="well form-horizontal" action="" method="post" id="subject_search_form">
 									<fieldset>
 
 										<!-- Form Name -->
@@ -244,15 +244,14 @@
                         }
                     }
                 })
-               
-                .on('success.form.fv', function(e) {
-                    // Prevent form submission
+
+                .on('success.form.bv', function (e) {
+                    // Prevent submit form
                     e.preventDefault();
-
-                   alert("wsda");
-
+                    var $form = $(e.target), validator = $form.data('bootstrapValidator');
+                   
                 });
-                
+
             }
 
             // when load all subject is clicked

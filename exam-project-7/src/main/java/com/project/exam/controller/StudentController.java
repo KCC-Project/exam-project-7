@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.project.exam.model.Student;
+import com.project.exam.model.StudentsProgram;
 import com.project.exam.services.StudentService;
 
 @Path("/ApiStudent")
@@ -79,6 +80,18 @@ public class StudentController {
 		
 	return studentService.searchStudent(params);
 		
+	}
+	
+	
+	@POST
+	@Path("/SearchStudentsByProgram")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List<Student> searchStudentsProgram(@FormParam("programId") int programId,@FormParam("batchyear") int batchyear) {
+		Object[] ob= new Object[7];
+		ob[2]=programId;
+		System.out.println(ob[2]);
+		ob[3]=batchyear;
+		return studentService.getStudentsByStudentsProgram(ob);
 	}
 	
 }
