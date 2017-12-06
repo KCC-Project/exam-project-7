@@ -48,4 +48,9 @@ public class SubjectServiceImpl implements SubjectService{
 		return subjectDao.getSubjectByParameters(obj);
 	}
 
+	@Override
+	public List getSubjectByProgram(Object[] obj) {
+		return subjectDao.getSubjectByProgram(obj);
+	}
+
 }

@@ -86,12 +86,12 @@ public class MainController {
 	}
 
 	@GET
-	@Path("/manage-exam")
+	@Path("/viewexam")
 	public Viewable manageExam() {
 		System.out.println("Insdie manage-exam");
 		Map<String, Boolean> model = new HashMap<>();
 		model.put("manage-exam_clicked", true);
-		return new Viewable("/admin/exam-management/manage-exam", model);
+		return new Viewable("/admin/exam-management/viewExam", model);
 	}
 	
 	@GET

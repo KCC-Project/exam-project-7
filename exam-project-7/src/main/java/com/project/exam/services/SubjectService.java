@@ -16,5 +16,5 @@ public interface SubjectService {
 	public int deleteSubject(int s_Id);
 	public List searchSubject(String searchPara);
 	public List<Subjects> getSubjectByParameters(Object[] obj);
-
+	public List getSubjectByProgram(Object[] obj);
 }

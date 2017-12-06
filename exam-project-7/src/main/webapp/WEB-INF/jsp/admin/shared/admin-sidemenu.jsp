@@ -57,7 +57,7 @@
           </a>
           <ul class="collapse collapseable" id="collapse-exam">
             <li><a href="${cp }/addexam" id="addexam">Add Exam</a></li>
-            <li><a href="${cp }/manage-exam" id="manageexam">Manage Exam</a></li>
+            <li><a href="${cp }/viewexam" id="manageexam">View Exam</a></li>
              <li><a href="${cp }/exam-type" id="exam-type">Exam-type</a></li>
              <li><a href="${cp }/student-exam" id="student-exam">Student-exam</a></li>
           </ul>

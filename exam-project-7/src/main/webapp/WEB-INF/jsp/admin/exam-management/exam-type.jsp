@@ -77,7 +77,7 @@
 
 
 	function loadExamTypeInformation(url, method, data) {
-		alert(url+"  "+method+  +data);
+		//alert(url+"  "+method+  +data);
 		$('#view_exam_Type').DataTable({
 			destroy : true,
 			paging : true,
