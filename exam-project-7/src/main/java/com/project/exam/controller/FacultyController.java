@@ -53,6 +53,7 @@ public class FacultyController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public Faculty updateFaculty(Faculty faculty) {
+		System.out.println("from update faculty="+faculty.toString());
 		return FacultyService.updateFaculty(faculty);
 	}
 	

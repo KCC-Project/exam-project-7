@@ -257,7 +257,7 @@
 					"internal_practical" : $('#add-subject-form').find('[name="internal_practical"]').val(),
 					"final_theory" : $('#add-subject-form').find('[name="final_theory"]').val(),
 					"syllabus_file" : $('#add-subject-form').find('[name="syllabus_file"]').val(),
-					"status" : $('#add-subject-form').find('[name="status"]').val(),
+					"status" : $('#add-subject-form').find('[name="status"]:checked').val(),
 					"program_id" : $('#add-subject-form').find('[name="program_id"]').val(),
 
 				});

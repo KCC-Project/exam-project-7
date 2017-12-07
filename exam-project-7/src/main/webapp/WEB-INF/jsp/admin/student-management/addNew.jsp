@@ -247,7 +247,7 @@
 					"address" : $('#add-student-form').find('[name="address"]').val(),
 					"image" : $('#add-student-form').find('[name="image"]').val(),
 					"current_semester" : $('#add-student-form').find('[name="current_semester"]').val(),
-					"status" : $('#add-student-form').find('[name="status"]').val(),	
+					"status" : $('#add-student-form').find('[name="status"]:checked').val(),	
 
 				});
 				alert(data);

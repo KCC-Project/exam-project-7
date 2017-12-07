@@ -105,8 +105,8 @@
 		<div class="form-group">
 			<label class="col-md-3 control-label">Available</label>
 			<div class="col-md-9">
-				<label> Yes <input type="radio" value=0 name="status" checked required>
-				</label> <label> No <input type="radio" value=1 name="status">
+				<label> Yes <input type="radio" value="0" name="status" checked required>
+				</label> <label> No <input type="radio" value="1" name="status">
 				</label>
 			</div>
 		</div>
@@ -152,7 +152,8 @@
 <!--=========================================================================================  -->
 <jsp:include page="../shared/footer.jsp" />
 <script>
-    $(document).ready(function () {
+var table;   
+$(document).ready(function () {
 
         var url = window.context + "/ApiFaculty/GetAllFaculty";
         var method = "GET";
@@ -161,7 +162,7 @@
 
         // loading data into datatable
         function loadFacultyInformation(url, method, data) {
-            $('#view_faculty').DataTable({
+        table=    $('#view_faculty').DataTable({
                 destroy : true,
                 paging : true,
                 searching : true,
@@ -278,21 +279,43 @@
 
         var data = $('#faculty-add-form').serializeArray();
         console.log(data);
-
+    	$('input[type=number]').each(function() {
+			var t = $(this);
+			if (t.val() != 0) {
+				//alert(t.val());
+			} else {
+				t.val('0');
+			}
+		});
         $.ajax({
             url : window.context + "/ApiFaculty/SaveFaculty",
             method : "POST",
             dataType : 'json',
-            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+        	contentType : 'application/json',
+        	data : formToJSON(),
             cache : true,
             success : function (data) {
                 alert("Thanks for the submission!");
                 $("#faculty-add-form")[0].reset();
+                $('#view_faculty').DataTable().ajax.reload();
+                
+             
             },
             error : function () {
                 alert("Error...!!!");
             }
         });
+        function formToJSON() {
+			var data = JSON.stringify({
+				"faculty_id" : $('#faculty-add-form').find('[name="faculty_id"]').val(),
+				"faculty_name" : $('#faculty-add-form').find('[name="faculty_name"]').val(),
+				"status" : $('#faculty-add-form').find('[name="status"]:checked').val(),
+				
+
+			});
+			alert(data);
+			return data;
+		}
     });
 
     // form validator for edit-faculty form
@@ -333,18 +356,33 @@
         console.log(data);
 
         $.ajax({
-            url : window.context + "/ApiFaculty/SaveFaculty",
-            method : "POST",
+            url : window.context + "/ApiFaculty/UpdateFaculty",
+            method : "PUT",
             dataType : 'json',
-            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            contentType : 'application/json',
+        	data : formToJSON(),
             cache : true,
             success : function (data) {
+            	
                 alert("Thanks for the submission!");
                 $("#faculty-edit-form")[0].reset();
+                $('#view_faculty').DataTable().ajax.reload();
+              
             },
             error : function () {
                 alert("Error...!!!");
             }
         });
+        function formToJSON() {
+			var data = JSON.stringify({
+				"faculty_id" : $('#faculty-edit-form').find('[name="faculty_id"]').val(),
+				"faculty_name" : $('#faculty-edit-form').find('[name="faculty_name"]').val(),
+				"status" : $('#faculty-edit-form').find('[name="status"]:checked').val(),
+				
+
+			});
+			alert(data);
+			return data;
+		}
     });
 </script>
