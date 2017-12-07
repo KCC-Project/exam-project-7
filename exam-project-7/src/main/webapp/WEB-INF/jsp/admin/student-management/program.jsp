@@ -221,10 +221,14 @@
 
             //$("input[name=fe_faculty_id][value=" + data['faculty_id'] + "]").attr('selected', 'selected');
             //$('#fe-faculty-box').val(1).attr("selected", "selected");
-            $('input[name=fe_faculty_id]').each(function() {
-            	alert($(this).val());
+            $('#fe-faculty-box option').each(function() {
+            	//alert($(this).val());
+  
                 if($(this).val() == data['faculty_id']) {
-                    $(this).prop("selected", true);
+                	alert("inside");
+                	$('select option[value="1"]').attr("selected",true);
+                	//$(this).prop("selected", true);
+                	
                 }
             });
             bootbox.dialog({
