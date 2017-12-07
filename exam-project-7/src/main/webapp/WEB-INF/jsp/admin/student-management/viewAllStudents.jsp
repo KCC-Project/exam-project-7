@@ -321,7 +321,7 @@
 
                 $("input[name=gender][value=" + data['gender'] + "]").prop('checked', true);
                 $("input[name=status][value=" + data['status'] + "]").prop('checked', true);
-                $("input[name=semester_no][value=" + data['semester_no'] + "]").attr('selected', 'selected');
+                $("input[name=s_semester_no][value=" + data['semester_no'] + "]").attr('selected', 'selected');
 
                 bootbox.dialog({
                     title : 'Edit the Student',
