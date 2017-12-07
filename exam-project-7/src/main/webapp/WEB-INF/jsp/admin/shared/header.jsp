@@ -51,6 +51,7 @@
 <script src="${extraJs}/bootstrap-editable.min.js"></script>
 <script src="${extraJs}/bootstrapValidator.min.js"></script>
 <script src="${extraJs}/bootstrap-switch.min.js"></script>
+<script src="${extraJs}/bootbox.min.js"></script>
 <!-- Written JS -->
 <script src="${custome}/custome_editableJs.js"></script>
 <script src="${custome}/reUsableJs.js"></script>
