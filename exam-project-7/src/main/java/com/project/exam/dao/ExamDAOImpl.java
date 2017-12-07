@@ -212,10 +212,10 @@ public class ExamDAOImpl implements ExamDAO {
 		}
 		
 		try {
-			StringBuilder query = new StringBuilder("SELECT * FROM exams WHERE 1=1");
+			StringBuilder query = new StringBuilder("SELECT * FROM exams WHERE 1=1 ");
 
 			if (exam_id != 0) {
-				query.append(" AND exam_id = ?");
+				query.append(" AND exam_id = ? ");
 				parameters.add(exam_id);
 			}
 			if (exam_type_id != 0) {
@@ -251,7 +251,7 @@ public class ExamDAOImpl implements ExamDAO {
 				parameters.add(time_to);
 
 				}
-
+query.append(" ORDER BY exam_id asc");
 			String Query = query.toString();
 			System.out.println("query of exam = "+Query);
 
