@@ -37,6 +37,7 @@ public class ProgramController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public Program saveProgram(Program program) {
+		System.out.println(program.toString());
 		return programService.addProgram(program);
 	}
 	
@@ -55,6 +56,7 @@ public class ProgramController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public Program updateProgram(Program program) {
+		System.out.println(program.toString());
 		return programService.updateProgram(program);
 	}
 	

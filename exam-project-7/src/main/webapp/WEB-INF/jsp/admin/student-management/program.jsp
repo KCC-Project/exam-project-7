@@ -72,8 +72,8 @@
 		<div class="form-group">
 			<label class="col-md-3 control-label">Available</label>
 			<div class="col-md-9">
-				<label> Yes <input type="radio" value=0 name="status" checked required>
-				</label> <label> No <input type="radio" value=1 name="status">
+				<label> Yes <input type="radio" value=1 name="status" checked required>
+				</label> <label> No <input type="radio" value=0 name="status">
 				</label>
 			</div>
 		</div>
@@ -90,7 +90,7 @@
 		<div class="form-group">
 			<label class="col-md-3 control-label">Program id</label>
 			<div class="col-md-9">
-				<input type="text" class="form-control" name="program_id" disabled="disabled" />
+				<input type="number" class="form-control" name="program_id" disabled="disabled" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -115,8 +115,8 @@
 		<div class="form-group">
 			<label class="col-md-3 control-label">Available</label>
 			<div class="col-md-9">
-				<label> Yes <input type="radio" value=0 name="status" required>
-				</label> <label> No <input type="radio" value=1 name="status">
+				<label> Yes <input type="radio" value=1 name="status" checked>
+				</label> <label> No <input type="radio" value=0 name="status">
 				</label>
 			</div>
 		</div>
@@ -303,11 +303,21 @@
         var data = $('#program-add-form').serializeArray();
         console.log(data);
 
+    	$('input[type=number]').each(function() {
+			var t = $(this);
+			if (t.val() != 0) {
+				//alert(t.val());
+			} else {
+				t.val('0');
+			}
+		});
+    	
         $.ajax({
             url : window.context + "/ApiProgram/SaveProgram",
             method : "POST",
             dataType : 'json',
-            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            data : formToJSON(),
+			contentType : 'application/json',
             cache : true,
             success : function (data) {
                 alert("Thanks for the submission!");
@@ -317,6 +327,19 @@
                 alert("Error...!!!");
             }
         });
+        function formToJSON() {
+			var data = JSON.stringify({
+				"program_id" : $('#program-add-form').find('[name="program_id"]').val(),
+				"program_name" : $('#program-add-form').find('[name="program_name"]').val(),
+				"program_years" : $('#program-add-form').find('[name="program_years"]').val(),
+				"status" : $('#program-add-form').find('[name="status"]:checked').val(),
+				"faculty_id" : $('#program-add-form').find('[name="faculty_id"]').val(),
+				
+
+			});
+			alert(data);
+			return data;
+		}
     });
 
     // form validator for program edit form
@@ -363,11 +386,21 @@
         var data = $('#program-edit-form').serializeArray();
         console.log(data);
 
+    	$('input[type=number]').each(function() {
+			var t = $(this);
+			if (t.val() != 0) {
+				//alert(t.val());
+			} else {
+				t.val('0');
+			}
+		});
+    	
         $.ajax({
             url : window.context + "/ApiProgram/UpdateProgram",
-            method : "POST",
+            method : "PUT",
             dataType : 'json',
-            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            data : formToJSON(),
+			contentType : 'application/json',
             cache : true,
             success : function (data) {
                 alert("Thanks for the submission!");
@@ -377,5 +410,18 @@
                 alert("Error...!!!");
             }
         });
+        function formToJSON() {
+			var data = JSON.stringify({
+				"program_id" : $('#program-edit-form').find('[name="program_id"]').val(),
+				"program_name" : $('#program-edit-form').find('[name="program_name"]').val(),
+				"program_years" : $('#program-edit-form').find('[name="program_years"]').val(),
+				"status" : $('#program-edit-form').find('[name="status"]:checked').val(),
+				"faculty_id" : $('#program-edit-form').find('[name="fe_faculty_id"]').val(),
+				
+
+			});
+			alert(data);
+			return data;
+		}
     });
 </script>

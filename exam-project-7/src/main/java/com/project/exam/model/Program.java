@@ -11,8 +11,7 @@ public class Program {
 	private String program_name;
 	
 	private int program_years;
-	
-	private int total_credit;
+
 	
 	private int status;
 	
@@ -23,13 +22,11 @@ public class Program {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Program(int program_id, String program_name, int program_years, int total_credit, int status,
-			int faculty_id) {
+	public Program(int program_id, String program_name, int program_years, int status, int faculty_id) {
 		super();
 		this.program_id = program_id;
 		this.program_name = program_name;
 		this.program_years = program_years;
-		this.total_credit = total_credit;
 		this.status = status;
 		this.faculty_id = faculty_id;
 	}
@@ -58,14 +55,6 @@ public class Program {
 		this.program_years = program_years;
 	}
 
-	public int getTotal_credit() {
-		return total_credit;
-	}
-
-	public void setTotal_credit(int total_credit) {
-		this.total_credit = total_credit;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -85,9 +74,10 @@ public class Program {
 	@Override
 	public String toString() {
 		return "Program [program_id=" + program_id + ", program_name=" + program_name + ", program_years="
-				+ program_years + ", total_credit=" + total_credit + ", status=" + status + ", faculty_id=" + faculty_id
-				+ "]";
+				+ program_years + ", status=" + status + ", faculty_id=" + faculty_id + "]";
 	}
+
+	
 	
 	
 	 

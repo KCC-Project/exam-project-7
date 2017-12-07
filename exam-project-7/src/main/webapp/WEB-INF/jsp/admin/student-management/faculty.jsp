@@ -298,7 +298,7 @@ $(document).ready(function () {
                 alert("Thanks for the submission!");
                 $("#faculty-add-form")[0].reset();
                 $('#view_faculty').DataTable().ajax.reload();
-                
+           
              
             },
             error : function () {

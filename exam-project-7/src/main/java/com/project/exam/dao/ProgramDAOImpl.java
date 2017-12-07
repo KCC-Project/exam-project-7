@@ -36,7 +36,6 @@ public class ProgramDAOImpl implements ProgramDAO {
 				model.setProgram_name(rs.getString("program_name"));
 				model.setProgram_years(rs.getInt("program_years"));
 				model.setStatus(rs.getInt("status"));
-				model.setTotal_credit(rs.getInt("total_credit"));
 				model.setFaculty_id(rs.getInt("faculty_id"));
 				listProgram.add(model);
 			}
@@ -52,13 +51,13 @@ public class ProgramDAOImpl implements ProgramDAO {
 	
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "insert into programs(program_name,program_years,status,total_credit,faculty_id) values(?,?,?,?,?)";
+			sql = "insert into programs(program_name,program_years,status,faculty_id) values(?,?,?,?)";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
 			pst.setString(col++, program.getProgram_name());
 			pst.setInt(col++, program.getProgram_years());
 			pst.setInt(col++, program.getStatus());
-			pst.setInt(col++, program.getTotal_credit());
+			
 			pst.setInt(col++, program.getFaculty_id());
 			
 			int count = pst.executeUpdate();
@@ -98,7 +97,7 @@ public class ProgramDAOImpl implements ProgramDAO {
 				model.setProgram_name(rs.getString("program_name"));
 				model.setProgram_years(rs.getInt("program_years"));
 				model.setStatus(rs.getInt("status"));
-				model.setTotal_credit(rs.getInt("total_credit"));
+			
 				model.setFaculty_id(rs.getInt("faculty_id"));
 				listProgram.add(model);
 			}
@@ -113,13 +112,13 @@ public class ProgramDAOImpl implements ProgramDAO {
 		
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "update programs set program_name=? , program_years=?, status=?, total_credit=?,faculty_id=? where program_id=?";
+			sql = "update programs set program_name=? , program_years=?, status=?,faculty_id=? where program_id=?";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
 			pst.setString(col++, program.getProgram_name());
 			pst.setInt(col++, program.getProgram_years());
 			pst.setInt(col++, program.getStatus());
-			pst.setInt(col++, program.getTotal_credit());
+			
 			pst.setInt(col++, program.getFaculty_id());
 			pst.setInt(col++, program.getProgram_id());
 			int count = pst.executeUpdate();
@@ -176,7 +175,7 @@ public class ProgramDAOImpl implements ProgramDAO {
 				model.setProgram_name(rs.getString("program_name"));
 				model.setProgram_years(rs.getInt("program_years"));
 				model.setStatus(rs.getInt("status"));
-				model.setTotal_credit(rs.getInt("total_credit"));
+			
 				model.setFaculty_id(rs.getInt("faculty_id"));
 				listProgram.add(model);
 			}
