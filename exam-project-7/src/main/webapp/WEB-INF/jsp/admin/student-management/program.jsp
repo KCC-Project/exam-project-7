@@ -225,10 +225,10 @@
             	//alert($(this).val());
   
                 if($(this).val() == data['faculty_id']) {
-                	alert("inside");
-                	$('select option[value="1"]').attr("selected",true);
+                	//alert("inside");
+                	//$('select option[value="1"]').attr("selected",true);
                 	//$(this).prop("selected", true);
-                	
+             
                 }
             });
             bootbox.dialog({
