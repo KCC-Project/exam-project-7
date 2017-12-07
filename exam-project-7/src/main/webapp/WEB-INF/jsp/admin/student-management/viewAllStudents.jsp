@@ -161,7 +161,7 @@
 			<label class="col-md-3 control-label">Program</label>
 			<div class="col-md-9">
 				<div class="col-md-6">
-					<select required class="form-control" id="all-program-box" name="program_id">
+					<select required class="form-control" id="all-program-box" name="e_program_id">
 					</select>
 				</div>
 				<div class="col-md-6">
@@ -201,9 +201,8 @@
 		</div>
 	</form>
 
-</div>
 <!--=========================================================================================  -->
-<jsp:include page="../shared/footer.jsp" />
+
 <script>
     var programId = 0;
     var batchyear = 0;
@@ -311,13 +310,13 @@
             });
 
             // edit buttons on students row
-            $("#editStud").click(function (event) {
+            $(".editStud").click(function (event) {
                 var table = $("#view_student").DataTable();
                 var data = table.row($(this).parents('tr')).data();
                 console.log(data);
 
                 // Populate the form fields
-                $('#student-edit-form').find('[name="s_id"]').val(data['s_id']).end().find('[name="first_name"]').val(data['first_name']).end().find('[name="middle_name"]').val(data['middle_name']).end().find('[name="last_name"]').val(data['last_name']).end().find('[name="username"]').val(data['username']).end().find('[name="password"]').val(data['password']).end().find('[name="email"]').val(data['email']).end().find('[name="date_of_birth"]').val(data['date_of_birth']).end().find('[name="phone"]').val(data['phone']).end().find('[name="address"]').val(data['address']).end().find('[name="image"]').val(data['image']).end();
+                $('#edit-student-form').find('[name="s_id"]').val(data['s_id']).end().find('[name="first_name"]').val(data['first_name']).end().find('[name="last_name"]').val(data['last_name']).end().find('[name="username"]').val(data['username']).end().find('[name="password"]').val(data['password']).end().find('[name="email"]').val(data['email']).end().find('[name="date_of_birth"]').val(data['date_of_birth']).end().find('[name="phone"]').val(data['phone']).end().find('[name="address"]').val(data['address']).end().find('[name="image"]').val(data['image']).end();
 
                 $("input[name=gender][value=" + data['gender'] + "]").prop('checked', true);
                 $("input[name=status][value=" + data['status'] + "]").prop('checked', true);
@@ -325,16 +324,16 @@
 
                 bootbox.dialog({
                     title : 'Edit the Student',
-                    message : $('#student-edit-form'),
+                    message : $('#edit-student-form'),
                     show : false
                 // We will show it manually later
                 }).on('shown.bs.modal', function () {
-                    $('#student-edit-form').show() // Show the modal form
+                    $('#edit-student-form').show() // Show the modal form
                 }).on('hide.bs.modal', function (e) {
                     // Bootbox will remove the modal (including the body which contains the login form)
                     // after hiding the modal
                     // Therefor, we need to backup the form
-                    $('#student-edit-form').hide().appendTo('body');
+                    $('#edit-student-form').hide().appendTo('body');
                 }).modal('show');
 
             });
@@ -400,7 +399,7 @@
     
     
     // form validator for student edit form
-    $("#student-edit-form").bootstrapValidator({
+    $("#edit-student-form").bootstrapValidator({
         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
         feedbackIcons : {
             valid : "glyphicon glyphicon-ok",
@@ -460,7 +459,7 @@
         // Prevent form submission
         e.preventDefault();
 
-        var data = $('#student-edit-form').serializeArray();
+        var data = $('#edit-student-form').serializeArray();
         console.log(data);
 
 
@@ -485,7 +484,7 @@
                 var message = "Student has been added Successfully";
                 $("#success_message").html(message);
                 alert("Thanks for the submission!");
-                $("#student-edit-form")[0].reset();
+                $("#edit-student-form")[0].reset();
             },
             error : function () {
                 alert("Error...!!!");
@@ -494,20 +493,20 @@
         
         function formToJSON() {
 			var data = JSON.stringify({
-				"s_id" : $('#student-edit-form').find('[name="s_id"]').val(),
-				"first_name" : $('#student-edit-form').find('[name="first_name"]').val(),
-				"middle_name" : $('#student-edit-form').find('[name="middle_name"]').val(),
-				"last_name" : $('#student-edit-form').find('[name="last_name"]').val(),
-				"username" : $('#student-edit-form').find('[name="username"]').val(),
-				"password" : $('#student-edit-form').find('[name="password"]').val(),
-				"email" : $('#student-edit-form').find('[name="email"]').val(),
-				"gender" : $('#student-edit-form').find('[name="gender"]').val(),
-				"date_of_birth" : $('#student-edit-form').find('[name="date_of_birth"]').val(),
-				"phone" : $('#student-edit-form').find('[name="phone"]').val(),
-				"address" : $('#student-edit-form').find('[name="address"]').val(),
-				"image" : $('#student-edit-form').find('[name="image"]').val(),
-				"current_semester" : $('#student-edit-form').find('[name="current_semester"]').val(),
-				"status" : $('#student-edit-form').find('[name="status"]:checked').val(),	
+				"s_id" : $('#edit-student-form').find('[name="s_id"]').val(),
+				"first_name" : $('#edit-student-form').find('[name="first_name"]').val(),
+				"middle_name" : $('#edit-student-form').find('[name="middle_name"]').val(),
+				"last_name" : $('#edit-student-form').find('[name="last_name"]').val(),
+				"username" : $('#edit-student-form').find('[name="username"]').val(),
+				"password" : $('#edit-student-form').find('[name="password"]').val(),
+				"email" : $('#edit-student-form').find('[name="email"]').val(),
+				"gender" : $('#edit-student-form').find('[name="gender"]').val(),
+				"date_of_birth" : $('#edit-student-form').find('[name="date_of_birth"]').val(),
+				"phone" : $('#edit-student-form').find('[name="phone"]').val(),
+				"address" : $('#edit-student-form').find('[name="address"]').val(),
+				"image" : $('#edit-student-form').find('[name="image"]').val(),
+				"current_semester" : $('#edit-student-form').find('[name="current_semester"]').val(),
+				"status" : $('#edit-student-form').find('[name="status"]:checked').val(),	
 
 			});
 			alert(data);
@@ -515,3 +514,7 @@
 		}
     });
 </script>
+
+</div>
+
+<jsp:include page="../shared/footer.jsp" />
