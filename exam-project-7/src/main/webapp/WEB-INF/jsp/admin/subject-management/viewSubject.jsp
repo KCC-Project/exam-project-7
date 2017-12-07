@@ -236,9 +236,6 @@
             var placeholder = "Subject Name";
             select2Function(url1, url2, method1, method2, placeholder, loadSubjectInformation);
 
-        });
-
-        
         function load_subject(e) {
             //alert(programId);
             //alert(batchyear);
@@ -338,42 +335,147 @@
 
             });
 
-            $("#updateSubject").click(function (e) {
-                
-                
-                // Prevent form submission
-                e.preventDefault();
-
-                var data = $('#subject-edit-form').serializeArray();
-                console.log(data);
-
-                //Add in additional data to the original form data:
-                /*
-                data.push({
-                    name : 'programId',
-                    value : 1
-                }, {
-                    name : 'batchyear',
-                    value : 2013
-                });  */
-
-                $.ajax({
-                    url : window.context + "/ApiStudent/SearchStudentsByProgram",
-                    method : "POST",
-                    dataType : 'json',
-                    contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-                    cache : true,
-                    success : function (data) {
-                        alert("Thanks for the submission!");
-                        $("#subject-edit-form")[0].reset();
-                    },
-                    error : function () {
-                        alert("Error...!!!");
-                    }
-                });
-            });
-
         }
+        });
+        
+        // form validator for subject edit form
+        $("#subject-edit-form").bootstrapValidator({
+			// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+			feedbackIcons : {
+				valid : "glyphicon glyphicon-ok",
+				invalid : "glyphicon glyphicon-remove",
+				validating : "glyphicon glyphicon-refresh"
+			},
+			fields : {
+				subject_name : {
+					validators : {
+						stringLength : {
+							min : 2
+						},
+						notEmpty : {
+							message : "Please Enter Subject Name"
+						}
+					}
+				},
+				subject_code : {
+					validators : {
+						stringLength : {
+							min : 3
+						},
+						notEmpty : {
+							message : "Please Enter Subject Code"
+						}
+					}
+				},
+				theory_cr : {
+					validators : {
+						stringLength : {
+							max : 1
+						},
+						integer : {
+							message : "Please Enter Number"
+						}
+					}
+				},
+				tutorial_cr : {
+					validators : {
+						stringLength : {
+							max : 1
+						},
+						integer : {
+							message : "Please Enter Number"
+						}
+					}
+				},
+				internal_theory : {
+					validators : {
+						stringLength : {
+							max : 3
+						},
+						integer : {
+							message : "Please Enter Number"
+						}
+					}
+				},
+				internal_practical : {
+					validators : {
+						stringLength : {
+							max : 3
+						},
+						integer : {
+							message : "Please Enter Number"
+						}
+					}
+				},
+				final_theory : {
+					validators : {
+						stringLength : {
+							max : 3
+						},
+						integer : {
+							message : "Please Enter Number"
+						}
+					}
+				}
+			}
+		})
+
+		.on("success.form.bv", function(e) {
+
+
+			$('input[type=number]').each(function() {
+				var t = $(this);
+				if (t.val() != 0) {
+					//alert(t.val());
+				} else {
+					t.val('0');
+				}
+			});
+			
+			// Prevent form submission
+			e.preventDefault();
+
+			var data = $('#subject-edit-form').serializeArray();
+			console.log(data);
+
+			$.ajax({
+				url : window.context + "/ApiSubject/UpdateSubject",
+				method : "PUT",
+				dataType : 'json',
+				data : formToJSON(),
+				contentType : 'application/json',
+				cache : true,
+				success : function(data) {
+					var message = "Subject has been added Successfully";
+					$("#success_message").html(message);
+					alert("Thanks for the submission!");
+					$("#subject-edit-form")[0].reset();
+				},
+				error : function() {
+					alert("Error...!!!");
+				}
+			});
+			function formToJSON() {
+				var data = JSON.stringify({
+					"subject_id" : $('#subject-edit-form').find('[name="subject_id"]').val(),
+					"semester_no" : $('#subject-edit-form').find('[name="semester_no"]').val(),
+					"subject_name" : $('#subject-edit-form').find('[name="subject_name"]').val(),
+					"subject_code" : $('#subject-edit-form').find('[name="subject_code"]').val(),
+					"theory_cr" : $('#subject-edit-form').find('[name="theory_cr"]').val(),
+					"tutorial_cr" : $('#subject-edit-form').find('[name="tutorial_cr"]').val(),
+					"internal_theory" : $('#subject-edit-form').find('[name="internal_theory"]').val(),
+					"internal_practical" : $('#subject-edit-form').find('[name="internal_practical"]').val(),
+					"final_theory" : $('#subject-edit-form').find('[name="final_theory"]').val(),
+					"syllabus_file" : $('#subject-edit-form').find('[name="syllabus_file"]').val(),
+					"status" : $('#subject-edit-form').find('[name="status"]:checked').val(),
+					"program_id" : $('#subject-edit-form').find('[name="program_id"]').val(),
+
+				});
+				alert(data);
+				return data;
+			}
+		});
+
     </script>
 
 
