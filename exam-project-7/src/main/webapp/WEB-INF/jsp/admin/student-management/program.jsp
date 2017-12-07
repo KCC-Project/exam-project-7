@@ -15,6 +15,9 @@
 			<div style="margin: 0px; padding-left: 20px; height: 35px;">
 				<a><button type="button" class="btn btn-info pull-right" data-toggle="modal"
 						id="modal-box-vew-all-program">View All</button></a>
+				<div class="pull-right" style="margin-right: 10px;">
+					<button class="btn btn-info" id="add-program-modal">Add Program</button>
+				</div>
 				<div class="col-xs-3" style="margin-left: -34px; /* border: 2px solid black; */ height: 37px;">
 					<div class="form-group">
 						<div class="input-group">
@@ -45,6 +48,67 @@
 		</thead>
 	</table>
 
+	<!-- This Form is for adding new Program  -->
+	<form id="program-add-form" method="post" class="form-horizontal well" style="display: none;">
+
+		<div class="form-group">
+			<label class="col-md-3 control-label">Program name</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="program_name" required />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">Select Faculty</label>
+			<div class="col-md-9">
+				<select required class="form-control" id="f-faculty-box" name="faculty_id">
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">Available</label>
+			<div class="col-md-9">
+				<label> Yes <input type="radio" value=0 name="status" checked required>
+				</label> <label> No <input type="radio" value=1 name="status">
+				</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<button type="submit" id="addProgram" class="btn btn-info btn-block">Save</button>
+			</div>
+		</div>
+	</form>
+
+	<!-- This Form is for Editing  Program  -->
+	<form id="program-edit-form" method="post" class="form-horizontal well" style="display: none;">
+
+		<div class="form-group">
+			<label class="col-md-3 control-label">Program name</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="program_name" required />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">Select Faculty</label>
+			<div class="col-md-9">
+				<select required class="form-control" id="fe-faculty-box" name="fe_faculty_id">
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">Available</label>
+			<div class="col-md-9">
+				<label> Yes <input type="radio" value=0 name="status" required>
+				</label> <label> No <input type="radio" value=1 name="status">
+				</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<button type="submit" id="editProgram" class="btn btn-info btn-block">Save</button>
+			</div>
+		</div>
+	</form>
 
 
 </div>
@@ -52,6 +116,11 @@
 <jsp:include page="../shared/footer.jsp" />
 <script>
     $(document).ready(function () {
+
+        // for selecting faculty in faculty add model box
+        load_faculty(event, "f-faculty-box");
+        // for selecting faculty in faculty edit model box
+        load_faculty(event, "fe-faculty-box");
 
         var url1 = window.context + "/ApiProgram/SearchProgram";
         var method1 = "POST";
@@ -66,8 +135,10 @@
             var data = "";
             loadProgramInformation(url, method, data);
         });
+
     });
 
+    // loading data into datatable
     function loadProgramInformation(url, method, data) {
         $('#view_program').DataTable({
             destroy : true,
@@ -110,17 +181,182 @@
             }, {
                 data : null,
                 render : function (data, type, row) {
-                    return '<button class="btn btn-success editBtns">Edit</button>';
+                    return '<button class="btn btn-success editProg">Edit</button>';
                 },
             } ]
         });
 
-        // edit buttons on subjects row
-        $('#view_program tbody').on('click', '.editBtns', function () {
+        // edit buttons on program row
+        $(".editProg").click(function (event) {
             var table = $("#view_program").DataTable();
             var data = table.row($(this).parents('tr')).data();
             console.log(data);
-            alert(data['program_name'] + "' id is: " + data['program_id']);
+
+            //$.when($.ajax(load_faculty("fe-faculty-box"))).done(function () {
+             //   $("input[name=fe_faculty_id][value=" + data['faculty_id'] + "]").attr('selected', 'selected');
+            //});
+
+            // Populate the form fields
+            $('#program-edit-form').find('[name="program_id"]').val(data['program_id']).end().find('[name="program_name"]').val(data['program_name']).end()
+            $("input[name=status][value=" + data['status'] + "]").prop('checked', true);
+
+            $("input[name=fe_faculty_id][value=" + data['faculty_id'] + "]").attr('selected', 'selected');
+
+            bootbox.dialog({
+                title : 'Edit the program',
+                message : $('#program-edit-form'),
+                show : false
+            // We will show it manually later
+            }).on('shown.bs.modal', function () {
+                $('#program-edit-form').show() // Show the modal form
+            }).on('hide.bs.modal', function (e) {
+                // Bootbox will remove the modal (including the body which contains the login form)
+                // after hiding the modal
+                // Therefor, we need to backup the form
+                $('#program-edit-form').hide().appendTo('body');
+            }).modal('show');
+
         });
+        // ---------------------------------------- edit btn function end --------------------
     }
+    // ----------------------- datatable function edn --------------
+
+    // modal popup for adding new Program data
+    $("#add-program-modal").click(function (event) {
+
+        load_faculty(event, "f-faculty-box");
+
+        bootbox.dialog({
+            title : 'Add New Program',
+            message : $('#program-add-form'),
+            show : false
+
+        // We will show it manually later
+        }).on('shown.bs.modal', function () {
+            $('#program-add-form').show() // Show the modal form
+
+        }).on('hide.bs.modal', function (e) {
+            $('#program-add-form').hide().appendTo('body');
+        }).modal('show');
+
+    });
+
+    $("#program-add-form").bootstrapValidator({
+        feedbackIcons : {
+            valid : "glyphicon glyphicon-ok",
+            invalid : "glyphicon glyphicon-remove",
+            validating : "glyphicon glyphicon-refresh"
+        },
+        fields : {
+            program_name : {
+                validators : {
+                    stringLength : {
+                        min : 3
+                    },
+                    notEmpty : {
+                        message : "Please Enter Program Name"
+                    }
+                }
+            },
+            faculty_id : {
+                validators : {
+                    notEmpty : {
+                        message : "Please Select Faculty"
+                    }
+                }
+            },
+            status : {
+                validators : {
+                    notEmpty : {
+                        message : "Please Select Avilability"
+                    }
+                }
+            }
+        }
+
+    })
+
+    .on("success.form.bv", function (e) {
+
+        // Prevent form submission
+        e.preventDefault();
+
+        var data = $('#program-add-form').serializeArray();
+        console.log(data);
+
+        $.ajax({
+            url : window.context + "/ApiProgram/SaveProgram",
+            method : "POST",
+            dataType : 'json',
+            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            cache : true,
+            success : function (data) {
+                alert("Thanks for the submission!");
+                $("#program-add-form")[0].reset();
+            },
+            error : function () {
+                alert("Error...!!!");
+            }
+        });
+    });
+
+    // form validator for program edit form
+    $("#program-edit-form").bootstrapValidator({
+        feedbackIcons : {
+            valid : "glyphicon glyphicon-ok",
+            invalid : "glyphicon glyphicon-remove",
+            validating : "glyphicon glyphicon-refresh"
+        },
+        fields : {
+            program_name : {
+                validators : {
+                    stringLength : {
+                        min : 3
+                    },
+                    notEmpty : {
+                        message : "Please Enter Program Name"
+                    }
+                }
+            },
+            faculty_id : {
+                validators : {
+                    notEmpty : {
+                        message : "Please Select Faculty"
+                    }
+                }
+            },
+            status : {
+                validators : {
+                    notEmpty : {
+                        message : "Please Select Avilability"
+                    }
+                }
+            }
+        }
+
+    })
+
+    .on("success.form.bv", function (e) {
+
+        // Prevent form submission
+        e.preventDefault();
+
+        var data = $('#program-edit-form').serializeArray();
+        console.log(data);
+
+        $.ajax({
+            url : window.context + "/ApiProgram/UpdateProgram",
+            method : "POST",
+            dataType : 'json',
+            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            cache : true,
+            success : function (data) {
+                alert("Thanks for the submission!");
+                $("#program-edit-form")[0].reset();
+            },
+            error : function () {
+                alert("Error...!!!");
+            }
+        });
+    });
 </script>
