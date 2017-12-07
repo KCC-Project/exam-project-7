@@ -169,6 +169,7 @@ public class ExamDAOImpl implements ExamDAO {
 
 	@Override
 	public List<Exam> searchByField(Object[] obj) {
+		
 		List<Object> parameters = new ArrayList<Object>();
 		List<Exam> examModel = new ArrayList<>();
 
@@ -209,7 +210,7 @@ public class ExamDAOImpl implements ExamDAO {
 		if (obj[8] != null) {
 			time_to = obj[8].toString();
 		}
-
+		
 		try {
 			StringBuilder query = new StringBuilder("SELECT * FROM exams WHERE 1=1");
 
@@ -249,16 +250,17 @@ public class ExamDAOImpl implements ExamDAO {
 				query.append(" AND time_to = ?");
 				parameters.add(time_to);
 
-				String Query = query.toString();
-				System.out.println(Query);
-
-				conn = DatabaseConnection.connectToDatabase();
-				pst = conn.prepareStatement(Query);
-
-				int i = 1;
-				for (Object parameter : parameters) {
-					pst.setObject(i++, parameter);
 				}
+
+			String Query = query.toString();
+			System.out.println("query of exam = "+Query);
+
+			conn = DatabaseConnection.connectToDatabase();
+			pst = conn.prepareStatement(Query);
+
+			int i = 1;
+			for (Object parameter : parameters) {
+				pst.setObject(i++, parameter);}
 				rs = pst.executeQuery();
 				if (rs != null) {
 
@@ -275,14 +277,18 @@ public class ExamDAOImpl implements ExamDAO {
 						model.setExam_type_id(rs.getInt("exam_type_id"));
 						model.setSubject_id(rs.getInt("subject_id"));
 						examModel.add(model);
+						//System.out.println("exam model data = "+model.toString());
 					}
 
 				}
-			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-		return examModel;
-	}
 
+		
+	
+	}
+		return examModel;
+
+	}
 }

@@ -162,7 +162,7 @@ var programeName;
 			alert("examTypeId = "+examTypeId+" "+examTypeName+ " "+subjectId);
 			var url=window.context + "/ApiExam/GetExamByExamTypeAndSubjectId";
 			var method="POST";
-			var data="{'examTypeId':'" + examTypeId + "','subjectId':'" + subjectId + "'}";
+			var data = "{'examTypeId':'" + examTypeId + "','subjectId':'" + subjectId + "'}";
 			loadExamInformation(url,method,data);
 		});
 		
@@ -228,9 +228,12 @@ var programeName;
 		});
 	}
 	
-	function loadExamInformation(url, method, data) {
-		alert(url+"  "+method+  +data);
+	function loadExamInformation(url,method,data) {
+		//alert(url+"  "+method+  +data);
 		alert(data);
+		alert(subjectname);
+		alert(examTypeName);
+		alert(programeName);
 		$('#view_exam').DataTable({
 			destroy : true,
 			paging : true,
@@ -240,7 +243,7 @@ var programeName;
 			"ajax" : {
 				"url" : url,
 				"type" : method,
-				"data" : data,
+				"data" :data,
 				"dataSrc" : "",
 				"dataType" : "json",
 				"async" : false
@@ -248,15 +251,21 @@ var programeName;
 			"columns" : [ {
 				"data" : "exam_id"
 			}, {
-				"data" : subjectname
-			}, {
-				"data" : examTypeName
+				data : null,
+				render : function(data, type, row) {
+					return subjectname;
+				},
 			}, {
 				data : null,
 				render : function(data, type, row) {
-					console.log(JSON.stringify(data));
+					return examTypeName;
+				},
+			},  {
+				data : null,
+				render : function(data, type, row) {
+					console.log("view exam = "+JSON.stringify(data));
 					
-					return programeName + ' ' +data.semester_no;
+					return programeName + ' / ' +data.semester_no;
 				},
 			}, {
 				"data" : "full_marks"

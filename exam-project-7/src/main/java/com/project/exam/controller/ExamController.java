@@ -69,10 +69,11 @@ public class ExamController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public List<Exam> getExamByExamTypeAndSubjectId(@FormParam("examTypeId") int examTypeId,@FormParam("subjectId") int subjectId) {
 		System.out.println("hreeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-		Object[] ob= new Object[10];
+		Object[] ob= new Object[11];
 		ob[1]=examTypeId;
 		ob[2]=subjectId;
 		System.out.println("examTypeId="+examTypeId+" "+"subjectId="+subjectId);
+		System.out.println(examService.searchByField(ob));
 		return examService.searchByField(ob);
 	}
 	
