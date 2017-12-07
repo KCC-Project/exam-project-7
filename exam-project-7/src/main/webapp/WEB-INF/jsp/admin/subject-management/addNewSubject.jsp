@@ -75,7 +75,6 @@
 					<label class="col-md-3 control-label">Program</label>
 					<div class="col-md-9">
 						<select required class="form-control" id="all-program-box" name="program_id">
-							<option value="" disabled selected>Select Program</option>
 						</select>
 					</div>
 				</div>
