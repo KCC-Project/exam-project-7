@@ -104,6 +104,15 @@ public class MainController {
 	}
 	
 	@GET
+	@Path("/student-exam")
+	public Viewable studentexam() {
+		System.out.println("Insdie student-exam");
+		Map<String, Boolean> model = new HashMap<>();
+		model.put("student-exam_clicked", true);
+		return new Viewable("/admin/exam-management/student-exam", model);
+	}
+	
+	@GET
 	@Path("/view-admin")
 	public Viewable admin() {
 		System.out.println("Insdie admin");
