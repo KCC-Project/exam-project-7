@@ -36,8 +36,9 @@ public class SubjectController {
 	@Path("/SaveSubject")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Subjects saveSubject(Subjects subjectModel) {
-		return subjectService.addSubject(subjectModel);
+	public Subjects saveSubject(Subjects sub) {
+		System.out.println(sub.toString());
+		return subjectService.addSubject(sub);
 	}
 	
 

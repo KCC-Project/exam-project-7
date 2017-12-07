@@ -1,9 +1,6 @@
 package com.project.exam.controller;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -16,11 +13,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.project.exam.model.Student;
-import com.project.exam.model.StudentsProgram;
 import com.project.exam.services.StudentService;
 
 @Path("/ApiStudent")
@@ -42,8 +37,11 @@ public class StudentController {
 	@Path("/SaveStudent")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Student saveStudent(Student studentModel) {
-		return studentService.addStudent(studentModel);
+	public Student saveStudent(Student student ) {
+		System.out.println("in save student");
+		
+		//return null;
+		return studentService.addStudent(student);
 	}
 	
 

@@ -56,7 +56,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">Phone</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" name="phone" />
+							<input type="number" class="form-control" name="phone" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -203,11 +203,23 @@
             var data = $('#add-student-form').serializeArray();
             console.log(data);
 
-            $.ajax({
+
+			$('input[type=number]').each(function() {
+				var t = $(this);
+				if (t.val() != 0) {
+					//alert(t.val());
+				} else {
+					t.val('0');
+				}
+			});
+			
+             $.ajax({
                 url : window.context + "/ApiStudent/SaveStudent",
                 method : "POST",
                 dataType : 'json',
-                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                contentType : 'application/json',
+                data: formToJSON(),
+                
                 cache : true,
                 success : function (data) {
                     var message = "Student has been added Successfully";
@@ -218,8 +230,29 @@
                 error : function () {
                     alert("Error...!!!");
                 }
-            });
+            }); 
+            
+            function formToJSON() {
+				var data = JSON.stringify({
+					"s_id" : $('#add-student-form').find('[name="s_id"]').val(),
+					"first_name" : $('#add-student-form').find('[name="first_name"]').val(),
+					"middle_name" : $('#add-student-form').find('[name="middle_name"]').val(),
+					"last_name" : $('#add-student-form').find('[name="last_name"]').val(),
+					"username" : $('#add-student-form').find('[name="username"]').val(),
+					"password" : $('#add-student-form').find('[name="password"]').val(),
+					"email" : $('#add-student-form').find('[name="email"]').val(),
+					"gender" : $('#add-student-form').find('[name="gender"]').val(),
+					"date_of_birth" : $('#add-student-form').find('[name="date_of_birth"]').val(),
+					"phone" : $('#add-student-form').find('[name="phone"]').val(),
+					"address" : $('#add-student-form').find('[name="address"]').val(),
+					"image" : $('#add-student-form').find('[name="image"]').val(),
+					"current_semester" : $('#add-student-form').find('[name="current_semester"]').val(),
+					"status" : $('#add-student-form').find('[name="status"]').val(),	
 
+				});
+				alert(data);
+				return data;
+			}
         });
     });
 </script>
