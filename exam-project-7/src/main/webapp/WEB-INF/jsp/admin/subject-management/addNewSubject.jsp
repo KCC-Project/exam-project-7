@@ -81,7 +81,7 @@
 				<div class="form-group">
 					<label class="col-md-3 control-label">Available</label>
 					<div class="col-md-9">
-						<label> Yes <input type="radio" value=0 name="status">
+						<label> Yes <input type="radio" value=0 name="status" checked>
 						</label> <label> No <input type="radio" value=1 name="status">
 						</label>
 					</div>
@@ -103,7 +103,10 @@
 <script>
     $(document).ready(function () {
 
-        load_all_program("all-program-box");
+        //load_all_program("all-program-box");
+        $.when( $.ajax(load_all_program("all-program-box")) ).done(function() {
+       	$("#all-program-box").append("<option value='' selected disabled>Select Program</option>");
+		});
         
         $("#add-subject-form").bootstrapValidator({
             // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
