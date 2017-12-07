@@ -223,6 +223,31 @@
             });
 
         });
+        
+        function load_all_program(e, target) {
+    		$.ajax({
+    			url : window.context + "/ApiProgram/GetAllProgram",
+    			method : "GET",
+    			dataType : 'json',
+    			cache : true,
+    			success : function(data) {
+
+    				//console.log("program size=" + JSON.stringify(data));
+    				var content = '';
+    				for (var i = 0; i < data.length; i++) {
+    					var programeName = data[i].program_name;
+    					var programeId = data[i].program_id;
+    					//console.log("faculty name =" + programeName);
+
+    					content += '<option value='+programeId+'>' + programeName + '</option>';
+    				}
+    				$('#' + target).html(content);
+    			},
+    			error : function() {
+    				alert("Error...!!!");
+    			}
+    		});
+    	}
     });
 </script>
 
