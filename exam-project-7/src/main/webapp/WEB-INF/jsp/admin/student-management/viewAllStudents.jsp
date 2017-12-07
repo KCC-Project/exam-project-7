@@ -190,8 +190,8 @@
 		//alert(batchyear);
 		var url = window.context + "/ApiStudent/SearchStudentsByProgram";
 		var method = "POST";
-		var data = "{'programId':'" + programId + "','batchyear':'" + batchyear + "'}";
-		
+		//var data = "{'programId':'" + programId + "','batchyear':'" + batchyear + "'}";
+		var data = {"programId":  programId  ,"batchyear":  batchyear };
 		loadStudentInformation(url,method,data);
 	}
 

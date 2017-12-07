@@ -34,6 +34,7 @@
 				<th>Subject Name</th>
 				<th>Exam Type</th>
 				<th>Programe/Semester</th>
+				<th>Date</th>
 				<th>F.M</th>
 				<th>P.M</th>
 				<th>Start Time</th>
@@ -52,7 +53,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Students Search</h4>
+					<h4 class="modal-title">Exam Search</h4>
 				</div>
 				<div class="modal-body">
 					<div class="row">
@@ -71,28 +72,6 @@
 								</select>
 							</div>
 							<div class="form-group col-sm-4" style="margin-bottom: 0px;">
-								<select required class="form-control" name="subject_id"
-									id="p-subject-box">
-									<option value="" disabled selected>Select Subject</option>
-								</select>
-							</div>
-							
-							
-
-						</div>
-					</div>
-					<br>
-				
-					<div class="row">
-						<div class="col-sm-12">
-						<div class="form-group col-sm-6" style="margin-bottom: 0px;">
-								<select required class="form-control" name="subject_id"
-									id="p-Exam-Type-box">
-									<option value="" disabled selected> Select Exam Type</option>
-								</select>
-							</div>
-							
-							<div class="form-group col-sm-6" style="margin-bottom: 0px;">
 								<select required class="form-control" name="semester"
 									id="p-semester-box">
 									<option value="" disabled selected> select Semester </option>
@@ -106,6 +85,30 @@
 									<option value="8" >8 </option>
 								</select>
 							</div>
+							
+							
+							
+
+						</div>
+					</div>
+					<br>
+				
+					<div class="row">
+						<div class="col-sm-12">
+						<div class="form-group col-sm-6" style="margin-bottom: 0px;">
+								<select required class="form-control" name="subject_id"
+									id="p-subject-box">
+									<option value="" disabled selected>Select Subject</option>
+								</select>
+							</div>
+						<div class="form-group col-sm-6" style="margin-bottom: 0px;">
+								<select required class="form-control" name="subject_id"
+									id="p-Exam-Type-box">
+									<option value="" disabled selected> Select Exam Type</option>
+								</select>
+							</div>
+							
+							
 					</div>
 					</div>	
 					<br>
@@ -127,6 +130,7 @@ var subjectname;
 var examTypeId;
 var examTypeName;
 var programeName;
+var semesterNo;
 	$(document).ready(function() {
 		
 	
@@ -141,6 +145,14 @@ var programeName;
 		$("#p-program-box").change(function(event) {
 			var getid = event.target.id;
 			programeName  = $('#' + getid).find(":selected").text();
+			load_subject(event, "p-subject-box");
+		});
+		
+		
+		$("#p-semester-box").change(function(event) {
+			var getid = event.target.id;
+			semesterNo = $('#' + getid).find(":selected").text();
+			alert("sem no=="+semesterNo);
 			load_subject(event, "p-subject-box");
 		});
 		
@@ -162,7 +174,9 @@ var programeName;
 			alert("examTypeId = "+examTypeId+" "+examTypeName+ " "+subjectId);
 			var url=window.context + "/ApiExam/GetExamByExamTypeAndSubjectId";
 			var method="POST";
-			var data = "{'examTypeId':'" + examTypeId + "','subjectId':'" + subjectId + "'}";
+			//var data = {examTypeId: 'examTypeId', subjectId: 'subjectId'};
+			var data = {"examTypeId":  examTypeId  ,"subjectId":  subjectId };
+			
 			loadExamInformation(url,method,data);
 		});
 		
@@ -175,6 +189,7 @@ var programeName;
 		var getid = event.target.id;
 		subjectId  = $('#' + getid).find(":selected").val();
 		subjectname=$('#' + getid).find(":selected").text();
+		semesterNo=$('#' + getid).find(":selected").attr('data-sem');
 		$.ajax({
 			url : window.context + "/ApiExam_type/GetAllExam_type",
 			method : "GET",
@@ -204,18 +219,23 @@ var programeName;
 		var getid = e.target.id;
 		var id = $('#' + getid).find(":selected").val();
 		$.ajax({
-			url : window.context + "/ApiSubject/GetSubjectByParameters1/" + id,
-			method : "GET",
+			url : window.context + "/ApiSubject/GetSubjectByParameters" ,
+			method : "POST",
 			dataType : 'json',
 			cache : true,
+			data:{
+				programId:id,
+				semester_no:semesterNo
+			},
 			success : function(data) {
 				
-				console.log("batch size=" + JSON.stringify(data));
+				console.log("subject data from server =" + JSON.stringify(data));
 				
 				var content = '';
 				content += "<option selected='true' > Select Subject </option>"
 				for (var i = 0; i < data.length; i++) {
-					content += '<option value='+data[i].subject_id +'>' + data[i].subject_name + '</option>';
+					content += '<option value='+data[i].subject_id +' data-sem='+data[i].semester_no+'>' + data[i].subject_name + '</option>';
+				//alert("data[i].semester_no="+data[i].semester_no);
 				}
 
 				
@@ -230,7 +250,7 @@ var programeName;
 	
 	function loadExamInformation(url,method,data) {
 		//alert(url+"  "+method+  +data);
-		alert(data);
+		alert("data="+data);
 		alert(subjectname);
 		alert(examTypeName);
 		alert(programeName);
@@ -265,8 +285,10 @@ var programeName;
 				render : function(data, type, row) {
 					console.log("view exam = "+JSON.stringify(data));
 					
-					return programeName + ' / ' +data.semester_no;
+					return programeName + ' / ' +semesterNo;
 				},
+			}, {
+				"data" : "exam_date"
 			}, {
 				"data" : "full_marks"
 			},

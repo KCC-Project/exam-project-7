@@ -89,8 +89,8 @@ public class StudentController {
 	public List searchStudentsByProgram(@FormParam("programId") int programId,@FormParam("batchyear") int batchyear) {
 		System.out.println("from controller =" +programId +" "+batchyear);
 		Object[] ob= new Object[7];
-		ob[2]=3;
-		ob[3]=2013;
+		ob[2]=programId;
+		ob[3]=batchyear;
 		System.out.println("form server = "+studentService.getStudentsByStudentsProgram(ob));
 		return studentService.getStudentsByStudentsProgram(ob);
 	}
