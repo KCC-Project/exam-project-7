@@ -78,7 +78,7 @@ function load_faculty(e, target) {
 				var json = data;
 				//console.log("json size=" + data.length);
 				var content = '';
-				content += "<option selected='true' > Select Faculty </option>"
+				content += "<option selected='true' disabled> Select Faculty </option>"
 				for (var i = 0; i < data.length; i++) {
 					var facultyName = data[i].faculty_name;
 					var facultyId = data[i].faculty_id;
@@ -105,7 +105,7 @@ function load_faculty(e, target) {
 
 				//console.log("program size=" + JSON.stringify(data));
 				var content = '';
-				content += "<option selected='true' > Select Program </option>"
+				content += "<option selected='true' disabled> Select Program </option>"
 				for (var i = 0; i < data.length; i++) {
 					var programeName = data[i].program_name;
 					var programeId = data[i].program_id;

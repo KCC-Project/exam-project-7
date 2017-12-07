@@ -39,10 +39,9 @@
 			<tr class="info">
 				<th>Id</th>
 				<th>Program Name</th>
-				<th>Year</th>
-				<th>Total Credit</th>
-				<th>Status</th>
+				<th>Program Year</th>
 				<th>Faculty Name</th>
+				<th>Status</th>
 				<th>Option</th>
 			</tr>
 		</thead>
@@ -55,6 +54,12 @@
 			<label class="col-md-3 control-label">Program name</label>
 			<div class="col-md-9">
 				<input type="text" class="form-control" name="program_name" required />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">Program years</label>
+			<div class="col-md-9">
+				<input type="number" class="form-control" name="program_years" required />
 			</div>
 		</div>
 		<div class="form-group">
@@ -83,9 +88,21 @@
 	<form id="program-edit-form" method="post" class="form-horizontal well" style="display: none;">
 
 		<div class="form-group">
+			<label class="col-md-3 control-label">Program id</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="program_id" disabled="disabled" />
+			</div>
+		</div>
+		<div class="form-group">
 			<label class="col-md-3 control-label">Program name</label>
 			<div class="col-md-9">
 				<input type="text" class="form-control" name="program_name" required />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">Program years</label>
+			<div class="col-md-9">
+				<input type="number" class="form-control" name="program_years" required />
 			</div>
 		</div>
 		<div class="form-group">
@@ -161,7 +178,7 @@
             }, {
                 "data" : "program_years"
             }, {
-                "data" : "total_credit"
+                "data" : "faculty_id"
             }, {
                 data : null,
                 render : function (data, type, row) {
@@ -177,8 +194,6 @@
                     return '' + statusStatus + '';
                 },
             }, {
-                "data" : "faculty_id"
-            }, {
                 data : null,
                 render : function (data, type, row) {
                     return '<button class="btn btn-success editProg">Edit</button>';
@@ -193,11 +208,15 @@
             console.log(data);
 
             //$.when($.ajax(load_faculty("fe-faculty-box"))).done(function () {
-             //   $("input[name=fe_faculty_id][value=" + data['faculty_id'] + "]").attr('selected', 'selected');
+            //   $("input[name=fe_faculty_id][value=" + data['faculty_id'] + "]").attr('selected', 'selected');
             //});
 
             // Populate the form fields
-            $('#program-edit-form').find('[name="program_id"]').val(data['program_id']).end().find('[name="program_name"]').val(data['program_name']).end()
+            $('#program-edit-form')
+            .find('[name="program_id"]').val(data['program_id']).end()
+            .find('[name="program_name"]').val(data['program_name']).end()
+             .find('[name="program_years"]').val(data['program_years']).end();
+            
             $("input[name=status][value=" + data['status'] + "]").prop('checked', true);
 
             $("input[name=fe_faculty_id][value=" + data['faculty_id'] + "]").attr('selected', 'selected');
