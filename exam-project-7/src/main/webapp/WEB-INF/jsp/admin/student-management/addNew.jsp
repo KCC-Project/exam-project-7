@@ -22,231 +22,206 @@
 			<div class="panel-heading main-color-bg">Add Student</div>
 			<div class="panel-body">
 
-				<form class='form-horizontal' role='form' id="add-student-form">
-					<div class='form-group'>
-						<label class='control-label col-md-2 col-md-offset-2' for='id_program'>Title</label>
-						<div class='col-md-2'>
-							<select class='form-control' id='id_program'>
-								<option>Mr</option>
-								<option>Ms</option>
-								<option>Mrs</option>
-								<option>Miss</option>
-							</select>
-						</div>
-					</div>
-					<div class='form-group'>
-						<label class='control-label col-md-2 col-md-offset-2' for='id_title'>Name</label>
-						<div class='col-md-8'>
+				<form id="add-student-form" method="post" class="form-horizontal well">
 
-							<div class='col-md-3 indent-small'>
-								<div class='form-group internal'>
-									<input class='form-control' name='first_name' id='id_first_name' placeholder='First Name' type='text'
-										required />
-								</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Student Name</label>
+						<div class="col-md-9">
+							<div class="col-md-4">
+								First_Name:<input type="text" class="form-control" name="first_name" />
 							</div>
-							<div class='col-md-3 indent-small'>
-								<div class='form-group internal'>
-									<input class='form-control' id='id_middle_name'  name='middle_name' placeholder='Middle Name' type='text' />
-								</div>
+							<div class="col-md-4">
+								Middle_Name<input type="text" class="form-control" name="middle_name" />
 							</div>
-							<div class='col-md-3 indent-small'>
-								<div class='form-group internal'>
-									<input class='form-control' id='id_last_name'  name='last_name' placeholder='Last Name' type='text' required />
-								</div>
+							<div class="col-md-4">
+								Last_Name<input type="text" class="form-control" name="last_name" />
 							</div>
 						</div>
 					</div>
-					<div class='form-group'>
-						<label class='control-label col-md-2 col-md-offset-2' for='id_username'>Username</label>
-						<div class='col-md-8'>
-							<div class='col-md-5'>
-								<div class='form-group internal'>
-									<input class='form-control col-md-8' id='id_username'  name='username' placeholder='Username' type='text' required />
-								</div>
-							</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Gender</label>
+						<div class="col-md-9">
+							<label> Male <input type="radio" value=0 name="gender" >
+							</label> <label> Female <input type="radio" value=1 name="gender" >
+							</label>
 						</div>
 					</div>
-					<div class='form-group'>
-						<label class='control-label col-md-2 col-md-offset-2' for='id_password'>Password</label>
-						<div class='col-md-8'>
-							<div class='col-md-5'>
-								<div class='form-group internal'>
-									<input class='form-control col-md-8' id='id_password'  name='password' placeholder='Password' type='text'
-										required />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class='form-group'>
-						<label class='control-label col-md-2 col-md-offset-2' for='id_email'>Contact</label>
-						<div class='col-md-6'>
-							<div class='form-group'>
-								<div class='col-md-11'>
-									<input class='form-control' id='id_email'  name='email' placeholder='E-mail' type='text' />
-								</div>
-							</div>
-							<div class='form-group internal'>
-								<div class='col-md-11'>
-									<input class='form-control' id='id_phone'  name='phone' placeholder='Phone: (xxx) - xxx xxxx' type='text' />
-								</div>
-							</div>
-							<div class='form-group internal'>
-								<div class='col-md-11'>
-									<input class='form-control' id='id_phone'  name='address' placeholder='Address' type='text' required />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class='form-group'>
-						<label class='control-label col-md-2 col-md-offset-2' for='id_dob'>Date Of Birth</label>
-						<div class='col-md-8'>
-							<div class='col-md-3'>
-								<div class='form-group internal input-group'>
-									<input class='form-control datepicker' id='id_dob'  name='date_of_birth' /> <span class='input-group-addon'>
-										<i class='glyphicon glyphicon-calendar'></i>
-									</span>
-								</div>
-							</div>
-							<label class='control-label col-md-2' for='id_gender'>Gender</label>
-							<div class='col-md-3'>
-								<div class='form-group internal'>
-									<div class="form-group">
-										<div class="radio">
-											<label> <input type="radio" value=1 name="gender" required> Male
-											</label>
-										</div>
 
-										<div class="radio">
-											<label> <input type="radio" value=0 name="gender" required> Female
-											</label>
-										</div>
-									</div>
-								</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Address</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="address"  />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Phone</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="phone" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Date_Of_Birth</label>
+						<div class="col-md-9">
+							<input type="date" class="form-control" name="date_of_birth" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Login Info</label>
+						<div class="col-md-9">
+							<div class="col-md-6">
+								Username<input type="text" class="form-control" name="username" />
+							</div>
+							<div class="col-md-6">
+								Password<input type="password" class="form-control" name="password" />
 							</div>
 						</div>
 					</div>
-					<div class='form-group'>
-						<label class='control-label col-md-2 col-md-offset-2' for='id_equipment'>Current
-							Semester</label>
-						<div class='col-md-8'>
-							<div class='col-md-3'>
-								<div class='form-group internal'>
-									<select class='form-control' id='id_equipment'  name='semester_no'>
-										<option>Select Semester</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-									</select>
-								</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Email</label>
+						<div class="col-md-9">
+							<input type="email" class="form-control" name="email" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Program</label>
+						<div class="col-md-9">
+							<div class="col-md-6">
+								<select required class="form-control" id="all-program-box" name="program_id">
+								</select>
 							</div>
-							<div class='col-md-9'>
-								<div class='form-group internal'>
-									<label class='control-label col-md-3' for='id_status'>Status</label>
-									<div class="form-group">
-										<div class="radio">
-											<label> <input type="radio" value=0 name="status" checked required>
-												Active
-											</label>
-										</div>
-
-										<div class="radio">
-											<label> <input type="radio" value=0 name="status" required> Inactive
-											</label>
-										</div>
-									</div>
-								</div>
+							<div class="col-md-6">
+								Semester no.:<select class="form-control" id="s-semester-no" name="s_semester_no">
+									<option value="" selected>Select Semester</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+								</select>
 							</div>
 						</div>
 					</div>
 
-					<div class='form-group'>
-						<label class='control-label col-md-2 col-md-offset-2' for='id_pets'>Image</label>
-						<div class='col-md-8'>
-
-							<input name="myFile" type="file"  name='image'>
-
-
+					<div class="form-group">
+						<label class="col-md-3 control-label">Image</label>
+						<div class="col-md-9">
+							<input type="file" class="form-control" name="image" />
 						</div>
-
 					</div>
-
-					<div class="row">
-						<div class="col-md-2 col-md-offset-5">
-							<input type="submit" value="Submit" class="btn btn-primary">
+					<div class="form-group">
+						<label class="col-md-3 control-label">Available</label>
+						<div class="col-md-9">
+							<label> Yes <input type="radio" value=0 name="status" checked>
+							</label> <label> No <input type="radio" value=1 name="status">
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-12">
+							<button type="submit" id="addStudent" class="btn btn-info btn-block">Add Student</button>
 						</div>
 					</div>
 				</form>
+
+
+
 			</div>
 		</div>
 	</div>
 </div>
 
 <script>
-$(document).ready(function () {
-    
-    $("#add-student-form").bootstrapValidator({
-        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-        feedbackIcons : {
-            valid : "glyphicon glyphicon-ok",
-            invalid : "glyphicon glyphicon-remove",
-            validating : "glyphicon glyphicon-refresh"
-        },
-        fields : {
-            first_name : {
-                validators : {
-                    stringLength : {
-                        min : 2
-                    },
-                    notEmpty : {
-                        message : "Please Enter Student First Name"
-                    }
-                }
+    $(document).ready(function () {
+        
+        $.when( $.ajax(load_all_program("all-program-box")) ).done(function() {
+           	$("#all-program-box").append("<option value='' selected disabled>Select Program</option>");
+    		});
+
+        $("#add-student-form").bootstrapValidator({
+            // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+            feedbackIcons : {
+                valid : "glyphicon glyphicon-ok",
+                invalid : "glyphicon glyphicon-remove",
+                validating : "glyphicon glyphicon-refresh"
             },
-            last_name : {
-                validators : {
-                    stringLength : {
-                        min : 2
-                    },
-                    notEmpty : {
-                        message : "Please Enter Student Last Name"
+            fields : {
+                first_name : {
+                    validators : {
+                        stringLength : {
+                            min : 2
+                        },
+                        notEmpty : {
+                            message : "Please Enter Student First Name"
+                        }
+                    }
+                },
+                last_name : {
+                    validators : {
+                        stringLength : {
+                            min : 2
+                        },
+                        notEmpty : {
+                            message : "Please Enter Student Last Name"
+                        }
+                    }
+                },
+                gender : {
+                    validators : {
+                        notEmpty : {
+                            message : "Please Select Gender"
+                        }
+                    }
+                },
+                date_of_birth : {
+                    validators : {
+                        notEmpty : {
+                            message : "Please Enter Date of birth"
+                        }
+                    }
+                },
+                address : {
+                    validators : {
+                        stringLength : {
+                            min : 2
+                        },
+                        notEmpty : {
+                            message : "Please Enter address"
+                        }
                     }
                 }
             }
-        }
-    })
+        })
 
-    .on("success.form.bv", function (e) {
+        .on("success.form.bv", function (e) {
 
-        // Prevent form submission
-        e.preventDefault();
+            // Prevent form submission
+            e.preventDefault();
 
-        var data = $('#add-student-form').serializeArray();
-        console.log(data);
+            var data = $('#add-student-form').serializeArray();
+            console.log(data);
 
-        $.ajax({
-            url : window.context + "/ApiStudent/SaveStudent",
-            method : "POST",
-            dataType : 'json',
-            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-            cache : true,
-            success : function (data) {
-                var message = "Student has been added Successfully";
-                $("#success_message").html(message);
-                alert("Thanks for the submission!");
-                $("#add-student-form")[0].reset();
-            },
-            error : function () {
-                alert("Error...!!!");
-            }
+            $.ajax({
+                url : window.context + "/ApiStudent/SaveStudent",
+                method : "POST",
+                dataType : 'json',
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                cache : true,
+                success : function (data) {
+                    var message = "Student has been added Successfully";
+                    $("#success_message").html(message);
+                    alert("Thanks for the submission!");
+                    $("#add-student-form")[0].reset();
+                },
+                error : function () {
+                    alert("Error...!!!");
+                }
+            });
+
         });
-
     });
-});
 </script>
 
 <jsp:include page="../shared/footer.jsp" />
