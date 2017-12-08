@@ -19,7 +19,6 @@
           <ul class="collapse collapseable" id="collapse-post">
           	<li><a href="${cp }/student/view" id="view-student">View</a></li>
             <li><a href="${cp }/student/addNew" id="add-student">Add New</a></li>
-            <li><a href="${cp }/student/studentSemester" id="Student-Semester">Student-Semester</a></li>
           </ul>
         </li>
         <li class="link">
@@ -31,7 +30,6 @@
           <ul class="collapse collapseable" id="collapse-comments">
             <li><a href="${cp }/subject/view" id="view-subject">View</a></li>
             <li><a href="${cp }/subject/addNew" id="add-subject">Add New</a></li>
-            <li><a href="${cp }/subject/subjectSemester" id="Subject-Semester">Subject-Semester</a></li>
           </ul>
         </li>
 
@@ -44,8 +42,6 @@
           <ul class="collapse collapseable" id="collapse-manage">
             <li><a href="${cp }/faculty" id="Semester">Faculty</a></li>
             <li><a href="${cp }/program" id="courses">Program</a></li>
-             <li><a href="${cp }/semester" id="courses">Semester</a></li>
-             <li><a href="${cp }/sem-info" id="courses">Semester Info</a></li>
           </ul>
         </li>
         <!--====================================================================================  -->
