@@ -175,10 +175,9 @@ function load_faculty(e, target) {
 	
 	function search_subject(data, target) {
         $.ajax({
-            url : window.context + "/ApiSubject/SearchSubject",
-            method : "GET",
+            url : window.context + "/ApiSubject/GetSubjectByParameters",
+            method : "POST",
             data: data,
-            contentType : 'application/json',
             dataType : 'json',
             cache : true,
             success : function(data) {

@@ -371,14 +371,14 @@ public class SubjectDAOImpl implements SubjectDAO {
 		
 		
 		try {
-			  StringBuilder query = new StringBuilder("SELECT * FROM subjects as s  INNER JOIN programs as sp ON s.program_id = sp.program_id where 1=1");
+			  StringBuilder query = new StringBuilder("SELECT * FROM subjects as s INNER JOIN programs as p ON s.program_id = p.program_id where 1=1");
 			  
 				if (subject_id != 0) {
 		            query.append(" AND subject_id = ?");
 		            parameters.add(subject_id);
 		        }
 				if (program_id != 0) {
-		            query.append(" AND program_id = ?");
+		            query.append(" AND s.program_id = ?");
 		            parameters.add(program_id);
 		        }
 				if (subject_name != null) {

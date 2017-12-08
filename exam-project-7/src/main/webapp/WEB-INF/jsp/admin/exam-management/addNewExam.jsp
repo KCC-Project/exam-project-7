@@ -10,7 +10,7 @@
 
 	</ol>
 
-<!-- 
+	<!-- 
 	<form id="add-exam-by-semester-form" method="post" class="form-horizontal well">
 		<h2>Add Exam for Particular Program-> Semester</h2>
 		<div class="form-group">
@@ -139,24 +139,20 @@
 
             $("#s-semester-no").change(function (event) {
                 var a_program_id = $('#add-exam-form').find('[name="program_id"]').val();
-                
-                var data = JSON.stringify({
-                    "program_id" : $('#add-exam-form').find('[name="program_id"]').val(),
-                    "semester_no" : $('#add-exam-form').find('[name="s_semester_no"]').val(),
-               
-                });
-                
-                if(a_program_id != ""){
+                var semester_no = $('#add-exam-form').find('[name="s_semester_no"]').val();
+
+                if (a_program_id != "") {
+                    var data = {
+                        "programId" : a_program_id,
+                        "semester_no" : semester_no
+                    };
                     search_subject(data, "subject-box");
                 }
-                
+
             });
-            
-            
 
         });
         // ------------------------------- document.ready end --------------------------------
-
 
         // form validator for add-faculty form
         $("#add-exam-by-semester-form").bootstrapValidator({
