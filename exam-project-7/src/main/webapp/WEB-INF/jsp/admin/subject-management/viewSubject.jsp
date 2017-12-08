@@ -65,14 +65,14 @@
 								<div class="col-sm-4">
 									<label class="control-label">Subject Name</label>
 									<div class="input-group">
-										<input name="s_subject_name" placeholder="Enter Subject Name" class="form-control" type="text">
+										<input name="s_subject_name" id="subject-name" placeholder="Enter Subject Name" class="form-control" type="text">
 									</div>
 								</div>
 
 								<div class="col-sm-4">
 									<label class=" control-label">Subject Code</label>
 									<div class="input-group">
-										<input name="s_subject_code" placeholder="Enter Subject code" class="form-control" type="text">
+										<input name="s_subject_code" id="subject-code" placeholder="Enter Subject code" class="form-control" type="text">
 									</div>
 								</div>
 								<div class="col-sm-4">
@@ -239,14 +239,18 @@
         function load_subject(e) {
             //alert(programId);
             //alert(batchyear);
+            var program_id = $('#p-program-box').val();
+            var subject_name = $('#subject-name').val();
+            var subject_code = $('#subject-code').val();
             var semester_no = $('#s-semester-no').val();
-            var url = window.context + "/ApiSubject/SearchSubject";
+            var url = window.context + "/ApiSubject/GetSubjectByParameters";
             var method = "POST";
             var data = {
-                "programId" : programId,
-                "semester_no" : semester_no
-            };
-
+                    "program_id" : program_id,
+                    "subject_name" : subject_name,
+                    "subject_code" : subject_code,
+                    "semester_no" : semester_no
+                };
             loadSubjectInformation(url, method, data);
         }
 
@@ -302,13 +306,13 @@
                 }, {
                     data : null,
                     render : function (data, type, row) {
-                        return '<button class="btn btn-success" id="editSub">Click!</button>';
+                        return '<button class="btn btn-success editSub">Click!</button>';
                     },
                 } ]
             });
 
             // edit buttons on subjects row
-            $("#editSub").click(function (event) {
+            $(".editSub").click(function (event) {
                 var table = $("#view_subject").DataTable();
                 var data = table.row($(this).parents('tr')).data();
                 console.log(data);
