@@ -10,4 +10,6 @@ public interface StudentsExamDAO {
 	public StudentsExam getstudentsExam(int s_Id);
 	public StudentsExam updatestudentsExam(StudentsExam studentsExam);
 	public int deletestudentsExam(int s_Id);
+	public void getRequiredInfoTOSave(int a_program_id, int examTypeId, int semester_no);
+	
 }

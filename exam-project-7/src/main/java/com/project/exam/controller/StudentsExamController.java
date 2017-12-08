@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -13,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.exam.model.StudentsExam;
 import com.project.exam.services.StudentsExamService;
@@ -20,14 +22,14 @@ import com.project.exam.services.StudentsExamService;
 @Path("/ApiStudentsExams")
 public class StudentsExamController {
 	@Autowired
-	private StudentsExamService StudentsExamService;
+	private StudentsExamService studentsExamService;
 
 	@GET
 	@Path("/GetAllStudentsExams")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public List<StudentsExam> getAllStudentsExam() {
 		System.out.println("indiseee");
-		return StudentsExamService.getstudentsExam();
+		return studentsExamService.getstudentsExam();
 	}
 	
 	
@@ -36,7 +38,7 @@ public class StudentsExamController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public StudentsExam saveStudentsExam(StudentsExam studentsExamModel) {
-		return StudentsExamService.addstudentsExam(studentsExamModel);
+		return studentsExamService.addstudentsExam(studentsExamModel);
 	}
 	
 
@@ -44,7 +46,7 @@ public class StudentsExamController {
 	@Path("/GetStudentsExams/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public StudentsExam getStudentsExam(@PathParam("id") int id) {
-		return StudentsExamService.getstudentsExam(id);
+		return studentsExamService.getstudentsExam(id);
 	}
 	
 	@PUT
@@ -52,17 +54,24 @@ public class StudentsExamController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public StudentsExam updateStudentsExam(StudentsExam studentsExamModel) {
-		return StudentsExamService.updatestudentsExam(studentsExamModel);
+		return studentsExamService.updatestudentsExam(studentsExamModel);
 	}
 	
 	@DELETE
 	@Path("/DeleteStudentsExam/{id}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public int deleteStudentsExamsModel(@PathParam("id") int id) {
-		return StudentsExamService.deletestudentsExam(id);
+		return studentsExamService.deletestudentsExam(id);
 	}
 	
 	
-	
+	@POST
+	@Path("/GetRequiredInfoTOSave")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public void getRequiredInfoTOSave(@FormParam("a_program_id") int a_program_id,@FormParam("examTypeId") int examTypeId,@FormParam("semester_no") int semester_no) {
+	System.out.println("a_program_id examTypeId semester_no"+a_program_id+examTypeId+semester_no);
+	System.out.println("Hereeeeeeeeeeeeeeeeeeemausam");
+	 studentsExamService.getRequiredInfoTOSave(a_program_id, examTypeId, semester_no);
+	}
 		
 }

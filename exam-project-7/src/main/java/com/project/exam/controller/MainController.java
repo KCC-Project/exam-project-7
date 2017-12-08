@@ -26,6 +26,7 @@ public class MainController {
 	public Viewable home() {
 		return new Viewable("/home");
 	}
+
 	
 	@GET
 	@Path("/index")
@@ -114,6 +115,14 @@ public class MainController {
 		Map<String, Boolean> model = new HashMap<>();
 		model.put("manage-exam_clicked", true);
 		return new Viewable("/admin/exam-management/viewExam", model);
+	}
+	@GET
+	@Path("/result")
+	public Viewable resultExam() {
+		System.out.println("Insdie manage-exam");
+		Map<String, Boolean> model = new HashMap<>();
+		model.put("result_clicked", true);
+		return new Viewable("/admin/exam-management/result", model);
 	}
 	
 	@GET

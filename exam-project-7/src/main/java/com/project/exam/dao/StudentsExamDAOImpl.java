@@ -4,14 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.exam.model.Admin;
+import com.project.exam.controller.StudentsExamController;
 import com.project.exam.model.StudentsExam;
 
 @Repository("studentExamDao")
@@ -152,6 +151,46 @@ public class StudentsExamDAOImpl implements StudentsExamDAO {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public void getRequiredInfoTOSave(int a_program_id, int examTypeId, int semester_no) {
+		List<StudentsExam> listOfInfo=new ArrayList();
+		System.out.println("inside db");
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			//sql="SELECT DISTINCT s.subject_id FROM subjects as s INNER JOIN exams as e ON s.subject_id = e.subject_id INNER JOIN exam_types as et ON e.exam_id = et.exam_type_id where s.semester_no=? and s.program_id=?";
+			sql="SELECT * FROM exams ORDER BY exam_id DESC LIMIT 1";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			System.out.println("inside db");
+			while (rs.next()) {
+
+				int examId=rs.getInt("exam_id");
+				sql="SELECT s.s_id FROM students as s INNER JOIN students_program as sp ON s.s_id = sp.s_id INNER JOIN programs as p ON sp.program_id = p.program_id where sp.program_id=? and s.current_semester=?";
+				pst = conn.prepareStatement(sql);
+				pst.setInt(1, a_program_id);
+				pst.setInt(2,semester_no );
+				rs = pst.executeQuery();
+				while(rs.next()) {
+					sql = "insert into students_exams(attendance_status,grade,obtained_marks,status,exam_id,s_id) values(?,?,?,?,?,?)";
+					pst = conn.prepareStatement(sql);
+					int col = 1;
+				pst.setInt(col++, 0);
+				pst.setInt(col++,0);
+				pst.setInt(col++, 0);
+				pst.setInt(col++, 0);
+				pst.setInt(col++, examId);
+				pst.setInt(col++, rs.getInt("s_id"));
+				
+				
+					int count = pst.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 }

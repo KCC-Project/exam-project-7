@@ -127,6 +127,9 @@
 
 
 	<script>
+	var a_program_id;
+	var semester_no;
+	var examTypeId;
         $(document).ready(function () {
 
             $.when($.ajax(load_all_program("all-program-box"))).done(function () {
@@ -137,9 +140,14 @@
                 $("#exam-type-box").append("<option value='' selected disabled>Select Exam Type</option>");
             });
 
+            $("#exam-type-box").change(function(event) {
+            	var getid = event.target.id;
+    		
+            	examTypeId = $('#' + getid).find(":selected").val();
+    		});
             $("#s-semester-no").change(function (event) {
-                var a_program_id = $('#add-exam-form').find('[name="program_id"]').val();
-                var semester_no = $('#add-exam-form').find('[name="s_semester_no"]').val();
+                 a_program_id = $('#add-exam-form').find('[name="program_id"]').val();
+                 semester_no = $('#add-exam-form').find('[name="s_semester_no"]').val();
 
                 if (a_program_id != "") {
                     var data = {
@@ -299,17 +307,19 @@
                 contentType : 'application/json',
                 data : formToJSON(),
                 cache : true,
+                async: false,
                 success : function (data) {
 
                     alert("Thanks for the submission!");
                     $("#add-exam-form")[0].reset();
                     $('#add-exam-form').DataTable().ajax.reload();
-
+                    
                 },
                 error : function () {
                     alert("Error...!!!");
                 }
             });
+            saveInfo();
             function formToJSON() {
                 var data = JSON.stringify({
                     "exam_type_id" : $('#add-exam-form').find('[name="exam_type_id"]').val(),
@@ -324,6 +334,30 @@
                 alert(data);
                 return data;
             }
+            function saveInfo() {
+            	//alert(a_program_id);
+            	//alert(semester_no);
+            	//alert(examTypeId);
+        		$.ajax({
+        			url : window.context + "/ApiStudentsExams/GetRequiredInfoTOSave",
+        			method : "POST",
+        			cache : true,
+        			data : {
+        				a_program_id : a_program_id,
+        				semester_no : semester_no,
+        				examTypeId	: examTypeId
+
+        			},
+        			success : function(data) {
+        				alert("sucess");
+        			
+        			},
+        			error : function() {
+        				alert("Error...!!!");
+        			}
+        		});
+        	}
+        
         });
     </script>
 

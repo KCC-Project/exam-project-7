@@ -42,4 +42,10 @@ public class StudentsExamServiceImpl implements StudentsExamService {
 		return studentExamDao.deletestudentsExam(s_Id);
 	}
 
+	@Override
+	public void getRequiredInfoTOSave(int a_program_id, int examTypeId, int semester_no) {
+		studentExamDao.getRequiredInfoTOSave(a_program_id, examTypeId, semester_no);
+		
+	}
+
 }
