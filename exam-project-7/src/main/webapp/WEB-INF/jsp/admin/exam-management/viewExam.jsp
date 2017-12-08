@@ -121,6 +121,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
 </div>
 <!--=========================================================================================  -->
 <jsp:include page="../shared/footer.jsp" />
@@ -306,13 +308,13 @@
 			}, {
 				data : null,
 				render : function(data, type, row) {
-					return '<button class="btn btn-success editBtns">Edit</button>';
+					return '<button class="btn btn-danger deletebtn">Delete</button>';
 				},
 			} ]
 		});
 
-		// edit buttons on subjects row
-		$('#view_exam tbody').on('click', '.editBtns', function() {
+		// delete buttons on exam row
+		$('#view_exam tbody').on('click', '.deletebtn', function() {
 			var table = $("#view_exam").DataTable();
 			var data = table.row($(this).parents('tr')).data();
 			console.log(data);

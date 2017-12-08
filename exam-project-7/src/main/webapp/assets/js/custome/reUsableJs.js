@@ -149,3 +149,53 @@ function load_faculty(e, target) {
     }
 	
 	
+	function load_all_examType(target) {
+        $.ajax({
+            url : window.context + "/ApiExam_type/GetAllExam_type",
+            method : "GET",
+            dataType : 'json',
+            cache : true,
+            success : function(data) {
+
+                var content = '';
+                for (var i = 0; i < data.length; i++) {
+                    var exam_type_id = data[i].exam_type_id;
+                    var type_name = data[i].type_name;
+
+                    content += '<option value='+exam_type_id+'>' + type_name + '</option>';
+                }
+                $('#' + target).html(content);
+            },
+            error : function() {
+                alert("Error...!!!");
+            }
+        });
+    }
+	
+	
+	function search_subject(data, target) {
+        $.ajax({
+            url : window.context + "/ApiSubject/SearchSubject",
+            method : "GET",
+            data: data,
+            contentType : 'application/json',
+            dataType : 'json',
+            cache : true,
+            success : function(data) {
+
+                var content = '';
+                for (var i = 0; i < data.length; i++) {
+                    var subject_id = data[i].subject_id;
+                    var subject_name = data[i].subject_name;
+
+                    content += '<option value='+subject_id+'>' + subject_name + '</option>';
+                }
+                $('#' + target).html(content);
+            },
+            error : function() {
+                alert("Error...!!!");
+            }
+        });
+    }
+	
+	

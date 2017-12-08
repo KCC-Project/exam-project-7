@@ -239,18 +239,43 @@
         function load_subject(e) {
             //alert(programId);
             //alert(batchyear);
+            $('input[type=number]').each(function() {
+				var t = $(this);
+				if (t.val() != 0) {
+					//alert(t.val());
+				} else {
+					t.val('0');
+				}
+			});
+            /*
             var program_id = $('#p-program-box').val();
             var subject_name = $('#subject-name').val();
+            if (subject_name == ""){
+            subject_name = null;
+        }
             var subject_code = $('#subject-code').val();
+            if (subject_code == ""){
+                subject_code = null;
+            }
             var semester_no = $('#s-semester-no').val();
+            */
+            
+            function formToJSON() {
+				var data = JSON.stringify({
+					"semester_no" : $('#searchSubjectModal').find('[name="s_semester_no"]').val(),
+					"subject_name" : $('#searchSubjectModal').find('[name="_subject_name"]').val(),
+					"subject_code" : $('#searchSubjectModal').find('[name="s_subject_code"]').val(),
+					"program_id" : $('#searchSubjectModal').find('[name="program_id"]').val(),
+
+				});
+				alert(data);
+				return data;
+			}
+            var data = formToJSON();
             var url = window.context + "/ApiSubject/GetSubjectByParameters";
             var method = "POST";
-            var data = {
-                    "program_id" : program_id,
-                    "subject_name" : subject_name,
-                    "subject_code" : subject_code,
-                    "semester_no" : semester_no
-                };
+           
+            console.log(data);
             loadSubjectInformation(url, method, data);
         }
 
@@ -269,6 +294,7 @@
                     "data" : data,
                     "dataSrc" : "",
                     "dataType" : "json",
+                    "contentType" : 'application/json',
                     "async" : false
                 },
                 "columns" : [ {
