@@ -8,6 +8,7 @@ import com.project.exam.controller.AdminController;
 import com.project.exam.controller.ExamController;
 import com.project.exam.controller.Exam_typeController;
 import com.project.exam.controller.FacultyController;
+import com.project.exam.controller.LoginLogOutController;
 import com.project.exam.controller.MainController;
 import com.project.exam.controller.ProgramController;
 import com.project.exam.controller.StudentController;
@@ -38,6 +39,7 @@ public class MyApplication extends ResourceConfig {
 		register(StudentsExamController.class);
 		register(ExamController.class);
 		register(StudentsProgramController.class);
-
+		register(LoginLogOutController.class);
+		
 	}
 }

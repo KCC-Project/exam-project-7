@@ -3,24 +3,34 @@ package com.project.exam.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.glassfish.jersey.server.mvc.Viewable;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Path("/")
 public class MainController {
 
 	@GET
 	public Viewable index() {
-		return new Viewable("/home");
+		return new Viewable("/index");
 	}
 	@GET
 	@Path("/home")
 	public Viewable home() {
 		return new Viewable("/home");
+	}
+	
+	@GET
+	@Path("/index")
+	public Viewable indexx() {
+		return new Viewable("/index");
 	}
 	
 	@GET

@@ -77,7 +77,9 @@
 
 					</h4>
 				</div>
-
+<div class="hidden-xs pull-right" id="dash-info">
+					<form action="ApiLoginOut/logoutStudent" method="POST"><input type="submit" class="btn btn-defult pull-right" value="logout"></form>
+				</div>
 				<!-- Dashboard search bar -->
 				<div class="search-field pull-left">
 					<input type="text" placeholder="search" class="form-control">

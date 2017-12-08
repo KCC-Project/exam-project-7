@@ -1,9 +1,28 @@
+<%@page import="java.net.URI"%>
+<%@page import="org.springframework.context.annotation.Import"%>
+<%@page import="javax.ws.rs.core.Response"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%
+//Object userName=session.getAttribute("adminUserName");
+//System.out.println("username from jsp = "+userName.toString());
+	
+	
+
+		if (session.getAttribute("adminUserName") != null) {
+			System.out.println("admin");
+			response.sendRedirect("index.jsp");
+		}else{
+			System.out.println("No Admin");
+			response.sendRedirect("index");
+		}
+	%>
+	
+	
 <c:set var="cp" scope="application">${pageContext.request.contextPath}</c:set>
 
 <!DOCTYPE html>
@@ -29,33 +48,33 @@
 <title>MIS</title>
 
 <!-- Linked CSS -->
-<link href="${css }/bootstrap.min.css" rel="stylesheet">
-<link href="${css}/select2.min.css" rel="stylesheet">
-<link href="${css}/select2-bootstrap.min.css" rel="stylesheet">
-<link href="${css}/bootstrap-editable.css" rel="stylesheet">
+<link href="${css }bootstrap.min.css" rel="stylesheet">
+<link href="${css}select2.min.css" rel="stylesheet">
+<link href="${css}select2-bootstrap.min.css" rel="stylesheet">
+<link href="${css}bootstrap-editable.css" rel="stylesheet">
 <link href="${fontAwasome}" rel="stylesheet">
-<link href="${css}/bootstrap-switch.min.css" rel="stylesheet">
-<link href="${css}/datatables.min.css" rel="stylesheet">
+<link href="${css}bootstrap-switch.min.css" rel="stylesheet">
+<link href="${css}datatables.min.css" rel="stylesheet">
 <!-- Written CSS -->
 <link href="${css }style.css" rel="stylesheet">
 <link href="${css }sidebar.css" rel="stylesheet">
-<link href="${css }/style-responsive.css" rel="stylesheet">
-<link href="${css}/profile.css" rel="stylesheet">
+<link href="${css }style-responsive.css" rel="stylesheet">
+<link href="${css}profile.css" rel="stylesheet">
 
 
 <!-- Linked JS -->
-<script src="${extraJs}/jquery-3.2.1.min.js"></script>
-<script src="${extraJs}/bootstrap.min.js"></script>
-<script src="${extraJs}/datatables.min.js"></script>
-<script src="${extraJs}/select2.min.js"></script>
-<script src="${extraJs}/bootstrap-editable.min.js"></script>
-<script src="${extraJs}/bootstrapValidator.min.js"></script>
-<script src="${extraJs}/bootstrap-switch.min.js"></script>
-<script src="${extraJs}/bootbox.min.js"></script>
+<script src="${extraJs}jquery-3.2.1.min.js"></script>
+<script src="${extraJs}bootstrap.min.js"></script>
+<script src="${extraJs}datatables.min.js"></script>
+<script src="${extraJs}select2.min.js"></script>
+<script src="${extraJs}bootstrap-editable.min.js"></script>
+<script src="${extraJs}bootstrapValidator.min.js"></script>
+<script src="${extraJs}bootstrap-switch.min.js"></script>
+<script src="${extraJs}bootbox.min.js"></script>
 <!-- Written JS -->
-<script src="${custome}/custome_editableJs.js"></script>
-<script src="${custome}/reUsableJs.js"></script>
-<script src="${Js}/default.js"></script>
+<script src="${custome}custome_editableJs.js"></script>
+<script src="${custome}reUsableJs.js"></script>
+<script src="${Js}default.js"></script>
 
 
 <script>
@@ -78,10 +97,14 @@
 						<a href="#menu-toggle" class="btn btn-default menu-toggle">Toggle
 							Menu</a> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 						Dashboard <small>Manage</small>
+						
 
 					</h4>
 				</div>
-
+				<div class="hidden-xs pull-right" id="dash-info">
+					<form action="ApiLoginOut/logoutAdmin" method="POST"><input type="submit" class="btn btn-defult pull-right" value="logout"></form>
+				</div>
+				
 				<!-- Dashboard search bar -->
 				<div class="search-field pull-left">
 					<input type="text" placeholder="search" class="form-control">
