@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
@@ -21,7 +22,7 @@ import com.project.exam.model.Student;
 import com.project.exam.services.AdminService;
 import com.project.exam.services.StudentService;
 
-@Path("ApiLoginOut")
+@Path("/")
 @SessionAttributes("userName")
 public class LoginLogOutController {
 	@Autowired
@@ -30,6 +31,7 @@ public class LoginLogOutController {
 	private StudentService studentService;
 
 	@POST
+	@Path("/ApiLoginOut")
 	public Response login(@FormParam("category") String category, @FormParam("InputEmail1User") String InputEmail1User,
 			@FormParam("InputPassword1") String InputPassword1, @FormParam("rememberMe") String rememberMe
 			,@Context HttpServletRequest req) throws URISyntaxException  {
@@ -84,22 +86,36 @@ public class LoginLogOutController {
 		return null;
 	}
 
-	@POST
+	@GET
 	@Path("/logoutAdmin")
 	public Response logoutAdmin(@Context HttpServletRequest req) throws URISyntaxException {
 		HttpSession session= req.getSession(true);
 		session.removeAttribute("adminUserName");
-		URI targetURIForRedirection = new URI("");
+		StringBuffer requestURL = req.getRequestURL();
+		System.out.println("full url="+requestURL);
+		String uri = req.getScheme() + "://" +   // "http" + "://
+				req.getServerName() +       // "myhost"
+	             ":" +                           // ":"
+	             req.getServerPort() + "/exam-project-7/";     
+	           
+		// req.getRequestURI() ;    
+		System.out.println("url ="+uri);
+		URI targetURIForRedirection = new URI(uri);
 		return Response.seeOther(targetURIForRedirection).build();
+	
 		
 	}
 	
-	@POST
+	@GET
 	@Path("/logoutStudent")
 	public Response logoutStudent(@Context HttpServletRequest req) throws URISyntaxException {
 		HttpSession session= req.getSession(true);
 		session.removeAttribute("studentUserName");
-		URI targetURIForRedirection = new URI("");
+		String uri = req.getScheme() + "://" +   // "http" + "://
+				req.getServerName() +       // "myhost"
+	             ":" +                           // ":"
+	             req.getServerPort() + "/exam-project-7/";   
+		URI targetURIForRedirection = new URI(uri);
 		return Response.seeOther(targetURIForRedirection).build();
 		
 	}

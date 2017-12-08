@@ -78,7 +78,7 @@
 					</h4>
 				</div>
 <div class="hidden-xs pull-right" id="dash-info">
-					<form action="ApiLoginOut/logoutStudent" method="POST"><input type="submit" class="btn btn-defult pull-right" value="logout"></form>
+					<a href="${cp }/logoutStudent"><input type="submit" class="btn btn-defult pull-right" value="logout"></
 				</div>
 				<!-- Dashboard search bar -->
 				<div class="search-field pull-left">

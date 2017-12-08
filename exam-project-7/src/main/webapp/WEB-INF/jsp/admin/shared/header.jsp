@@ -4,25 +4,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-//Object userName=session.getAttribute("adminUserName");
-//System.out.println("username from jsp = "+userName.toString());
-	
-	
 
-		if (session.getAttribute("adminUserName") != null) {
-			System.out.println("admin");
-			response.sendRedirect("index.jsp");
-		}else{
-			System.out.println("No Admin");
-			response.sendRedirect("index");
-		}
-	%>
-	
-	
+<c:if test="${empty adminUserName}">
+<c:redirect url="${cp}/index }"></c:redirect>
+</c:if>
+
+
+
 <c:set var="cp" scope="application">${pageContext.request.contextPath}</c:set>
 
 <!DOCTYPE html>
@@ -32,7 +23,8 @@
 
 <!-- CSS Directory -->
 <spring:url value="/assets/css/" var="css" />
-<spring:url value="/assets/font-awesome/css/font-awesome.min.css" var="fontAwasome" />
+<spring:url value="/assets/font-awesome/css/font-awesome.min.css"
+	var="fontAwasome" />
 
 <!-- JS Directory -->
 <spring:url value="/assets/js/extraJs/" var="extraJs" />
@@ -97,14 +89,15 @@
 						<a href="#menu-toggle" class="btn btn-default menu-toggle">Toggle
 							Menu</a> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 						Dashboard <small>Manage</small>
-						
+
 
 					</h4>
 				</div>
 				<div class="hidden-xs pull-right" id="dash-info">
-					<form action="ApiLoginOut/logoutAdmin" method="POST"><input type="submit" class="btn btn-defult pull-right" value="logout"></form>
+					<a href="${cp }/logoutAdmin"><input type="submit"
+						class="btn btn-defult pull-right" value="logout"></a>
 				</div>
-				
+
 				<!-- Dashboard search bar -->
 				<div class="search-field pull-left">
 					<input type="text" placeholder="search" class="form-control">
