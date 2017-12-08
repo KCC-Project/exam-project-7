@@ -19,6 +19,7 @@ public class StudentsExamDAOImpl implements StudentsExamDAO {
 	private String sql;
 	private PreparedStatement pst;
 	private ResultSet rs;
+
 	@Override
 	public List<StudentsExam> getstudentsExamList() {
 		List<StudentsExam> listStudentsExam = new ArrayList<StudentsExam>();
@@ -53,12 +54,12 @@ public class StudentsExamDAOImpl implements StudentsExamDAO {
 			sql = "insert into students_exams(attendance_status,grade,obtained_marks,status,exam_id,s_id) values(?,?,?,?,?,?)";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
-		pst.setInt(col++, studentsExam.getAttendance_status());
-		pst.setString(col++, studentsExam.getGrade());
-		pst.setInt(col++, studentsExam.getObtained_marks());
-		pst.setInt(col++, studentsExam.getStatus());
-		pst.setInt(col++, studentsExam.getExam_id());
-		pst.setInt(col++, studentsExam.getS_id());
+			pst.setInt(col++, studentsExam.getAttendance_status());
+			pst.setString(col++, studentsExam.getGrade());
+			pst.setInt(col++, studentsExam.getObtained_marks());
+			pst.setInt(col++, studentsExam.getStatus());
+			pst.setInt(col++, studentsExam.getExam_id());
+			pst.setInt(col++, studentsExam.getS_id());
 			int count = pst.executeUpdate();
 			if (count > 0) {
 				status = true;
@@ -127,7 +128,8 @@ public class StudentsExamDAOImpl implements StudentsExamDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return new StudentsExam();	}
+		return new StudentsExam();
+	}
 
 	@Override
 	public int deletestudentsExam(int s_Id) {
@@ -155,42 +157,91 @@ public class StudentsExamDAOImpl implements StudentsExamDAO {
 
 	@Override
 	public void getRequiredInfoTOSave(int a_program_id, int examTypeId, int semester_no) {
-		List<StudentsExam> listOfInfo=new ArrayList();
+		List<StudentsExam> listOfInfo = new ArrayList();
 		System.out.println("inside db");
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			//sql="SELECT DISTINCT s.subject_id FROM subjects as s INNER JOIN exams as e ON s.subject_id = e.subject_id INNER JOIN exam_types as et ON e.exam_id = et.exam_type_id where s.semester_no=? and s.program_id=?";
-			sql="SELECT * FROM exams ORDER BY exam_id DESC LIMIT 1";
+			// sql="SELECT DISTINCT s.subject_id FROM subjects as s INNER JOIN exams as e ON
+			// s.subject_id = e.subject_id INNER JOIN exam_types as et ON e.exam_id =
+			// et.exam_type_id where s.semester_no=? and s.program_id=?";
+			sql = "SELECT * FROM exams ORDER BY exam_id DESC LIMIT 1";
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();
 			System.out.println("inside db");
 			while (rs.next()) {
 
-				int examId=rs.getInt("exam_id");
-				sql="SELECT s.s_id FROM students as s INNER JOIN students_program as sp ON s.s_id = sp.s_id INNER JOIN programs as p ON sp.program_id = p.program_id where sp.program_id=? and s.current_semester=?";
+				int examId = rs.getInt("exam_id");
+				sql = "SELECT s.s_id FROM students as s INNER JOIN students_program as sp ON s.s_id = sp.s_id INNER JOIN programs as p ON sp.program_id = p.program_id where sp.program_id=? and s.current_semester=?";
 				pst = conn.prepareStatement(sql);
 				pst.setInt(1, a_program_id);
-				pst.setInt(2,semester_no );
+				pst.setInt(2, semester_no);
 				rs = pst.executeQuery();
-				while(rs.next()) {
+				while (rs.next()) {
 					sql = "insert into students_exams(attendance_status,grade,obtained_marks,status,exam_id,s_id) values(?,?,?,?,?,?)";
 					pst = conn.prepareStatement(sql);
 					int col = 1;
-				pst.setInt(col++, 0);
-				pst.setInt(col++,0);
-				pst.setInt(col++, 0);
-				pst.setInt(col++, 0);
-				pst.setInt(col++, examId);
-				pst.setInt(col++, rs.getInt("s_id"));
-				
-				
+					pst.setInt(col++, 0);
+					pst.setInt(col++, 0);
+					pst.setInt(col++, 0);
+					pst.setInt(col++, 0);
+					pst.setInt(col++, examId);
+					pst.setInt(col++, rs.getInt("s_id"));
+
 					int count = pst.executeUpdate();
 				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 	}
-	
+
+	@Override
+	public List updatestudentExamModel(int semesterNo, String programeName, int programId, int batchyear,
+			String examTypeName, int subjectId, int examtypeId, String subjectName) {
+		System.out.println("inside sql");
+		List list = new ArrayList<>();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			System.out.println("inside sql");
+			sql = "SELECT s.first_name,s.middle_name,s.last_name,se.attendance_status, se.obtained_marks,se.students_exams_id,se.grade,se.status, sub.subject_name, et.type_name, e.exam_date,se.s_id,s.current_semester, pr.program_name, sub.semester_no FROM students_exams as se INNER JOIN students as s ON se.s_id = s.s_id INNER JOIN students_program as sp ON s.s_id = sp.s_id INNER JOIN exams as e ON e.exam_id = se.exam_id INNER JOIN exam_types as et ON et.exam_type_id = e.exam_type_id INNER JOIN subjects as sub ON e.subject_id = sub.subject_id INNER JOIN programs as pr ON pr.program_id = sub.program_id where sp.program_id=? and sp.batch_year=? and s.current_semester=? and et.exam_type_id=? and sub.subject_id=?";
+			System.out.println("inside sql");
+			pst = conn.prepareStatement(sql);
+			System.out.println("inside sql");
+			pst.setInt(1, programId);
+			System.out.println("inside sql");
+			pst.setInt(2, batchyear);
+			pst.setInt(3, semesterNo);
+			System.out.println("inside sql");
+			pst.setInt(4, examtypeId);
+			pst.setInt(5, subjectId);
+			System.out.println("inside sql");
+			rs = pst.executeQuery();
+			System.out.println("inside sql");
+			while (rs.next()) {
+				System.out.println(rs.getString("first_name"));
+				Map<String, Object> map = new HashMap<>();
+				map.put("first_name", rs.getString("first_name"));
+				map.put("middle_name", rs.getString("middle_name"));
+				map.put("last_name", rs.getString("last_name"));
+				map.put("grade", rs.getInt("grade"));
+				map.put("attendance_status", rs.getInt("attendance_status"));
+				map.put("obtained_marks", rs.getInt("obtained_marks"));
+				map.put("subject_name", rs.getString("subject_name"));
+				map.put("type_name", rs.getString("type_name"));
+				map.put("status", rs.getInt("status"));
+				map.put("current_semester", rs.getInt("current_semester"));
+				map.put("exam_date", rs.getString("exam_date"));
+				map.put("s_id", rs.getInt("s_id"));
+				map.put("students_exams_id", rs.getString("students_exams_id"));
+				
+				list.add(map);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return list;
+
+	}
+
 }

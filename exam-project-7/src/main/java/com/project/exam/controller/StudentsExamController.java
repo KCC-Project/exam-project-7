@@ -70,8 +70,37 @@ public class StudentsExamController {
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public void getRequiredInfoTOSave(@FormParam("a_program_id") int a_program_id,@FormParam("examTypeId") int examTypeId,@FormParam("semester_no") int semester_no) {
 	System.out.println("a_program_id examTypeId semester_no"+a_program_id+examTypeId+semester_no);
-	System.out.println("Hereeeeeeeeeeeeeeeeeeemausam");
+	
 	 studentsExamService.getRequiredInfoTOSave(a_program_id, examTypeId, semester_no);
+	}
+	
+	
+	@POST
+	@Path("/GetRequiredInfoTOupdate")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List getRequiredInfoTOupdate(
+			@FormParam("semesterNo") int semesterNo,
+			@FormParam("programeName") String programeName,
+			@FormParam("programId") int programId,
+			@FormParam("batchyear") int batchyear,
+			@FormParam("examTypeName") String examTypeName,
+			@FormParam("examtypeId") int examtypeId,
+			@FormParam("subjectId") int subjectId,
+			@FormParam("subjectName") String subjectName
+			
+			) {
+	System.out.println("semesterNo = "+semesterNo);
+	System.out.println("programeName = "+programeName);
+	System.out.println("programId = "+programId);
+	System.out.println("batchyear = "+batchyear);
+	System.out.println("examTypeName = "+examTypeName);
+	System.out.println("subjectId = "+subjectId);
+	System.out.println("examtypeId = "+examtypeId);
+	System.out.println("subjectName = "+subjectName);
+	
+	System.out.println(studentsExamService.updatestudentExamModel(semesterNo,programeName,programId,batchyear,examTypeName,subjectId,examtypeId,subjectName));
+	
+	return studentsExamService.updatestudentExamModel(semesterNo,programeName,programId,batchyear,examTypeName,subjectId,examtypeId,subjectName);
 	}
 		
 }

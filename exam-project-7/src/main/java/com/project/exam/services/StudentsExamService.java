@@ -11,4 +11,7 @@ public interface StudentsExamService {
 	public StudentsExam updatestudentsExam(StudentsExam studentsExam);
 	public int deletestudentsExam(int s_Id);
 	public void getRequiredInfoTOSave(int a_program_id, int examTypeId, int semester_no);
+	
+	public List updatestudentExamModel(int semesterNo, String programeName, int programId, int batchyear,
+			String examTypeName, int subjectId, int examtypeId, String subjectName);
 }

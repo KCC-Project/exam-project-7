@@ -48,4 +48,11 @@ public class StudentsExamServiceImpl implements StudentsExamService {
 		
 	}
 
+	@Override
+	public List updatestudentExamModel(int semesterNo, String programeName, int programId, int batchyear,
+			String examTypeName, int subjectId, int examtypeId, String subjectName) {
+		return studentExamDao.updatestudentExamModel(semesterNo, programeName, programId, batchyear, examTypeName, subjectId, examtypeId, subjectName);
+		
+	}
+
 }
