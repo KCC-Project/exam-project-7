@@ -33,16 +33,28 @@ public class MainController {
 		return new Viewable("/index");
 	}
 	
+	// --------- student main controller Starts here -----------
 	@GET
 	@Path("/user")
 	public Viewable student() {
-		return new Viewable("/student/student-home");
-	}
-	@GET
-	@Path("/user/profile")
-	public Viewable profile() {
 		return new Viewable("/student/student-profile");
 	}
+	@GET
+	@Path("/results")
+	public Viewable results() {
+		return new Viewable("/student/student-results");
+	}
+	@GET
+	@Path("/upcoming-exams")
+	public Viewable upcomingExams() {
+		return new Viewable("/student/student-upcomingExams");
+	}
+	@GET
+	@Path("/subjects-details")
+	public Viewable subjectsDetails() {
+		return new Viewable("/student/student-subjectDetails");
+	}
+	// --------- student main controller ends -----------
 	
 	@GET
 	@Path("/subject/addNew")
