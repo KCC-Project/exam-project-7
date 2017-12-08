@@ -8,13 +8,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<c:if test="${empty adminUserName}">
-<c:redirect url="${cp}/index }"></c:redirect>
-</c:if>
 
-
+ 
 
 <c:set var="cp" scope="application">${pageContext.request.contextPath}</c:set>
+
+
+ <c:if test = "${ empty sessionScope.adminUserName }">
+         <c:redirect url = "${cp }/index "/>
+      </c:if>
 
 <!DOCTYPE html>
 <html lang="en">
