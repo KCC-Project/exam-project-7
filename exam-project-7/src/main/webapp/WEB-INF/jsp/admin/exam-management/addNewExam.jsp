@@ -10,11 +10,7 @@
 
 	</ol>
 
-	<div class="pull-right">
-		<button class="btn btn-info" id="add-SemesterExam-modal">Add Exam</button>
-	</div>
-
-
+<!-- 
 	<form id="add-exam-by-semester-form" method="post" class="form-horizontal well">
 		<h2>Add Exam for Particular Program-> Semester</h2>
 		<div class="form-group">
@@ -45,14 +41,16 @@
 			</div>
 		</div>
 	</form>
+	
+	 -->
 
 	<form id="add-exam-form" method="post" class="form-horizontal well">
 
 		<div class="form-group">
-			<label class="col-md-3 control-label">Program</label>
+			<label class="col-md-3 control-label">Exam For</label>
 			<div class="col-md-9">
 				<div class="col-md-6">
-					<select required class="form-control" id="all-program-box" name="program_id">
+					Program<select required class="form-control" id="all-program-box" name="program_id">
 					</select>
 				</div>
 				<div class="col-md-6">
@@ -71,10 +69,10 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-3 control-label">Subject</label>
+			<label class="col-md-3 control-label">Exam Info</label>
 			<div class="col-md-9">
 				<div class="col-md-6">
-					<select required class="form-control" id="subject-box" name="subject_id">
+					Subject_Name<select required class="form-control" id="subject-box" name="subject_id">
 					</select>
 				</div>
 				<div class="col-md-6">
