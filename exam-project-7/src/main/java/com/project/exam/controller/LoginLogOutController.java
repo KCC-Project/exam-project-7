@@ -71,6 +71,7 @@ public class LoginLogOutController {
 						&& student1.getPassword().equals(InputPassword1)) {
 					HttpSession session= req.getSession(true);
 					session.setAttribute("studentUserName", InputEmail1User);
+					session.setAttribute("studentID", student1.getS_id());
 					//for session only if remember btn is checked
 					if (rememberMe != null) {
 					
