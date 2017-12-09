@@ -12,7 +12,7 @@
 		<li><a><span class="glyphicon glyphicon-user black"> View Results </span></a></li>
 	</ol>
 
-	<form id="search-result" method="post" class="form-horizontal well">
+	<form  class="form-horizontal well">
 
 		<div class="form-group">
 			<label class="col-md-3 control-label">Results</label>
@@ -67,6 +67,11 @@
 </div>
 <script>
 var x = document.getElementById("searchResult").value;
+var semester_no;
+var exam_type_id;
+var data;
+var url;
+var method;
 
     $(document).ready(function () {
   
@@ -74,9 +79,33 @@ var x = document.getElementById("searchResult").value;
         $.when($.ajax(load_all_examType("exam-type-box"))).done(function () {
             $("#exam-type-box").append("<option value='' selected disabled>Select Exam Type</option>");
         });
+        
+        $("#s-semester-no").change(function(event) {
+        	var getid = event.target.id;
+		
+        	semester_no = $('#' + getid).find(":selected").val();
+		});
+        $("#exam-type-box").change(function(event) {
+        	var getid = event.target.id;
+		
+        	exam_type_id = $('#' + getid).find(":selected").val();
+
+             data = {
+                "semester_no" : semester_no,
+                "exam_type_id" : exam_type_id,
+                "studentId" :x
+            };
+             url = window.context + "/ApiStudentsExams/loadResultExams";
+           method = "POST";
+            
+		});
+        $("#searchResult").click(function(event) {
+     
+            loadExamInformation(url, method, data);
+		});
 
     });
-
+/* 
     $("#search-result").bootstrapValidator({
         feedbackIcons : {
             valid : "glyphicon glyphicon-ok",
@@ -107,24 +136,16 @@ var x = document.getElementById("searchResult").value;
         // Prevent form submission
         e.preventDefault();
 
-        var semester_no = $('#sub-form').find('[name="s_semester_no"]').val();
-        var exam_type_id = $('#sub-form').find('[name="exam_type_id"]').val();
+         semester_no = $('#sub-form').find('[name="s_semester_no"]').val();
+         exam_type_id = $('#sub-form').find('[name="exam_type_id"]').val();
     
 
-        var data = {
-            "semester_no" : semester_no,
-            "exam_type_id" : exam_type_id,
-            "studentId" :x
-        };
-        var url = window.context + "/ApiStudentsExams/loadResultExams";
-        var method = "POST";
-        loadSubjectInformation(url, method, data);
 
-    });
+    }); */
 
     // Datatable for viewing student exam
     function loadExamInformation(url, method, data) {
-
+alert(semester_no+ "  "+exam_type_id);
         $('#view-student-exam').DataTable({
             destroy : true,
             paging : true,
@@ -145,6 +166,8 @@ var x = document.getElementById("searchResult").value;
             }, {
                 data : null,
                 render : function (data, type, row) {
+                	//alert(data);
+                	console.log(data);
                     var full_name = "";
                     full_name += data.first_name + " ";
                     if (data.middle_name == undefined) {

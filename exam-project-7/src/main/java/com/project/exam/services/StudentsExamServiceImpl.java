@@ -55,4 +55,9 @@ public class StudentsExamServiceImpl implements StudentsExamService {
 		
 	}
 
+	@Override
+	public StudentsExam getstudentsExam(int s_Id, int examid) {
+		return studentExamDao.getstudentsExam(s_Id, examid);
+	}
+
 }
