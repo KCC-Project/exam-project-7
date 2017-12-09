@@ -257,4 +257,29 @@ public class StudentsProgramDAOImpl implements StudentsProgramDAO {
 		return studentsProgramModel;
 	}
 
+	@Override
+	public void saveStudentProgram(int programID, int batch, String enrollDate) {
+	try {
+		conn = DatabaseConnection.connectToDatabase();
+		sql = "SELECT * FROM students ORDER BY s_id DESC LIMIT 1";
+		pst = conn.prepareStatement(sql);
+		rs = pst.executeQuery();
+		while(rs.next()) {
+			sql = "insert into students_program(batch_year,enroll_date,status,program_id,s_id) values(?,?,?,?,?)";
+			pst = conn.prepareStatement(sql);
+			int col = 1;
+
+			pst.setInt(col++, batch);
+			pst.setString(col++, enrollDate);
+			pst.setInt(col++, 0);
+			pst.setInt(col++, programID);
+			pst.setInt(col++, rs.getInt("s_id"));
+			int count = pst.executeUpdate();
+		}
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
+		
+	}
+
 }

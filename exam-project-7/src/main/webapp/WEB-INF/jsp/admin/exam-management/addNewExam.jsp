@@ -348,6 +348,7 @@
         			url : window.context + "/ApiStudentsExams/GetRequiredInfoTOSave",
         			method : "POST",
         			cache : true,
+        			 async: false,
         			data : {
         				a_program_id : a_program_id,
         				semester_no : semester_no,

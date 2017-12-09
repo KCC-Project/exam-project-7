@@ -79,4 +79,10 @@ public class StudentsProgramController {
 		ob[3]=batchyear;
 		return studentsProgramService.searchByField(ob);
 	}
+	@POST
+	@Path("/GetStudentProgramInfoTOSave")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public void getRequiredInfoTOSave(@FormParam("p_id") int p_id,@FormParam("enroll_date") String enroll_date,@FormParam("batch") int batch) {
+		studentsProgramService.saveStudentProgram(p_id, batch, enroll_date);
+	}
 }

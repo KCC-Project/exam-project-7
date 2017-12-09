@@ -48,5 +48,11 @@ public class StudentsProgramServiceImpl implements StudentsProgramService {
 		return studentsProgramDao.searchByField(obj);
 	}
 
+	@Override
+	public void saveStudentProgram(int programID, int batch, String enrollDate) {
+		studentsProgramDao.saveStudentProgram(programID, batch, enrollDate);
+		
+	}
+
 
 }
