@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <jsp:include page="../shared/header.jsp" />
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cp" scope="application">${pageContext.request.contextPath}</c:set>
+    <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+ <c:if test = "${ empty sessionScope.adminUserName }">
+         <c:redirect url = "/index "/>
+      </c:if>
+          
 <div id="page-content-wrapper">
 	<ol class="breadcrumb">
 		<li><a href="${cp}/home""><span class="glyphicon glyphicon-home"> Home</span></a></li>

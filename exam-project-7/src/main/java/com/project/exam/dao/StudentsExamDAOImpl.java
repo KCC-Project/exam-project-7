@@ -204,7 +204,7 @@ public class StudentsExamDAOImpl implements StudentsExamDAO {
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			System.out.println("inside sql");
-			sql = "SELECT s.first_name,s.middle_name,s.last_name,se.attendance_status, se.obtained_marks,se.students_exams_id,se.grade,se.status, sub.subject_name, et.type_name, e.exam_date,se.s_id,s.current_semester, pr.program_name, sub.semester_no FROM students_exams as se INNER JOIN students as s ON se.s_id = s.s_id INNER JOIN students_program as sp ON s.s_id = sp.s_id INNER JOIN exams as e ON e.exam_id = se.exam_id INNER JOIN exam_types as et ON et.exam_type_id = e.exam_type_id INNER JOIN subjects as sub ON e.subject_id = sub.subject_id INNER JOIN programs as pr ON pr.program_id = sub.program_id where sp.program_id=? and sp.batch_year=? and s.current_semester=? and et.exam_type_id=? and sub.subject_id=?";
+			sql = "SELECT s.first_name,s.middle_name,s.last_name,se.attendance_status, se.obtained_marks,se.students_exams_id,se.grade,se.status, sub.subject_name, et.type_name,e.full_marks,e.pass_marks, e.exam_date,se.s_id,s.current_semester, pr.program_name, sub.semester_no FROM students_exams as se INNER JOIN students as s ON se.s_id = s.s_id INNER JOIN students_program as sp ON s.s_id = sp.s_id INNER JOIN exams as e ON e.exam_id = se.exam_id INNER JOIN exam_types as et ON et.exam_type_id = e.exam_type_id INNER JOIN subjects as sub ON e.subject_id = sub.subject_id INNER JOIN programs as pr ON pr.program_id = sub.program_id where sp.program_id=? and sp.batch_year=? and s.current_semester=? and et.exam_type_id=? and sub.subject_id=?";
 			System.out.println("inside sql");
 			pst = conn.prepareStatement(sql);
 			System.out.println("inside sql");
@@ -233,6 +233,8 @@ public class StudentsExamDAOImpl implements StudentsExamDAO {
 				map.put("current_semester", rs.getInt("current_semester"));
 				map.put("exam_date", rs.getString("exam_date"));
 				map.put("s_id", rs.getInt("s_id"));
+				map.put("full_marks", rs.getInt("full_marks"));
+				map.put("pass_marks", rs.getInt("pass_marks"));
 				map.put("students_exams_id", rs.getString("students_exams_id"));
 				
 				list.add(map);

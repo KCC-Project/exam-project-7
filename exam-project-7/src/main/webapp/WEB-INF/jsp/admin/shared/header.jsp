@@ -6,14 +6,7 @@
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-
- 
-
 <c:set var="cp" scope="application">${pageContext.request.contextPath}</c:set>
-
-
  <c:if test = "${ empty sessionScope.adminUserName }">
          <c:redirect url = "${cp }/index "/>
       </c:if>
