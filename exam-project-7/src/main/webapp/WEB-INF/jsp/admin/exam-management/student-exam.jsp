@@ -136,8 +136,7 @@
 
 
 
-	<form id="student-exam-edit-form" method="post"
-		class="form-horizontal well" style="display: none;">
+	<form id="studentedit" method="post" class="form-horizontal well" style="display:none;">
 		<div class="form-group">
 			<label class="col-md-3 control-label">Student-Exam Detail</label>
 			<div class="col-md-9">
@@ -151,6 +150,10 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-md-6">
+					Student_exam_id:<input type="text" class="form-control" name="student_exam_id"
+						disabled="disabled" />
+				</div>
 		<div class="form-group">
 			<label class="col-md-3 control-label">Attendance</label>
 			<div class="col-md-9">
@@ -239,35 +242,231 @@
 				examTypeName = $('#' + getid).find(":selected").text();
 			});
 
-			$("#searchbtnClicked").click(function(event) {
-console.log("semesterNo = "+semesterNo);
-console.log("programeName = "+programeName);
-console.log("programId = "+programId);
-console.log("batchyear = "+batchyear);
-console.log("examTypeName = "+examTypeName);
-console.log("examtypeId = "+examtypeId);
-console.log("subjectId = "+subjectId);
-console.log("subjectName = "+subjectName);
+		
+		// Datatable for viewing student exam
+		function loadsExamInformation(url, method, data) {
 
-			
-					 var url = window.context + "/ApiStudentsExams/GetRequiredInfoTOupdate";
-					var method = "POST";
-				
-					var data = {
-						semesterNo : semesterNo,
-						programeName : programeName,
-						programId : programId,
-						batchyear : batchyear,
-						examTypeName : examTypeName,
-						examtypeId : examtypeId,
-						subjectId : subjectId,
-						subjectName : subjectName,
-					};
-					loadExamInformation(url,method,data);
-					
+			$('#view-student-exam').DataTable({
+				destroy : true,
+				paging : true,
+				searching : true,
+				"processing" : true,
+				"serverSide" : false,
+				"order" : [ [ 0, "desc" ] ],
+				"ajax" : {
+					"url" : url,
+					"type" : method,
+					"data" : data,
+					"dataSrc" : "",
+					"dataType" : "json",
+					"async" : false
+				},
+				"columns" : [ {
+					"data" : "students_exams_id"
+				}, {
+					data : null,
+					render : function(data, type, row) {
+						var full_name = "";
+						full_name += data.first_name + " ";
+						if (data.middle_name == undefined) {
+
+						} else {
+							full_name += data.middle_name + " ";
+						}
+						full_name += data.last_name;
+						// Combine the two data
+						return '' + full_name + '';
+					},
+				}, {
+					"data" : "type_name"
+				}, {
+					"data" : "subject_name"
+				}, {
+					"data" : "current_semester"
+				}, {
+					"data" : "exam_date"
+				}, {
+					data : null,
+					render : function(data, type, row) {
+						  console.log(JSON.stringify(data));
+						return 'Full: ' + data.full_marks + '\ Pass: ' + data.pass_marks + '';
+					},
+				}, {
+					data : null,
+					render : function(data, type, row) {
+						var statusStatus = "";
+
+						if (data.attendance_status == 0) {
+							statusStatus = "Absent";
+						} else if (data.attendance_status == 1) {
+							statusStatus = "Present";
+						}
+
+						return '' + statusStatus + '';
+					},
+				}, {
+					"data" : "obtained_marks"
+				}, {
+					data : null,
+					render : function(data, type, row) {
+						if (data.grade == "A") {
+							return '<p class="btn-success">' + data.grade + '</p>';
+						} else if (data.grade == "F") {
+							return '<p class="btn-danger">' + data.grade + '</p>';
+						} else {
+							return '<p class="btn-default">' + data.grade + '</p>';
+						}
+					},
+				}, {
+					data : null,
+					render : function(data, type, row) {
+						return '<button class="btn btn-success editStude">Edit</button>';
+					},
+				} ]
 			});
 
+			// edit buttons on students row
+			$(".editStude").click(function(event) {
+				var table = $("#view-student-exam").DataTable();
+				var data = table.row($(this).parents('tr')).data();
+				console.log(data);
+
+				// Populate the form fields
+				$('#studentedit').
+				find('[name="s_id"]').val(data['s_id']).end()
+				.find('[name="student_exam_id"]').val(data['students_exams_id']).end()
+				.find('[name="exam_id"]').val(data['exam_id']).end().find('[name="obtained_marks"]').val(data['obtained_marks']).end().find('[name="grade"]').val(data['grade']).end()
+
+				$("input[name=attendance_status][value=" + data['attendance_status'] + "]").prop('checked', true);
+				$("input[name=status][value=" + data['status'] + "]").prop('checked', true);
+
+				bootbox.dialog({
+					title : 'Edit the Student',
+					message : $('#studentedit'),
+					show : false
+				// We will show it manually later
+				}).on('shown.bs.modal', function() {
+					$('#studentedit').show() // Show the modal form
+				}).on('hide.bs.modal', function(e) {
+					// Bootbox will remove the modal (including the body which contains the login form)
+					// after hiding the modal
+					// Therefor, we need to backup the form
+					$('#studentedit').hide().appendTo('body');
+				}).modal('show');
+
+			});
+		}
+		
+		
+		$("#searchbtnClicked").click(function(event) {
+			
+			 var url = window.context + "/ApiStudentsExams/GetRequiredInfoTOupdate";
+			var method = "POST";
+		
+			var data = {
+				semesterNo : semesterNo,
+				programeName : programeName,
+				programId : programId,
+				batchyear : batchyear,
+				examTypeName : examTypeName,
+				examtypeId : examtypeId,
+				subjectId : subjectId,
+				subjectName : subjectName,
+			};
+			loadsExamInformation(url,method,data);
+			
+	});
+		
 		});
+
+		// form validator for student edit form
+		$("#studentedit").bootstrapValidator({
+			// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+			feedbackIcons : {
+				valid : "glyphicon glyphicon-ok",
+				invalid : "glyphicon glyphicon-remove",
+				validating : "glyphicon glyphicon-refresh"
+			},
+			attendance_status : {
+				first_name : {
+					validators : {
+						notEmpty : {
+							message : "Please Select Attendance Status"
+						}
+					}
+				},
+				obtained_marks : {
+					validators : {
+						notEmpty : {
+							message : "Please Enter Obtained Marks"
+						},
+						Integer : {
+							message : "Please Enter Valid Number"
+						}
+					}
+				},
+				status : {
+					validators : {
+						notEmpty : {
+							message : "Please Select Status"
+						}
+					}
+				}
+			}
+		})
+
+		.on("success.form.bv", function(e) {
+
+			// Prevent form submission
+			e.preventDefault();
+
+			var data = $('#studentedit').serializeArray();
+			console.log(data);
+
+			$('input[type=number]').each(function() {
+				var t = $(this);
+				if (t.val() != 0) {
+					//alert(t.val());
+				} else {
+					t.val('0');
+				}
+			});
+
+			$.ajax({
+				url : window.context + "/ApiStudentsExams/UpdateStudentsExam",
+				method : "PUT",
+				dataType : 'json',
+				contentType : 'application/json',
+				data : formToJSON(),
+
+				cache : true,
+				success : function(data) {
+					var message = "Student has been added Successfully";
+					alert("Thanks for the submission!");
+					$("#studentedit")[0].reset();
+				},
+				error : function() {
+					alert("Error...!!!");
+				}
+			});
+
+			function formToJSON() {
+				var data = JSON.stringify({
+					"students_exams_id" : $('#studentedit').find('[name="student_exam_id"]').val(),
+					"s_id" : $('#studentedit').find('[name="s_id"]').val(),
+					"exam_id" : $('#studentedit').find('[name="exam_id"]').val(),
+					"attendance_status" : $('#studentedit').find('[name="attendance_status"]:checked').val(),
+					"obtained_marks" : $('#studentedit').find('[name="obtained_marks"]').val(),
+					"grade" : $('#studentedit').find('[name="grade"]').val(),
+					"status" : $('#studentedit').find('[name="status"]:checked').val(),
+
+				});
+				alert(data);
+				return data;
+			}
+		});
+		
+		
 		function load_batch_year(e, target) {
 			var getid = e.target.id;
 			var id = $('#' + getid).find(":selected").val();
@@ -366,203 +565,6 @@ console.log("subjectName = "+subjectName);
 			});
 		}
 
-		// Datatable for viewing student exam
-		function loadExamInformation(url, method, data) {
-
-			$('#view-student-exam').DataTable({
-				destroy : true,
-				paging : true,
-				searching : true,
-				"processing" : true,
-				"serverSide" : false,
-				"order" : [ [ 0, "desc" ] ],
-				"ajax" : {
-					"url" : url,
-					"type" : method,
-					"data" : data,
-					"dataSrc" : "",
-					"dataType" : "json",
-					
-				},
-				"columns" : [ {
-					"data" : "students_exams_id"
-				}, {
-					data : null,
-					render : function(data, type, row) {
-						var full_name = "";
-						full_name += data.first_name + " ";
-						if (data.middle_name == undefined) {
-
-						} else {
-							full_name += data.middle_name + " ";
-						}
-						full_name += data.last_name;
-						// Combine the two data
-						return '' + full_name + '';
-					},
-				}, {
-					"data" : "type_name"
-				}, {
-					"data" : "subject_name"
-				}, {
-					"data" : "current_semester"
-				}, {
-					"data" : "exam_date"
-				}, {
-					data : null,
-					render : function(data, type, row) {
-						  console.log(JSON.stringify(data));
-						return 'Full: ' + data.full_marks + '\ Pass: ' + data.pass_marks + '';
-					},
-				}, {
-					data : null,
-					render : function(data, type, row) {
-						var statusStatus = "";
-
-						if (data.attendance_status == 0) {
-							statusStatus = "Absent";
-						} else if (data.attendance_status == 1) {
-							statusStatus = "Present";
-						}
-
-						return '' + statusStatus + '';
-					},
-				}, {
-					"data" : "obtained_marks"
-				}, {
-					data : null,
-					render : function(data, type, row) {
-						if (data.grade == "A") {
-							return '<p class="btn-success">' + data.grade + '</p>';
-						} else if (data.grade == "F") {
-							return '<p class="btn-danger">' + data.grade + '</p>';
-						} else {
-							return '<p class="btn-default">' + data.grade + '</p>';
-						}
-					},
-				}, {
-					data : null,
-					render : function(data, type, row) {
-						return '<button class="btn btn-info editStuExam">Edit</button>';
-					},
-				} ]
-			});
-
-			// edit buttons on students row
-			$(".editStuExam").click(function(event) {
-				var table = $("#student-exam-edit-form").DataTable();
-				var data = table.row($(this).parents('tr')).data();
-				console.log(data);
-
-				// Populate the form fields
-				$('#student-exam-edit-form').find('[name="s_id"]').val(data['s_id']).end().find('[name="exam_id"]').val(data['exam_id']).end().find('[name="obtained_marks"]').val(data['obtained_marks']).end().find('[name="grade"]').val(data['grade']).end()
-
-				$("input[name=attendance_status][value=" + data['attendance_status'] + "]").prop('checked', true);
-				$("input[name=status][value=" + data['status'] + "]").prop('checked', true);
-
-				bootbox.dialog({
-					title : 'Edit the Student',
-					message : $('#student-exam-edit-form'),
-					show : false
-				// We will show it manually later
-				}).on('shown.bs.modal', function() {
-					$('#student-exam-edit-form').show() // Show the modal form
-				}).on('hide.bs.modal', function(e) {
-					// Bootbox will remove the modal (including the body which contains the login form)
-					// after hiding the modal
-					// Therefor, we need to backup the form
-					$('#student-exam-edit-form').hide().appendTo('body');
-				}).modal('show');
-
-			});
-		}
-
-		// form validator for student edit form
-		$("#student-exam-edit-form").bootstrapValidator({
-			// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-			feedbackIcons : {
-				valid : "glyphicon glyphicon-ok",
-				invalid : "glyphicon glyphicon-remove",
-				validating : "glyphicon glyphicon-refresh"
-			},
-			attendance_status : {
-				first_name : {
-					validators : {
-						notEmpty : {
-							message : "Please Select Attendance Status"
-						}
-					}
-				},
-				obtained_marks : {
-					validators : {
-						notEmpty : {
-							message : "Please Enter Obtained Marks"
-						},
-						Integer : {
-							message : "Please Enter Valid Number"
-						}
-					}
-				},
-				status : {
-					validators : {
-						notEmpty : {
-							message : "Please Select Status"
-						}
-					}
-				}
-			}
-		})
-
-		.on("success.form.bv", function(e) {
-
-			// Prevent form submission
-			e.preventDefault();
-
-			var data = $('#student-exam-edit-form').serializeArray();
-			console.log(data);
-
-			$('input[type=number]').each(function() {
-				var t = $(this);
-				if (t.val() != 0) {
-					//alert(t.val());
-				} else {
-					t.val('0');
-				}
-			});
-
-			$.ajax({
-				url : window.context + "/ApiStudentsExams/UpdateStudentsExam",
-				method : "PUT",
-				dataType : 'json',
-				contentType : 'application/json',
-				data : formToJSON(),
-
-				cache : true,
-				success : function(data) {
-					var message = "Student has been added Successfully";
-					$("#student-exam-edit-form").html(message);
-					alert("Thanks for the submission!");
-					$("#student-exam-edit-form")[0].reset();
-				},
-				error : function() {
-					alert("Error...!!!");
-				}
-			});
-
-			function formToJSON() {
-				var data = JSON.stringify({
-					"s_id" : $('#student-exam-edit-form').find('[name="s_id"]').val(),
-					"exam_id" : $('#student-exam-edit-form').find('[name="exam_id"]').val(),
-					"attendance_status" : $('#student-exam-edit-form').find('[name="attendance_status"]').val(),
-					"obtained_marks" : $('#student-exam-edit-form').find('[name="obtained_marks"]').val(),
-					"grade" : $('#student-exam-edit-form').find('[name="grade"]').val(),
-					"status" : $('#student-exam-edit-form').find('[name="status"]').val(),
-
-				});
-				alert(data);
-				return data;
-			}
-		});
 	</script>
 
 </div>

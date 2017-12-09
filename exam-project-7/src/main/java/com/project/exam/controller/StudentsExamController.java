@@ -69,6 +69,7 @@ public class StudentsExamController {
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public StudentsExam updateStudentsExam(StudentsExam studentsExamModel) {
+		System.out.println("oppp=="+studentsExamModel.toString());
 		return studentsExamService.updatestudentsExam(studentsExamModel);
 	}
 

@@ -268,15 +268,15 @@ var p_id;
 					"status" : $('#add-student-form').find('[name="status"]:checked').val(),	
 
 				});
-				alert(data);
+				//alert(data);
 				return data;
 			}
             function saveStudentProgram() {
             	var utc = new Date().toJSON().slice(0,10).replace(/-/g,'-');
-            	alert(utc);
+            	//alert(utc);
             	var today = new Date();
             	var yyyy = today.getFullYear();
-            	alert(yyyy);
+            	//alert(yyyy);
         		$.ajax({
         			url : window.context + "/ApiStudentsProgram/GetStudentProgramInfoTOSave",
         			method : "POST",
