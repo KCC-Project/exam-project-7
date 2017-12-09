@@ -259,7 +259,7 @@ var p_id;
 					"username" : $('#add-student-form').find('[name="username"]').val(),
 					"password" : $('#add-student-form').find('[name="password"]').val(),
 					"email" : $('#add-student-form').find('[name="email"]').val(),
-					"gender" : $('#add-student-form').find('[name="gender"]').val(),
+					"gender" : $('#add-student-form').find('[name="gender"]:checked').val(),
 					"date_of_birth" : $('#add-student-form').find('[name="date_of_birth"]').val(),
 					"phone" : $('#add-student-form').find('[name="phone"]').val(),
 					"address" : $('#add-student-form').find('[name="address"]').val(),
