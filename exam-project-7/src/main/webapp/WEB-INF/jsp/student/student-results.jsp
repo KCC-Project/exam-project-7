@@ -35,7 +35,7 @@
 					</select>
 				</div>
 				<div class="col-md-4">
-					<button type="submit" id="searchResult" value="${studentID}" class="btn btn-info btn-block">Search Result</button>
+					<button type="button" id="searchResult" value="${studentID}" class="btn btn-info btn-block">Search Result</button>
 					<%-- <button type="button" id="idstud"  class="btn btn-info btn-block hidden" >${studentID}</button> --%>
 				</div>
 
@@ -182,7 +182,7 @@ alert(semester_no+ "  "+exam_type_id);
             }, {
                 "data" : "type_name"
             }, {
-                "data" : "subject_name"
+                "data" : "subjectname"
             }, {
                 "data" : "semester_no"
             }, {
@@ -190,7 +190,7 @@ alert(semester_no+ "  "+exam_type_id);
             }, {
                 data : null,
                 render : function (data, type, row) {
-                    return 'Full: ' + data.full_marks + '\ Pass: ' + data.pass_marks + '';
+                    return 'Full: ' + data.fullmarks + '\ Pass: ' + data.passmarks + '';
                 },
             }, {
                 data : null,
