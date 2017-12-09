@@ -13,4 +13,5 @@ public interface StudentsProgramService {
 	public List<StudentsProgram> getStudentsProgramByProgramId(int s_Id);
 	public List<StudentsProgram> searchByField(Object[] obj);
 	public void saveStudentProgram(int programID,int batch,String enrollDate);
+	StudentsProgram getStudentsProgramByStudentId(int s_Id);
 }

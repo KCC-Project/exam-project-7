@@ -35,7 +35,8 @@
 					</select>
 				</div>
 				<div class="col-md-4">
-					<button type="submit" id="searchResult" class="btn btn-info btn-block">Search Result</button>
+					<button type="submit" id="searchResult" value="${studentID}" class="btn btn-info btn-block">Search Result</button>
+					<%-- <button type="button" id="idstud"  class="btn btn-info btn-block hidden" >${studentID}</button> --%>
 				</div>
 
 			</div>
@@ -65,8 +66,11 @@
 
 </div>
 <script>
+var x = document.getElementById("searchResult").value;
+
     $(document).ready(function () {
- 
+  
+    
         $.when($.ajax(load_all_examType("exam-type-box"))).done(function () {
             $("#exam-type-box").append("<option value='' selected disabled>Select Exam Type</option>");
         });
@@ -105,12 +109,14 @@
 
         var semester_no = $('#sub-form').find('[name="s_semester_no"]').val();
         var exam_type_id = $('#sub-form').find('[name="exam_type_id"]').val();
+    
 
         var data = {
             "semester_no" : semester_no,
             "exam_type_id" : exam_type_id,
+            "studentId" :x
         };
-        var url = window.context + "/ApiStudentsExams/SearchStudentExams";
+        var url = window.context + "/ApiStudentsExams/loadResultExams";
         var method = "POST";
         loadSubjectInformation(url, method, data);
 

@@ -72,6 +72,20 @@ public class LoginLogOutController {
 					HttpSession session= req.getSession(true);
 					session.setAttribute("studentUserName", InputEmail1User);
 					session.setAttribute("studentID", student1.getS_id());
+					session.setAttribute("first_name", student1.getFirst_name());
+					session.setAttribute("middle_name", student1.getMiddle_name());
+					session.setAttribute("last_name", student1.getLast_name());
+					if (student1.getGender()==0) {
+						session.setAttribute("gender", "Male");
+					}else {
+						session.setAttribute("gender", "Female");
+					}
+					
+					session.setAttribute("dob", student1.getDate_of_birth());
+					session.setAttribute("email", student1.getEmail());
+					session.setAttribute("status", student1.getStatus());
+					session.setAttribute("phone", student1.getPhone());
+					session.setAttribute("password", student1.getPassword());
 					//for session only if remember btn is checked
 					if (rememberMe != null) {
 					

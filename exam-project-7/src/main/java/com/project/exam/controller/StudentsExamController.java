@@ -2,6 +2,7 @@ package com.project.exam.controller;
 
 import java.util.List;
 
+import javax.security.auth.Subject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -17,13 +18,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.exam.model.StudentsExam;
+import com.project.exam.model.StudentsProgram;
+import com.project.exam.model.Subjects;
 import com.project.exam.services.StudentsExamService;
+import com.project.exam.services.StudentsProgramService;
+import com.project.exam.services.SubjectService;
 
 @Path("/ApiStudentsExams")
 public class StudentsExamController {
 	@Autowired
 	private StudentsExamService studentsExamService;
-
+	@Autowired
+	private StudentsProgramService studentsProgramService;
+	@Autowired
+	private SubjectService subjectser;
 	@GET
 	@Path("/GetAllStudentsExams")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
@@ -101,6 +109,36 @@ public class StudentsExamController {
 	System.out.println(studentsExamService.updatestudentExamModel(semesterNo,programeName,programId,batchyear,examTypeName,subjectId,examtypeId,subjectName));
 	
 	return studentsExamService.updatestudentExamModel(semesterNo,programeName,programId,batchyear,examTypeName,subjectId,examtypeId,subjectName);
+	}
+	
+	@POST
+	@Path("/loadResultExams")
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public List loadResultExams(
+			@FormParam("semester_no") int semester_no,
+			@FormParam("exam_type_id") int exam_type_id,
+			@FormParam("studentId") int studentId
+			
+			) {
+	System.out.println("semesterNo = "+semester_no);
+	System.out.println("programeName = "+exam_type_id);
+	System.out.println("programId = "+studentId);
+
+	 StudentsProgram pr= studentsProgramService.getStudentsProgramByStudentId(studentId);
+	 int program_id=pr.getProgram_id();
+	
+	 Object[] obj= new Object[15];
+	 obj[1]=program_id;
+	 obj[9]=semester_no;
+	 
+	 List<Subjects> sub=subjectser.getSubjectByParameters(obj);
+	 for (Subjects subjects : sub) {
+		int subjID=subjects.getSubject_id();
+		
+	}
+	
+	return null;
+	//return studentsExamService.updatestudentExamModel(semesterNo,programeName,programId,batchyear,examTypeName,subjectId,examtypeId,subjectName);
 	}
 		
 }

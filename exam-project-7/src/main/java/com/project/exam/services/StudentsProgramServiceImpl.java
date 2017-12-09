@@ -54,5 +54,10 @@ public class StudentsProgramServiceImpl implements StudentsProgramService {
 		
 	}
 
+	@Override
+	public StudentsProgram getStudentsProgramByStudentId(int s_Id) {
+		return studentsProgramDao.getStudentsProgramByStudentId(s_Id);
+	}
+
 
 }
