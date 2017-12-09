@@ -45,8 +45,8 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">Gender</label>
 						<div class="col-md-9">
-							<label> Male <input type="radio" value=0 name="gender" >
-							</label> <label> Female <input type="radio" value=1 name="gender" >
+							<label> Male <input type="radio" value=0 name="" >
+							</label> <label> Female <input type="radio" value=1 id="gender" name="gender" >
 							</label>
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">Date_Of_Birth</label>
 						<div class="col-md-9">
-							<input type="date" class="form-control" name="date_of_birth" />
+							<input type="date" class="form-control" id="date_of_birth" name="date_of_birth" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -118,7 +118,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">Available</label>
 						<div class="col-md-9">
-							<label> Yes <input type="radio" value=0 name="status" checked>
+							<label> Yes <input type="radio" value=0 name="" checked>
 							</label> <label> No <input type="radio" value=1 name="status">
 							</label>
 						</div>
@@ -138,12 +138,19 @@
 </div>
 
 <script>
+var semesterno;
     $(document).ready(function () {
         
         $.when( $.ajax(load_all_program("all-program-box")) ).done(function() {
            	$("#all-program-box").append("<option value='' selected disabled>Select Program</option>");
     		});
-
+        
+        
+        $("#s-semester-no").change(function(event) {
+			var getid = event.target.id;
+			semesterno = $('#' + getid).find(":selected").val();
+			//load_subject(event, "p-subject-box");
+		});
         $("#add-student-form").bootstrapValidator({
             // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
             feedbackIcons : {
@@ -250,7 +257,7 @@
 					"phone" : $('#add-student-form').find('[name="phone"]').val(),
 					"address" : $('#add-student-form').find('[name="address"]').val(),
 					"image" : $('#add-student-form').find('[name="image"]').val(),
-					"current_semester" : $('#add-student-form').find('[name="current_semester"]').val(),
+					"current_semester" : semesterno,
 					"status" : $('#add-student-form').find('[name="status"]:checked').val(),	
 
 				});
