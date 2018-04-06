@@ -77,10 +77,6 @@ public class StudentDAOImpl implements StudentDAO {
 			pst.setString(col++, student.getPhone());
 			pst.setInt(col++, student.getStatus());
 			pst.setString(col++, student.getUsername());
-			
-			
-			
-
 			int count = pst.executeUpdate();
 			if (count > 0) {
 				status = true;
